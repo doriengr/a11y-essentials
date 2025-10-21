@@ -1,0 +1,27 @@
+title: 'SEO: Basic'
+fields:
+  -
+    handle: seo_title
+    field:
+      input_type: text
+      type: text
+      localizable: true
+      listable: hidden
+      display: 'Titel der Seite'
+      character_limit: 70
+      instructions: 'Standardisiert wird auf den Titel der Seite zurück gegriffen. Die max. Zeichenlänge beträgt 70 Zeichen.'
+      instructions_position: below
+      antlers: false
+      visibility: visible
+      replicator_preview: true
+      hide_display: false
+  -
+    handle: seo_description
+    field:
+      type: textarea
+      localizable: true
+      listable: hidden
+      display: 'Meta Beschreibung'
+      character_limit: '160'
+      instructions: 'Die max. Zeichenlänge der Meta Beschreibung beträgt 160 Zeichen.'
+      instructions_position: below

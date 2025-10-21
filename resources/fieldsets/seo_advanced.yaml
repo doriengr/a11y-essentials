@@ -1,0 +1,71 @@
+title: 'SEO: Advanced'
+fields:
+  -
+    handle: seo_noindex
+    field:
+      type: toggle
+      instructions: 'Aktivieren wenn diese Seite vom Crawler _nicht_ indexiert sowie von der sitemap.xml ausgeschlossen werden soll.'
+      listable: hidden
+      width: 50
+      display: No-index
+      instructions_position: above
+      default: false
+      visibility: visible
+      replicator_preview: true
+      hide_display: false
+      localizable: true
+  -
+    handle: seo_nofollow
+    field:
+      type: toggle
+      instructions: 'Aktivieren wenn vorhandene Links auf dieser Seite vom Crawler _nicht_ verfolgt werden sollen.'
+      listable: hidden
+      width: 50
+      display: No-follow
+      instructions_position: above
+      default: false
+      visibility: visible
+      replicator_preview: true
+      hide_display: false
+      localizable: true
+  -
+    handle: seo_canonical_type
+    field:
+      options:
+        entry: 'Aktuelle Seite'
+        current: 'Aktuelle Domain'
+        external: 'Externe Domain'
+      display: 'Canonical URL'
+      type: button_group
+      default: entry
+      instructions: 'Wohin soll die Canonical URL dieser Seite verlinken?'
+      listable: hidden
+      instructions_position: above
+      localizable: true
+  -
+    handle: seo_canonical_current
+    field:
+      max_items: 1
+      mode: default
+      type: entries
+      listable: hidden
+      display: 'Canonical URL'
+      localizable: true
+      width: 66
+      instructions: 'Falls diese Seite kopierten Inhalt beinhaltet, kann hier die Quelle des Inhalts angegeben werden.'
+      validate:
+        - 'required_if:seo_canonical_type,current'
+      if:
+        seo_canonical_type: 'equals current'
+  -
+    handle: seo_canonical_external
+    field:
+      input_type: url
+      display: 'Canonical URL'
+      type: text
+      listable: hidden
+      validate:
+        - 'required_if:seo_canonical_type,external'
+      if:
+        seo_canonical_type: 'equals external'
+      localizable: true

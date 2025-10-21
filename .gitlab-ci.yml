@@ -1,0 +1,167 @@
+stages:
+  - build
+  - inspect
+  - provision
+  - deploy
+  - update
+
+build-image-tooling:
+  stage: build
+  before_script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+  script:
+    - docker buildx build
+      --push
+      --progress=plain
+      --cache-to type=inline
+      --cache-from type=registry,ref=$CI_REGISTRY_IMAGE/tooling:$CI_COMMIT_BRANCH
+      --tag $CI_REGISTRY_IMAGE/tooling:$CI_COMMIT_BRANCH
+      --file docker/tooling/tooling.Dockerfile .
+  after_script:
+    - docker logout
+
+build-be-dev:
+  stage: build
+  image: git.visuellverstehen.de:4567/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME/tooling:$CI_COMMIT_BRANCH
+  needs:
+    - job: build-image-tooling
+  script:
+    - composer install --optimize-autoloader --no-suggest --no-interaction
+  artifacts:
+    paths:
+      - vendor/
+
+build-be:
+  stage: build
+  image: git.visuellverstehen.de:4567/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME/tooling:$CI_COMMIT_BRANCH
+  needs:
+    - job: build-image-tooling
+  script:
+    - composer install --ignore-platform-reqs --optimize-autoloader --no-ansi --no-suggest --no-interaction --no-dev
+  artifacts:
+    expire_in: 30 min
+    paths:
+      - vendor
+
+build-fe:
+  stage: build
+  image: git.visuellverstehen.de:4567/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME/tooling:$CI_COMMIT_BRANCH
+  needs:
+    - job: build-image-tooling
+  script:
+    - npm ci
+    - npm run check
+    - npm run production
+  artifacts:
+    expire_in: 30 min
+    paths:
+      - public
+
+inspect-be:
+  stage: inspect
+  image: git.visuellverstehen.de:4567/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME/tooling:$CI_COMMIT_BRANCH
+  needs:
+    - build-be-dev
+  script:
+    - vendor/bin/duster lint
+
+provision-image-application:
+  stage: provision
+  only:
+    - main
+    - dev
+  needs:
+    - job: build-fe
+      artifacts: true
+    - job: build-be
+      artifacts: true
+  before_script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+  script:
+    - docker buildx build
+      --push
+      --progress=plain
+      --cache-to type=inline
+      --cache-from type=registry,ref=$CI_REGISTRY_IMAGE/application:$CI_COMMIT_BRANCH
+      --tag $CI_REGISTRY_IMAGE/application:$CI_COMMIT_BRANCH
+      --file docker/application/application.Dockerfile .
+  after_script:
+    - docker logout
+
+provision-server:
+  stage: provision
+  image: python:3.10-alpine
+  only:
+    refs:
+      - main
+      - dev
+    changes:
+      - ansible/*
+  before_script:
+    - apk add openssh-client
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - pip3 install --root-user-action=ignore ansible
+    - ansible-galaxy install -r ansible/requirements.yml
+    - export ANSIBLE_HOST_KEY_CHECKING=false
+  script:
+    - ansible-playbook ansible/create.yml -i ansible/inventory.yml
+
+deploy:
+  stage: deploy
+  only:
+    - main
+    - dev
+  image: alpine
+  needs:
+    - job: build-be
+      artifacts: false
+    - job: build-fe
+      artifacts: false
+    - job: provision-image-application
+      artifacts: false
+    - job: provision-server
+      optional: true
+  before_script:
+    - apk add openssh-client
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - touch .env
+    - if [ "$CI_COMMIT_BRANCH" = "main" ]; then echo "$ENV_MAIN" >> .env; fi
+    - if [ "$CI_COMMIT_BRANCH" = "dev" ]; then echo "$ENV_DEV" >> .env; fi
+    - ssh vvuser@$IP_ADDRESS -o StrictHostKeyChecking=no "docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY"
+  script:
+    - scp -o StrictHostKeyChecking=no .env vvuser@$IP_ADDRESS:/home/vvuser/$CI_COMMIT_BRANCH/.env
+    - scp -o StrictHostKeyChecking=no docker-compose.$CI_COMMIT_BRANCH.yml vvuser@$IP_ADDRESS:/home/vvuser/$CI_COMMIT_BRANCH/docker-compose.yml
+    - ssh vvuser@$IP_ADDRESS "cd $CI_COMMIT_BRANCH && docker compose pull"
+    - ssh vvuser@$IP_ADDRESS "cd $CI_COMMIT_BRANCH && docker compose up -d"
+  after_script:
+    - apk add openssh-client
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - ssh vvuser@$IP_ADDRESS -o StrictHostKeyChecking=no "docker image prune -af"
+
+update:
+  stage: update
+  image: python:3.10-alpine
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "schedule"
+      when: always
+      allow_failure: false
+  before_script:
+    - apk add openssh-client
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - pip3 install --root-user-action=ignore ansible
+    - ansible-galaxy install -r ansible/requirements.yml
+    - export ANSIBLE_HOST_KEY_CHECKING=false
+  script:
+    - ansible-playbook ansible/update.yml -i ansible/inventory.yml

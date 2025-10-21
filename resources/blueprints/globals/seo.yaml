@@ -1,0 +1,101 @@
+tabs:
+  meta:
+    display: Meta
+    sections:
+      -
+        display: Meta-Daten
+        instructions: 'Titel, Beschreibung und Open Graph Bild der Webseite'
+        fields:
+          -
+            handle: title_separator
+            field:
+              options:
+                ' | ': '|'
+                ' - ': '-'
+                ' / ': /
+                ' :: ': '::'
+                ' > ': '>'
+                ' ~ ': '~'
+              type: select
+              instructions: 'Auswahl an Zeichen, um Webseiten-Titel und Seiten-Titel zu trennen.'
+              width: 33
+              display: Trennzeichen
+          -
+            handle: site_name
+            field:
+              type: text
+              localizable: true
+              display: 'Titel der Webseite'
+              instructions: "Standartisiert wird Laravel's App Name ausgespielt."
+              width: 66
+          -
+            handle: seo_author
+            field:
+              display: 'Meta Autor'
+              type: text
+              instructions: 'Autor der Seite'
+          -
+            handle: seo_description
+            field:
+              character_limit: '160'
+              type: textarea
+              display: 'Meta Beschreibung'
+              instructions: 'Der Text dient als standardisierte Meta Beschreibung und kann pro Seite überschrieben werden. Max. Zeichenlänge beträgt 160 Zeichen.'
+          -
+            handle: og_image
+            field:
+              max_files: 1
+              container: assets
+              type: assets
+              display: 'Open Graph Bild'
+              instructions: 'Das hinterlegte Bild dient als standardisiertes OG-Bild, kann aber pro Seite überschrieben werden. Die empfohlene Größe beträgt 1200px x 630px und das Bild wird zu dieser Größe beschnitten.'
+  structured_data:
+    display: 'Strukturierte Daten'
+    sections:
+      -
+        display: 'Strukturierte Daten'
+        instructions: 'Mit Hilfe von strukturieren Daten können der Suchmaschine wichtige Informationen zur Verfügung gestellt werden. Diese werden zum einen für [eine gesonderte Darstellung](https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data?hl=de) in den SERPs genutzt, beispielsweise für Rezepte, Veranstaltungen, Jobangebote u. Ä. Zum anderen werden die Informationen genutzt, um der Suchmaschine semantische Zusammenhänge leichter verständlich zu machen. Die Nutzung von strukturierten Daten ist zwar nicht als Ranking-Faktor definiert, aber viele Websites profitieren dadurch von höheren Klickraten. Um die Einbindung der strukturieren Daten zu prüfen, stellt [Google ein Testing Tool](https://developers.google.com/search/docs/appearance/structured-data?hl=de) zur Verfügung.'
+        fields:
+          -
+            handle: kg_schema_type
+            field:
+              type: text
+              display: 'Schema Typ (@type)'
+              instructions: 'z. B. Organization, LocalBusiness, OnlineBusiness, [Weitere Beispiele](https://schema.org/Organization#subtypes)'
+      -
+        display: 'Automatische Properties'
+        instructions: 'Einige Felder werden im Graph bereits automatisch ausgefüllt. Dazu zählen: `name`: Titel der Website, `url`: URL der Homepage, `description`: Globale Meta Beschreibung `image`: Globales Meta Image'
+        fields:
+          -
+            handle: kg_additional_properties
+            field:
+              mode: javascript
+              mode_selectable: false
+              indent_size: 2
+              type: code
+              display: 'Zusätzliche Properties'
+              instructions: |-
+                Weitere Properties müssen in folgendem Format hinzugefügt werden:  `"property": "value",` oder `"property":  {…}`
+                Achtung: Hinter dem letzten Property darf kein Komma stehen.
+          -
+            handle: breadcrumbs
+            field:
+              type: toggle
+              instructions: 'Sollen JSON-LD Breadcrumbs zu jeder Seite hinzugefügt werden?'
+              listable: false
+              display: Breadcrumbs
+  sitemap:
+    display: Sitemap
+    sections:
+      -
+        display: Sitemap
+        instructions: 'Konfiguration der sitemap.xml'
+        fields:
+          -
+            handle: sitemap_collections
+            field:
+              mode: select
+              type: collections
+              instructions: 'Sammlungen, die in der sitemap.xml aufgelistet werden sollen.'
+              default: pages
+              display: Sammlungen

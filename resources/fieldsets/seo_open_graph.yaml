@@ -1,0 +1,42 @@
+title: 'SEO: Open Graph'
+fields:
+  -
+    handle: og_title
+    field:
+      input_type: text
+      type: text
+      localizable: true
+      listable: hidden
+      display: OG-Titel
+      instructions: 'Standardisiert wird der SEO-Titel plus Titel der Webseite angezeigt.'
+      instructions_position: below
+      antlers: false
+      visibility: visible
+      replicator_preview: true
+      hide_display: false
+  -
+    handle: og_description
+    field:
+      type: textarea
+      localizable: true
+      listable: hidden
+      display: OG-Beschreibung
+      instructions: 'Standardisiert wird auf die Meta Beschreibung zurück gegriffen.'
+      width: 100
+      instructions_position: below
+  -
+    handle: og_image
+    field:
+      mode: list
+      container: assets
+      restrict: false
+      allow_uploads: true
+      max_files: 1
+      type: assets
+      localizable: true
+      listable: hidden
+      display: OG-Bild
+      instructions: 'Standardisiert wird das default OG-Bild der Webseite genutzt. Die empfohlene Größe beträgt 1200px x 630px, da ansonsten das Bild zu diesem Format zugeschnitten wird.'
+      width: 50
+      instructions_position: below
+      

@@ -1,0 +1,6 @@
+roles:
+  - src: geerlingguy.security
+  - src: geerlingguy.docker
+collections:
+  - name: community.docker
+  - name: community.general

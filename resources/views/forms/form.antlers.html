@@ -1,0 +1,28 @@
+{{# This is an example form. Adjust it to your needs. #}}
+<section class="js-form-wrapper">
+    <div class="js-form-success-message hidden" role="alert" aria-live="polite">
+        <h2>Nachricht erhalten!</h2>
+        <p>Vielen Dank für Ihre Nachricht!</p>
+        <a href="/" class="button">Zur Startseite</a>
+    </div>
+
+    <div class="js-form-error-message hidden" role="alert" aria-live="polite">
+        <p>Bitte überprüfen Sie Ihre Eingaben</p>
+    </div>
+
+    {{# TODO: Replace 'contact' with the form handle you want to use. #}}
+    {{ form:contact class="js-form" aria-labelledby="form-title" }}
+        <h1 id="form-title" class="sr-only">Kontaktformular</h1>
+        {{ fields }}
+            <div class="form-group">
+                <label for="{{ handle }}">{{ display }}</label>
+                {{ field }}
+                <div class="js-form-error js-form-error-{{ handle }} hidden" id="error-{{ handle }}" role="alert">
+                    <p class="js-form-field-error-message"></p>
+                </div>
+            </div>
+        {{ /fields }}
+        <input type="text" class="hidden" name="{{ honeypot ?? 'honeypot' }}" aria-hidden="true" />
+        <button type="submit" class="js-form-submit-button">Absenden</button>
+    {{ /form:contact }}
+</section>

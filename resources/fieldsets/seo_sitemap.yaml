@@ -1,0 +1,44 @@
+title: 'SEO: Sitemap'
+fields:
+  -
+    handle: sitemap_change_frequency
+    field:
+      options:
+        always: Immer
+        hourly: Stündlich
+        daily: Täglich
+        weekly: Wöchentlich
+        monthly: Monatlich
+        yearly: Jährlich
+        never: Nie
+      clearable: false
+      multiple: false
+      searchable: true
+      taggable: false
+      push_tags: false
+      cast_booleans: false
+      type: select
+      instructions: 'Wie oft soll die Suchmaschine die Sitemap untersuchen?'
+      width: 50
+      default: weekly
+      listable: hidden
+      display: 'Frequenz des Sitemap-Crawlings'
+      instructions_position: below
+      visibility: visible
+      replicator_preview: true
+      hide_display: false
+  -
+    handle: sitemap_priority
+    field:
+      type: text
+      display: 'Priorität der Sitemap'
+      default: 0.5
+      instructions: 'Wert zwischen  0.0 und 1.0 möglich. Diese Angabe lässt den Crawler lediglich wissen, welche Seiten für Sie eine erhöhte Priorität für eine Untersuchung haben.'
+      width: 50
+      listable: hidden
+      instructions_position: below
+      input_type: text
+      antlers: false
+      visibility: visible
+      replicator_preview: true
+      hide_display: false

@@ -1,0 +1,19 @@
+{{# This is a very basic template. Adjust it to your needs and handles. #}}
+<script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "{{ title }}",
+      "image": "{{ kg_image }}",
+      "datePublished": "{{ date }}",
+      "dateModified": "{{ updated_at }}",
+      "author": [
+        {{ authors }}
+            {
+                "@type": "Person",
+                "name": "{{ name }}"
+            }{{ unless last}},{{ /unless}}
+        {{ /authors }}
+        ]
+    }
+</script>

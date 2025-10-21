@@ -1,0 +1,109 @@
+networks:
+  web:
+    external: true
+  stack:
+    external: false
+
+volumes:
+  storage:
+  content:
+  users:
+  assets:
+  redis:
+
+services:
+  application:
+    image: git.visuellverstehen.de:4567/a11y/website/application:main
+    networks:
+      - web
+      - stack
+    env_file:
+      - .env
+    volumes:
+      - storage:/var/www/html/storage
+      - content:/var/www/html/content
+      - users:/var/www/html/users
+      - assets:/var/www/html/public/assets
+    working_dir: /var/www/html
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "3"
+    restart: always
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.middlewares.a11y.headers.stsseconds=31536000"
+      - "traefik.http.routers.a11y.middlewares=a11y"
+      - "traefik.http.routers.a11y.rule=Host(`example.com`)"
+      - "traefik.http.routers.a11y.entrypoints=https,http"
+      - "traefik.http.services.a11y.loadbalancer.server.port=80"
+      - "traefik.http.routers.a11y.tls.certresolver=tls"
+      - "traefik.docker.network=web"
+    entrypoint: ["bash", "/var/www/html/docker/application/entrypoint.sh"]
+    command: ["bash", "/var/www/html/docker/application/startup.sh"]
+
+  redis:
+    image: redis:7.2-alpine
+    networks:
+      - stack
+    restart: always
+    volumes:
+      - redis:/data
+    command: >
+      --requirepass a11y
+
+  schedule:
+    image: git.visuellverstehen.de:4567/a11y/website/application:main
+    init: true
+    networks:
+      - stack
+    env_file:
+      - .env
+    volumes:
+      - storage:/var/www/html/storage
+      - content:/var/www/html/content
+      - users:/var/www/html/users
+      - assets:/var/www/html/public/assets
+    working_dir: /var/www/html
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "3"
+    restart: always
+    command: ["su", "vvuser", "-c", "php artisan schedule:work"]
+
+  worker:
+    image: git.visuellverstehen.de:4567/a11y/website/application:main
+    networks:
+      - stack
+    env_file:
+      - .env
+    volumes:
+      - storage:/var/www/html/storage
+      - content:/var/www/html/content
+      - users:/var/www/html/users
+      - assets:/var/www/html/public/assets
+    working_dir: /var/www/html
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "3"
+    restart: always
+    command: ["su", "vvuser", "-c", "php artisan queue:work --tries=3"]
+    # healthcheck:
+    #   test: ["CMD", "bash", "/var/www/html/docker/application/healthcheck.sh"]
+    #   start_period: 5s
+
+  # warm_static_cache:
+  #   image: git.visuellverstehen.de:4567/a11y/website/application:dev
+  #   depends_on:
+  #     application:
+  #       condition: service_healthy
+  #   networks:
+  #     - stack
+  #   tty: true
+  #   working_dir: /var/www/html
+  #   command: ["su", "vvuser", "-c", "php please static:warm --queue"]
+  #   volumes:
+  #     - ./:/var/www/html
+  #   restart: "no"

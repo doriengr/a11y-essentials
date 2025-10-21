@@ -1,0 +1,45 @@
+tabs:
+  contact:
+    display: Kontakt
+    sections:
+      -
+        display: 'Allgemeine Kontaktdaten'
+        fields:
+          -
+            handle: address
+            field:
+              antlers: false
+              display: Adresse
+              type: textarea
+              icon: textarea
+              listable: hidden
+              instructions_position: above
+          -
+            handle: email
+            field:
+              input_type: text
+              prepend: 'Mail:'
+              antlers: false
+              display: E-Mail
+              type: text
+              icon: text
+              listable: hidden
+              instructions_position: above
+              visibility: visible
+              hide_display: false
+              width: 50
+          -
+            handle: phone
+            field:
+              placeholder: '+ 49 0123 456 789'
+              input_type: text
+              prepend: 'TEL:'
+              antlers: false
+              display: Telefonnummer
+              type: text
+              icon: text
+              width: 50
+              listable: hidden
+              instructions_position: above
+              visibility: visible
+              hide_display: false

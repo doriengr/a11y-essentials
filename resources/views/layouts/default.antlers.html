@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="{{ site:short_locale }}">
+    <head>
+        {{ partial:layout/built-by }}
+        {{ partial:layout/meta }}
+        {{ partial:layout/knowledge-graph }}
+        {{ partial:layout/favicons }}
+        {{ vite src="resources/js/site.js|resources/css/site.css" }}
+    </head>
+    <body class="text-base font-light antialiased">
+        {{ partial:layout/header }}
+        {{ yield:seo_body }}
+        <main>
+            {{ template_content }}
+        </main>
+        {{ partial:layout/footer }}
+        {{ partial:helpers/utility-class-helper }}
+    </body>
+</html>

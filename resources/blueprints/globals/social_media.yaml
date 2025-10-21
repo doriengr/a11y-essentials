@@ -1,0 +1,59 @@
+tabs:
+  main:
+    display: Hauptteil
+    sections:
+      -
+        fields:
+          -
+            handle: channels
+            field:
+              fields:
+                -
+                  handle: icon
+                  field:
+                    type: icon
+                    display: Icon
+                    icon: icon_picker
+                    listable: hidden
+                    instructions_position: above
+                    visibility: visible
+                    hide_display: false
+                    width: 50
+                -
+                  handle: label
+                  field:
+                    input_type: text
+                    antlers: false
+                    type: text
+                    display: Label
+                    icon: text
+                    listable: hidden
+                    instructions_position: above
+                    visibility: visible
+                    hide_display: false
+                    width: 50
+                -
+                  handle: link
+                  field:
+                    collections:
+                      - pages
+                    container: assets
+                    type: link
+                    display: Link
+                    icon: link
+                    listable: hidden
+                    instructions_position: above
+                    visibility: visible
+                    hide_display: false
+                    width: 33
+              mode: stacked
+              add_row: +
+              reorderable: true
+              fullscreen: true
+              type: grid
+              display: Kanäle
+              icon: grid
+              listable: hidden
+              instructions_position: above
+              visibility: visible
+              hide_display: false

@@ -1,0 +1,12 @@
+title: 'SEO: JSON-LD'
+fields:
+  -
+    handle: schema_jsonld
+    field:
+      type: textarea
+      localizable: true
+      listable: false
+      display: 'JSON-ld Schema'
+      instructions: 'Die benutzerdefinierten JSON-ld-Schemaobjekte werden von einem passenden Script-Tag umschlossen.'
+      width: 100
+      instructions_position: below

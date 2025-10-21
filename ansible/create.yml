@@ -1,0 +1,124 @@
+---
+- name: create server or change a server
+  hosts: all
+  become: true
+  remote_user: root
+
+  vars:
+    - security_autoupdate_enabled: true
+    - security_autoupdate_reboot: true
+    - security_autoupdate_reboot_time: "02:00"
+    - security_autoupdate_mail_to: "hello@visuellverstehen.de"
+    - security_autoupdate_mail_on_error: true
+    - security_ssh_password_authentication: "no"
+    - security_ssh_permit_root_login: "yes"
+
+  roles:
+    - geerlingguy.docker
+    - geerlingguy.security
+
+  tasks:
+    - name: Set timezone to Europe/Berlin
+      community.general.timezone:
+        name: Europe/Berlin
+
+    - name: Install UFW firewall
+      ansible.builtin.apt:
+        name: ufw
+        state: present
+
+    - name: Add user vvuser
+      user:
+        name: vvuser
+        groups: docker
+        shell: /bin/bash
+        create_home: yes
+        append: yes
+        state: present
+
+    - name: Set gitlab key for vvuser
+      authorized_key:
+        user: vvuser
+        key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDl4kvkQ/thzVm860JY1Yb917IonQrXGjp7F6a2thyWKPJlLFhwxFBrNdfSfirRIuE2LfywW3goPMa8I1bjUBMIFRKs26IjyMfUyQ6i8zOpW8juqGkDK4ZXlnWR3LcL9Mc9KM8WoCTdy1m6xmhVVYNtZBOERoQ2lRKF5GODyKGF4cJbI6ht275atZrECl9tDob+ivgLUvHM1QjjctmPZFzwcSGPBRSjYKYKLqVAOW8A4gtYAe4F0qdWc7d34XOIfTFyaMM2nRr7aAJ/3GXgQ1SD+UZfB3fY2NXd5ZZWqgQSv0YSeKrUxq0bUtYBgDuI2zfLqoCuLevRamHyeLeLwaQiRAneApkZYYnQR997L6hnw7+8n5D219u8lhDbIMCuav2o0cE52lKugnzPAarCZ0cMutyX49Wq0BtSvcG0+uSJQSuTaMwDUSgI4EUDVSAcv/3A85vPzPDBN1+zH9xiaWpcK81K9dQ9wqLNaFXCrjrhHOqFUe9JO1ZNqJRrnHZ2/bC8l/5MunLlnxKDV0EYD8655RVoLQckzrlvNLyPzMMWVthOx6tZhV5nkvZa8uGsgvAXrmXRJTBz5VWDBhDSrcrpeO6WYZANxsrzFyANDWefZqUujEY3/ogmtdtns8w76FTMZFyszKnW+S6LH8+Qy+AfkiQ5ANA5EyYJIGfYCoLvNw==
+        state: present
+
+    - name: Create docker overlay network
+      community.docker.docker_network:
+        name: web
+        state: present
+        ipam_config:
+          - subnet: 172.19.0.0/16
+
+    - name: UFW - Deny everything incoming
+      community.general.ufw:
+        policy: deny
+        direction: incoming
+
+    - name: UFW - Allow everything outgoing
+      community.general.ufw:
+        policy: allow
+        direction: outgoing
+
+    - name: UFW - Allow ssh
+      community.general.ufw:
+        rule: allow
+        port: ssh
+        proto: tcp
+
+    - name: UFW - Allow all access to http, https and ssh
+      community.general.ufw:
+        rule: allow
+        direction: in
+        port: '{{ item }}'
+        proto: tcp
+      loop:
+        - 80
+        - 443
+
+    - name: UFW - Allow access via QUIC
+      community.general.ufw:
+        rule: allow
+        direction: in
+        port: 443
+        proto: udp
+
+    - name: Remove old images
+      ansible.builtin.cron:
+        name: "Delete old images once a day"
+        minute: "0"
+        hour: "0"
+        job: "docker image prune -af"
+
+    - name: UFW - Enable
+      community.general.ufw:
+        state: enabled
+
+    - name: Create folder for the dev application
+      file:
+        path: "/home/vvuser/dev"
+        state: directory
+        owner: vvuser
+
+    - name: Create folder for the live application
+      file:
+        path: "/home/vvuser/main"
+        state: directory
+        owner: vvuser
+
+    - name: Create traefik folder
+      file:
+        path: "/home/vvuser/traefik"
+        state: directory
+        owner: vvuser
+
+    - name: Copy docker-compose.traefik.yml to destination
+      ansible.builtin.copy:
+        src: docker-compose.traefik.yml
+        dest: /home/vvuser/traefik/docker-compose.yml
+        owner: vvuser
+        group: vvuser
+
+    - name: Start traefik
+      ansible.builtin.command: docker compose up -d
+      args:
+        chdir: /home/vvuser/traefik

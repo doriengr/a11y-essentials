@@ -1,0 +1,4 @@
+title: Seiten
+structure:
+  root: true
+route: '{parent_uri}/{slug}'

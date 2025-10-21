@@ -1,0 +1,88 @@
+title: Seite
+tabs:
+  main:
+    display: Hauptteil
+    sections:
+      -
+        fields:
+          -
+            handle: title
+            field:
+              type: text
+              required: true
+              display: Titel
+              validate:
+                - required
+  sidebar:
+    display: Sidebar
+    sections:
+      -
+        fields:
+          -
+            handle: slug
+            field:
+              type: slug
+              localizable: true
+              validate:
+                - required
+              display: 'Sprechende URL'
+              instructions_position: above
+              listable: hidden
+              visibility: visible
+              replicator_preview: true
+              from: title
+              generate: true
+              show_regenerate: false
+              hide_display: false
+          -
+            handle: parent
+            field:
+              type: entries
+              collections:
+                - pages
+              max_items: 1
+              listable: false
+              localizable: true
+          -
+            handle: template
+            field:
+              default: templates/pages/home
+              type: hidden
+              display: Template
+              listable: hidden
+              instructions_position: above
+              visibility: visible
+              hide_display: false
+  seo:
+    display: SEO
+    sections:
+      -
+        display: 'Einfache Einstellungen'
+        instructions: 'Einfache aber grundlegende SEO-Einstellungen'
+        fields:
+          -
+            import: seo_basic
+      -
+        display: 'Erweiterte Einstellungen'
+        instructions: 'Weitere, tiefgreifendere Einstellungen'
+        fields:
+          -
+            import: seo_advanced
+      -
+        display: 'Open Graph'
+        instructions: 'Einstellungen für das „Open Graph“-Protokoll'
+        fields:
+          -
+            import: seo_open_graph
+      -
+        display: Sitemap
+        instructions: 'Einstellungen für die automatische Sitemap'
+        fields:
+          -
+            import: seo_sitemap
+      -
+        display: 'JSON-ld Schema'
+        instructions: 'Benutzerdefinierte JSON-ld-Schemaobjekte'
+        fields:
+          -
+            import: seo_schema

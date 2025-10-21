@@ -1,0 +1,19 @@
+tabs:
+  main:
+    display: Main
+    sections:
+      -
+        display: 'Allgemeine Einstellungen'
+        fields:
+          -
+            handle: name
+            field:
+              input_type: text
+              type: text
+              listable: hidden
+              display: 'Name der Website'
+              validate: required
+              instructions_position: above
+              visibility: visible
+              antlers: false
+              hide_display: false

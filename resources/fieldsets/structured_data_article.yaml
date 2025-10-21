@@ -1,0 +1,51 @@
+title: 'Strukturierte Daten: Article'
+fields:
+  -
+    handle: kg_schema_type
+    field:
+      input_type: text
+      default: Article
+      antlers: false
+      type: text
+      display: 'Schema Typ'
+      icon: text
+      listable: hidden
+      instructions_position: above
+      visibility: read_only
+      replicator_preview: true
+      hide_display: false
+  -
+    handle: automatic_fields_section
+    field:
+      type: section
+      display: 'Automatische Properties'
+      icon: section
+      instructions: |-
+        Einige Felder werden im Graph bereits automatisch ausgefüllt. Dazu zählen:
+        `headline`: Titel des Eintrags,
+        `datePublished`: Datum des Eintrags,
+        `dateModified`: Datum des letzten Speichervorgangs
+        `author`: Autor*innen des Eintrags
+      listable: hidden
+      instructions_position: above
+      visibility: visible
+      replicator_preview: true
+      hide_display: false
+  -
+    handle: kg_image
+    field:
+      max_files: 1
+      mode: list
+      container: assets
+      restrict: false
+      allow_uploads: true
+      show_filename: true
+      show_set_alt: true
+      type: assets
+      display: Image
+      icon: assets
+      listable: hidden
+      instructions_position: above
+      visibility: visible
+      replicator_preview: true
+      hide_display: false

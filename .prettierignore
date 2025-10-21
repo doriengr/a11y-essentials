@@ -1,0 +1,9 @@
+**/*.yml
+**/*.yaml
+**/*.md
+/storage
+composer.lock
+composer.json
+package-lock.json
+/public/vendor
+/resources/views/email

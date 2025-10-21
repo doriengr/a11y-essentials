@@ -1,0 +1,77 @@
+tabs:
+  not_found:
+    display: '404 | Seite nicht gefunden'
+    sections:
+      -
+        display: '404: Seite konnte nicht gefunden werden'
+        instructions: 'Ein 404-Fehler tritt auf, wenn eine angeforderte Seite nicht gefunden wurde.'
+        fields:
+          -
+            handle: not_found
+            field:
+              fullscreen: false
+              border: false
+              type: group
+              display: Inhalt
+              fields:
+                -
+                  handle: title
+                  field:
+                    display: Titel
+                    type: text
+                    validate:
+                      - required
+                -
+                  handle: content
+                  field:
+                    buttons:
+                      - h2
+                      - h3
+                      - bold
+                      - italic
+                      - unorderedlist
+                      - orderedlist
+                      - anchor
+                    remove_empty_nodes: false
+                    type: bard
+                    display: Beschreibung
+                    validate:
+                      - required
+  server_error:
+    display: '500 | Server Fehler'
+    sections:
+      -
+        display: '500: Server Fehler'
+        instructions: 'Ein 500-Fehler ist ein Serverfehler, der darauf hinweist, dass der Server aufgrund eines internen Problems die Anfrage nicht verarbeiten kann.'
+        fields:
+          -
+            handle: server_error
+            field:
+              fullscreen: false
+              border: false
+              type: group
+              display: Inhalt
+              fields:
+                -
+                  handle: title
+                  field:
+                    display: Titel
+                    type: text
+                    validate:
+                      - required
+                -
+                  handle: content
+                  field:
+                    buttons:
+                      - h2
+                      - h3
+                      - bold
+                      - italic
+                      - unorderedlist
+                      - orderedlist
+                      - anchor
+                    remove_empty_nodes: false
+                    type: bard
+                    display: Beschreibung
+                    validate:
+                      - required

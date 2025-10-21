@@ -1,0 +1,39 @@
+{
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "watch": "vite --host",
+        "dev": "vite --host",
+        "build": "vite build",
+        "production": "vite build",
+        "js-lint:check": "eslint .",
+        "js-lint:fix": "eslint . --fix",
+        "css-lint:check": "stylelint \"**/*.css\" -f verbose --ignore-path .gitignore",
+        "css-lint:fix": "stylelint \"**/*.css\" --fix -f verbose --ignore-path .gitignore",
+        "php-lint:check": "vendor/bin/duster lint",
+        "php-lint:fix": "vendor/bin/duster fix",
+        "format:check": "prettier --check .",
+        "format:fix": "prettier --write .",
+        "check": "npm run js-lint:check && npm run css-lint:check && npm run format:check",
+        "check:all": "npm run check && npm run php-lint:check",
+        "fix": "npm run js-lint:fix && npm run css-lint:fix && npm run format:fix",
+        "fix:all": "npm run fix && npm run php-lint:fix",
+        "prepare": "husky"
+    },
+    "devDependencies": {
+        "@eslint/compat": "^1.2.6",
+        "@tailwindcss/typography": "^0.5.16",
+        "autoprefixer": "^10.4.20",
+        "eslint": "^9.25.1",
+        "globals": "^15.14.0",
+        "husky": "^9.1.7",
+        "laravel-vite-plugin": "^1.2.0",
+        "postcss": "^8.5.2",
+        "prettier": "^3.5.0",
+        "prettier-plugin-antlers": "^2.0.5",
+        "prettier-plugin-tailwindcss": "^0.6.11",
+        "stylelint": "^16.14.1",
+        "tailwindcss": "^3.4.17",
+        "vite": "^6.1.0"
+    }
+}

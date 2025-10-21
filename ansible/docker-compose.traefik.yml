@@ -1,0 +1,38 @@
+version: "3.8"
+
+networks:
+  web:
+    external: true
+
+volumes:
+  letsencrypt:
+
+services:
+  traefik:
+    image: "traefik:v3.2"
+    ports:
+      - "80:80"
+      - "443:443/tcp"
+      - "443:443/udp"
+    networks:
+      - web
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "3"
+    volumes:
+      - "letsencrypt:/letsencrypt"
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+    restart: always
+    command:
+      - --api.insecure=false
+      - --providers.docker=true
+      - --providers.docker.exposedByDefault=false
+      - --entrypoints.https.address=:443
+      - --entrypoints.https.http3=true
+      - --entrypoints.http.address=:80
+      - --entrypoints.http.http.redirections.entryPoint.to=https
+      - --entrypoints.http.http.redirections.entryPoint.scheme=https
+      - --certificatesresolvers.tls.acme.tlschallenge=true
+      - --certificatesresolvers.tls.acme.email=hello@visuellverstehen.de
+      - --certificatesresolvers.tls.acme.storage=/letsencrypt/acme.json

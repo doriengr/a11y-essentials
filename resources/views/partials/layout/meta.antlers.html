@@ -1,0 +1,72 @@
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+{{# No index and no follow #}}
+{{ if environment == 'production' }}
+    {{ if seo_noindex & seo_nofollow }}
+        <meta name="robots" content="noindex, nofollow" />
+    {{ elseif seo_nofollow }}
+        <meta name="robots" content="nofollow" />
+    {{ elseif seo_noindex }}
+        <meta name="robots" content="noindex" />
+    {{ /if }}
+{{ else }}
+    <meta name="robots" content="noindex, nofollow" />
+{{ /if }}
+{{# hreflang tags #}}
+{{ locales }}
+    <link rel="alternate" hreflang="{{ locale:full replace="_|-" }}" href="{{ permalink }}" />
+{{ /locales }}
+{{# Page title #}}
+<title>
+    {{ yield:seo_title }} {{ seo_title ? seo_title : title | linebreaks:hide }}
+    {{ seo:title_separator ? seo:title_separator : " | " }} {{ seo:site_name ? seo:site_name : site:name }}
+</title>
+
+{{# Page author #}}
+{{ if seo:seo_author }}
+    <meta name="author" content="{{ seo:seo_author }}" />
+{{ /if }}
+{{# Page description #}}
+{{ if seo_description }}
+    <meta name="description" content="{{ seo_description }}" />
+{{ elseif seo:seo_description }}
+    <meta name="description" content="{{ seo:seo_description }}" />
+{{ /if }}
+{{# Canonical URL #}}
+{{ if seo_canonical_type == 'current' }}
+    <link rel="canonical" href="{{ config:app:url }}{{ seo_canonical_current | url }}" />
+{{ elseif seo_canonical_type == 'external' }}
+    <link rel="canonical" href="{{ seo_canonical_external }}" />
+{{ elseif seo_canonical_type == 'entry' }}
+    <link rel="canonical" href="{{ permalink }}" />
+{{ /if }}
+{{# Auto add pagination link's when using resources/views/components/_pagination.antlers.html. #}}
+{{ yield:pagination }}
+{{# Open Graph #}}
+<meta property="og:site_name" content="{{ seo:site_name ? seo:site_name : site:name }}" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="{{ current_url }}" />
+<meta property="og:locale" content="{{ site:locale }}" />
+{{ if og_title }}
+    <meta property="og:title" content="{{ og_title }}" />
+{{ else }}
+    <meta property="og:title" content="{{ seo_title ? seo_title : title | linebreaks:hide }}" />
+{{ /if }}
+{{ if og_description }}
+    <meta property="og:description" content="{{ og_description }}" />
+{{ elseif seo_description }}
+    <meta property="og:description" content="{{ seo_description }}" />
+{{ /if }}
+{{ if og_image }}
+    <meta
+        property="og:image"
+        content="{{ glide:og_image width='1200' height='630' fit='crop_focal' absolute="true" }}"
+    />
+{{ elseif seo:og_image }}
+    <meta
+        property="og:image"
+        content="{{ glide:seo:og_image width='1200' height='630' fit='crop_focal' absolute="true" }}"
+    />
+{{ /if }}

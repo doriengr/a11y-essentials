@@ -1,0 +1,7 @@
+services:
+  application:
+    build:
+      args:
+        INSTALL_XDEBUG: "true"
+    environment:
+      - PHP_XDEBUG_MODE=debug

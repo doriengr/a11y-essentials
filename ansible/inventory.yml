@@ -1,0 +1,5 @@
+all:
+    hosts:
+      a11y-live:
+        # Enter IP-Address or domain
+        ansible_host: x.x.x.x

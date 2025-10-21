@@ -1,0 +1,13 @@
+{
+    "singleQuote": true,
+    "printWidth": 120,
+    "plugins": ["prettier-plugin-antlers", "prettier-plugin-tailwindcss"],
+    "overrides": [
+        {
+            "files": ["*.antlers.*"],
+            "options": {
+                "parser": "antlers"
+            }
+        }
+    ]
+}

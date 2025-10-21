@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="{{ site:short_locale }}">
+    <head>
+        {{ partial:layout/built-by }}
+        <title>Ein Fehler ist aufgetreten</title>
+        {{ partial:layout/knowledge-graph }}
+        {{ partial:layout/favicons }}
+        {{ vite src="resources/js/site.js|resources/css/site.css" }}
+    </head>
+    <body class="text-base font-light antialiased">
+        {{ partial:layout/header }}
+        {{ yield:seo_body }}
+        <main>
+            <section class="flex h-screen items-center justify-center">
+                <article class="text-center font-mono">
+                    {{ error_messages:server_error }}
+                        <h1 class="text-lg font-bold">
+                            {{ title ?? '500 Fehler: Es ist ein serverseitiger Fehler aufgetreten' }}
+                        </h1>
+                        <div class="text-base">
+                            {{ content }}
+                        </div>
+                    {{ /error_messages:server_error }}
+                </article>
+            </section>
+        </main>
+        {{ partial:layout/footer }}
+        {{ partial:layout/scripts }}
+        {{ partial:helpers/utility-class-helper }}
+    </body>
+</html>
