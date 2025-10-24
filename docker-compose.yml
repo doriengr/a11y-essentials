@@ -35,7 +35,6 @@ services:
     stop_grace_period: 1s
     extra_hosts:
       - "a11y.localhost:127.0.0.1"
-      - "a11y.localhost.visuellverstehen.de:127.0.0.1"
       - "host.docker.internal:host-gateway"
     environment:
       - PHP_OPCACHE_VALIDATE_TIMESTAMPS=1
@@ -43,12 +42,10 @@ services:
       web:
         aliases:
           - a11y.localhost
-          - a11y.localhost.visuellverstehen.de
-          - a11y.vscode.visuellverstehen.de
       stack:
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.a11y.rule=Host(`a11y.localhost`) || Host(`a11y.localhost.visuellverstehen.de`)"
+      - "traefik.http.routers.a11y.rule=Host(`a11y.localhost`)"
       - "traefik.http.routers.a11y.entrypoints=web"
       - "traefik.http.services.a11y.loadbalancer.server.port=80"
       - "traefik.docker.network=web"
