@@ -5,9 +5,26 @@ networks:
     external: false
 
 volumes:
+  database:
   redis:
 
 services:
+  database:
+    image: mysql:8.0
+    networks:
+      - stack
+    working_dir: /var/www/html
+    volumes:
+      - database:/var/lib/mysql:cached
+      - ./docker/database/initialize.sql:/docker-entrypoint-initdb.d/initialize.sql
+    restart: always
+    environment:
+      - MYSQL_DATABASE=a11y
+      - MYSQL_USER=a11y
+      - MYSQL_PASSWORD=a11y
+      - MYSQL_ROOT_PASSWORD=a11y
+    command: mysqld --character-set-server=utf8 --collation-server=utf8_general_ci --sql_mode=''
+
   application:
     build:
       context: .

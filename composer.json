@@ -14,6 +14,7 @@
     "laravel/tinker": "^2.9",
     "predis/predis": "^2.0",
     "statamic/cms": "^5.0",
+    "statamic/eloquent-driver": "^4.34",
     "visuellverstehen/pull": "^2.3"
   },
   "require-dev": {
