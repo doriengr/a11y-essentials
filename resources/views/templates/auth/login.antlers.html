@@ -1,0 +1,23 @@
+{{ user:login_form }}
+    {{ if errors }}
+        <div class="bg-red-300 text-white p-2">
+            {{ errors }}
+                {{ value }}<br>
+            {{ /errors }}
+        </div>
+    {{ /if }}
+
+    {{ if success }}
+        <div class="bg-green-300 text-white p-2">
+            {{ success }}<br>
+        </div>
+    {{ /if }}
+
+    <label>Email</label>
+    <input type="email" name="email" value="{{ old:email }}" />
+
+    <label>Password</label>
+    <input type="password" name="password" value="{{ old:password }}" />
+
+    <button type="submit">Log in</button>
+{{ /user:login_form }}

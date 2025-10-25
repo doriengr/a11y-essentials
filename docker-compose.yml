@@ -5,9 +5,26 @@ networks:
     external: false
 
 volumes:
+  database:
   redis:
 
 services:
+  database:
+    image: mysql:8.0
+    networks:
+      - stack
+    working_dir: /var/www/html
+    volumes:
+      - database:/var/lib/mysql:cached
+      - ./docker/database/initialize.sql:/docker-entrypoint-initdb.d/initialize.sql
+    restart: always
+    environment:
+      - MYSQL_DATABASE=a11y
+      - MYSQL_USER=a11y
+      - MYSQL_PASSWORD=a11y
+      - MYSQL_ROOT_PASSWORD=a11y
+    command: mysqld --character-set-server=utf8 --collation-server=utf8_general_ci --sql_mode=''
+
   application:
     build:
       context: .
@@ -18,7 +35,6 @@ services:
     stop_grace_period: 1s
     extra_hosts:
       - "a11y.localhost:127.0.0.1"
-      - "a11y.localhost.visuellverstehen.de:127.0.0.1"
       - "host.docker.internal:host-gateway"
     environment:
       - PHP_OPCACHE_VALIDATE_TIMESTAMPS=1
@@ -26,12 +42,10 @@ services:
       web:
         aliases:
           - a11y.localhost
-          - a11y.localhost.visuellverstehen.de
-          - a11y.vscode.visuellverstehen.de
       stack:
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.a11y.rule=Host(`a11y.localhost`) || Host(`a11y.localhost.visuellverstehen.de`)"
+      - "traefik.http.routers.a11y.rule=Host(`a11y.localhost`)"
       - "traefik.http.routers.a11y.entrypoints=web"
       - "traefik.http.services.a11y.loadbalancer.server.port=80"
       - "traefik.docker.network=web"
