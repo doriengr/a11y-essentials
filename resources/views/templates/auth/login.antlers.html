@@ -1,18 +1,18 @@
 {{ user:login_form }}
     {{ if errors }}
-        <div class="bg-red-300 text-white p-2">
+        <div class="bg-red-300 p-2 text-white">
             {{ errors }}
-                {{ value }}<br>
+                {{ value }}
+                <br />
             {{ /errors }}
         </div>
     {{ /if }}
-
     {{ if success }}
-        <div class="bg-green-300 text-white p-2">
-            {{ success }}<br>
+        <div class="bg-green-300 p-2 text-white">
+            {{ success }}
+            <br />
         </div>
     {{ /if }}
-
     <label>Email</label>
     <input type="email" name="email" value="{{ old:email }}" />
 
