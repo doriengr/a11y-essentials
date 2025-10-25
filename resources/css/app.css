@@ -1,0 +1,30 @@
+@import "tailwindcss";
+
+@import "./theme/colors.css";
+@import "./theme/fonts.css";
+@import "./theme/text-sizes.css";
+
+@source "../../lib/portal_web/**/*.html.heex";
+@source "../../lib/portal_web/**/*.ex";
+@source "../js/**/*.js";
+
+@layer base {
+  :focus-visible {
+    outline: 3px solid var(--color-black);
+    outline-offset: 3px;
+    box-shadow: 0 0 0 6px var(--color-white);
+  }
+
+  /* Make lists accessible */
+  ol {
+    list-style: decimal;
+    list-style-type: "";
+  }
+
+  ul {
+    list-style: disc;
+    list-style-type: "";
+  }
+}
+
+@variant hocus (&:focus, &:hover);

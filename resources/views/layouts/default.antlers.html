@@ -5,9 +5,9 @@
         {{ partial:layout/meta }}
         {{ partial:layout/knowledge-graph }}
         {{ partial:layout/favicons }}
-        {{ vite src="resources/js/site.js|resources/css/site.css" }}
+        {{ vite src="resources/js/site.js|resources/css/app.css" }}
     </head>
-    <body class="text-base font-light antialiased">
+    <body class="text-base text-black bg-red font-light antialiased">
         {{ partial:layout/header }}
         {{ yield:seo_body }}
         <main>
