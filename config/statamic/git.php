@@ -78,8 +78,8 @@ return [
     'use_authenticated' => true,
 
     'user' => [
-        'name' => env('STATAMIC_GIT_USER_NAME', 'visuellverstehen'),
-        'email' => env('STATAMIC_GIT_USER_EMAIL', 'kontakt@visuellverstehen.de'),
+        'name' => env('STATAMIC_GIT_USER_NAME', ''),
+        'email' => env('STATAMIC_GIT_USER_EMAIL', ''),
     ],
 
     /*

@@ -5,3 +5,6 @@ services:
         INSTALL_XDEBUG: "true"
     environment:
       - PHP_XDEBUG_MODE=debug
+  database:
+    ports:
+      - "33060:3306"

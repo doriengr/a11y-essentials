@@ -34,5 +34,5 @@ services:
       - --entrypoints.http.http.redirections.entryPoint.to=https
       - --entrypoints.http.http.redirections.entryPoint.scheme=https
       - --certificatesresolvers.tls.acme.tlschallenge=true
-      - --certificatesresolvers.tls.acme.email=hello@visuellverstehen.de
+      - --certificatesresolvers.tls.acme.email=dorien.groenwald@googlemail.de
       - --certificatesresolvers.tls.acme.storage=/letsencrypt/acme.json

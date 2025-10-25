@@ -1,1 +1,4 @@
-<header></header>
+<header>
+    {{ if current_user }}{{ current_user:email }}{{ /if }}
+    <a href="{{ user:logout_url }}">Log out</a>
+</header>

@@ -93,7 +93,7 @@ return [
     |
     */
 
-    'support_url' => env('STATAMIC_SUPPORT_URL', 'https://visuellverstehen.de'),
+    'support_url' => env('STATAMIC_SUPPORT_URL', ''),
 
     /*
     |--------------------------------------------------------------------------
