@@ -1,6 +1,8 @@
 <header>
     {{ if current_user }}
         {{ current_user:email }}
+        <a href="{{ user:logout_url }}">Log out</a>
+    {{ else }}
+        <a href="{{ route:auth.login }}">Login</a>
     {{ /if }}
-    <a href="{{ user:logout_url }}">Log out</a>
 </header>
