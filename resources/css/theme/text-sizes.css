@@ -1,0 +1,41 @@
+@theme {
+    /* Font size: 14px */
+    --text-sm: 0.875rem;
+    --text-sm--line-height: 1.5em;
+
+    /* Font size: 16px */
+    --text-base: 1rem;
+    --text-base--line-height: 1.5em;
+
+    /* Font size: 18px */
+    --text-lg: 1.125rem;
+    --text-lg--line-height: 1.5em;
+
+    /* Font size: 20px */
+    --text-xl: 1.25rem;
+    --text-xl--line-height: 1.5em;
+
+    /* Font size: 24px */
+    --text-2xl: 1.5rem;
+    --text-xl--line-height: 1.5em;
+
+    /* Font size: 32px */
+    --text-4xl: 2rem;
+    --text-xl--line-height: 1.5em;
+
+    /* Font size: 36px */
+    --text-5xl: 2.25rem;
+    --text-xl--line-height: 1.5em;
+
+    /* Font size: 40px */
+    --text-6xl: 2.5rem;
+    --text-xl--line-height: 1.5em;
+
+    /* Font size: 56px */
+    --text-7xl: 3.5rem;
+    --text-xl--line-height: 1.5em;
+
+    /* Font size: 72px */
+    --text-8xl: 4.5rem;
+    --text-xl--line-height: 1.5em;
+}

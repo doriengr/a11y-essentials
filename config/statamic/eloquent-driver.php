@@ -49,12 +49,12 @@ return [
 
     'forms' => [
         'driver' => 'file',
-        'model'  => \Statamic\Eloquent\Forms\FormModel::class,
+        'model' => \Statamic\Eloquent\Forms\FormModel::class,
     ],
 
     'form_submissions' => [
         'driver' => 'file',
-        'model'  => \Statamic\Eloquent\Forms\SubmissionModel::class,
+        'model' => \Statamic\Eloquent\Forms\SubmissionModel::class,
     ],
 
     'global_sets' => [

@@ -11,7 +11,7 @@ export default defineConfig({
     plugins: [
         laravel({
             input: [
-                'resources/css/site.css',
+                'resources/css/app.css',
                 'resources/js/site.js',
 
                 // Control Panel assets.
