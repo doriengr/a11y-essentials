@@ -1,0 +1,11 @@
+<h1>Neues Projekt erstellen</h1>
+
+<form action="{{ route:projects.store }}" method="POST">
+    {{ csrf_field }}
+    <div class="mb-4">
+        <label for="title">Titel</label>
+        <input type="text" name="title" id="title" value="{{ old:title }}" required />
+    </div>
+
+    <button type="submit">Projekt speichern</button>
+</form>

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProjectController;
 use Illuminate\Support\Facades\Route;
 use Statamic\View\View;
 
@@ -14,3 +15,9 @@ Route::get('sitemap.xml', function () {
 // Authentication
 Route::get('register', [AuthController::class, 'register'])->name('auth.registration');
 Route::get('login', [AuthController::class, 'login'])->name('auth.login');
+
+// Projects
+// TODO: add auth middleware
+Route::get('projects', [ProjectController::class, 'index'])->name('projects.index');
+Route::get('projects/create', [ProjectController::class, 'create'])->name('projects.create');
+Route::post('projects', [ProjectController::class, 'store'])->name('projects.store');
