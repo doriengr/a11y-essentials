@@ -2,6 +2,7 @@
 @import './theme/colors.css';
 @import './theme/fonts.css';
 @import './theme/text-sizes.css';
+@import './utilities/underline.css';
 @import './utilities/vice.css';
 
 @source '../views/*.antlers.html';

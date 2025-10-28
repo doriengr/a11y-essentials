@@ -1,0 +1,21 @@
+@utility link-underline {
+    position: relative;
+    display: block;
+    width: max-content;
+    font-weight: 600;
+
+    &::before {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        height: 2px;
+        width: 0;
+        background-color: var(--color-white);
+        transition: all 300ms ease-in-out;
+    }
+
+    &:hover::before {
+        width: 100%;
+    }
+}
