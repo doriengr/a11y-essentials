@@ -1,5 +1,5 @@
 window.addEventListener('load', () => {
-    if (typeof window.Alpine !== 'undefined') {
+    if (window.Alpine) {
         window.Alpine.start();
     }
 });

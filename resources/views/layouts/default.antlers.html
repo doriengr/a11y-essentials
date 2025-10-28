@@ -6,13 +6,14 @@
         {{ partial:layout/favicons }}
         {{ vite src="resources/js/site.js|resources/css/app.css" }}
     </head>
-    <body class="font-base bg-white text-base text-black antialiased">
+    <body class="font-base bg-white text-base text-black antialiased md:text-lg">
         {{ partial:layout/header }}
         {{ yield:seo_body }}
         <main>
             {{ template_content }}
         </main>
         {{ partial:layout/footer }}
+        {{ partial:layout/scripts }}
         {{ partial:helpers/utility-class-helper }}
     </body>
 </html>

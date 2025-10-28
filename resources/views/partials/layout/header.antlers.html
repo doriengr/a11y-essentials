@@ -1,8 +1,36 @@
-<header>
-    {{ if current_user }}
-        {{ current_user:email }}
-        <a href="{{ user:logout_url }}">Log out</a>
-    {{ else }}
-        <a href="{{ route:auth.login }}">Login</a>
-    {{ /if }}
+<header class="vice py-6">
+    <nav x-data="mainNavigation()" aria-labelledby="main-navigation-control">
+        <div class="flex items-center justify-between">
+            <p>Logo</p>
+            <button
+                @click="toggle()"
+                id="main-navigation-control"
+                :aria-expanded="isOpen"
+                aria-controls="main-navigation-list"
+                class="group flex cursor-pointer items-center gap-x-2 font-semibold"
+            >
+                <span class="rotate-45 transition-transform duration-300 group-aria-expanded:rotate-0">
+                    {{ svg:general/close }}
+                </span>
+                Menü
+            </button>
+        </div>
+        <ul
+            id="main-navigation-list"
+            x-show="isOpen"
+            x-cloak
+            class="bg-green fixed inset-x-6 top-18 flex flex-col gap-y-6 rounded-sm p-6 text-lg text-white"
+        >
+            {{ nav:main_navigation }}
+                <li>
+                    <a
+                        href="{{ url }}"
+                        class="relative block w-max font-semibold before:absolute before:-bottom-1 before:left-0 before:h-[2px] before:w-0 before:bg-white before:transition-all before:duration-600 before:content-[''] hover:before:w-full"
+                    >
+                        {{ title }}
+                    </a>
+                </li>
+            {{ /nav:main_navigation }}
+        </ul>
+    </nav>
 </header>

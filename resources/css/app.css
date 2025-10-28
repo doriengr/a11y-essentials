@@ -2,9 +2,12 @@
 @import './theme/colors.css';
 @import './theme/fonts.css';
 @import './theme/text-sizes.css';
+@import './utilities/vice.css';
 
-@source '../../lib/portal_web/**/*.html.heex';
-@source '../../lib/portal_web/**/*.ex';
+@source '../views/*.antlers.html';
+@source '../views/**/*.antlers.html';
+@source '../views/**/**/*.antlers.html';
+@source '../js/*.js';
 @source '../js/**/*.js';
 
 @layer base {
@@ -31,6 +34,10 @@
     h4,
     h5 {
         font-family: var(--font-headline);
+    }
+
+    [x-cloak] {
+        display: none !important;
     }
 }
 
