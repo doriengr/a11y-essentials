@@ -1,10 +1,16 @@
 @import 'tailwindcss';
+@import './components/autoformat.css';
+@import './components/buttons.css';
 @import './theme/colors.css';
 @import './theme/fonts.css';
 @import './theme/text-sizes.css';
+@import './utilities/underline.css';
+@import './utilities/vice.css';
 
-@source '../../lib/portal_web/**/*.html.heex';
-@source '../../lib/portal_web/**/*.ex';
+@source '../views/*.antlers.html';
+@source '../views/**/*.antlers.html';
+@source '../views/**/**/*.antlers.html';
+@source '../js/*.js';
 @source '../js/**/*.js';
 
 @layer base {
@@ -12,6 +18,11 @@
         outline: 3px solid var(--color-black);
         outline-offset: 3px;
         box-shadow: 0 0 0 6px var(--color-white);
+    }
+
+    button,
+    a {
+        cursor: pointer;
     }
 
     /* Make lists accessible */
@@ -31,6 +42,10 @@
     h4,
     h5 {
         font-family: var(--font-headline);
+    }
+
+    [x-cloak] {
+        display: none !important;
     }
 }
 

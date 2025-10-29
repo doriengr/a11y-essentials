@@ -6,10 +6,10 @@
         {{ partial:layout/favicons }}
         {{ vite src="resources/js/site.js|resources/css/app.css" }}
     </head>
-    <body class="font-base bg-white text-base text-black antialiased">
+    <body class="font-base flex min-h-screen flex-col bg-white text-base text-black antialiased">
         {{ partial:layout/header }}
         {{ yield:seo_body }}
-        <main>
+        <main id="main" class="flex-grow">
             <section class="flex h-screen items-center justify-center">
                 <article class="font-base text-center">
                     {{ error_messages:server_error }}
