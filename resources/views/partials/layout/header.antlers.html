@@ -1,4 +1,4 @@
-<header class="vice py-6">
+<header class="vice w-full py-6">
     <nav
         x-data="{ mainNavOpen : false }"
         @click.outside="mainNavOpen = false"
@@ -6,7 +6,7 @@
         class="relative lg:flex lg:justify-between"
     >
         <div class="flex items-center justify-between">
-            <p>Logo</p>
+            <a href="{{ homepage }}">Logo</a>
             <button
                 @click="mainNavOpen = !mainNavOpen"
                 id="main-navigation-control"
