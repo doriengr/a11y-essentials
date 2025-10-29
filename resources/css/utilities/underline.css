@@ -11,7 +11,7 @@
         left: 0;
         height: 2px;
         width: 0;
-        background-color: var(--color-white);
+        background-color: var(--color-current);
         transition: all 300ms ease-in-out;
     }
 

@@ -1,15 +1,16 @@
 <header class="vice py-6">
     <nav
-        x-data="mainNavigation()"
+        x-data="{ mainNavOpen : false }"
+        @click.outside="mainNavOpen = false"
         aria-labelledby="main-navigation-control"
         class="relative lg:flex lg:justify-between"
     >
         <div class="flex items-center justify-between">
             <p>Logo</p>
             <button
-                @click="toggle()"
+                @click="mainNavOpen = !mainNavOpen"
                 id="main-navigation-control"
-                :aria-expanded="isOpen"
+                :aria-expanded="mainNavOpen"
                 aria-controls="main-navigation-list"
                 class="group flex cursor-pointer items-center gap-x-2 font-semibold lg:hidden"
             >
@@ -21,27 +22,29 @@
         </div>
         <ul
             id="main-navigation-list"
-            :class="isOpen ? 'flex' : 'hidden'"
+            :class="mainNavOpen ? 'flex' : 'hidden'"
             x-cloak
-            class="bg-green fixed inset-x-6 top-18 flex-col gap-x-6 rounded-sm p-6 text-lg text-white lg:static lg:flex lg:flex-row lg:gap-x-10 lg:bg-white lg:p-0 lg:text-black"
+            class="bg-green fixed inset-x-6 top-18 flex-col gap-y-6 rounded-sm p-6 text-lg text-white lg:static lg:flex lg:flex-row lg:gap-x-10 lg:bg-white lg:p-0 lg:text-black"
         >
             {{ nav:main_navigation }}
-                <li x-data="{ isOpen : false }">
+                <li x-data="{ subNavOpen : false }">
                     {{ if !children }}
                         <a href="{{ url }}" class="link-underline">
                             {{ title }}
                         </a>
                     {{ else }}
                         <button
-                            class="link-underline flex items-center gap-x-2 font-semibold"
-                            :aria-expanded="isOpen"
-                            @click="isOpen = !isOpen"
+                            class="group/button link-underline flex items-center gap-x-2 font-semibold"
+                            :aria-expanded="subNavOpen"
+                            @click="subNavOpen = !subNavOpen"
                         >
                             {{ title }}
-                            <span class="size-6 rotate-90">{{ svg:general/chevron }}</span>
+                            <span class="size-6 rotate-90 group-aria-expanded/button:-rotate-90">
+                                {{ svg:general/chevron }}
+                            </span>
                         </button>
                         <div
-                            x-show="isOpen"
+                            x-show="subNavOpen"
                             x-cloak
                             class="lg:bg-green pt-6 lg:absolute lg:inset-x-0 lg:top-12 lg:rounded-sm lg:p-6 lg:text-white"
                         >
