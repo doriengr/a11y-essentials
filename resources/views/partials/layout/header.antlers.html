@@ -29,7 +29,7 @@
             {{ nav:main_navigation }}
                 <li x-data="{ subNavOpen : false }">
                     {{ if !children }}
-                        <a href="{{ url }}" class="link-underline">
+                        <a href="{{ url }}" class="link-underline" {{ if is_current }} aria-current="page" {{ /if }}>
                             {{ title }}
                         </a>
                     {{ else }}
@@ -50,7 +50,11 @@
                         >
                             {{ if children }}
                                 {{ children limit="1" }}
-                                    <a href="{{ url }}" class="button mb-6">
+                                    <a
+                                        href="{{ url }}"
+                                        class="button button-secondary mb-6"
+                                        {{ if is_current }} aria-current="page" {{ /if }}
+                                    >
                                         {{ title }}
                                         <span class="size-6">{{ svg:general/arrow }}</span>
                                     </a>
@@ -64,7 +68,13 @@
                                 >
                                     {{ children offset="1" }}
                                         <li>
-                                            <a href="{{ url }}" class="link-underline">{{ title }}</a>
+                                            <a
+                                                href="{{ url }}"
+                                                class="link-underline"
+                                                {{ if is_current }} aria-current="page" {{ /if }}
+                                            >
+                                                {{ title }}
+                                            </a>
                                         </li>
                                     {{ /children }}
                                 </ul>
