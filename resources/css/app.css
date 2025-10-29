@@ -10,6 +10,7 @@
 @source '../views/*.antlers.html';
 @source '../views/**/*.antlers.html';
 @source '../views/**/**/*.antlers.html';
+@source '../views/**/**/**/*.antlers.html';
 @source '../js/*.js';
 @source '../js/**/*.js';
 
