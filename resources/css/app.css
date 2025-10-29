@@ -2,6 +2,7 @@
 @import './theme/colors.css';
 @import './theme/fonts.css';
 @import './theme/text-sizes.css';
+@import './utilities/button.css';
 @import './utilities/underline.css';
 @import './utilities/vice.css';
 
@@ -16,6 +17,11 @@
         outline: 3px solid var(--color-black);
         outline-offset: 3px;
         box-shadow: 0 0 0 6px var(--color-white);
+    }
+
+    button,
+    a {
+        cursor: pointer;
     }
 
     /* Make lists accessible */

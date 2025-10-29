@@ -28,13 +28,37 @@
                             {{ title }}
                         </a>
                     {{ else }}
-                        <button class="link-underline flex items-center gap-x-2 font-semibold" :aria-expanded="isOpen">
+                        <button
+                            class="link-underline flex items-center gap-x-2 font-semibold"
+                            :aria-expanded="isOpen"
+                            @click="isOpen = !isOpen"
+                        >
                             {{ title }}
                             <span class="size-6 rotate-90">{{ svg:general/chevron }}</span>
                         </button>
-                        <ul x-show="isOpen" x-cloak>
-                            Test
-                        </ul>
+                        <div x-show="isOpen" x-cloak class="pt-6">
+                            {{ if children }}
+                                {{ children limit="1" }}
+                                    <a href="{{ url }}" class="button mb-6">
+                                        {{ title }}
+                                        <span class="size-6">{{ svg:general/arrow }}</span>
+                                    </a>
+                                    <span id="sub-navigation-list-{{ index }}" class="mb-4 block text-base">
+                                        Schnellverweise
+                                    </span>
+                                {{ /children }}
+                                <ul
+                                    aria-labelledby="sub-navigation-list-{{ index }}"
+                                    class="relative flex flex-col gap-y-6 pl-4 before:absolute before:top-0 before:left-0 before:h-full before:w-px before:bg-white"
+                                >
+                                    {{ children offset="1" }}
+                                        <li>
+                                            <a href="{{ url }}" class="link-underline">{{ title }}</a>
+                                        </li>
+                                    {{ /children }}
+                                </ul>
+                            {{ /if }}
+                        </div>
                     {{ /if }}
                 </li>
             {{ /nav:main_navigation }}
