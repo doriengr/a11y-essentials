@@ -1,5 +1,9 @@
 <header class="vice py-6">
-    <nav x-data="mainNavigation()" aria-labelledby="main-navigation-control">
+    <nav
+        x-data="mainNavigation()"
+        aria-labelledby="main-navigation-control"
+        class="relative lg:flex lg:justify-between"
+    >
         <div class="flex items-center justify-between">
             <p>Logo</p>
             <button
@@ -7,7 +11,7 @@
                 id="main-navigation-control"
                 :aria-expanded="isOpen"
                 aria-controls="main-navigation-list"
-                class="group flex cursor-pointer items-center gap-x-2 font-semibold"
+                class="group flex cursor-pointer items-center gap-x-2 font-semibold lg:hidden"
             >
                 <span class="rotate-45 transition-transform duration-300 group-aria-expanded:rotate-0">
                     {{ svg:general/close }}
@@ -17,9 +21,9 @@
         </div>
         <ul
             id="main-navigation-list"
-            x-show="isOpen"
+            :class="isOpen ? 'flex' : 'hidden'"
             x-cloak
-            class="bg-green fixed inset-x-6 top-18 flex flex-col gap-y-6 rounded-sm p-6 text-lg text-white"
+            class="bg-green fixed inset-x-6 top-18 flex-col gap-x-6 rounded-sm p-6 text-lg text-white lg:static lg:flex lg:flex-row lg:gap-x-10 lg:bg-white lg:p-0 lg:text-black"
         >
             {{ nav:main_navigation }}
                 <li x-data="{ isOpen : false }">
@@ -36,7 +40,11 @@
                             {{ title }}
                             <span class="size-6 rotate-90">{{ svg:general/chevron }}</span>
                         </button>
-                        <div x-show="isOpen" x-cloak class="pt-6">
+                        <div
+                            x-show="isOpen"
+                            x-cloak
+                            class="lg:bg-green pt-6 lg:absolute lg:inset-x-0 lg:top-12 lg:rounded-sm lg:p-6 lg:text-white"
+                        >
                             {{ if children }}
                                 {{ children limit="1" }}
                                     <a href="{{ url }}" class="button mb-6">
@@ -49,7 +57,7 @@
                                 {{ /children }}
                                 <ul
                                     aria-labelledby="sub-navigation-list-{{ index }}"
-                                    class="relative flex flex-col gap-y-6 pl-4 before:absolute before:top-0 before:left-0 before:h-full before:w-px before:bg-white"
+                                    class="relative flex flex-col gap-y-6 pl-4 before:absolute before:top-0 before:left-0 before:h-full before:w-px before:bg-white lg:flex-row lg:gap-x-10 lg:p-0 lg:before:h-0"
                                 >
                                     {{ children offset="1" }}
                                         <li>
