@@ -1,1 +1,27 @@
-<footer></footer>
+<footer class="vice flex flex-wrap justify-between gap-x-10 bg-green-100 py-10">
+    <div class="autoformat flex items-start gap-x-3 text-sm">
+        <span class="text-green mt-1 size-6 shrink-0">{{ svg:status/info }}</span>
+        <p>
+            Diese Website wurde im Rahmen einer Masterthesis an der
+            <a href="https://hs-flensburg.de/">Hochschule Flensburg</a>
+            entwickelt.
+            <br />
+            Sie dient zu Forschungszwecken und ist nicht vollständig.
+        </p>
+    </div>
+    <nav aria-label="Fußnavigation" class="mt-6">
+        <ul class="flex items-center justify-end gap-x-6">
+            {{ nav:footer_navigation }}
+                <li>
+                    <a
+                        href="{{ url }}"
+                        class="link-underline text-sm"
+                        {{ if is_current }} aria-current="page" {{ /if }}
+                    >
+                        {{ title }}
+                    </a>
+                </li>
+            {{ /nav:footer_navigation }}
+        </ul>
+    </nav>
+</footer>
