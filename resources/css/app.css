@@ -4,6 +4,8 @@
 @import './theme/colors.css';
 @import './theme/fonts.css';
 @import './theme/text-sizes.css';
+@import './utilities/cover.css';
+@import './utilities/priority.css';
 @import './utilities/underline.css';
 @import './utilities/vice.css';
 
@@ -13,6 +15,7 @@
 @source '../views/**/**/**/*.antlers.html';
 @source '../js/*.js';
 @source '../js/**/*.js';
+@source inline('before:bg-red before:bg-green before:bg-yellow');
 
 @layer base {
     :focus-visible {

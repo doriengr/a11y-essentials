@@ -1,0 +1,13 @@
+{{ $bg_color = switch(
+                (priority == 'high') => 'red',
+                (priority == 'moderate') => 'yellow',
+                () => 'green') }}
+{{ $priority_label = switch(
+                      (priority == 'high') => 'Hohe Priorität',
+                      (priority == 'moderate') => 'Moderate Priorität',
+                      () => 'Niedrige Priorität') }}
+<span
+    class="priority text-grey-800 before:bg-{{ $bg_color }} flex items-center gap-x-2 text-sm lg:gap-x-3 lg:text-base"
+>
+    {{ priority_label }}
+</span>

@@ -1,4 +1,5 @@
 title: Hauptnavigation
 collections:
   - pages
+  - components
 max_depth: 2

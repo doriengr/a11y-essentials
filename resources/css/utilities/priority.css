@@ -1,0 +1,18 @@
+@utility priority {
+    position: relative;
+
+    &::before {
+        content: '';
+        display: block;
+        border-radius: 100%;
+        width: calc(var(--spacing) * 3);
+        height: calc(var(--spacing) * 3);
+    }
+
+    @media (min-width: 64rem) {
+        &::before {
+            width: calc(var(--spacing) * 4);
+            height: calc(var(--spacing) * 4);
+        }
+    }
+}
