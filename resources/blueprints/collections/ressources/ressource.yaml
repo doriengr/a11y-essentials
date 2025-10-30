@@ -38,7 +38,7 @@ tabs:
                       icon: alert-help-question
                       fields:
                         -
-                          handle: notice_headline
+                          handle: notice_label
                           field:
                             type: text
                             display: Überschrift
