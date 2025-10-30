@@ -22,7 +22,7 @@
                             <button
                                 @click="isOpen = !isOpen"
                                 id="accordion-button-{{ index }}"
-                                :aria-expanded="!isOpen"
+                                :aria-expanded="isOpen"
                                 aria-controls="accordion-panel-{{ index }}"
                                 class="before:cover"
                             >
@@ -37,11 +37,16 @@
                         </div>
                     {{ /if }}
                 {{ /partial:disclosure/control }}
-                <div id="accordion-panel-{{ index }}" x-cloak x-show="isOpen" class="px-6 pb-4">
+                <article
+                    id="accordion-panel-{{ index }}"
+                    x-cloak
+                    x-show="isOpen"
+                    class="flex flex-col gap-y-4 px-6 pb-4"
+                >
                     {{ content }}
-                        {{ type }}
+                        {{ partial:if_exists src="sets/content/{type | dashify}" }}
                     {{ /content }}
-                </div>
+                </article>
             </li>
         {{ /ressources }}
     </ul>

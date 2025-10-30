@@ -15,7 +15,7 @@ tabs:
           -
             handle: short_description
             field:
-              remove_empty_nodes: false
+              remove_empty_nodes: true
               type: bard
               display: 'Kurze Beschreibung'
               buttons:
@@ -53,7 +53,7 @@ tabs:
                               - unorderedlist
                               - orderedlist
                               - anchor
-                            remove_empty_nodes: false
+                            remove_empty_nodes: true
                             type: bard
                             display: Beschreibung
                             validate:
@@ -94,7 +94,7 @@ tabs:
                               - unorderedlist
                               - orderedlist
                               - anchor
-                            remove_empty_nodes: false
+                            remove_empty_nodes: true
                             type: bard
                             display: Text
                             validate:
