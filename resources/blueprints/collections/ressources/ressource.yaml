@@ -99,10 +99,15 @@ tabs:
                             display: Text
                             validate:
                               - required
-                    buttons_list:
+                    button_list:
                       display: Buttons-Liste
                       icon: file-content-list
                       fields:
+                        -
+                          handle: button_list_label
+                          field:
+                            type: text
+                            display: Label
                         -
                           handle: button_list
                           field:

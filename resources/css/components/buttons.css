@@ -21,6 +21,17 @@
     }
 
     .button-secondary {
+        background-color: transparent;
+        color: var(--color-green);
+        border: 1px solid var(--color-green);
+
+        @variant hocus {
+            background-color: var(--color-green);
+            color: var(--color-white);
+        }
+    }
+
+    .button-tertiary {
         background-color: var(--color-white);
         color: var(--color-green);
         border: 1px solid var(--color-white);

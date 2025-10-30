@@ -1,0 +1,17 @@
+<section>
+    {{ if button_list_label }}
+        <span class="mb-2 block">{{ button_list_label }}</span>
+    {{ /if }}
+    <ul class="flex flex-wrap gap-4">
+        {{ button_list }}
+            <li>
+                <a href="{{ button_url }}" class="button button-secondary">
+                    {{ button_label }}
+                    <span class="size-6">
+                        {{ svg:general/arrow-up-right }}
+                    </span>
+                </a>
+            </li>
+        {{ /button_list }}
+    </ul>
+</section>
