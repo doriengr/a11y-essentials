@@ -3,6 +3,14 @@ export default (options = {}) => ({
     isOpen: false,
 
     init() {
+        if (this.currentHashIsID()) {
+            this.isOpen = true;
+            setTimeout(() => {
+                const topPos = this.$root.getBoundingClientRect().top + window.scrollY;
+                window.scrollTo({ top: topPos, behavior: 'smooth' });
+            }, 50);
+        }
+
         window.addEventListener('hashchange', () => {
             if (this.currentHashIsID()) this.isOpen = true;
         });

@@ -7,7 +7,7 @@
             {{ ressources }}
                 <li x-data="sideNavigation({ slug: '{{ slug }}'})">
                     <button
-                        @click="scrollToElement(event)"
+                        @click="scrollToElement()"
                         class="hocus:text-green-800 transition-colors duration-300 ease-in-out"
                     >
                         {{ title }}
