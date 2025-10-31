@@ -1,0 +1,22 @@
+@layer components {
+    .pill {
+        display: inline-block;
+        border-radius: calc(var(--spacing) * 10);
+        width: max-content;
+        min-width: calc(var(--spacing) * 8);
+        font-weight: 600;
+        padding: 0 calc(var(--spacing) * 2);
+        font-size: var(--text-sm);
+        text-align: center;
+    }
+
+    .pill-highlight {
+        border: 1px solid var(--color-red);
+        color: var(--color-red);
+    }
+
+    .pill-primary {
+        background-color: var(--color-green-200);
+        color: var(--color-green);
+    }
+}
