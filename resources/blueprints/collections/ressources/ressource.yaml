@@ -69,6 +69,13 @@ tabs:
                             display: Code
                             validate:
                               - required
+                        -
+                          handle: code_caption
+                          field:
+                            type: text
+                            display: Bescheibung
+                            validate:
+                              - required
                     text:
                       display: Text
                       icon: text-formatting-all-caps
