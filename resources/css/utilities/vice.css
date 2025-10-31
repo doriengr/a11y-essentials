@@ -1,10 +1,10 @@
 @utility vice {
     margin-left: auto;
     margin-right: auto;
-    max-width: 100rem;
+    max-width: 80rem;
     padding-inline: calc(var(--spacing) * 6);
 
     @media (min-width: 64rem) {
-        width: 90%;
+        width: 95%;
     }
 }

@@ -61,7 +61,11 @@ tabs:
             field:
               type: slug
               localizable: true
-              validate: 'max:200'
+              validate:
+                - required
+                - 'max:200'
+              display: Slug
+              instructions: 'Dieser Wert wird als URL-Parameter verwendet'
           -
             handle: priority
             field:

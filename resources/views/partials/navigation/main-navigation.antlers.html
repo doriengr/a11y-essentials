@@ -1,0 +1,64 @@
+<ul
+    id="main-navigation-list"
+    :class="mainNavOpen ? 'flex' : 'hidden'"
+    x-cloak
+    class="bg-green fixed inset-x-6 top-18 flex-col gap-y-6 rounded-sm p-6 text-lg text-white lg:static lg:flex lg:flex-row lg:gap-x-10 lg:bg-white lg:p-0 lg:text-black"
+>
+    {{ nav:main_navigation }}
+        <li x-data="{ subNavOpen : false }">
+            {{ if !children }}
+                <a href="{{ url }}" class="link-underline" {{ if is_current }} aria-current="page" {{ /if }}>
+                    {{ title }}
+                </a>
+            {{ else }}
+                <button
+                    class="group/button link-underline flex items-center gap-x-2 font-semibold"
+                    :aria-expanded="subNavOpen"
+                    @click="subNavOpen = !subNavOpen"
+                >
+                    {{ title }}
+                    <span class="size-6 rotate-90 group-aria-expanded/button:-rotate-90">
+                        {{ svg:general/chevron }}
+                    </span>
+                </button>
+                <div
+                    x-show="subNavOpen"
+                    x-cloak
+                    class="lg:bg-green pt-6 lg:absolute lg:inset-x-0 lg:top-12 lg:rounded-sm lg:p-6 lg:text-white"
+                >
+                    {{ if children }}
+                        {{ children limit="1" }}
+                            <a
+                                href="{{ url }}"
+                                class="button button-tertiary mb-6"
+                                {{ if is_current }} aria-current="page" {{ /if }}
+                            >
+                                {{ title }}
+                                <span class="size-6">{{ svg:general/arrow }}</span>
+                            </a>
+                            <span id="sub-navigation-list-{{ index }}" class="mb-4 block text-base">
+                                Schnellverweise
+                            </span>
+                        {{ /children }}
+                        <ul
+                            aria-labelledby="sub-navigation-list-{{ index }}"
+                            class="relative flex flex-col gap-y-6 pl-4 before:absolute before:top-0 before:left-0 before:h-full before:w-px before:bg-white lg:flex-row lg:gap-x-10 lg:p-0 lg:before:h-0"
+                        >
+                            {{ children offset="1" }}
+                                <li>
+                                    <a
+                                        href="{{ url }}"
+                                        class="link-underline"
+                                        {{ if is_current }} aria-current="page" {{ /if }}
+                                    >
+                                        {{ title }}
+                                    </a>
+                                </li>
+                            {{ /children }}
+                        </ul>
+                    {{ /if }}
+                </div>
+            {{ /if }}
+        </li>
+    {{ /nav:main_navigation }}
+</ul>

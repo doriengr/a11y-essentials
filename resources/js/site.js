@@ -1,6 +1,8 @@
 import Alpine from 'alpinejs';
-//import code from './components/code';
+import accordion from './components/accordion';
+import sideNavigation from './components/sideNavigation';
 
-//Alpine.data('code', code);
+Alpine.data('accordion', accordion);
+Alpine.data('sideNavigation', sideNavigation);
 
 window.Alpine = Alpine;
