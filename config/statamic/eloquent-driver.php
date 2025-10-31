@@ -84,12 +84,12 @@ return [
     ],
 
     'taxonomies' => [
-        'driver' => 'file',
+        'driver' => 'eloquent',
         'model' => \Statamic\Eloquent\Taxonomies\TaxonomyModel::class,
     ],
 
     'terms' => [
-        'driver' => 'file',
+        'driver' => 'eloquent',
         'model' => \Statamic\Eloquent\Taxonomies\TermModel::class,
     ],
 

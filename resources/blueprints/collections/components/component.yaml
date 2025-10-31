@@ -1,0 +1,59 @@
+tabs:
+  main:
+    display: Hauptteil
+    sections:
+      -
+        fields:
+          -
+            handle: title
+            field:
+              type: text
+              required: true
+              validate:
+                - required
+              width: 66
+          -
+            handle: component_type
+            field:
+              options:
+                -
+                  key: common
+                  value: 'Allgemeine Komponente'
+                -
+                  key: specific
+                  value: 'Spezifische Komponente'
+              type: select
+              display: Art
+              width: 33
+              default: common
+          -
+            handle: short_description
+            field:
+              buttons:
+                - bold
+                - italic
+                - unorderedlist
+                - orderedlist
+                - anchor
+              remove_empty_nodes: false
+              type: bard
+              display: 'Kurze Beschreibung'
+          -
+            handle: ressources
+            field:
+              type: entries
+              display: Ressoucen
+              collections:
+                - ressources
+  sidebar:
+    display: Sidebar
+    sections:
+      -
+        fields:
+          -
+            handle: slug
+            field:
+              type: slug
+              localizable: true
+              validate: 'max:200'
+title: Komponenten

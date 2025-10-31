@@ -1,0 +1,180 @@
+tabs:
+  main:
+    display: Hauptteil
+    sections:
+      -
+        display: Vorschau
+        fields:
+          -
+            handle: title
+            field:
+              type: text
+              required: true
+              validate:
+                - required
+          -
+            handle: short_description
+            field:
+              remove_empty_nodes: true
+              type: bard
+              display: 'Kurze Beschreibung'
+              buttons:
+                - bold
+                - italic
+      -
+        display: Inhalt
+        fields:
+          -
+            handle: content
+            field:
+              type: replicator
+              display: Inhalt
+              sets:
+                neue_setgruppe:
+                  display: 'Neue Setgruppe'
+                  sets:
+                    notice:
+                      display: Notiz
+                      icon: alert-help-question
+                      fields:
+                        -
+                          handle: notice_label
+                          field:
+                            type: text
+                            display: Überschrift
+                            validate:
+                              - required
+                        -
+                          handle: notice_description
+                          field:
+                            buttons:
+                              - bold
+                              - italic
+                              - unorderedlist
+                              - orderedlist
+                              - anchor
+                            remove_empty_nodes: true
+                            type: bard
+                            display: Beschreibung
+                            validate:
+                              - required
+                    code:
+                      display: Code
+                      icon: programming-script-code-brackets
+                      fields:
+                        -
+                          handle: code_content
+                          field:
+                            type: code
+                            display: Code
+                            validate:
+                              - required
+                        -
+                          handle: code_caption
+                          field:
+                            type: text
+                            display: Bescheibung
+                            validate:
+                              - required
+                    text:
+                      display: Text
+                      icon: text-formatting-all-caps
+                      fields:
+                        -
+                          handle: text_headline
+                          field:
+                            type: text
+                            display: Überschrift
+                            width: 66
+                        -
+                          handle: text_label
+                          field:
+                            type: text
+                            display: Label
+                            width: 33
+                        -
+                          handle: text
+                          field:
+                            buttons:
+                              - bold
+                              - italic
+                              - unorderedlist
+                              - orderedlist
+                              - anchor
+                            remove_empty_nodes: true
+                            type: bard
+                            display: Text
+                            validate:
+                              - required
+                    button_list:
+                      display: Buttons-Liste
+                      icon: file-content-list
+                      fields:
+                        -
+                          handle: button_list_label
+                          field:
+                            type: text
+                            display: Label
+                        -
+                          handle: button_list
+                          field:
+                            type: replicator
+                            display: 'Liste an Buttons'
+                            sets:
+                              neue_setgruppe:
+                                display: 'Neue Setgruppe'
+                                sets:
+                                  button:
+                                    display: Button
+                                    fields:
+                                      -
+                                        handle: button_label
+                                        field:
+                                          type: text
+                                          display: Label
+                                          validate:
+                                            - required
+                                      -
+                                        handle: button_url
+                                        field:
+                                          type: text
+                                          display: 'Button URL'
+                                          validate:
+                                            - required
+  sidebar:
+    display: Sidebar
+    sections:
+      -
+        fields:
+          -
+            handle: slug
+            field:
+              type: slug
+              localizable: true
+              validate: 'max:200'
+          -
+            handle: priority
+            field:
+              options:
+                -
+                  key: high
+                  value: hoch
+                -
+                  key: moderate
+                  value: moderat
+                -
+                  key: low
+                  value: niedrig
+              max_items: 1
+              default: low
+              type: select
+              display: Priorität
+          -
+            handle: conformance_levels
+            field:
+              max_items: 3
+              taxonomies:
+                - conformance_levels
+              type: terms
+              display: Konformitätsstufen
+title: Ressourcen
