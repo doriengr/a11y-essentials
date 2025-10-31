@@ -27,17 +27,7 @@ tabs:
               width: 33
               default: common
           -
-            handle: short_description
-            field:
-              buttons:
-                - bold
-                - italic
-                - unorderedlist
-                - orderedlist
-                - anchor
-              remove_empty_nodes: false
-              type: bard
-              display: 'Kurze Beschreibung'
+            import: common_description
           -
             handle: ressources
             field:

@@ -1,0 +1,11 @@
+title: 'Common: Beschreibung'
+fields:
+  -
+    handle: description
+    field:
+      remove_empty_nodes: true
+      type: bard
+      display: Beschreibung
+      buttons:
+        - bold
+        - italic

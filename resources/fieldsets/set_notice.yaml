@@ -1,0 +1,19 @@
+title: 'Set: Info'
+fields:
+  -
+    handle: notice_label
+    field:
+      type: text
+      display: Überschrift
+      validate:
+        - required
+  -
+    handle: notice_description
+    field: common_description.description
+    config:
+      buttons:
+        - bold
+        - italic
+        - unorderedlist
+        - orderedlist
+        - anchor
