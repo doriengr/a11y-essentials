@@ -1,5 +1,6 @@
 @utility priority {
     position: relative;
+    width: max-content;
 
     &::before {
         content: '';

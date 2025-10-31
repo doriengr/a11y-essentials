@@ -1,0 +1,19 @@
+<aside class="hidden lg:col-span-2 lg:block">
+    <span id="component-side-navigation" class="sr-only">Schnellverweise</span>
+    <nav aria-labelledby="component-side-navigation">
+        <ul
+            class="before:bg-grey-400 relative flex flex-col gap-y-2 pl-4 before:absolute before:top-0 before:left-0 before:h-full before:w-px"
+        >
+            {{ ressources }}
+                <li>
+                    <a
+                        href="{{ current_url }}#{{ id_hash }}"
+                        class="hocus:text-green-800 transition-colors duration-300 ease-in-out"
+                    >
+                        {{ title }}
+                    </a>
+                </li>
+            {{ /ressources }}
+        </ul>
+    </nav>
+</aside>
