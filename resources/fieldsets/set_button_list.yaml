@@ -1,0 +1,33 @@
+title: 'Set: Button Liste'
+fields:
+  -
+    handle: button_list_label
+    field:
+      type: text
+      display: Label
+  -
+    handle: button_list
+    field:
+      type: replicator
+      display: 'Liste an Buttons'
+      sets:
+        neue_setgruppe:
+          display: 'Neue Setgruppe'
+          sets:
+            button:
+              display: Button
+              fields:
+                -
+                  handle: button_label
+                  field:
+                    type: text
+                    display: Label
+                    validate:
+                      - required
+                -
+                  handle: button_url
+                  field:
+                    type: text
+                    display: 'Button URL'
+                    validate:
+                      - required

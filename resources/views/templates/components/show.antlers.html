@@ -1,10 +1,15 @@
-<section class="vice my-12 flex flex-col-reverse lg:my-20">
-    <h1 class="font-headline text-6xl font-bold lg:text-7xl">
-        {{ title }}
-    </h1>
-    <span class="mb-4 block">
-        {{ component_type === 'specific' ? 'Spezifische Komponente' : 'Allgemeine Komponente' }}
-    </span>
+<section class="vice my-12 lg:my-20">
+    <div class="flex flex-col-reverse">
+        <h1 class="font-headline text-6xl font-bold lg:text-7xl">
+            {{ title }}
+        </h1>
+        <span class="mb-4 block">
+            {{ component_type === 'specific' ? 'Spezifische Komponente' : 'Allgemeine Komponente' }}
+        </span>
+    </div>
+    {{ if description }}
+        <div class="autoformat mt-4 max-w-4xl">{{ description }}</div>
+    {{ /if }}
 </section>
 <section class="bg-green-100 py-12 lg:py-20">
     <div class="vice">
@@ -12,7 +17,7 @@
     </div>
 </section>
 <section class="vice my-12 lg:my-20">
-    <h2 class="font-headline text-2xl font-bold lg:text-4xl">Was muss beachtet werden?</h2>
+    <h2 class="font-headline mb-4 text-2xl font-bold lg:mb-6 lg:text-4xl">Was muss beachtet werden?</h2>
     <ul>
         {{ ressources }}
             <li x-data="{ isOpen: false }" class="border-green rounded-sm border">
@@ -31,9 +36,9 @@
                         </h3>
                         <span>{{ partial:tags/priority }}</span>
                     </div>
-                    {{ if short_description }}
+                    {{ if description }}
                         <div class="mt-0.5">
-                            {{ short_description }}
+                            {{ description }}
                         </div>
                     {{ /if }}
                 {{ /partial:disclosure/control }}

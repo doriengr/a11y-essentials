@@ -1,0 +1,25 @@
+title: 'Set: Text'
+fields:
+  -
+    handle: text_headline
+    field:
+      type: text
+      display: Überschrift
+      width: 66
+  -
+    handle: text_label
+    field:
+      type: text
+      display: Label
+      width: 33
+  -
+    handle: text_description
+    field: common_description.description
+    config:
+      display: Text
+      buttons:
+        - bold
+        - italic
+        - unorderedlist
+        - orderedlist
+        - anchor

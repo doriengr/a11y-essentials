@@ -1,0 +1,16 @@
+title: 'Set: Code'
+fields:
+  -
+    handle: code_content
+    field:
+      type: code
+      display: Code
+      validate:
+        - required
+  -
+    handle: code_caption
+    field:
+      type: text
+      display: Bescheibung
+      validate:
+        - required
