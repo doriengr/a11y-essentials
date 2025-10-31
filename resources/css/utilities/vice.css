@@ -3,4 +3,8 @@
     margin-right: auto;
     max-width: 100rem;
     padding-inline: calc(var(--spacing) * 6);
+
+    @media (min-width: 64rem) {
+        width: 90%
+    }
 }
