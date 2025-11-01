@@ -2,6 +2,7 @@
     <h1 class="font-headline text-6xl font-bold lg:text-7xl">
         {{ title }}
     </h1>
+
     <div class="autoformat mt-4 max-w-4xl">
         <p>Um alle Funktionen vollumfänglich nutzen zu können, musst du ein Benuzter:innen-Konto anlegen.</p>
         <p><strong>Folgende Funktionen werden freigeschaltet:</strong></p>
@@ -11,55 +12,90 @@
             <li>Lernprozess verfolgen</li>
         </ul>
     </div>
-    {{ user:register_form class="flex flex-col gap-y-6 mt-6" }}
-        {{ if errors }}
-            <div class="bg-red-300 p-2 text-white">
-                {{ errors }}
-                    {{ value }}
-                    <br />
-                {{ /errors }}
+
+    <form method="POST" action="{{ route:auth.registration.store }}" class="flex flex-col gap-y-6 mt-6">
+        {{ csrf_field }}
+
+        {{ get_errors:all }}
+            <div class="errors">
+            <p>Oops, something went wrong!</p>
+            <ul>
+                {{ messages }}
+                <li>{{ message }}</li>
+                {{ /messages }}
+            </ul>
+            </div>
+        {{ /get_errors:all }}
+
+        {{ if success }}
+            <div class="bg-green p-2 text-white">
+                {{ success }}
+                <br />
             </div>
         {{ /if }}
         <div>
-            <label for="registration-name" class="label">Name (erforderlich)</label>
+            <label for="name" class="label">Username (erforderlich)</label>
             <input
-                id="registration-name"
+                id="name"
                 type="name"
                 name="name"
                 class="input"
                 aria-required="true"
                 value="{{ old:name }}"
-            />
+                {{ get_error:name }} aria-invalid="true" aria-describedby="registration-name-error" {{ /get_error:name }} />
+            {{ get_errors:name }}
+                {{ partial:forms/field-error
+                    field_id="registration-name-error"
+                    messages="{{ messages }}"
+                }}
+            {{ /get_errors:name }}
         </div>
 
         <div>
-            <label for="registration-email" class="label">Email (erforderlich)</label>
+            <label for="email" class="label">Email (erforderlich)</label>
             <input
-                id="registration-email"
+                id="email"
                 class="input"
                 type="email"
                 name="email"
                 aria-required="true"
                 value="{{ old:email }}"
+                {{ get_error:email }} aria-invalid="true" aria-describedby="registration-email-error" {{ /get_error:email }}
             />
+            {{ get_errors:email }}
+                {{ partial:forms/field-error
+                    field_id="registration-email-error"
+                    messages="{{ messages }}"
+                }}
+            {{ /get_errors:email }}
         </div>
 
         <div>
-            <label for="registration-password" class="label">Password (erforderlich)</label>
+            <label for="password" class="label">Password (erforderlich)</label>
             <input
-                id="registration-password"
+                id="password"
                 class="input"
                 type="password"
                 name="password"
                 aria-required="true"
                 value="{{ old:password }}"
+                {{ get_error:password }}
+                    aria-invalid="true"
+                    aria-describedby="registration-password-error"
+                {{ /get_error:password }}
             />
+            {{ get_errors:password }}
+                {{ partial:forms/field-error
+                    field_id="registration-password-error"
+                    messages="{{ messages }}"
+                }}
+            {{ /get_errors:password }}
         </div>
 
         <div>
-            <label for="registration-password-confirmation" class="label">Password bestätigen (erforderlich)</label>
+            <label for="password_confirmation" class="label">Password bestätigen (erforderlich)</label>
             <input
-                id="registration-password-confirmation"
+                id="password_confirmation"
                 type="password"
                 name="password_confirmation"
                 aria-required="true"
@@ -67,8 +103,14 @@
             />
         </div>
 
-        <button class="button button-primary">Registrieren</button>
-    {{ /user:register_form }}
+        <button
+            @click="submit(event)"
+            class="button button-primary"
+        >
+            Registrieren
+        </button>
+    </form>
+
     <div class="mt-6 rounded-sm bg-green-100 px-6 py-4">
         <div class="text-green flex items-center gap-x-2">
             <span class="size-6 shrink-0">{{ svg:status/info }}</span>

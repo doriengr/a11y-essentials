@@ -8,4 +8,8 @@
     @variant hocus {
         border: 1px solid var(--color-green-800);
     }
+
+    &[aria-invalid='true'] {
+        border: 1px solid var(--color-red);
+    }
 }
