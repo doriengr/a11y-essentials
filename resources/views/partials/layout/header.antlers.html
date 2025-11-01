@@ -1,9 +1,9 @@
-<header class="vice w-full py-6">
+<header class="vice w-full py-6 flex items-center justify-between gap-x-6 lg:gap-x-10">
     <nav
         x-data="{ mainNavOpen : false }"
         @click.outside="mainNavOpen = false"
         aria-label="Seitenavigation"
-        class="relative lg:flex lg:justify-between"
+        class="relative w-full lg:flex lg:justify-between"
     >
         <div class="flex items-center justify-between">
             <a href="{{ homepage }}">Logo</a>
@@ -22,4 +22,37 @@
         </div>
         {{ partial:navigation/main-navigation }}
     </nav>
+    <div x-data="{ profileNavOpen : false }">
+        <button
+            @click="profileNavOpen = !profileNavOpen"
+            :aria-expanded="profileNavOpen"
+            aria-controls="profile-navigation-list"
+            aria-labelledby="proile-navigation-label"
+            class="group/profile flex items-center gap-x-2"
+        >
+            <span class="flex items-center justify-center size-10 shrink-0 rounded-full uppercase text-sm font-bold {{ current_user ? 'bg-green-200 text-green' : 'bg-grey-100 text-grey-800' }}">
+                {{ if current_user }}
+                    {{ current_user:name | first(2) }}
+                {{ else }}
+                    <span class="size-6 stroke-2">{{ svg:general/person }}</span>
+                {{ /if }}
+            </span>
+            <span class="size-5 rotate-90 group-aria-expanded/profile:-rotate-90">{{ svg:general/chevron }}</span>
+        </button>
+        <div
+            id="profile-navigation-list"
+            x-show="profileNavOpen"
+            x-cloak
+            class="bg-green fixed right-6 top-18 flex-col gap-y-6 rounded-sm p-6 text-base text-white w-full max-w-2xs"
+        >
+            <span id="proile-navigation-label" class="sr-only">Dein Profil</span>
+            {{ if current_user }}
+                <span class="-mt-1">Angemeldet als:</span>
+                <p class="font-bold truncate mb-3">{{ current_user:email }}</p>
+                <a href="{{ user:logout_url }}" class="button button-tertiary">Abmelden</a>
+            {{ else }}
+                <a href="{{ user:login_url }}" class="button button-tertiary">Anmelden</a>
+            {{ /if }}
+        </div>
+    </div>
 </header>
