@@ -1,16 +1,16 @@
-<header class="vice w-full py-6">
+<header class="relative vice w-full py-6 flex items-center justify-between gap-x-6 lg:gap-x-10">
     <nav
-        x-data="{ mainNavOpen : false }"
-        @click.outside="mainNavOpen = false"
+        x-data="mainNavigation()"
+        @click.outside="clickOutside()"
         aria-label="Seitenavigation"
-        class="relative lg:flex lg:justify-between"
+        class="w-full lg:flex lg:justify-between"
     >
         <div class="flex items-center justify-between">
             <a href="{{ homepage }}">Logo</a>
             <button
-                @click="mainNavOpen = !mainNavOpen"
+                @click="toggle()"
                 id="main-navigation-control"
-                :aria-expanded="mainNavOpen"
+                :aria-expanded="isOpen"
                 aria-controls="main-navigation-list"
                 class="group flex cursor-pointer items-center gap-x-2 font-semibold lg:hidden"
             >
@@ -22,4 +22,6 @@
         </div>
         {{ partial:navigation/main-navigation }}
     </nav>
+
+    {{ partial:navigation/profile-navigation }}
 </header>
