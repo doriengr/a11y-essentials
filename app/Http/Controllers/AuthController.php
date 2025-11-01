@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\MessageBag;
 use Statamic\View\View;
 
@@ -16,6 +19,7 @@ class AuthController extends Controller
 
             ->with([
                 'title' => 'Registrierung',
+                'success' => session('success'),
                 'old' => session()->get('_old_input', []),
             ]);
     }
@@ -28,8 +32,13 @@ class AuthController extends Controller
             'password' => ['required','confirmed','min:8','regex:/^(?=.*[A-Z])(?=.*\d).+$/',],
         ]);
 
-        // do your creation logic
-        // User::create(...)
+        $user = User::create([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'password' => Hash::make($validated['password']),
+        ]);
+
+        Auth::login($user);
 
         return redirect()
             ->route('auth.registration')

@@ -5,7 +5,7 @@
     <div class="autoformat mt-4 max-w-4xl">
         <p>Um alle Funktionen vollumfänglich nutzen zu können, musst du dich einloggen.</p>
     </div>
-    {{ user:login_form class="flex flex-col gap-y-6 mt-6" }}
+    {{ user:login_form class="flex flex-col gap-y-6 my-6" }}
         {{ if errors }}
             <div class="bg-red-300 p-2 text-white">
                 {{ errors }}
@@ -46,17 +46,11 @@
 
         <button type="submit" class="button button-primary">Einloggen</button>
     {{ /user:login_form }}
-    <div class="mt-6 rounded-sm bg-green-100 px-6 py-4">
-        <div class="text-green flex items-center gap-x-2">
-            <span class="size-6 shrink-0">{{ svg:status/info }}</span>
-            <strong class="font-semibold">Registierung</strong>
-        </div>
-        <div class="autoformat mt-2">
-            <p class="text-grey-800 text-sm lg:text-base">
-                Du hast noch Benutzer:innen-Konto angelegt? Dann
-                <a href="{{ route:auth.registration }}">registriere</a>
-                dich gern!
-            </p>
-        </div>
-    </div>
+    {{ partial:sets/content/notice notice_label="Registrierung" }}
+        <p>
+            Du hast noch Benutzer:innen-Konto angelegt? Dann
+            <a href="{{ route:auth.registration }}">registriere</a>
+            dich gern!
+        </p>
+    {{ /partial:sets/content/notice }}
 </section>

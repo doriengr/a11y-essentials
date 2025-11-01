@@ -10,7 +10,7 @@ return [
         ],
         'email' => [
             'required' => 'Bitte gib eine E-Mail-Adresse ein.',
-            'email' => 'Bitte gib eine gültige E-Mail-Adresse mit eine @-Zeichen ein.',
+            'email' => 'Bitte gib eine gültige E-Mail-Adresse ein.',
             'unique' => 'Diese E-Mail-Adresse ist bereits registriert.',
         ],
         'password' => [
