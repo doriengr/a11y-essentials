@@ -2,55 +2,80 @@
     <h1 class="font-headline text-6xl font-bold lg:text-7xl">
         {{ title }}
     </h1>
-    <div class="autoformat mt-4 max-w-4xl">
+    <div class="autoformat mt-4 max-w-4xl mb-6">
         <p>Um alle Funktionen vollumfänglich nutzen zu können, musst du dich einloggen.</p>
     </div>
-    {{ user:login_form class="flex flex-col gap-y-6 my-6" }}
-        {{ if errors }}
-            <div class="bg-red-300 p-2 text-white">
-                {{ errors }}
-                    {{ value }}
-                    <br />
-                {{ /errors }}
-            </div>
-        {{ /if }}
-        {{ if success }}
-            <div class="bg-green-300 p-2 text-white">
-                {{ success }}
-                <br />
-            </div>
-        {{ /if }}
-        <div>
-            <label for="login-email" class="label">Email (erforderlich)</label>
-            <input
-                id="login-email"
-                class="input"
-                type="email"
-                name="email"
-                aria-required="true"
-                value="{{ old:email }}"
-            />
-        </div>
 
-        <div>
-            <label for="login-password" class="label">Password (erforderlich)</label>
-            <input
-                id="login-password"
-                class="input"
-                type="password"
-                name="password"
-                aria-required="true"
-                value="{{ old:password }}"
-            />
-        </div>
+    {{ if current_user }}
+        {{ partial:sets/content/notice notice_label="Bereits angemeldet" }}
+            <p>Du bist bereits angemeldet. Möchtest du dich abmelden?</p>
+            <a href="{{ user:logout_url }}" class="button button-primary mt-4">Abmelden</a>
+        {{ /partial:sets/content/notice }}
+    {{ else }}
+        <form
+            method="POST"
+            action="{{ route:auth.login.store }}"
+            class="flex flex-col gap-y-6 my-6"
+            x-data="form({ errorsCount: '{{ errors | count }}' })"
+            novalidate
+        >
 
-        <button type="submit" class="button button-primary">Einloggen</button>
-    {{ /user:login_form }}
-    {{ partial:sets/content/notice notice_label="Registrierung" }}
-        <p>
-            Du hast noch Benutzer:innen-Konto angelegt? Dann
-            <a href="{{ route:auth.registration }}">registriere</a>
-            dich gern!
-        </p>
-    {{ /partial:sets/content/notice }}
+            {{ csrf_field }}
+            {{ partial:forms/error-summary }}
+
+            <div>
+                <label for="email" class="label">Email (erforderlich)</label>
+                <input
+                    id="email"
+                    class="input"
+                    type="email"
+                    name="email"
+                    aria-required="true"
+                    value="{{ old:email }}"
+                    {{ get_error:email }}
+                        aria-invalid="true"
+                        aria-describedby="registration-email-error"
+                    {{ /get_error:email }}
+                />
+                {{ get_errors:email }}
+                    {{ partial:forms/field-error
+                        field_id="registration-email-error"
+                        messages="{{ messages }}"
+                    }}
+                {{ /get_errors:email }}
+            </div>
+
+            <div>
+                <label for="password" class="label">Password (erforderlich)</label>
+                <input
+                    id="password"
+                    class="input"
+                    type="password"
+                    name="password"
+                    aria-required="true"
+                    value="{{ old:password }}"
+                    {{ get_error:password }}
+                        aria-invalid="true"
+                        aria-describedby="registration-password-error"
+                    {{ /get_error:password }}
+                />
+                {{ get_errors:password }}
+                    {{ partial:forms/field-error
+                        field_id="registration-password-error"
+                        messages="{{ messages }}"
+                    }}
+                {{ /get_errors:password }}
+            </div>
+
+            <button type="submit" class="button button-primary">Einloggen</button>
+        </form>
+
+        {{ partial:sets/content/notice notice_label="Registrierung" }}
+            <p>
+                Du hast noch Benutzer:innen-Konto angelegt? Dann
+                <a href="{{ route:auth.registration }}">registriere</a>
+                dich gern!
+            </p>
+        {{ /partial:sets/content/notice }}
+    {{ /if }}
 </section>
