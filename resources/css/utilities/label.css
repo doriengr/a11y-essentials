@@ -1,0 +1,6 @@
+@utility label {
+    display: block;
+    color: var(--color-grey-800);
+    font-weight: 600;
+    margin-bottom: calc(var(--spacing) * 2);
+}

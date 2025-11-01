@@ -1,23 +1,56 @@
-{{ user:login_form }}
-    {{ if errors }}
-        <div class="bg-red-300 p-2 text-white">
-            {{ errors }}
-                {{ value }}
+<section class="vice my-12 max-w-3xl lg:my-20">
+    <h1 class="font-headline text-6xl font-bold lg:text-7xl">
+        {{ title }}
+    </h1>
+    <div class="autoformat mt-4 max-w-4xl">
+        <p>Um alle Funktionen vollumfänglich nutzen zu können, musst du dich einloggen.</p>
+    </div>
+    {{ user:login_form class="flex flex-col gap-y-6 my-6" }}
+        {{ if errors }}
+            <div class="bg-red-300 p-2 text-white">
+                {{ errors }}
+                    {{ value }}
+                    <br />
+                {{ /errors }}
+            </div>
+        {{ /if }}
+        {{ if success }}
+            <div class="bg-green-300 p-2 text-white">
+                {{ success }}
                 <br />
-            {{ /errors }}
+            </div>
+        {{ /if }}
+        <div>
+            <label for="login-email" class="label">Email (erforderlich)</label>
+            <input
+                id="login-email"
+                class="input"
+                type="email"
+                name="email"
+                aria-required="true"
+                value="{{ old:email }}"
+            />
         </div>
-    {{ /if }}
-    {{ if success }}
-        <div class="bg-green-300 p-2 text-white">
-            {{ success }}
-            <br />
+
+        <div>
+            <label for="login-password" class="label">Password (erforderlich)</label>
+            <input
+                id="login-password"
+                class="input"
+                type="password"
+                name="password"
+                aria-required="true"
+                value="{{ old:password }}"
+            />
         </div>
-    {{ /if }}
-    <label>Email</label>
-    <input type="email" name="email" value="{{ old:email }}" />
 
-    <label>Password</label>
-    <input type="password" name="password" value="{{ old:password }}" />
-
-    <button type="submit">Log in</button>
-{{ /user:login_form }}
+        <button type="submit" class="button button-primary">Einloggen</button>
+    {{ /user:login_form }}
+    {{ partial:sets/content/notice notice_label="Registrierung" }}
+        <p>
+            Du hast noch Benutzer:innen-Konto angelegt? Dann
+            <a href="{{ route:auth.registration }}">registriere</a>
+            dich gern!
+        </p>
+    {{ /partial:sets/content/notice }}
+</section>

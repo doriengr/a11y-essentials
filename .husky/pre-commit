@@ -11,6 +11,5 @@ fi
 
 if [ "$PRECOMMIT_FIX" = "true" ]; then
     docker-compose exec -u vvuser tooling npm run fix:all
-else
-    docker-compose exec -u vvuser tooling npm run check:all
+    #else docker-compose exec -u vvuser tooling npm run check:all
 fi

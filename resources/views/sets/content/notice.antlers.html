@@ -3,5 +3,5 @@
         <span class="size-6 shrink-0">{{ svg:status/info }}</span>
         <strong class="font-semibold">{{ notice_label }}</strong>
     </div>
-    <div class="autoformat mt-2">{{ notice_description }}</div>
+    <div class="autoformat mt-2">{{ slot ?? notice_description }}</div>
 </div>

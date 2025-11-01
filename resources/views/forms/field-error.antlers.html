@@ -1,0 +1,8 @@
+<span id="{{ field_id }}" class="text-red mt-2 flex items-start gap-x-2 rounded-sm text-base font-semibold">
+    <span class="mt-[0.2rem] size-5 stroke-2">{{ svg:status/error }}</span>
+    <ul>
+        {{ messages }}
+            <li>{{ message }}</li>
+        {{ /messages }}
+    </ul>
+</span>

@@ -14,6 +14,7 @@ Route::get('sitemap.xml', function () {
 
 // Authentication
 Route::get('register', [AuthController::class, 'register'])->name('auth.registration');
+Route::post('register', [AuthController::class, 'store'])->name('auth.registration.store');
 Route::get('login', [AuthController::class, 'login'])->name('auth.login');
 
 // Projects
