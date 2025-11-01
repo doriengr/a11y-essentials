@@ -28,6 +28,19 @@ tabs:
               default: common
           -
             import: common_description
+      -
+        display: Lernmodule
+        fields:
+          -
+            handle: learning_modules
+            field:
+              type: entries
+              display: Lernmodule
+              collections:
+                - learning_modules
+      -
+        display: Ressourcen
+        fields:
           -
             handle: ressources
             field:

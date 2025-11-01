@@ -1,0 +1,95 @@
+tabs:
+  main:
+    display: Hauptteil
+    sections:
+      -
+        fields:
+          -
+            handle: title
+            field:
+              type: text
+              required: true
+              validate:
+                - required
+      -
+        display: Inhalt
+        fields:
+          -
+            handle: content
+            field:
+              type: replicator
+              display: Inhalt
+              collapse: true
+              sets:
+                items:
+                  display: Inhaltselemente
+                  sets:
+                    button_list:
+                      display: Button-Liste
+                      icon: file-content-list
+                      fields:
+                        -
+                          import: set_button_list
+                    notice:
+                      display: Info
+                      icon: alert-help-question
+                      fields:
+                        -
+                          import: set_notice
+                    text:
+                      display: Text
+                      icon: text-formatting-all-caps
+                      fields:
+                        -
+                          import: set_text
+                    video:
+                      display: Video
+                      icon: media-webcam-video
+                      fields:
+                        -
+                          handle: video_url
+                          field:
+                            type: video
+                            display: Video
+                            validate:
+                              - required
+                        -
+                          handle: video_caption
+                          field:
+                            type: text
+                            display: Beschreibung
+                            validate:
+                              - required
+                    image:
+                      display: Bild
+                      icon: media-image-camera
+                      fields:
+                        -
+                          handle: image_caption
+                          field:
+                            type: text
+                            display: Beschreibung
+                            validate:
+                              - required
+                        -
+                          handle: image
+                          field:
+                            max_files: 1
+                            container: assets
+                            type: assets
+                            display: Bild
+                            validate:
+                              - required
+  sidebar:
+    display: Sidebar
+    sections:
+      -
+        fields:
+          -
+            handle: slug
+            field:
+              type: slug
+              localizable: true
+              validate: 'max:200'
+              instructions: 'Dieser Wert wird als URL-Parameter verwendet.'
+title: Lernmodule
