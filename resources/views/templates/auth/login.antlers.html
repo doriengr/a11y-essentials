@@ -14,20 +14,28 @@
                 {{ /errors }}
             </div>
         {{ /if }}
-        {{ if success }}
-            <div class="bg-green-300 p-2 text-white">
-                {{ success }}
-                <br />
-            </div>
-        {{ /if }}
         <div>
-            <label for="login-email" class="label">Email</label>
-            <input id="login-email" class="input" type="email" name="email" value="{{ old:email }}" />
+            <label for="login-email" class="label">Email (erforderlich)</label>
+            <input
+                id="login-email"
+                class="input"
+                type="email"
+                name="email"
+                aria-required="true"
+                value="{{ old:email }}"
+            />
         </div>
 
         <div>
-            <label for="login-password" class="label">Password</label>
-            <input id="login-password" class="input" type="password" name="password" value="{{ old:password }}" />
+            <label for="login-password" class="label">Password (erforderlich)</label>
+            <input
+                id="login-password"
+                class="input"
+                type="password"
+                name="password"
+                aria-required="true"
+                value="{{ old:password }}"
+            />
         </div>
 
         <button type="submit" class="button button-primary">Einloggen</button>

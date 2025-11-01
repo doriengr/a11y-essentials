@@ -1,29 +1,84 @@
-{{ user:register_form }}
-    {{ if errors }}
-        <div class="bg-red-300 p-2 text-white">
-            {{ errors }}
-                {{ value }}
-                <br />
-            {{ /errors }}
+<section class="vice my-12 max-w-3xl lg:my-20">
+    <h1 class="font-headline text-6xl font-bold lg:text-7xl">
+        {{ title }}
+    </h1>
+    <div class="autoformat mt-4 max-w-4xl">
+        <p>Um alle Funktionen vollumfänglich nutzen zu können, musst du ein Benuzter:innen-Konto anlegen.</p>
+        <p><strong>Folgende Funktionen werden freigeschaltet:</strong></p>
+        <ul>
+            <li>Speichern der Ergebnisse von automatisierten Tests</li>
+            <li>Durchführen und Speichern von Qualitätssicherungen</li>
+            <li>Lernprozess verfolgen</li>
+        </ul>
+    </div>
+    {{ user:register_form class="flex flex-col gap-y-6 mt-6" }}
+        {{ if errors }}
+            <div class="bg-red-300 p-2 text-white">
+                {{ errors }}
+                    {{ value }}
+                    <br />
+                {{ /errors }}
+            </div>
+        {{ /if }}
+        <div>
+            <label for="registration-name" class="label">Name (erforderlich)</label>
+            <input
+                id="registration-name"
+                type="name"
+                name="name"
+                class="input"
+                aria-required="true"
+                value="{{ old:name }}"
+            />
         </div>
-    {{ /if }}
-    {{ if success }}
-        <div class="bg-green-300 p-2 text-white">
-            {{ success }}
-            <br />
+
+        <div>
+            <label for="registration-email" class="label">Email (erforderlich)</label>
+            <input
+                id="registration-email"
+                class="input"
+                type="email"
+                name="email"
+                aria-required="true"
+                value="{{ old:email }}"
+            />
         </div>
-    {{ /if }}
-    <label>Name</label>
-    <input type="name" name="name" value="{{ old:name }}" />
 
-    <label>Email</label>
-    <input type="email" name="email" value="{{ old:email }}" />
+        <div>
+            <label for="registration-password" class="label">Password (erforderlich)</label>
+            <input
+                id="registration-password"
+                class="input"
+                type="password"
+                name="password"
+                aria-required="true"
+                value="{{ old:password }}"
+            />
+        </div>
 
-    <label>Password</label>
-    <input type="password" name="password" />
+        <div>
+            <label for="registration-password-confirmation" class="label">Password bestätigen (erforderlich)</label>
+            <input
+                id="registration-password-confirmation"
+                type="password"
+                name="password_confirmation"
+                aria-required="true"
+                class="input"
+            />
+        </div>
 
-    <label>Password Confirmation</label>
-    <input type="password" name="password_confirmation" />
-
-    <button>Register</button>
-{{ /user:register_form }}
+        <button class="button button-primary">Registrieren</button>
+    {{ /user:register_form }}
+    <div class="mt-6 rounded-sm bg-green-100 px-6 py-4">
+        <div class="text-green flex items-center gap-x-2">
+            <span class="size-6 shrink-0">{{ svg:status/info }}</span>
+            <strong class="font-semibold">Login</strong>
+        </div>
+        <div class="autoformat mt-2">
+            <p class="text-grey-800 text-sm lg:text-base">
+                Du hast bereits ein Benutzer:innen-Konto? Dann
+                <a href="{{ route:auth.login }}">melde dich gerne an!</a>
+            </p>
+        </div>
+    </div>
+</section>
