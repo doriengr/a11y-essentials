@@ -13,17 +13,31 @@
         </ul>
     </div>
 
-    <form method="POST" action="{{ route:auth.registration.store }}" class="flex flex-col gap-y-6 mt-6">
+    <form
+        method="POST"
+        action="{{ route:auth.registration.store }}"
+        class="flex flex-col gap-y-6 mt-6"
+        x-data="form({ errorsCount: '{{ errors | count }}' })"
+    >
         {{ csrf_field }}
 
         {{ get_errors:all }}
-            <div class="errors">
-            <p>Oops, something went wrong!</p>
-            <ul>
-                {{ messages }}
-                <li>{{ message }}</li>
-                {{ /messages }}
-            </ul>
+            <div
+                role="region"
+                id="form-errors-summary"
+                aria-labelledby="form-errors-summary-label"
+                tabindex="0"
+                class="bg-red-100 rounded-sm px-6 py-4"
+            >
+                <div class="flex items-center text-red gap-x-2">
+                    <span class="mt-[0.2rem] size-6 stroke-2">{{ svg:status/error }}</span>
+                    <span id="form-errors-summary-label" class="font-semibold">Leider sind folgende Eingaben fehlerhaft:</span>
+                </div>
+                <ol class="flex flex-col gap-y-2 list-decimal pl-6 mt-2">
+                    {{ messages }}
+                        <li>{{ message }}</li>
+                    {{ /messages }}
+                </ol>
             </div>
         {{ /get_errors:all }}
 
@@ -42,7 +56,11 @@
                 class="input"
                 aria-required="true"
                 value="{{ old:name }}"
-                {{ get_error:name }} aria-invalid="true" aria-describedby="registration-name-error" {{ /get_error:name }} />
+                {{ get_error:name }}
+                    aria-invalid="true"
+                    aria-describedby="registration-name-error"
+                {{ /get_error:name }}
+            />
             {{ get_errors:name }}
                 {{ partial:forms/field-error
                     field_id="registration-name-error"
@@ -60,7 +78,10 @@
                 name="email"
                 aria-required="true"
                 value="{{ old:email }}"
-                {{ get_error:email }} aria-invalid="true" aria-describedby="registration-email-error" {{ /get_error:email }}
+                {{ get_error:email }}
+                    aria-invalid="true"
+                    aria-describedby="registration-email-error"
+                {{ /get_error:email }}
             />
             {{ get_errors:email }}
                 {{ partial:forms/field-error
