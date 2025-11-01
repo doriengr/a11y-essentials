@@ -1,0 +1,19 @@
+{{ get_errors:all }}
+    <div
+        role="region"
+        id="form-errors-summary"
+        aria-labelledby="form-errors-summary-label"
+        tabindex="0"
+        class="bg-red-100 rounded-sm px-6 py-4"
+    >
+        <div class="flex items-center text-red gap-x-2">
+            <span class="mt-[0.2rem] size-6 stroke-2">{{ svg:status/error }}</span>
+            <span id="form-errors-summary-label" class="font-semibold">Leider sind folgende Eingaben fehlerhaft:</span>
+        </div>
+        <ol class="flex flex-col gap-y-2 list-decimal pl-6 mt-2">
+            {{ messages }}
+                <li>{{ message }}</li>
+            {{ /messages }}
+        </ol>
+    </div>
+{{ /get_errors:all }}

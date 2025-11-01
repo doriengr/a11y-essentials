@@ -14,8 +14,9 @@ Route::get('sitemap.xml', function () {
 
 // Authentication
 Route::get('register', [AuthController::class, 'register'])->name('auth.registration');
-Route::post('register', [AuthController::class, 'store'])->name('auth.registration.store');
+Route::post('register', [AuthController::class, 'registerStore'])->name('auth.registration.store');
 Route::get('login', [AuthController::class, 'login'])->name('auth.login');
+Route::post('login', [AuthController::class, 'loginStore'])->name('auth.login.store');
 
 // Projects
 // TODO: add auth middleware
