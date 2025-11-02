@@ -65,7 +65,7 @@
                                         id="accordion-button-{{ slug }}"
                                         :aria-expanded="isOpen"
                                         aria-controls="accordion-panel-{{ slug }}"
-                                        class="before:cover"
+                                        class="before:cover text-left"
                                     >
                                         {{ title }}
                                     </button>
@@ -82,7 +82,7 @@
                                 <span>{{ partial:tags/priority }}</span>
                             </div>
                             {{ if description }}
-                                <div class="mt-0.5">
+                                <div class="mt-1.5">
                                     {{ description }}
                                 </div>
                             {{ /if }}
