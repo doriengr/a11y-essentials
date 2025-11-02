@@ -1,0 +1,31 @@
+title: 'Set: Bild(er)'
+fields:
+  -
+    handle: images
+    field:
+      collapse: true
+      type: replicator
+      display: Bilder
+      sets:
+        neue_setgruppe:
+          display: 'Neue Setgruppe'
+          sets:
+            image:
+              display: 'Bild'
+              fields:
+                -
+                  handle: image
+                  field:
+                    max_files: 1
+                    container: assets
+                    type: assets
+                    display: Bild
+                    validate:
+                      - required
+                -
+                  handle: image_caption
+                  field:
+                    type: text
+                    display: Beschreibung
+                    validate:
+                      - required

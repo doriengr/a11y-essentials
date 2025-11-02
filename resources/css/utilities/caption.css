@@ -1,0 +1,5 @@
+@utility caption {
+    color: var(--color-grey-800);
+    font-size: var(--text-sm);
+    line-height: 1.4em;
+}

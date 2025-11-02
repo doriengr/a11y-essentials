@@ -24,6 +24,12 @@ tabs:
                 items:
                   display: Inhaltselemente
                   sets:
+                    images:
+                      display: Bild(er)
+                      icon: media-image-camera
+                      fields:
+                        -
+                          import: set_images
                     button_list:
                       display: Button-Liste
                       icon: file-content-list
@@ -47,39 +53,7 @@ tabs:
                       icon: media-webcam-video
                       fields:
                         -
-                          handle: video_url
-                          field:
-                            type: video
-                            display: Video
-                            validate:
-                              - required
-                        -
-                          handle: video_caption
-                          field:
-                            type: text
-                            display: Beschreibung
-                            validate:
-                              - required
-                    image:
-                      display: Bild
-                      icon: media-image-camera
-                      fields:
-                        -
-                          handle: image_caption
-                          field:
-                            type: text
-                            display: Beschreibung
-                            validate:
-                              - required
-                        -
-                          handle: image
-                          field:
-                            max_files: 1
-                            container: assets
-                            type: assets
-                            display: Bild
-                            validate:
-                              - required
+                          import: set_video
   sidebar:
     display: Sidebar
     sections:
