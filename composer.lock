@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "20cb20312edbe23bd58e82ce04ba23ee",
+    "content-hash": "92e88910a77efa65bb6a4a0e34510150",
     "packages": [
         {
             "name": "ajthinking/archetype",
@@ -7765,6 +7765,68 @@
                 "source": "https://github.com/visuellverstehen/pull/tree/2.4.1"
             },
             "time": "2023-03-08T08:02:13+00:00"
+        },
+        {
+            "name": "visuellverstehen/statamic-picturesque",
+            "version": "v2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/visuellverstehen/statamic-picturesque.git",
+                "reference": "efe409bf3c06a0145969c6bf4bf892ab73965bfe"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/visuellverstehen/statamic-picturesque/zipball/efe409bf3c06a0145969c6bf4bf892ab73965bfe",
+                "reference": "efe409bf3c06a0145969c6bf4bf892ab73965bfe",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.0",
+                "statamic/cms": "^3.4 || ^4.0 || ^5.0"
+            },
+            "type": "statamic-addon",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "VV\\Picturesque\\ServiceProvider"
+                    ]
+                },
+                "statamic": {
+                    "name": "Statamic Picturesque",
+                    "description": "A Statamic tag for building HTML-only responsive images."
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "VV\\Picturesque\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "visuellverstehen"
+                }
+            ],
+            "description": "A Statamic tag for building HTML-only responsive images.",
+            "keywords": [
+                "addon",
+                "glide",
+                "image",
+                "picture",
+                "responsive",
+                "statamic",
+                "v3",
+                "v4"
+            ],
+            "support": {
+                "email": "hello@visuellverstehen.de",
+                "issues": "https://github.com/visuellverstehen/statamic-picturesque/issues",
+                "source": "https://github.com/visuellverstehen/statamic-picturesque/tree/v2.0.0"
+            },
+            "time": "2025-08-28T13:02:12+00:00"
         },
         {
             "name": "vlucas/phpdotenv",

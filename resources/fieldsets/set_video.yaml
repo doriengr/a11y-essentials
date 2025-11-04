@@ -1,0 +1,16 @@
+title: 'Set: Video'
+fields:
+  -
+    handle: video_url
+    field:
+      type: video
+      display: Video
+      validate:
+        - required
+  -
+    handle: video_caption
+    field:
+      type: text
+      display: Beschreibung
+      validate:
+        - required

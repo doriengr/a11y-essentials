@@ -1,0 +1,69 @@
+tabs:
+  main:
+    display: Hauptteil
+    sections:
+      -
+        fields:
+          -
+            handle: title
+            field:
+              type: text
+              required: true
+              validate:
+                - required
+      -
+        display: Inhalt
+        fields:
+          -
+            handle: content
+            field:
+              type: replicator
+              display: Inhalt
+              collapse: true
+              sets:
+                items:
+                  display: Inhaltselemente
+                  sets:
+                    images:
+                      display: Bild(er)
+                      icon: media-image-camera
+                      fields:
+                        -
+                          import: set_images
+                    button_list:
+                      display: Button-Liste
+                      icon: file-content-list
+                      fields:
+                        -
+                          import: set_button_list
+                    notice:
+                      display: Info
+                      icon: alert-help-question
+                      fields:
+                        -
+                          import: set_notice
+                    text:
+                      display: Text
+                      icon: text-formatting-all-caps
+                      fields:
+                        -
+                          import: set_text
+                    video:
+                      display: Video
+                      icon: media-webcam-video
+                      fields:
+                        -
+                          import: set_video
+  sidebar:
+    display: Sidebar
+    sections:
+      -
+        fields:
+          -
+            handle: slug
+            field:
+              type: slug
+              localizable: true
+              validate: 'max:200'
+              instructions: 'Dieser Wert wird als URL-Parameter verwendet.'
+title: Lernmodule

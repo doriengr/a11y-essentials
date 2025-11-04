@@ -15,7 +15,8 @@
     "predis/predis": "^2.0",
     "statamic/cms": "^5.0",
     "statamic/eloquent-driver": "^4.34",
-    "visuellverstehen/pull": "^2.3"
+    "visuellverstehen/pull": "^2.3",
+    "visuellverstehen/statamic-picturesque": "^2.0"
   },
   "require-dev": {
     "barryvdh/laravel-debugbar": "^3.8.1",

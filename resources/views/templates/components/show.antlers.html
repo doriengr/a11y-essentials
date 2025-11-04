@@ -12,11 +12,43 @@
     {{ /if }}
 </section>
 
+{{ if learning_modules }}
 <section class="bg-green-100 py-12 lg:py-20">
     <div class="vice">
-        <h2 class="font-headline text-2xl font-bold lg:text-4xl">Warum ist a11y wichtig?</h2>
+        <h2 class="font-headline mb-6 text-2xl font-bold lg:mb-8 lg:text-4xl">Warum ist a11y wichtig?</h2>
+        <ul class="flex flex-col gap-y-4 lg:gap-y-6">
+            {{ learning_modules }}
+                <li x-data="accordion({ id: '{{ slug }}' })" class="border-green rounded-sm border bg-white">
+                    {{ partial:disclosure/control control_id="{slug}" }}
+                        <h3 class="font-headline text-green flex flex-wrap gap-x-3 text-xl font-semibold hocus:text-green-800">
+                            <button
+                                @click="toggle()"
+                                id="accordion-button-{{ slug }}"
+                                :aria-expanded="isOpen"
+                                aria-controls="accordion-panel-{{ slug }}"
+                                class="before:cover text-left"
+                            >
+                                {{ title }}
+                            </button>
+                        </h3>
+                    {{ /partial:disclosure/control }}
+                <article
+                    id="accordion-panel-{{ slug }}"
+                    x-cloak
+                    x-show="isOpen"
+                    class="flex flex-col gap-y-4 px-6 pb-4"
+                >
+                    {{ content }}
+                        {{ partial:if_exists src="sets/content/{type | dashify}" }}
+                    {{ /content }}
+                </article>
+                </li>
+            {{ /learning_modules }}
+        </ul>
     </div>
 </section>
+{{ /if }}
+
 {{ if ressources }}
     <section class="vice my-12 lg:my-20">
         <h2 class="font-headline mb-6 text-2xl font-bold lg:mb-10 lg:text-4xl">Was muss beachtet werden?</h2>
@@ -27,13 +59,13 @@
                     <li x-data="accordion({ id: '{{ slug }}' })" class="border-green rounded-sm border">
                         {{ partial:disclosure/control control_id="{slug}" }}
                             <div class="flex flex-col-reverse gap-y-0.5 lg:gap-y-1">
-                                <h3 class="font-headline text-green flex flex-wrap gap-x-3 text-xl font-bold">
+                                <h3 class="font-headline text-green flex flex-wrap gap-x-3 text-xl font-semibold hocus:text-green-800">
                                     <button
                                         @click="toggle()"
-                                        id="accordion-button-{{ index }}"
+                                        id="accordion-button-{{ slug }}"
                                         :aria-expanded="isOpen"
-                                        aria-controls="accordion-panel-{{ index }}"
-                                        class="before:cover"
+                                        aria-controls="accordion-panel-{{ slug }}"
+                                        class="before:cover text-left"
                                     >
                                         {{ title }}
                                     </button>
@@ -50,13 +82,13 @@
                                 <span>{{ partial:tags/priority }}</span>
                             </div>
                             {{ if description }}
-                                <div class="mt-0.5">
+                                <div class="mt-1.5">
                                     {{ description }}
                                 </div>
                             {{ /if }}
                         {{ /partial:disclosure/control }}
                         <article
-                            id="accordion-panel-{{ index }}"
+                            id="accordion-panel-{{ slug }}"
                             x-cloak
                             x-show="isOpen"
                             class="flex flex-col gap-y-4 px-6 pb-4"

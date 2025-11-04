@@ -6,6 +6,7 @@
 @import './theme/colors.css';
 @import './theme/fonts.css';
 @import './theme/text-sizes.css';
+@import './utilities/caption.css';
 @import './utilities/cover.css';
 @import './utilities/input.css';
 @import './utilities/label.css';
