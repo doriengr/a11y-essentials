@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Middleware\EnsureUserIsAuthenticated;
 use Illuminate\Support\Facades\Route;
 use Statamic\View\View;
 
@@ -19,7 +20,8 @@ Route::get('login', [AuthController::class, 'login'])->name('auth.login');
 Route::post('login', [AuthController::class, 'loginStore'])->name('auth.login.store');
 
 // Projects
-// TODO: add auth middleware
-Route::get('projects', [ProjectController::class, 'index'])->name('projects.index');
-Route::get('projects/create', [ProjectController::class, 'create'])->name('projects.create');
-Route::post('projects', [ProjectController::class, 'store'])->name('projects.store');
+Route::middleware([EnsureUserIsAuthenticated::class])->group(function () {
+    Route::get('projects', [ProjectController::class, 'index'])->name('projects.index');
+    Route::get('projects/create', [ProjectController::class, 'create'])->name('projects.create');
+    Route::post('projects', [ProjectController::class, 'store'])->name('projects.store');
+});
