@@ -32,16 +32,16 @@
                             </button>
                         </h3>
                     {{ /partial:disclosure/control }}
-                <article
-                    id="accordion-panel-{{ slug }}"
-                    x-cloak
-                    x-show="isOpen"
-                    class="flex flex-col gap-y-4 px-6 pb-4"
-                >
-                    {{ content }}
-                        {{ partial:if_exists src="sets/content/{type | dashify}" }}
-                    {{ /content }}
-                </article>
+                    <article
+                        id="accordion-panel-{{ slug }}"
+                        x-cloak
+                        x-show="isOpen"
+                        class="flex flex-col gap-y-4 px-6 pb-4"
+                    >
+                        {{ content }}
+                            {{ partial:if_exists src="sets/content/{type | dashify}" }}
+                        {{ /content }}
+                    </article>
                 </li>
             {{ /learning_modules }}
         </ul>

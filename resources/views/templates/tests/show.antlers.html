@@ -1,6 +1,6 @@
-<section class="vice my-12 lg:my-20">
+<section x-data="codeChecker()" class="vice my-12 lg:my-20">
     <div class="flex flex-col-reverse">
-        <h1 class="font-headline text-6xl font-bold lg:text-7xl">
+        <h1 id="form-headline" class="font-headline text-6xl font-bold lg:text-7xl">
             {{ title }}
         </h1>
         <span class="mb-4 block">
@@ -17,7 +17,11 @@
         </li>
     </ul>
 
-    <form class="mt-10 flex flex-col gap-y-4">
+    <form
+        aria-labelledby="form-headline"
+        class="mt-10 flex flex-col gap-y-6"
+        novalidate
+    >
         <div>
             <label for="url" class="label">URL der Website (erforderlich)</label>
             <input
@@ -28,10 +32,15 @@
                 pattern="https://.*"
                 aria-required="true"
             />
+            {{ partial:forms/field-error
+                class="hidden"
+                field_id="automatic-test-url-error"
+                message="Bitte geben Sie eine gültige URL ein, die mit https:// beginnt."
+            }}
         </div>
-        <button type="submit" class="button button-primary">
+        <button type="submit" class="button button-primary" @click="submit(event)">
             Test starten
-            <span class="size-6">{{ svg:general/arrow }}</span>
+            {{ svg:general/arrow class="size-6" }}
         </button>
     </form>
 </section>

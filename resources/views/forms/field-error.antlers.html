@@ -1,8 +1,12 @@
-<span id="{{ field_id }}" class="text-red mt-2 flex items-start gap-x-2 rounded-sm text-base font-semibold">
+<span id="{{ field_id }}" class="text-red mt-2 flex items-start gap-x-2 rounded-sm text-base font-semibold {{ class }}">
     {{ svg:status/error class="mt-[0.2rem] size-5 stroke-2" }}
+    {{ if messages }}
     <ul>
         {{ messages }}
             <li>{{ message }}</li>
         {{ /messages }}
     </ul>
+    {{ elseif message }}
+        <span>{{ message }}</span>
+    {{ /if }}
 </span>

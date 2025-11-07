@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AutomaticTestsController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Middleware\EnsureUserIsAuthenticated;
 use Illuminate\Support\Facades\Route;
@@ -18,6 +19,9 @@ Route::get('register', [AuthController::class, 'register'])->name('auth.registra
 Route::post('register', [AuthController::class, 'registerStore'])->name('auth.registration.store');
 Route::get('login', [AuthController::class, 'login'])->name('auth.login');
 Route::post('login', [AuthController::class, 'loginStore'])->name('auth.login.store');
+
+
+Route::get('run-automatic-test', [AutomaticTestsController::class, 'show'])->name('automatic_tests.show');
 
 // Projects
 Route::middleware([EnsureUserIsAuthenticated::class])->group(function () {
