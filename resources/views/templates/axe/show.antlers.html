@@ -1,4 +1,4 @@
-<section x-data="codeChecker()" class="vice my-12 lg:my-20">
+<section x-data="codeChecker({ action: '{{ route:axe.run }}' })" class="vice my-12 lg:my-20">
     <div class="flex flex-col-reverse">
         <h1 id="form-headline" class="font-headline text-6xl font-bold lg:text-7xl">
             {{ title }}
@@ -16,12 +16,17 @@
             Konformitätsstufen A, AA
         </li>
     </ul>
-
     <form
+        method="POST"
         aria-labelledby="form-headline"
-        class="mt-10 flex flex-col gap-y-6"
+        action="{{ route:axe.run }}"
+        class="flex flex-col gap-y-6 my-6"
+        x-data="form({ errorsCount: '{{ errors | count }}' })"
         novalidate
     >
+
+        {{ csrf_field }}
+        {{ partial:forms/error-summary }}
         <div>
             <label for="url" class="label">URL der Website (erforderlich)</label>
             <input
@@ -31,14 +36,20 @@
                 name="url"
                 pattern="https://.*"
                 aria-required="true"
+                value="{{ old:url }}"
+                {{ get_error:url }}
+                    aria-invalid="true"
+                    aria-describedby="checker-url-error"
+                {{ /get_error:url }}
             />
-            {{ partial:forms/field-error
-                class="hidden"
-                field_id="automatic-test-url-error"
-                message="Bitte geben Sie eine gültige URL ein, die mit https:// beginnt."
-            }}
+            {{ get_errors:url }}
+                {{ partial:forms/field-error
+                    field_id="checker-url-error"
+                    messages="{{ messages }}"
+                }}
+            {{ /get_errors:url }}
         </div>
-        <button type="submit" class="button button-primary" @click="submit(event)">
+        <button type="submit" class="button button-primary">
             Test starten
             {{ svg:general/arrow class="size-6" }}
         </button>
