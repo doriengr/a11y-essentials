@@ -16,7 +16,11 @@
     }
 
     .pill-primary {
-        background-color: var(--color-green-200);
+        background-color: var(--color-green-100);
         color: var(--color-green);
+    }
+
+    .pill-large {
+        padding: calc(var(--spacing) * 1) calc(var(--spacing) * 3);
     }
 }

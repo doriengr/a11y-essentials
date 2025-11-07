@@ -10,10 +10,10 @@
             {{ if current_user }}
                 {{ current_user:name | first(2) }}
             {{ else }}
-                <span class="size-6 stroke-2">{{ svg:general/person }}</span>
+                {{ svg:general/person class="size-6 stroke-2" }}
             {{ /if }}
         </span>
-        <span class="size-5 rotate-90 group-aria-expanded/profile:-rotate-90">{{ svg:general/chevron }}</span>
+        {{ svg:general/chevron class="size-5 rotate-90 group-aria-expanded/profile:-rotate-90" }}
     </button>
     <div
         id="profile-navigation-list"
