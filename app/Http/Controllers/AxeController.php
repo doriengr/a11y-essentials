@@ -35,7 +35,8 @@ class AxeController extends Controller
             return response()->json(['error' => 'Ungültige URL'], 400);
         }
 
-        $process = new Process(['/usr/local/bin/node', base_path('node/axe-check.js'), $url]);
+        $nodePath = trim(shell_exec('which node'));
+        $process = new Process([$nodePath, base_path('node/axe-check.js'), $url]);
         $process->setTimeout(60);
 
         try {
