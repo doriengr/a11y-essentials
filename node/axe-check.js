@@ -11,8 +11,8 @@ if (!url) {
 
 (async () => {
     const browser = await puppeteer.launch({
-        executablePath: '/usr/bin/chromium',
-        headless: true,
+        executablePath: '/usr/bin/chromium-browser',
+        args: ['--no-sandbox', '--disable-setuid-sandbox']
     });
 
   try {
