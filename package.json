@@ -37,9 +37,5 @@
         "stylelint": "^16.14.1",
         "tailwindcss": "^4.1.16",
         "vite": "^6.1.0"
-    },
-    "dependencies": {
-        "axe-core": "^4.11.0",
-        "puppeteer": "^24.29.1"
     }
 }

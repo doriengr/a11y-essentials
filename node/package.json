@@ -1,0 +1,8 @@
+{
+  "name": "axe-checker",
+  "type": "module",
+  "dependencies": {
+    "axe-core": "^4.11.0",
+    "puppeteer": "^23.0.0"
+  }
+}

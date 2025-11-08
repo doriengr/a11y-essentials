@@ -75,15 +75,11 @@ RUN if [ "$INSTALL_XDEBUG" = "false" ]; then rm /usr/local/etc/php/conf.d/xdebug
 COPY docker/application/php.ini "$PHP_INI_DIR/conf.d/zzz-custom-php.ini"
 COPY docker/application/php-fpm-www.conf /usr/local/etc/php-fpm.d/zzz-www.conf
 
-# ----------------------------
-# Install Puppeteer & axe-core CLI globally
-# ----------------------------
-RUN npm install -g puppeteer axe-core
-
-# ----------------------------
-# Copy application code & make scripts executable
-# ----------------------------
 COPY --chown=vvuser:vvuser ./ /var/www/html
+
+COPY node/ /var/www/html/node/
+RUN cd /var/www/html/node && npm install
+
 RUN chmod +x /var/www/html/docker/application/*.sh
 
 # ----------------------------
