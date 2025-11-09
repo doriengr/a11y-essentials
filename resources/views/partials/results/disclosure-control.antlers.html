@@ -1,18 +1,18 @@
 {{ $impact_icon = switch(
-        (impact == 'critical') => 'general/arrow',
-        (impact == 'serious') => 'general/arrow',
-        (impact == 'moderate') => 'general/arrow',
-        () => 'general/arrow') }}
+        (impact == 'critical') => 'impact/critical',
+        (impact == 'serious') => 'impact/serious',
+        (impact == 'moderate') => 'impact/moderate',
+        () => 'impact/minor') }}
 
 {{ partial:disclosure/control control_id="{impact}" }}
     <div class="flex flex-col gap-y-2 gap-x-4 sm:flex-row sm:items-center">
         <span
             class="shrink-0 size-10 rounded-full flex items-center justify-center
             {{ switch(
-                (impact == 'critical') => 'bg-purple-200',
-                (impact == 'serious') => 'bg-red-200',
-                (impact == 'moderate') => 'bg-yellow-200',
-                () => 'bg-green-200')
+                (impact == 'critical') => 'bg-purple-200 text-purple',
+                (impact == 'serious') => 'bg-red-200 text-red',
+                (impact == 'moderate') => 'bg-yellow-200 text-yellow-900',
+                () => 'bg-green-200 text-green')
             }}"
         >
             {{ svg src="{{ $impact_icon }}" class="size-6" }}
