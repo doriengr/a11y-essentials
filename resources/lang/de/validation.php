@@ -19,6 +19,10 @@ return [
             'min' => 'Das Passwort muss mindestens :min Zeichen lang sein.',
             'regex' => 'Das Passwort muss mindestens einen Großbuchstaben und eine Zahl enthalten.',
         ],
+        'url' => [
+            'required' => 'Bitte gib eine URL ein.',
+            'url' => 'Bitte gib eine gültige URL ein, die mit http:// oder https:// beginnt.',
+        ],
     ],
 
 ];

@@ -1,5 +1,5 @@
 <section class="vice my-12 max-w-3xl lg:my-20">
-    <h1 class="font-headline text-6xl font-bold lg:text-7xl">
+    <h1 id="form-headline" class="font-headline text-6xl font-bold lg:text-7xl">
         {{ title }}
     </h1>
 
@@ -26,6 +26,7 @@
     {{ else }}
         <form
             method="POST"
+            aria-labelledby="form-headline"
             action="{{ route:auth.registration.store }}"
             class="flex flex-col gap-y-6 my-6"
             x-data="form({ errorsCount: '{{ errors | count }}' })"
@@ -111,12 +112,7 @@
                 />
             </div>
 
-            <button
-                @click="submit(event)"
-                class="button button-primary"
-            >
-                Registrieren
-            </button>
+            {{ partial:buttons/submit-button button_label="Registrieren" }}
         </form>
 
         {{ partial:sets/content/notice notice_label="Login" }}

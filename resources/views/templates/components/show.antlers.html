@@ -13,7 +13,7 @@
 </section>
 
 {{ if learning_modules }}
-<section class="bg-green-100 py-12 lg:py-20">
+<section class="bg-green-50 py-12 lg:py-20">
     <div class="vice">
         <h2 class="font-headline mb-6 text-2xl font-bold lg:mb-8 lg:text-4xl">Warum ist a11y wichtig?</h2>
         <ul class="flex flex-col gap-y-4 lg:gap-y-6">
@@ -32,16 +32,16 @@
                             </button>
                         </h3>
                     {{ /partial:disclosure/control }}
-                <article
-                    id="accordion-panel-{{ slug }}"
-                    x-cloak
-                    x-show="isOpen"
-                    class="flex flex-col gap-y-4 px-6 pb-4"
-                >
-                    {{ content }}
-                        {{ partial:if_exists src="sets/content/{type | dashify}" }}
-                    {{ /content }}
-                </article>
+                    <article
+                        id="accordion-panel-{{ slug }}"
+                        x-cloak
+                        x-show="isOpen"
+                        class="flex flex-col gap-y-4 px-6 pb-4"
+                    >
+                        {{ content }}
+                            {{ partial:if_exists src="sets/content/{type | dashify}" }}
+                        {{ /content }}
+                    </article>
                 </li>
             {{ /learning_modules }}
         </ul>
@@ -79,7 +79,7 @@
                                         </ul>
                                     {{ /if }}
                                 </h3>
-                                <span>{{ partial:tags/priority }}</span>
+                                {{ partial:tags/priority }}
                             </div>
                             {{ if description }}
                                 <div class="mt-1.5">

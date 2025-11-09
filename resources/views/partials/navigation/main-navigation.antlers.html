@@ -17,9 +17,7 @@
                     @click="toggleSubnav()"
                 >
                     {{ title }}
-                    <span class="size-6 rotate-90 group-aria-expanded/button:-rotate-90">
-                        {{ svg:general/chevron }}
-                    </span>
+                    {{ svg:general/chevron class="size-6 rotate-90 group-aria-expanded/button:-rotate-90" }}
                 </button>
                 <div
                     x-show="isSubnavOpen"
@@ -34,7 +32,7 @@
                                 {{ if is_current }} aria-current="page" {{ /if }}
                             >
                                 {{ title }}
-                                <span class="size-6">{{ svg:general/arrow }}</span>
+                                {{ svg:general/arrow class="size-6" }}
                             </a>
                             <span id="sub-navigation-list-{{ index }}" class="mb-4 block text-base">
                                 Schnellverweise

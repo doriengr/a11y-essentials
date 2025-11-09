@@ -9,6 +9,7 @@
 /public/vendor/statamic
 /public/hot
 /public/build
+/node/node_modules
 /storage/*.key
 /storage/glide
 /storage/forms

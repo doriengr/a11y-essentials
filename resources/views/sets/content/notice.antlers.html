@@ -1,6 +1,6 @@
-<div class="rounded-sm bg-green-100 px-6 py-4">
+<div class="rounded-sm bg-green-50 px-6 py-4">
     <div class="text-green flex items-center gap-x-2">
-        <span class="size-6 shrink-0">{{ svg:status/info }}</span>
+        {{ svg:status/info class="size-6 shrink-0" }}
         <strong class="font-semibold">{{ notice_label }}</strong>
     </div>
     <div class="autoformat mt-2">{{ slot ?? notice_description }}</div>
