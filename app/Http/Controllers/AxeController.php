@@ -36,7 +36,7 @@ class AxeController extends Controller
         }
 
         $nodePath = trim(shell_exec('which node'));
-        $process = new Process([$nodePath, base_path('node/axe-check.js'), $url]);
+        $process = new Process([$nodePath, base_path('node/axe-checker.js'), $url]);
         $process->setTimeout(60);
 
         try {
