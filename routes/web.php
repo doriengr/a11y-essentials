@@ -21,8 +21,8 @@ Route::get('login', [AuthController::class, 'login'])->name('auth.login');
 Route::post('login', [AuthController::class, 'loginStore'])->name('auth.login.store');
 
 
-Route::get('run-automatic-test', [AxeController::class, 'show'])->name('axe.show');
-Route::post('run-automatic-test', [AxeController::class, 'run'])->name('axe.run');
+Route::get('run-axe', [AxeController::class, 'show'])->name('axe.show');
+Route::post('run-axe', [AxeController::class, 'run'])->name('axe.run');
 
 // Projects
 Route::middleware([EnsureUserIsAuthenticated::class])->group(function () {
