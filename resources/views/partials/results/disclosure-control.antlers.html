@@ -1,0 +1,38 @@
+{{ $impact_icon = switch(
+        (impact == 'critical') => 'general/arrow',
+        (impact == 'serious') => 'general/arrow',
+        (impact == 'moderate') => 'general/arrow',
+        () => 'general/arrow') }}
+
+{{ $impact_color = switch(
+        (impact == 'critical') => 'purple-200',
+        (impact == 'serious') => 'red-200',
+        (impact == 'moderate') => 'yellow-200',
+        () => 'green-200') }}
+
+{{ partial:disclosure/control control_id="{impact}" }}
+    <div class="flex gap-x-4 items-center">
+        <span
+            class="shrink-0 size-10 rounded-full flex items-center justify-center"
+            style="background-color: var(--color-{{ $impact_color }});"
+        >
+            {{ svg src="{{ $impact_icon }}" class="size-6" }}
+        </span>
+        <div>
+            <h3 class="font-headline text-green flex flex-wrap gap-x-3 text-xl font-semibold hocus:text-green-800">
+                <button
+                    @click="toggle()"
+                    id="accordion-button-{{ impact }}"
+                    :aria-expanded="isOpen"
+                    aria-controls="accordion-panel-{{ impact }}"
+                    class="before:cover text-left"
+                >
+                    {{ trans key="axe.impact_labels.{{ impact }}" }}: {{ errors | count }}
+                </button>
+            </h3>
+            <p class="mt-1">
+                {{ trans key="axe.impact_descriptions.{{ impact }}" }}
+            </p>
+        </div>
+    </div>
+{{ /partial:disclosure/control }}

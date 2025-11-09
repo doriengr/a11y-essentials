@@ -17,15 +17,6 @@ export default (options = {}) => ({
         this.urlError?.classList.add("hidden");
         this.urlInput?.removeAttribute("aria-labelledby");
         if (!this.action) return;
-
-        fetch(this.action, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ url: this.url })
-        })
-        .then(r => r.json())
-        .then(results => console.log(results))
-        .catch(err => console.error(err));
     },
 
     isURLvalid() {

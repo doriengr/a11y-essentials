@@ -20,7 +20,7 @@
 @source '../views/**/**/**/*.antlers.html';
 @source '../js/*.js';
 @source '../js/**/*.js';
-@source inline('before:bg-red before:bg-green before:bg-yellow');
+@safelist bg-red-200 bg-purple-200 bg-green-200 bg-yellow-200 before:bg-red before:bg-green before:bg-yellow;
 
 @layer base {
     :focus-visible {

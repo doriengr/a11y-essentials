@@ -1,0 +1,16 @@
+<article
+    id="accordion-panel-{{ impact }}"
+    x-cloak
+    x-show="isOpen"
+    class="flex flex-col gap-y-4 px-6 pb-4"
+>
+    {{ if errors }}
+
+    {{ else }}
+        {{ partial:sets/content/notice notice_label="Keine Fehler" }}
+            <p>
+                Sehr gut! In dieser Kategorie wurden keine Probleme gefunden.
+            </p>
+        {{ /partial:sets/content/notice }}
+    {{ /if }}
+</article>

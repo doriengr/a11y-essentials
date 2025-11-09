@@ -14,7 +14,6 @@ class AxeController extends Controller
             ->template('templates/axe/show')
             ->layout('layouts.default')
             ->with([
-                'kicker' => 'Finde einen Anfang',
                 'title' => 'Überprüfe deinen Code',
                 'success' => session('success'),
                 'old' => session()->get('_old_input', []),
@@ -62,9 +61,8 @@ class AxeController extends Controller
                 ->template('templates/axe/show')
                 ->layout('layouts.default')
                 ->with([
-                    'kicker' => 'Getestete URL: ' . $url,
                     'title' => 'Deine Testergebnisse',
-                    'results' => response()->json($results),
+                    'results' => $results,
                 ]);
 
         } catch (\Exception $e) {

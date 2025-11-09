@@ -1,10 +1,17 @@
-<div x-data="axeChecker({ action: '{{ route:axe.run }}' })" class="vice mt-12 lg:grid lg:grid-cols-6 lg:gap-8">
+<div x-data="axeChecker({ action: '{{ route:axe.run }}' })" class="vice my-12 lg:grid lg:grid-cols-6 lg:gap-8">
     <section class="lg:col-span-4">
-        <div class="flex flex-col-reverse">
+        <div class="autoformat flex flex-col-reverse">
             <h1 id="form-headline" class="font-headline text-6xl font-bold lg:text-7xl">
                 {{ title }}
             </h1>
-            <span class="mb-4 block">{{ kicker }}</span>
+            <p class="mb-4 block">
+                {{ if results }}
+                    <a href="{{ results.url }}">{{ results.url }}</a> |
+                    {{ results.timestamp | format('d.m.y') }} um {{ results.timestamp | format('H:m') }} Uhr
+                {{ else }}
+                    Finde einen Anfang
+                {{ /if }}
+            </p>
         </div>
         <span id="automatic-test-config" class="sr-only">Konfigurationen des automatischen Tests</span>
         <ul aria-labelledby="automatic-test-config" class="flex flex-wrap gap-4 mt-4">
@@ -102,5 +109,7 @@
                 </ul>
             </div>
         </aside>
+    {{ else }}
+        {{ partial:results }}
     {{ /unless }}
 </div>
