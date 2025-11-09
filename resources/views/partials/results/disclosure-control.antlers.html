@@ -11,10 +11,9 @@
         () => 'green-200') }}
 
 {{ partial:disclosure/control control_id="{impact}" }}
-    <div class="flex gap-x-4 items-center">
+    <div class="flex flex-col gap-y-2 gap-x-4 sm:flex-row sm:items-center">
         <span
-            class="shrink-0 size-10 rounded-full flex items-center justify-center"
-            style="background-color: var(--color-{{ $impact_color }});"
+            class="shrink-0 size-10 rounded-full flex items-center justify-center bg-green-200"
         >
             {{ svg src="{{ $impact_icon }}" class="size-6" }}
         </span>

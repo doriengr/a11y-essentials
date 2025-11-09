@@ -2,10 +2,17 @@
     id="accordion-panel-{{ impact }}"
     x-cloak
     x-show="isOpen"
-    class="flex flex-col gap-y-4 px-6 pb-4"
+    class="px-6 pb-4"
 >
     {{ if errors }}
-
+        <strong class="block mb-1">Entdeckte Probleme:</strong>
+        <ol>
+            {{ errors }}
+                <li class="border-t border-grey-200 py-2">
+                    <span>{{ description | entities }}</span>
+                </li>
+            {{ /errors }}
+        </ol>
     {{ else }}
         {{ partial:sets/content/notice notice_label="Keine Fehler" }}
             <p>

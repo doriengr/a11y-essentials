@@ -36,15 +36,28 @@
         cursor: pointer;
     }
 
-    /* Make lists accessible */
-    ol {
-        list-style: decimal;
-        list-style-type: '';
-    }
-
     ul {
         list-style: disc;
         list-style-type: '';
+    }
+
+    ol {
+        counter-reset: item;
+        list-style: decimal;
+        list-style-type: "";
+    }
+
+    ol > li {
+        counter-increment: item;
+        position: relative;
+        padding-left: calc(var(--spacing) * 6);
+    }
+
+    ol > li::before {
+        content: counter(item) ".";
+        position: absolute;
+        left: calc(var(--spacing) * 0.5);
+        top: 0.5em;
     }
 
     h1,
