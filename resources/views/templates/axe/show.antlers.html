@@ -4,9 +4,7 @@
             <h1 id="form-headline" class="font-headline text-6xl font-bold lg:text-7xl">
                 {{ title }}
             </h1>
-            <span class="mb-4 block">
-                Finde einen Anfang
-            </span>
+            <span class="mb-4 block">{{ kicker }}</span>
         </div>
         <span id="automatic-test-config" class="sr-only">Konfigurationen des automatischen Tests</span>
         <ul aria-labelledby="automatic-test-config" class="flex flex-wrap gap-4 mt-4">
@@ -77,30 +75,32 @@
         </form>
     </section>
 
-    <aside class="mt-12 flex flex-col gap-y-12 lg:col-span-2">
-        {{ partial:sets/content/notice notice_label="Wichtige Info" }}
-            <p>
-                Diese schnelle, automatische Überprüfung kann nur einen kleinen Teil überprüfen und
-                <strong>ersetzt keine vollumfängliche, manuelle Überprüfung</strong>.
-                Sie dient lediglich dazu sich einen ersten schnellen Überblick zu schaffen.
-            </p>
-        {{ /partial:sets/content/notice }}
-        <div>
-            <span class="mb-2 block">Weitere Informationen</span>
-            <ul class="flex flex-wrap gap-4">
-                <li>
-                    <a href="https://www.w3.org/TR/WCAG22/" class="button button-secondary">
-                        Die WCAG-Richtlinien
-                        {{ svg:general/arrow-up-right class="size-6" }}
-                    </a>
-                </li>
-                <li>
-                    <a href="https://www.w3.org/TR/UNDERSTANDING-WCAG20/conformance.html" class="button button-secondary">
-                        Die Konformitätsstufen
-                        {{ svg:general/arrow-up-right class="size-6" }}
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </aside>
+    {{ unless results }}
+        <aside aria-labelledby="aside-headline" class="mt-12 flex flex-col gap-y-12 lg:col-span-2">
+            {{ partial:sets/content/notice notice_label="Wichtige Info" }}
+                <p>
+                    Diese schnelle, automatische Überprüfung kann nur einen kleinen Teil überprüfen und
+                    <strong>ersetzt keine vollumfängliche, manuelle Überprüfung</strong>.
+                    Sie dient lediglich dazu sich einen ersten schnellen Überblick zu schaffen.
+                </p>
+            {{ /partial:sets/content/notice }}
+            <div>
+                <span id="aside-headline" class="mb-2 block">Weitere Informationen</span>
+                <ul class="flex flex-wrap gap-4">
+                    <li>
+                        <a href="https://www.w3.org/TR/WCAG22/" class="button button-secondary">
+                            Die WCAG-Richtlinien
+                            {{ svg:general/arrow-up-right class="size-6" }}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.w3.org/TR/UNDERSTANDING-WCAG20/conformance.html" class="button button-secondary">
+                            Die Konformitätsstufen
+                            {{ svg:general/arrow-up-right class="size-6" }}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+    {{ /unless }}
 </div>
