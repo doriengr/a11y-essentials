@@ -10,17 +10,17 @@
     <span id="automatic-test-config" class="sr-only">Konfigurationen des automatischen Tests</span>
     <ul aria-labelledby="automatic-test-config" class="flex flex-wrap gap-x-4 mt-4">
         <li class="pill pill-primary pill-large">
-            WCAG 2.2
+            WCAG 2.2 konform
         </li>
         <li class="pill pill-primary pill-large">
-            Konformitätsstufen A, AA
+            Alle Konformitätsstufen möglich
         </li>
     </ul>
     <form
         method="POST"
         aria-labelledby="form-headline"
         action="{{ route:axe.run }}"
-        class="flex flex-col gap-y-6 my-6"
+        class="flex flex-col gap-y-6 mt-12"
         x-data="form({ errorsCount: '{{ errors | count }}' })"
         novalidate
     >
