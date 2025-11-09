@@ -30,7 +30,9 @@
     }
 
     button,
-    a {
+    a,
+    input,
+    label {
         cursor: pointer;
     }
 

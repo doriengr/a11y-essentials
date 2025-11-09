@@ -13,7 +13,6 @@ class AxeController extends Controller
         return (new View())
             ->template('templates/axe/show')
             ->layout('layouts.default')
-
             ->with([
                 'title' => 'Überprüfe deinen Code',
                 'success' => session('success'),
@@ -23,32 +22,46 @@ class AxeController extends Controller
 
     public function run(Request $request)
     {
-
         $validated = $request->validate([
             'url' => ['required', 'url'],
+            'check_for_aaa' => ['nullable'],
         ]);
 
         $url = $validated['url'];
 
-        $url = $request->input('url');
         if (!$url || !filter_var($url, FILTER_VALIDATE_URL)) {
             return response()->json(['error' => 'Ungültige URL'], 400);
         }
 
+        // boolean: checkbox checked or not
+        $checkForAAA = $request->boolean('check_for_aaa');
+
         $nodePath = trim(shell_exec('which node'));
-        $process = new Process([$nodePath, base_path('node/axe-checker.js'), $url]);
+
+        // prepare node arguments
+        $args = [$nodePath, base_path('node/axe-checker.js'), $url];
+
+        if ($checkForAAA) {
+            $args[] = 'aaa';
+        }
+
+        $process = new Process($args);
         $process->setTimeout(60);
 
         try {
             $process->run();
+
             if (!$process->isSuccessful()) {
                 throw new \Exception($process->getErrorOutput());
             }
-            $results = json_decode($process->getOutput(), true);
 
+            $results = json_decode($process->getOutput(), true);
             return response()->json($results);
+
         } catch (\Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 500);
+            return response()->json([
+                'error' => $e->getMessage()
+            ], 500);
         }
     }
 }
