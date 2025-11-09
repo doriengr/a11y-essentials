@@ -2,7 +2,7 @@
   "name": "axe-checker",
   "type": "module",
   "dependencies": {
-    "axe-core": "^4.11.0",
+    "axe-core": "git+https://github.com/doriengr/axe-core.git#v1.0.1-dist",
     "puppeteer": "^23.0.0"
   }
 }
