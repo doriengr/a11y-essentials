@@ -42,12 +42,12 @@ tabs:
         display: Ressourcen
         fields:
           -
-            handle: ressources
+            handle: resources
             field:
               type: entries
               display: Ressoucen
               collections:
-                - ressources
+                - resources
   sidebar:
     display: Sidebar
     sections:
