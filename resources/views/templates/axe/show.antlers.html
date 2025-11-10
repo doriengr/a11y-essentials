@@ -42,7 +42,7 @@
                     name="url"
                     pattern="https://.*"
                     aria-required="true"
-                    value="{{ old:url }}"
+                    value="{{ old:url || input_url }}"
                     {{ get_error:url }}
                         aria-invalid="true"
                         aria-describedby="checker-url-error"
@@ -56,17 +56,18 @@
                 {{ /get_errors:url }}
             </div>
             <div class="flex flex-row-reverse justify-end gap-x-4">
-                <label for="check_for_aaa" class="label">WCAG Konformitätsstufe AAA ebenfalls testen</label>
+                <label for="include_aaa" class="label">WCAG Konformitätsstufe AAA ebenfalls testen</label>
                 <input
-                    id="check_for_aaa"
+                    id="include_aaa"
                     class="size-6 accent-green"
                     type="checkbox"
-                    name="check_for_aaa"
+                    name="include_aaa"
                     value="1"
-                    {{ get_error:check_for_aaa }}
+                    {{ if input_include_aaa }} checked {{ /if }}
+                    {{ get_error:include_aaa }}
                         aria-invalid="true"
                         aria-describedby="checker-aaa-error"
-                    {{ /get_error:check_for_aaa }}
+                    {{ /get_error:include_aaa }}
                 />
                 {{ get_errors:check_for_aaa }}
                     {{ partial:forms/field-error
