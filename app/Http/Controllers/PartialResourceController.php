@@ -17,8 +17,15 @@ class PartialResourceController extends Controller
             return view('partials.resources.notice');
         }
 
+        $component = Entry::query()
+            ->where('collection', 'components')
+            ->where('resources', 'like', "%{$resource->id()}%")
+            ->first();
+
         return view('partials.resources.async-load', [
             'resource' => $resource,
+            'button_url'   => $component ? $component->uri() : null,
+            'button_label' => $component ? $component->get('title') : null,
         ]);
     }
 }
