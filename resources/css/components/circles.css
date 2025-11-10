@@ -1,0 +1,24 @@
+@layer components {
+    .circle {
+    --_percentage: var(--percentage, 0);
+
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+    background: conic-gradient(
+        #c14424 0deg,
+        #c14424 calc(var(--_percentage) * 1deg * 3.6),
+        #f4d7cd calc(var(--_percentage) * 1deg * 3.6),
+        #f4d7cd 360deg
+    );
+    }
+
+    .circle::before {
+        content: attr(data-percentage) "%";
+    }
+}

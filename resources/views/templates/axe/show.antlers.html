@@ -112,8 +112,15 @@
         </aside>
     {{ else }}
         {{ results }}
+            <section aria-labelledby="results-summary" class="my-12 lg:my-20 lg:col-span-full">
+                <h2 id="results-summary" class="sr-only">Zusammenfassung</h2>
+                <p class="circle text-center p-6 flex flex-col items-center justify-center" style="--percentage: {{ results.summary.successPercent }}">
+                    <strong class="block text-5xl">{{ results.summary.successPercent }} %</strong>
+                    <span class="text-sm text-grey-800 block">erfolgreiche Überprüfungen</span>
+                </p>
+            </section>
             <section class="my-12 lg:my-20 lg:col-span-full">
-                <h2 class="font-headline mb-6 text-2xl font-bold lg:mb-8 lg:text-4xl">
+                <h2 class="font-headline mb-4 text-2xl font-bold lg:mb-8 lg:text-4xl">
                     Gefundene Probleme
                 </h2>
                 <ul class="flex flex-col gap-y-4">
