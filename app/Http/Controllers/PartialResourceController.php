@@ -10,9 +10,14 @@ class PartialResourceController extends Controller
     {
         $resource = Entry::query()
             ->where('collection', 'resources')
-            ->where('slug', $slug)->firstOrFail();
+            ->where('slug', $slug)
+            ->first();
 
-        return view('partials.resource', [
+        if (!$resource) {
+            return view('partials.resources.notice');
+        }
+
+        return view('partials.resources.disclosure', [
             'resource' => $resource,
         ]);
     }

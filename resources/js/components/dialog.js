@@ -24,8 +24,8 @@ export default (options = {}) => ({
         if (!this.loadResourceRoute) return;
 
         const html = await fetch(this.loadResourceRoute).then(r => r.text());
-        console.log(html);
-        const target = document.querySelector('#target');
+        const target = this.$root.querySelector('[id^="dialog-target"]');
+        console.log(target);
         if (!target) return;
         target.innerHTML = html;
         this.resourceLoaded = true;

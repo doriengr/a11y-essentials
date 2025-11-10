@@ -20,7 +20,6 @@
 @source '../views/**/**/**/*.antlers.html';
 @source '../js/*.js';
 @source '../js/**/*.js';
-@safelist before:bg-red before:bg-green before:bg-yellow;
 
 @layer base {
     :focus-visible {
@@ -57,7 +56,6 @@
         content: counter(item) ".";
         position: absolute;
         left: calc(var(--spacing) * 0.5);
-        top: 0.5em;
     }
 
     h1,
