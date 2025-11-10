@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Statamic\View\View;
 use Symfony\Component\Process\Process;
@@ -62,6 +63,7 @@ class AxeController extends Controller
                 ->layout('layouts.default')
                 ->with([
                     'title' => 'Deine Testergebnisse',
+                    'localized_timestamp' => Carbon::parse($results['timestamp'])->timezone('Europe/Berlin'),
                     'results' => $results,
                     'input_url' => $url,
                     'input_include_aaa' => $includeAAA,

@@ -7,7 +7,7 @@
             <p class="mb-4 block">
                 {{ if results }}
                     <a href="{{ results.url }}">{{ results.url }}</a> |
-                    {{ results.timestamp | format('d.m.y') }} um {{ results.timestamp | format('H:m') }} Uhr
+                    {{ localized_timestamp | format('d.m.y') }} um {{ localized_timestamp | format('H:i') }} Uhr
                 {{ else }}
                     Finde einen Anfang
                 {{ /if }}
