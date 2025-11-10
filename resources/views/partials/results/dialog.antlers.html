@@ -3,7 +3,7 @@
     role="dialog"
     aria-labelledby="dialog-headline-{{ id }}"
     aria-modal="true"
-    class="fixed inset-6 bg-white w-full h-full overflow-scroll z-50 rounded-sm p-6"
+    class="fixed inset-6 bg-white w-full h-full overflow-scroll z-50 rounded-sm p-4 sm:p-6"
 >
     <div class="h-full">
         <header class="flex items-center justify-between gap-x-6">
@@ -17,6 +17,16 @@
         </header>
         <article class="mt-4">
             <p>{{ help | entities }}</p>
+            <strong class="block mt-4">Betroffene HTML-Elemente</strong>
+            <ul class="flex flex-col gap-y-2 -mt-2">
+                {{ nodes }}
+                    <li class="h-12">
+                        <pre aria-hidden="true" class="block text-sm h-12">
+                            <code class="language-html rounded-sm">{{ html | entities }}</code>
+                        </pre>
+                    </li>
+                {{ /nodes }}
+            </ul>
         </article>
     </div>
 </dialog>
