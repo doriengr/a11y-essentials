@@ -19,8 +19,12 @@
     --color-green-50: #f2f3ee;
     --color-blue: #006bb8;
     --color-red: #d73a13;
+    --color-red-200: #F7D5C9;
     --color-red-100: #fbe9df;
     --color-purple: #562f83;
+    --color-purple-200: #DDD3DF;
     --color-yellow: #f7c64f;
+    --color-yellow-200: #FDF1D5;
     --color-yellow-50: #fffcf6;
+    --color-yellow-900: #EEB529;
 }

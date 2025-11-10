@@ -56,7 +56,14 @@ class AxeController extends Controller
             }
 
             $results = json_decode($process->getOutput(), true);
-            return response()->json($results);
+
+            return (new View())
+                ->template('templates/axe/show')
+                ->layout('layouts.default')
+                ->with([
+                    'title' => 'Deine Testergebnisse',
+                    'results' => $results,
+                ]);
 
         } catch (\Exception $e) {
             return response()->json([

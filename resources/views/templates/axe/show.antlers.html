@@ -1,77 +1,115 @@
-<section x-data="axeChecker({ action: '{{ route:axe.run }}' })" class="vice my-12 lg:my-20">
-    <div class="flex flex-col-reverse">
-        <h1 id="form-headline" class="font-headline text-6xl font-bold lg:text-7xl">
-            {{ title }}
-        </h1>
-        <span class="mb-4 block">
-            Finde einen Anfang
-        </span>
-    </div>
-    <span id="automatic-test-config" class="sr-only">Konfigurationen des automatischen Tests</span>
-    <ul aria-labelledby="automatic-test-config" class="flex flex-wrap gap-x-4 mt-4">
-        <li class="pill pill-primary pill-large">
-            WCAG 2.2 konform
-        </li>
-        <li class="pill pill-primary pill-large">
-            Alle Konformitätsstufen möglich
-        </li>
-    </ul>
-    <form
-        method="POST"
-        aria-labelledby="form-headline"
-        action="{{ route:axe.run }}"
-        class="flex flex-col gap-y-6 mt-12"
-        x-data="form({ errorsCount: '{{ errors | count }}' })"
-        novalidate
-    >
+<div x-data="axeChecker({ action: '{{ route:axe.run }}' })" class="vice my-12 lg:grid lg:grid-cols-6 lg:gap-8">
+    <section class="lg:col-span-4">
+        <div class="autoformat flex flex-col-reverse">
+            <h1 id="form-headline" class="font-headline text-6xl font-bold lg:text-7xl">
+                {{ title }}
+            </h1>
+            <p class="mb-4 block">
+                {{ if results }}
+                    <a href="{{ results.url }}">{{ results.url }}</a> |
+                    {{ results.timestamp | format('d.m.y') }} um {{ results.timestamp | format('H:m') }} Uhr
+                {{ else }}
+                    Finde einen Anfang
+                {{ /if }}
+            </p>
+        </div>
+        <span id="automatic-test-config" class="sr-only">Konfigurationen des automatischen Tests</span>
+        <ul aria-labelledby="automatic-test-config" class="flex flex-wrap gap-4 mt-4">
+            <li class="pill pill-primary pill-large">
+                WCAG 2.2 konform
+            </li>
+            <li class="pill pill-primary pill-large">
+                Alle Konformitätsstufen möglich
+            </li>
+        </ul>
+        <form
+            method="POST"
+            aria-labelledby="form-headline"
+            action="{{ route:axe.run }}"
+            class="flex flex-col gap-y-6 mt-12"
+            x-data="form({ errorsCount: '{{ errors | count }}' })"
+            novalidate
+        >
 
-        {{ csrf_field }}
-        {{ partial:forms/error-summary }}
-        <div>
-            <label for="url" class="label">URL der Website (erforderlich)</label>
-            <input
-                id="url"
-                class="input"
-                type="url"
-                name="url"
-                pattern="https://.*"
-                aria-required="true"
-                value="{{ old:url }}"
-                {{ get_error:url }}
-                    aria-invalid="true"
-                    aria-describedby="checker-url-error"
-                {{ /get_error:url }}
-            />
-            {{ get_errors:url }}
-                {{ partial:forms/field-error
-                    field_id="checker-url-error"
-                    messages="{{ messages }}"
-                }}
-            {{ /get_errors:url }}
-        </div>
-        <div class="flex flex-row-reverse justify-end gap-x-4">
-            <label for="check_for_aaa" class="label">WCAG Konformitätsstufe AAA ebenfalls testen</label>
-            <input
-                id="check_for_aaa"
-                class="size-6 accent-green"
-                type="checkbox"
-                name="check_for_aaa"
-                value="1"
-                {{ get_error:check_for_aaa }}
-                    aria-invalid="true"
-                    aria-describedby="checker-aaa-error"
-                {{ /get_error:check_for_aaa }}
-            />
-            {{ get_errors:check_for_aaa }}
-                {{ partial:forms/field-error
-                    field_id="checker-aaa-error"
-                    messages="{{ messages }}"
-                }}
-            {{ /get_errors:check_for_aaa }}
-        </div>
-        <button type="submit" class="button button-primary">
-            Test starten
-            {{ svg:general/arrow class="size-6" }}
-        </button>
-    </form>
-</section>
+            {{ csrf_field }}
+            {{ partial:forms/error-summary }}
+            <div>
+                <label for="url" class="label">URL der Website (erforderlich)</label>
+                <input
+                    id="url"
+                    class="input"
+                    type="url"
+                    name="url"
+                    pattern="https://.*"
+                    aria-required="true"
+                    value="{{ old:url }}"
+                    {{ get_error:url }}
+                        aria-invalid="true"
+                        aria-describedby="checker-url-error"
+                    {{ /get_error:url }}
+                />
+                {{ get_errors:url }}
+                    {{ partial:forms/field-error
+                        field_id="checker-url-error"
+                        messages="{{ messages }}"
+                    }}
+                {{ /get_errors:url }}
+            </div>
+            <div class="flex flex-row-reverse justify-end gap-x-4">
+                <label for="check_for_aaa" class="label">WCAG Konformitätsstufe AAA ebenfalls testen</label>
+                <input
+                    id="check_for_aaa"
+                    class="size-6 accent-green"
+                    type="checkbox"
+                    name="check_for_aaa"
+                    value="1"
+                    {{ get_error:check_for_aaa }}
+                        aria-invalid="true"
+                        aria-describedby="checker-aaa-error"
+                    {{ /get_error:check_for_aaa }}
+                />
+                {{ get_errors:check_for_aaa }}
+                    {{ partial:forms/field-error
+                        field_id="checker-aaa-error"
+                        messages="{{ messages }}"
+                    }}
+                {{ /get_errors:check_for_aaa }}
+            </div>
+            <button type="submit" class="button button-primary">
+                Test starten
+                {{ svg:general/arrow class="size-6" }}
+            </button>
+        </form>
+    </section>
+
+    {{ unless results }}
+        <aside aria-labelledby="aside-headline" class="mt-12 flex flex-col gap-y-12 lg:col-span-2">
+            {{ partial:sets/content/notice notice_label="Wichtige Info" }}
+                <p>
+                    Diese schnelle, automatische Überprüfung kann nur einen kleinen Teil überprüfen und
+                    <strong>ersetzt keine vollumfängliche, manuelle Überprüfung</strong>.
+                    Sie dient lediglich dazu sich einen ersten schnellen Überblick zu schaffen.
+                </p>
+            {{ /partial:sets/content/notice }}
+            <div>
+                <span id="aside-headline" class="mb-2 block">Weitere Informationen</span>
+                <ul class="flex flex-wrap gap-4">
+                    <li>
+                        <a href="https://www.w3.org/TR/WCAG22/" class="button button-secondary">
+                            Die WCAG-Richtlinien
+                            {{ svg:general/arrow-up-right class="size-6" }}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.w3.org/TR/UNDERSTANDING-WCAG20/conformance.html" class="button button-secondary">
+                            Die Konformitätsstufen
+                            {{ svg:general/arrow-up-right class="size-6" }}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+    {{ else }}
+        {{ partial:results }}
+    {{ /unless }}
+</div>
