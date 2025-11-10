@@ -17,7 +17,7 @@ class PartialResourceController extends Controller
             return view('partials.resources.notice');
         }
 
-        return view('partials.resources.disclosure', [
+        return view('partials.resources.async-load', [
             'resource' => $resource,
         ]);
     }
