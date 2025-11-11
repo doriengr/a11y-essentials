@@ -1,4 +1,4 @@
-<div x-data="axeChecker({ action: '{{ route:axe.run }}' })" class="vice my-12 lg:grid lg:grid-cols-6 lg:gap-8">
+<div x-data="({ isLoading: false })" class="vice my-12 lg:grid lg:grid-cols-6 lg:gap-8">
     <section class="lg:col-span-4">
         <div class="autoformat flex flex-col-reverse">
             <h1 id="form-headline" class="font-headline text-6xl font-bold lg:text-7xl">
@@ -23,10 +23,13 @@
             </li>
         </ul>
         <form
+            x-show="!isLoading"
+            x-cloak
             method="POST"
             aria-labelledby="form-headline"
             action="{{ route:axe.run }}"
             class="flex flex-col gap-y-6 mt-12"
+            @submit="isLoading = true"
             x-data="form({ errorsCount: '{{ errors | count }}' })"
             novalidate
         >
@@ -112,22 +115,28 @@
         </aside>
     {{ else }}
         {{ results }}
-            {{ if results.summary }}
-                {{ partial:results/summary }}
-            {{ /if }}
-            <section class="my-12 lg:my-20 lg:col-span-full">
-                <h2 class="font-headline mb-4 text-2xl font-bold lg:mb-8 lg:text-4xl">
-                    Gefundene Probleme
-                </h2>
-                <ul class="flex flex-col gap-y-4">
-                    {{ results.byImpact }}
-                        <li x-data="accordion({ id: '{{ impact }}' })" class="border-green rounded-sm border">
-                            {{ partial:results/disclosure-control }}
-                            {{ partial:results/disclosure-panel }}
-                        </li>
-                    {{ /results.byImpact }}
-                </ul>
-            </section>
+            <div x-show="!isLoading" x-cloak class="lg:col-span-full">
+                {{ if results.summary }}
+                    {{ partial:results/summary }}
+                {{ /if }}
+                <section class="my-12 lg:my-20">
+                    <h2 class="font-headline mb-4 text-2xl font-bold lg:mb-8 lg:text-4xl">
+                        Gefundene Probleme
+                    </h2>
+                    <ul class="flex flex-col gap-y-4">
+                        {{ results.byImpact }}
+                            <li x-data="accordion({ id: '{{ impact }}' })" class="border-green rounded-sm border">
+                                {{ partial:results/disclosure-control }}
+                                {{ partial:results/disclosure-panel }}
+                            </li>
+                        {{ /results.byImpact }}
+                    </ul>
+                </section>
+            </div>
         {{ /results }}
     {{ /unless }}
+
+    <div x-show="isLoading" class="mx-auto my-10 lg:my-20 lg:col-span-full">
+        {{ partial:loading-spinner }}
+    </div>
 </div>
