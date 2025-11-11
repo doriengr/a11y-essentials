@@ -1,24 +1,39 @@
 @layer components {
-    .circle {
+  .circle {
     --_percentage: var(--percentage, 0);
 
-    width: 120px;
-    height: 120px;
+    width: calc(var(--spacing) * 48);
+    height: calc(var(--spacing) * 48);
     border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    font-size: 1.2rem;
-    background: conic-gradient(
-        #c14424 0deg,
-        #c14424 calc(var(--_percentage) * 1deg * 3.6),
-        #f4d7cd calc(var(--_percentage) * 1deg * 3.6),
-        #f4d7cd 360deg
-    );
-    }
+    -webkit-mask: radial-gradient(farthest-side, transparent 78%, black 79%);
+    -webkit-mask-composite: destination-out;
+    mask: radial-gradient(farthest-side, transparent 78%, black 79%);
+    mask-composite: exclude;
+  }
 
-    .circle::before {
-        content: attr(data-percentage) "%";
-    }
+  .circle::before {
+    content: attr(data-percentage) "%";
+    position: absolute;
+  }
+
+  .circle-red {
+    background: conic-gradient(
+      var(--color-red) calc(var(--_percentage) * 3.6deg),
+      var(--color-red-200) 0
+    );
+  }
+
+   .circle-yellow {
+    background: conic-gradient(
+      var(--color-yellow) calc(var(--_percentage) * 3.6deg),
+      var(--color-yellow-200) 0
+    );
+   }
+
+    .circle-green {
+    background: conic-gradient(
+      var(--color-green) calc(var(--_percentage) * 3.6deg),
+      var(--color-green-200) 0
+    );
+  }
 }
