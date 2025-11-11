@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Statamic\View\View;
 use Symfony\Component\Process\Process;
@@ -24,7 +25,7 @@ class AxeController extends Controller
     {
         $validated = $request->validate([
             'url' => ['required', 'url'],
-            'check_for_aaa' => ['nullable'],
+            'include_aaa' => ['nullable'],
         ]);
 
         $url = $validated['url'];
@@ -34,14 +35,14 @@ class AxeController extends Controller
         }
 
         // boolean: checkbox checked or not
-        $checkForAAA = $request->boolean('check_for_aaa');
+        $includeAAA = $request->boolean('include_aaa');
 
         $nodePath = trim(shell_exec('which node'));
 
         // prepare node arguments
         $args = [$nodePath, base_path('node/axe-checker.js'), $url];
 
-        if ($checkForAAA) {
+        if ($includeAAA) {
             $args[] = 'aaa';
         }
 
@@ -62,7 +63,10 @@ class AxeController extends Controller
                 ->layout('layouts.default')
                 ->with([
                     'title' => 'Deine Testergebnisse',
+                    'localized_timestamp' => Carbon::parse($results['timestamp'])->timezone('Europe/Berlin'),
                     'results' => $results,
+                    'input_url' => $url,
+                    'input_include_aaa' => $includeAAA,
                 ]);
 
         } catch (\Exception $e) {

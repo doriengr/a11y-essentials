@@ -8,6 +8,10 @@
         padding: calc(var(--spacing) * 2) calc(var(--spacing) * 4);
         transition: color 300ms ease-in-out;
         border-radius: var(--spacing);
+
+        &[disabled] {
+            background-color: var(--color-grey-500);
+        }
     }
 
     .button-primary {

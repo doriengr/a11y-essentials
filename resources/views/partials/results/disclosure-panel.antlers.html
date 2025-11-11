@@ -2,13 +2,16 @@
     id="accordion-panel-{{ impact }}"
     x-cloak
     x-show="isOpen"
-    class="px-6 pb-4"
+    class="px-4 pb-4 sm:px-6"
 >
     {{ if errors }}
         <strong class="block mb-1">Entdeckte Probleme:</strong>
         <ol>
             {{ errors }}
-                <li x-data="dialog()" class="flex flex-col gap-y-2 border-t border-grey-200 py-2 md:flex-row md:justify-between md:gap-x-6">
+                <li
+                    x-data="dialog({ loadResourceRoute: '{{ route:axe.resource slug="{{ id }}" }}'})"
+                    class="flex flex-col gap-y-2 border-t border-grey-200 py-2 md:flex-row md:justify-between md:gap-x-6"
+                >
                     <span>{{ description | entities }}</span>
                     <button
                         :aria-expanded="isOpen"

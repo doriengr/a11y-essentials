@@ -6,7 +6,7 @@
         aria-labelledby="proile-navigation-label"
         class="group/profile flex items-center gap-x-2"
     >
-        <span class="flex items-center justify-center size-10 shrink-0 rounded-full uppercase text-sm font-bold {{ current_user ? 'bg-green-200 text-green' : 'bg-grey-100 text-grey-800' }}">
+        <span class="flex items-center justify-center size-10 shrink-0 rounded-full uppercase text-sm font-bold {{ current_user ? 'bg-green-100 text-green' : 'bg-grey-100 text-grey-800' }}">
             {{ if current_user }}
                 {{ current_user:name | first(2) }}
             {{ else }}
