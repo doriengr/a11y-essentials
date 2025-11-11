@@ -20,13 +20,13 @@
         <ul class="font-headline flex flex-col gap-y-6 text-xl md:text-2xl">
             <li class="flex gap-x-4 items-center">
                 <span class="flex items-center justify-center size-10 rounded-full bg-red-200">
-                    {{ svg:status/error class="text-red size-6" }}
+                    {{ svg:status/error class="text-red size-6 stroke-2" }}
                 </span>
                 <strong class="font-semibold">{{ results.summary.totalChecks - results.summary.passedChecks }} durchgefallene Überprüfungen</strong>
             </li>
             <li class="flex gap-x-4 items-center">
                 <span class="flex items-center justify-center size-10 rounded-full bg-green-200">
-                    {{ svg:status/pass class="text-green size-6" }}
+                    {{ svg:status/pass class="text-green size-6 stroke-2" }}
                 </span>
                 <strong class="font-semibold">{{ results.summary.passedChecks }} erfolgreiche Überprüfungen</strong>
             </li>
