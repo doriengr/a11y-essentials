@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import puppeteer from 'puppeteer';
-import axeSource from 'axe-core';
+import axeSource from 'axe-core/axe.de.min.js';
 
 const url = process.argv[2];
 const check_for_aaa = process.argv[3] ?? false;
