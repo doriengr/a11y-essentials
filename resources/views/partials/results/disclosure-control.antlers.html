@@ -1,36 +1,40 @@
-{{ $impact_icon = switch(
-        (impact == 'critical') => 'impact/critical',
-        (impact == 'serious') => 'impact/serious',
-        (impact == 'moderate') => 'impact/moderate',
-        () => 'impact/minor') }}
+{{ $disclosure_icon = switch(
+        (index == 'critical') => 'impact/critical',
+        (index == 'serious') => 'impact/serious',
+        (index == 'moderate') => 'impact/moderate',
+        (index == 'minor') => 'impact/minor',
+        (index == 'wcag2a') => 'conformance/conformance_a',
+        (index == 'wcag2aa') => 'conformance/conformance_aa',
+        (index == 'wcag2aaa') => 'conformance/conformance_aaa',
+        () => 'general/arrow') }}
 
-{{ partial:disclosure/control control_id="{impact}" }}
+{{ partial:disclosure/control control_id="{index}" }}
     <div class="flex flex-col gap-y-2 gap-x-4 sm:flex-row sm:items-center">
         <span
             class="shrink-0 size-10 rounded-full flex items-center justify-center
             {{ switch(
-                (impact == 'critical') => 'bg-purple-200 text-purple',
-                (impact == 'serious') => 'bg-red-200 text-red',
-                (impact == 'moderate') => 'bg-yellow-200 text-yellow-900',
+                (index == 'critical') => 'bg-purple-200 text-purple',
+                (index == 'serious' || index == 'wcag2a') => 'bg-red-200 text-red',
+                (index == 'moderate' || index == 'wcag2aa') => 'bg-yellow-200 text-yellow-900',
                 () => 'bg-green-200 text-green')
             }}"
         >
-            {{ svg src="{{ $impact_icon }}" class="size-6" }}
+            {{ svg src="{{ $disclosure_icon }}" }}
         </span>
         <div>
             <h3 class="font-headline text-green flex flex-wrap gap-x-3 text-xl font-semibold hocus:text-green-800">
                 <button
                     @click="toggle()"
-                    id="accordion-button-{{ impact }}"
+                    id="accordion-button-{{ index }}"
                     :aria-expanded="isOpen"
-                    aria-controls="accordion-panel-{{ impact }}"
+                    aria-controls="accordion-panel-{{ index }}"
                     class="before:cover text-left"
                 >
-                    {{ trans key="axe.impact_labels.{{ impact }}" }}: {{ errors | count }}
+                    {{ trans key="axe.problem_labels.{{ index }}" }}: {{ errors | count }}
                 </button>
             </h3>
             <p class="mt-1">
-                {{ trans key="axe.impact_descriptions.{{ impact }}" }}
+                {{ trans key="axe.problem_descriptions.{{ index }}" }}
             </p>
         </div>
     </div>

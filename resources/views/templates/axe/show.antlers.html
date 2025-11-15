@@ -81,14 +81,22 @@
                         <ul class="flex flex-col gap-y-4">
                             {{ results.byImpact }}
                                 <li x-data="accordion({ id: '{{ impact }}' })" class="border-green rounded-sm border">
-                                    {{ partial:results/disclosure-control }}
+                                    {{ partial:results/disclosure-control index='{{ impact }}' }}
                                     {{ partial:results/disclosure-panel }}
                                 </li>
                             {{ /results.byImpact }}
                         </ul>
                     {{ /partial:tablist/panel }}
                     {{ partial:tablist/panel index="conformance" }}
-                        <p>NACH KONFORMITÄT</p>
+                        <ul class="flex flex-col gap-y-4">
+                            {{ results.byConformanceLevel }}
+                                <li x-data="accordion({ id: '{{ level }}' })" class="border-green rounded-sm border">
+                                    {{ partial:results/disclosure-control index='{{ level }}' }}
+                                    {{ partial:results/disclosure-panel }}
+                                </li>
+                            {{ /results.byConformanceLevel }}
+                            {{ results | dump }}
+                        </ul>
                     {{ /partial:tablist/panel }}
                 </section>
             </div>
