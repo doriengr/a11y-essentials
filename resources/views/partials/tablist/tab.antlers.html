@@ -1,0 +1,15 @@
+<button
+    id="tab-{{ index }}"
+    role="tab"
+    :aria-selected="currentLabel === '{{ index }}'"
+    :tabindex="currentLabel === '{{ index }}' ? 0 : -1"
+    aria-controls="tabpanel-{{ index }}"
+    @click="selectTab('{{ index }}')"
+    @keydown.arrow-left.prevent="prevTab()"
+    @keydown.arrow-right.prevent="nextTab()"
+    @keydown.home.prevent="firstTab()"
+    @keydown.end.prevent="lastTab()"
+    class="text-green px-4 py-2 rounded-sm font-semibold aria-selected:text-white aria-selected:bg-green"
+>
+    {{ tab_label }}
+</button>

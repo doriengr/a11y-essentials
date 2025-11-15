@@ -1,5 +1,5 @@
 <article
-    id="accordion-panel-{{ impact }}"
+    id="accordion-panel-{{ index }}"
     x-cloak
     x-show="isOpen"
     class="px-4 pb-4 sm:px-6"
@@ -23,7 +23,7 @@
                         <span class="sr-only">zu {{ description | entities }}</span>
                         {{ svg:general/arrow class="size-6" }}
                     </button>
-                    {{ partial:results/dialog }}
+                    {{ partial:results/dialog index={{ index }} }}
                 </li>
             {{ /errors }}
         </ol>
