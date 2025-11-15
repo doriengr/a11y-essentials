@@ -82,7 +82,7 @@
                             {{ results.byImpact }}
                                 <li x-data="accordion({ id: '{{ impact }}' })" class="border-green rounded-sm border">
                                     {{ partial:results/disclosure-control index='{{ impact }}' }}
-                                    {{ partial:results/disclosure-panel }}
+                                    {{ partial:results/disclosure-panel index='{{ impact }}' implement_dialog="true" }}
                                 </li>
                             {{ /results.byImpact }}
                         </ul>
@@ -92,7 +92,7 @@
                             {{ results.byConformanceLevel }}
                                 <li x-data="accordion({ id: '{{ level }}' })" class="border-green rounded-sm border">
                                     {{ partial:results/disclosure-control index='{{ level }}' }}
-                                    {{ partial:results/disclosure-panel }}
+                                    {{ partial:results/disclosure-panel index='{{ level }}' }}
                                 </li>
                             {{ /results.byConformanceLevel }}
                             {{ results | dump }}
