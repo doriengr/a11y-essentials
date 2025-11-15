@@ -23,9 +23,7 @@
                         <span class="sr-only">zu {{ description | entities }}</span>
                         {{ svg:general/arrow class="size-6" }}
                     </button>
-                    {{ if implement_dialog }}
-                        {{ partial:results/dialog }}
-                    {{ /if }}
+                    {{ partial:results/dialog index={{ index }} }}
                 </li>
             {{ /errors }}
         </ol>

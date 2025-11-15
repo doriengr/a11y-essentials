@@ -82,7 +82,7 @@
                             {{ results.byImpact }}
                                 <li x-data="accordion({ id: '{{ impact }}' })" class="border-green rounded-sm border">
                                     {{ partial:results/disclosure-control index='{{ impact }}' }}
-                                    {{ partial:results/disclosure-panel index='{{ impact }}' implement_dialog="true" }}
+                                    {{ partial:results/disclosure-panel index='{{ impact }}' }}
                                 </li>
                             {{ /results.byImpact }}
                         </ul>
@@ -95,7 +95,6 @@
                                     {{ partial:results/disclosure-panel index='{{ level }}' }}
                                 </li>
                             {{ /results.byConformanceLevel }}
-                            {{ results | dump }}
                         </ul>
                     {{ /partial:tablist/panel }}
                 </section>
