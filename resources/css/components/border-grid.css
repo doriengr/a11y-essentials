@@ -1,0 +1,34 @@
+@layer components {
+    .border-grid {
+        position: relative;
+
+        @media (min-width: 40rem) {
+            &::before {
+                content: '';
+                width: 1px;
+                height: 100%;
+                background-color: var(--color-grey-200);
+                position: absolute;
+                left: 50%;
+            }
+        }
+
+        @media (min-width: 64rem) {
+            &::before {
+                left: 32.75%;
+            }
+        }
+
+
+        @media (min-width: 64rem) {
+            &::after {
+                content: '';
+                width: 1px;
+                height: 100%;
+                background-color: var(--color-grey-200);
+                position: absolute;
+                left: 67.25%;
+            }
+        }
+    }
+}

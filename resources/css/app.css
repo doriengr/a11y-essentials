@@ -1,6 +1,7 @@
 @import 'tailwindcss';
 @import 'highlight.js/styles/atom-one-dark.min.css';
 @import './components/autoformat.css';
+@import './components/border-grid.css';
 @import './components/buttons.css';
 @import './components/circles.css';
 @import './components/pills.css';

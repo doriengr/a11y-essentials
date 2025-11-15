@@ -1,36 +1,37 @@
 <section class="vice my-12 lg:my-20">
-    <ul class="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-y-10 lg:gap-y-16 lg:grid-cols-3">
+    <ul class="border-grid grid grid-cols-1 gap-y-10 gap-x-10 sm:grid-cols-2 lg:gap-y-16 lg:grid-cols-3">
         {{ collection:components }}
-            <li class="relative group flex flex-col-reverse gap-y-4 transition-transform duration-300 ease-in-out hocus:-translate-y-1">
-                <div>
-                    <h2 class="font-bold font-headline text-2xl mb-2">
-                        <a href="{{ url }}" class="before:cover">
-                            {{ title }}
-                        </a>
-                    </h2>
-                    {{ if teaser_description }}
-                        <p>{{ teaser_description }}</p>
-                    {{ /if }}
-                    <span
-                        class="button text-white mt-4
-                        {{ switch(
-                            (component_color == 'red') => 'bg-red group-hocus:bg-red-800',
-                            (component_color == 'blue') => 'bg-blue group-hocus:bg-blue-800',
-                            (component_color == 'purple') => 'bg-purple group-hocus:bg-purple-800',
-                            () => 'bg-green group-hocus:bg-green-800')
-                        }}">
-                        Mehr erfahren
-                        {{ svg:general/arrow class="size-6" }}
-                    </span>
-                </div>
-                {{ picture:teaser_image
-                    default="300 | 16:9 | calc(95%-4rem)"
-                    sm="650 | 16:9 | calc(95%-4rem)"
-                    md="400 | 16:9 | calc((95%-4rem)/2)"
-                    lg="520 | 16:9 | calc((95%-4rem)/2)"
-                    xl="580 | 16:9 | 580px"
-                    class="rounded-sm size-full object-cover"
-                }}
+            <li class="relative pb-10 border-b border-b-grey-200 last:border-b-0 sm:last:border-b">
+               <div class="h-full group flex flex-col-reverse justify-end gap-y-4 transition-transform duration-300 ease-in-out hocus:-translate-y-1">
+                    <div>
+                        <h2 class="font-bold font-headline text-2xl mb-2">
+                            <a href="{{ url }}" class="before:cover">
+                                {{ title }}
+                            </a>
+                        </h2>
+                        {{ if teaser_description }}
+                            <p>{{ teaser_description }}</p>
+                        {{ /if }}
+                        <span
+                            class="button text-white mt-4
+                            {{ switch(
+                                (component_color == 'red') => 'bg-red group-hocus:bg-red-800',
+                                (component_color == 'blue') => 'bg-blue group-hocus:bg-blue-800',
+                                (component_color == 'purple') => 'bg-purple group-hocus:bg-purple-800',
+                                () => 'bg-green group-hocus:bg-green-800')
+                            }}">
+                            Mehr erfahren
+                            {{ svg:general/arrow class="size-6" }}
+                        </span>
+                    </div>
+                    {{ picture:teaser_image
+                        default="300 | 16:9 | calc(95%-4rem)"
+                        sm="650 | 16:9 | calc((95%-4rem)/2)"
+                        lg="520 | 16:9 | calc((95%-4rem)/3)"
+                        xl="580 | 16:9 | 580px"
+                        class="rounded-sm size-full object-cover"
+                    }}
+               </div>
             </li>
         {{ /collection:components }}
     </ul>
