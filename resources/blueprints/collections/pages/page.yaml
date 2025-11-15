@@ -13,6 +13,30 @@ tabs:
               display: Titel
               validate:
                 - required
+          -
+            handle: description
+            field: common_description.description
+      -
+        display: Pagebuilder
+        fields:
+          -
+            handle: pagebuilder
+            field:
+              type: replicator
+              display: Pagebuilder
+              sets:
+                neue_setgruppe:
+                  display: 'Neue Setgruppe'
+                  sets:
+                    components_list:
+                      display: 'Liste aller Komponenten'
+                      icon: file-content-list
+                      fields:
+                        -
+                          handle: component_list
+                          field:
+                            type: section
+                            display: 'Auflistung aller Komponenten'
   sidebar:
     display: Sidebar
     sections:
@@ -26,14 +50,6 @@ tabs:
               validate:
                 - required
               display: 'Sprechende URL'
-              instructions_position: above
-              listable: hidden
-              visibility: visible
-              replicator_preview: true
-              from: title
-              generate: true
-              show_regenerate: false
-              hide_display: false
           -
             handle: parent
             field:
@@ -43,16 +59,6 @@ tabs:
               max_items: 1
               listable: false
               localizable: true
-          -
-            handle: template
-            field:
-              default: templates/pages/home
-              type: hidden
-              display: Template
-              listable: hidden
-              instructions_position: above
-              visibility: visible
-              hide_display: false
   seo:
     display: SEO
     sections:

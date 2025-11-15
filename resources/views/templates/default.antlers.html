@@ -1,7 +1,10 @@
-{{# This is the default template. If no other is defined and assigned, this one will be loaded. #}}
-<section class="flex h-screen flex-col items-center justify-center px-8">
-    <p>Okaaay, let's go!</p>
+<section class="vice my-12 lg:my-20">
+    <h1 class="font-headline text-6xl font-bold lg:text-7xl">
+        {{ title }}
+    </h1>
+    {{ if description }}
+        <div class="autoformat mt-4 max-w-4xl">{{ description }}</div>
+    {{ /if }}
 </section>
-<section>
-    {{ partial:pagebuilder }}
-</section>
+
+{{ partial:pagebuilder }}
