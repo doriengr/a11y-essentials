@@ -59,12 +59,23 @@
                     {{ partial:results/summary }}
                 {{ /if }}
                 <section x-data="tablist()" class="my-12 lg:my-20">
-                    <h2 class="font-headline mb-4 text-2xl font-bold lg:mb-8 lg:text-4xl">
-                        Gefundene Probleme
-                    </h2>
-                    <div role="tablist" class="shrink-0 flex w-full h-12 border-2 border-grey rounded-lg md:w-[20rem]">
-                        {{ partial:tablist/tab tab_label="Nach Auswirkung" index="impact" }}
-                        {{ partial:tablist/tab tab_label="Nach Konformität" index="conformance" }}
+                    <div class="w-full flex flex-wrap justify-between items-end gap-y-4 gap-x-16 mb-6 lg:mb-8">
+                        <h2 class="font-headline text-2xl font-bold lg:text-4xl">
+                            Gefundene Probleme
+                        </h2>
+                        <div class="shrink-0 md:flex md:gap-x-4 md:items-center">
+                            <strong id="tablist-label" class="font-semibold text-grey-800 block mb-2 md:mb-0">
+                                Sortiert nach:
+                            </strong>
+                            <div
+                                aria-labelledby="tablist-label"
+                                role="tablist"
+                                class="bg-green-100 rounded-md p-2 flex items-center w-max"
+                            >
+                                {{ partial:tablist/tab tab_label="Nach Auswirkung" index="impact" }}
+                                {{ partial:tablist/tab tab_label="Nach Konformität" index="conformance" }}
+                            </div>
+                        </div>
                     </div>
                     {{ partial:tablist/panel index="impact" }}
                         <ul class="flex flex-col gap-y-4">
