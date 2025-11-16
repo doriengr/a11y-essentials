@@ -2,28 +2,28 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Project;
+use App\Models\Checklist;
 use Illuminate\Http\Request;
 use Statamic\View\View;
 
-class ProjectController extends Controller
+class ChecklistController extends Controller
 {
     public function index()
     {
-        $projects = Project::where('user_id', auth()->id())->get();
+        $checklists = Checklist::where('user_id', auth()->id())->get();
 
         return (new View())
-            ->template('templates/projects/index')
+            ->template('templates/checklists/index')
             ->layout('layouts.default')
             ->with([
-                'projects' => $projects,
+                'checklists' => $checklists,
             ]);
     }
 
     public function create()
     {
         return (new View())
-            ->template('templates/projects/create')
+            ->template('templates/checklists/create')
             ->layout('layouts.default');
     }
 
@@ -33,11 +33,11 @@ class ProjectController extends Controller
             'title' => 'required|string|max:255',
         ]);
 
-        Project::create([
+        Checklist::create([
             'user_id' => auth()->id(),
             'title' => $request->title,
         ]);
 
-        return redirect()->route('projects.index')->with('success', 'Projekt erstellt!');
+        return redirect()->route('checklist.index')->with('success', 'Projekt erstellt!');
     }
 }

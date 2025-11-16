@@ -3,7 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AxeController;
 use App\Http\Controllers\PartialResourceController;
-use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\ChecklistController;
 use App\Http\Middleware\EnsureUserIsAuthenticated;
 use Illuminate\Support\Facades\Route;
 use Statamic\Facades\Entry;
@@ -27,9 +27,9 @@ Route::get('run-axe', [AxeController::class, 'show'])->name('axe.show');
 Route::post('run-axe', [AxeController::class, 'run'])->name('axe.run');
 Route::get('/partial/resource/{slug}', [PartialResourceController::class, 'show'])->name('axe.resource');
 
-// Projects
+// Checklists
 Route::middleware([EnsureUserIsAuthenticated::class])->group(function () {
-    Route::get('projects', [ProjectController::class, 'index'])->name('projects.index');
-    Route::get('projects/create', [ProjectController::class, 'create'])->name('projects.create');
-    Route::post('projects', [ProjectController::class, 'store'])->name('projects.store');
+    Route::get('all-checklists', [ChecklistController::class, 'index'])->name('checklists.index');
+    Route::get('checklist/create', [ChecklistController::class, 'create'])->name('checklists.create');
+    Route::post('checklist', [ChecklistController::class, 'store'])->name('checklists.store');
 });
