@@ -12,8 +12,10 @@
     </div>
 </section>
 
-<p>{{ checklists | count }}</p>
-
-{{ checklists }}
-    <p>{{ title }}</p>
-{{ /checklists }}
+<section>
+    <ul>
+        {{ checklists }}
+            <a href="{{ route:checklists.show checklist_id='{{ id }}' }}">{{ title }}</a>
+        {{ /checklists }}
+    </ul>
+</section>

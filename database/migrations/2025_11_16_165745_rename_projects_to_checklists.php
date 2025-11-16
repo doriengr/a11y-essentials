@@ -8,11 +8,25 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::rename('projects', 'checklists');
+        Schema::dropIfExists('projects');
+
+        Schema::create('checklists', function (Blueprint $table) {
+            $table->uuid('id')->primary();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->string('title');
+            $table->timestamps();
+        });
     }
 
     public function down(): void
     {
-        Schema::rename('checklists', 'projects');
+        Schema::dropIfExists('checklists');
+
+        Schema::create('projects', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->string('title');
+            $table->timestamps();
+        });
     }
 };

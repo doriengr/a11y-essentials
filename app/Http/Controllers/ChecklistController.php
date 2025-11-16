@@ -40,4 +40,20 @@ class ChecklistController extends Controller
 
         return redirect()->route('checklist.index')->with('success', 'Projekt erstellt!');
     }
+
+    public function show(string $id)
+    {
+        $checklist = Checklist::where('id', $id)->firstOrFail();
+
+        if ($checklist->user_id !== auth()->id()) {
+            abort(403);
+        }
+
+        return (new View())
+            ->template('templates/checklists/show')
+            ->layout('layouts.default')
+            ->with([
+                'checklist' => $checklist,
+            ]);
+    }
 }

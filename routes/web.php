@@ -29,7 +29,8 @@ Route::get('/partial/resource/{slug}', [PartialResourceController::class, 'show'
 
 // Checklists
 Route::middleware([EnsureUserIsAuthenticated::class])->group(function () {
-    Route::get('all-checklists', [ChecklistController::class, 'index'])->name('checklists.index');
+    Route::get('checklists', [ChecklistController::class, 'index'])->name('checklists.index');
     Route::get('checklist/create', [ChecklistController::class, 'create'])->name('checklists.create');
     Route::post('checklist', [ChecklistController::class, 'store'])->name('checklists.store');
+    Route::get('/checklists/{checklist_id}', [ChecklistController::class, 'show'])->name('checklists.show');
 });
