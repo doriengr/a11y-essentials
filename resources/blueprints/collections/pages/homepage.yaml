@@ -15,6 +15,9 @@ tabs:
           -
             handle: description
             field: common_description.description
+            config:
+              validate:
+                - required
   sidebar:
     display: Sidebar
     sections:

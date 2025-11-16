@@ -6,5 +6,15 @@
         {{ if description }}
             <div class="autoformat mt-4">{{ description }}</div>
         {{ /if }}
+        <a href="{{ route:axe.show }}" class="button button-primary mt-6">
+            Finde deinen Anfang
+            {{ svg:general/arrow class="size-6" }}
+        </a>
     </div>
+</section>
+<section aria-hidden="true" class="grid grid-cols-2 lg:grid-cols-4">
+    <div>{{ svg:design/preceivable class="size-full" }}</div>
+    <div>{{ svg:design/operable class="size-full" }}</div>
+    <div>{{ svg:design/understandable class="size-full" }}</div>
+    <div>{{ svg:design/robust class="size-full" }}</div>
 </section>
