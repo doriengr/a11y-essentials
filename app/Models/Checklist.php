@@ -15,12 +15,14 @@ class Checklist extends Model
 
     protected $casts = [
         'states' => 'array',
+        'groups' => 'array'
     ];
 
     protected $fillable = [
         'user_id',
         'title',
-        'states'
+        'states',
+        'groups'
     ];
 
     protected static function boot()

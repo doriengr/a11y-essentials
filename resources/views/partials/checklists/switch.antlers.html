@@ -4,26 +4,19 @@
     x-data="{ isChecked: {{ group_settings[slug] ? 'true' : 'false' }} }"
     class="mt-4"
 >
-    <input
-        type="checkbox"
-        name="group-visibility-{{ slug }}"
-        :checked="isChecked"
-        @change="toggleGroup('{{ slug }}', $event)"
-    />
-
-            <div class="mt-4">
-                <label
-                    for="{{ checklist_point_id }}"
-                    class="">Aufgabe: {{ title }}</label>
-                <input
-                    id="{{ checklist_point_id }}"
-                    class="size-6 accent-green"
-                    type="checkbox"
-                    name="{{ checklist_point_id }}"
-                    :checked="states['{{ slug }}'] && states['{{ slug }}']['{{ checklist_point_id }}']"
-                    @change="toggleGroup('{{ slug }}', event)"
-                />
-            </div>
+        <div class="mt-4">
+            <label
+                for="{{ checklist_point_id }}"
+                class="">Aufgabe: {{ title }}</label>
+            <input
+                id="{{ checklist_point_id }}"
+                class="size-6 accent-green"
+                type="checkbox"
+                name="{{ checklist_point_id }}"
+                :checked="groups['{{ slug }}']"
+                @change="toggleGroup('{{ slug }}', event)"
+            />
+        </div>
 
     <!-- <button
         role="switch"
