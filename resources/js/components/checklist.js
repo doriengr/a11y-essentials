@@ -16,7 +16,7 @@ export default (options = {}) => ({
         progressDisplay.classList.remove('hidden');
     },
 
-    toggle(group, id, event) {
+    toggleChecklistItem(group, id, event) {
         const value = event.target.checked;
 
         if (!this.states[group]) {

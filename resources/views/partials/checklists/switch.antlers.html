@@ -1,0 +1,31 @@
+{{ if can_be_hidden }}
+<div
+    id="group-label-{{ slug }}"
+    x-data="{ isChecked: {{ group_settings[slug] ? 'true' : 'false' }} }"
+    class="mt-4"
+>
+    <input
+        type="checkbox"
+        name="group-visibility-{{ slug }}"
+        :checked="isChecked"
+        @change="toggleGroup('{{ slug }}', $event)"
+    />
+
+    <!-- <button
+        role="switch"
+        :aria-checked="isChecked"
+        @click="isChecked = !isChecked; $el.previousElementSibling.dispatchEvent(new Event('change'))"
+        class="group switch"
+    >
+        <span class="sr-only">Checkliste der Komponente anzeigen</span>
+
+        <span class="pl-15 group-aria-checked:hidden" aria-hidden="true">
+            Nicht inkludieren
+        </span>
+
+        <span class="pl-15 hidden group-aria-checked:block" aria-hidden="true">
+            Inkludieren
+        </span>
+    </button> -->
+</div>
+{{ /if }}

@@ -1,41 +1,29 @@
 <h3 class="font-semibold text-xl lg:text-2xl">{{ title }}</h3>
-    {{ if description }}
-        <div class="autoformat mt-2">
-            {{ description }}
-        </div>
-    {{ /if }}
+{{ if description }}
+    <div class="autoformat mt-2">
+        {{ description }}
+    </div>
+{{ /if }}
 
-    {{ if can_be_hidden }}
-        <div id="group-label-{{ slug }}" x-data="{ isChecked: false }" class="mt-4">
-            <button
-                role="switch"
-                :aria-checked="isChecked"
-                @click="isChecked = !isChecked"
-                class="group switch"
-            >
-                <span class="sr-only">Checkliste der Komponente anzeigen</span>
-                <span class="pl-15 group-aria-checked:hidden" aria-hidden="true">Nicht inkludieren</span>
-                <span class="pl-15 hidden group-aria-checked:block" aria-hidden="true">Inkludieren</span>
-            </button>
-        </div>
-    {{ /if }}
-    <ul class="mt-6 flex flex-col gap-y-4">
-        {{ checklist_points }}
-            <li class="grid grid-cols-[2rem_auto] gap-x-4">
-                <div class="mt-4">
-                    <label
-                        for="{{ checklist_point_id }}"
-                        class="sr-only">Aufgabe: {{ title }}</label>
-                    <input
-                        id="{{ checklist_point_id }}"
-                        class="size-6 accent-green"
-                        type="checkbox"
-                        name="{{ checklist_point_id }}"
-                        :checked="states['{{ slug }}'] && states['{{ slug }}']['{{ checklist_point_id }}']"
-                        @change="toggle('{{ slug }}', '{{ checklist_point_id }}', event)"
-                    />
-                </div>
-                {{ partial:checklists/disclosure }}
-            </li>
-        {{ /checklist_points }}
-    </ul>
+{{ partial:checklists/switch }}
+
+<ul class="mt-6 flex flex-col gap-y-4">
+    {{ checklist_points }}
+        <li class="grid grid-cols-[2rem_auto] gap-x-4">
+            <div class="mt-4">
+                <label
+                    for="{{ checklist_point_id }}"
+                    class="sr-only">Aufgabe: {{ title }}</label>
+                <input
+                    id="{{ checklist_point_id }}"
+                    class="size-6 accent-green"
+                    type="checkbox"
+                    name="{{ checklist_point_id }}"
+                    :checked="states['{{ slug }}'] && states['{{ slug }}']['{{ checklist_point_id }}']"
+                    @change="toggleChecklistItem('{{ slug }}', '{{ checklist_point_id }}', event)"
+                />
+            </div>
+            {{ partial:checklists/disclosure }}
+        </li>
+    {{ /checklist_points }}
+</ul>
