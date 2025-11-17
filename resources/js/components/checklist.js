@@ -7,71 +7,67 @@ export default (options = {}) => ({
     debounceTime: 500,
 
     init() {
-        if (typeof options.states === 'string') {
-            this.states = JSON.parse(options.states);
-        } else {
-            this.states = options.states || {};
-        }
+        this.states = typeof options.states === 'string'
+            ? JSON.parse(options.states)
+            : (options.states || {});
 
         const progressDisplay = this.$root.querySelector('#progress-display');
         if (!progressDisplay) return;
         progressDisplay.classList.remove('hidden');
     },
 
-    toggle(name, event) {
-        if (!name || !event) return;
+    toggle(group, id, event) {
         const value = event.target.checked;
 
-        // Update local state
-        this.states[name] = value;
-        this.pendingUpdates[name] = value;
+        if (!this.states[group]) {
+            this.states[group] = {};
+        }
 
-        // Debounce trigger
+        this.states[group][id] = value;
+
+        if (!this.pendingUpdates[group]) {
+            this.pendingUpdates[group] = {};
+        }
+
+        this.pendingUpdates[group][id] = value;
+
         clearTimeout(this.timeout);
-        this.timeout = setTimeout(() => {
-            this.sync();
-        }, this.debounceTime);
+        this.timeout = setTimeout(() => this.sync(), this.debounceTime);
     },
 
     sync() {
-        if (Object.keys(this.pendingUpdates).length === 0) return;
+        if (!Object.keys(this.pendingUpdates).length) return;
 
         const updates = this.pendingUpdates;
         this.pendingUpdates = {};
 
         fetch(this.route, {
-            method: 'POST',
+            method: "POST",
             headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': this.csrfToken
+                "Content-Type": "application/json",
+                "X-CSRF-TOKEN": this.csrfToken
             },
             body: JSON.stringify({ updates })
-        })
-        .catch(() => {
-            // On error restore pendingUpdates
-            this.pendingUpdates = Object.assign(this.pendingUpdates, updates);
+        }).catch(() => {
+            this.pendingUpdates = {
+                ...updates,
+                ...this.pendingUpdates
+            };
         });
     },
 
-    countAllCheckboxes() {
+    countAll() {
         return this.$root.querySelectorAll('input').length;
     },
 
-    countCheckedStates() {
-        return Object.values(this.states).filter(v => v === true).length;
+    countChecked() {
+        return Object.values(this.states)
+            .flatMap(group => Object.values(group))
+            .filter(v => v).length;
     },
 
     progressPercent() {
-        const total = this.countAllCheckboxes();
-        const checked = this.countCheckedStates();
-        return total > 0 ? (checked / total) * 100 : 0;
-    },
-
-    progressColor() {
-        const percent = this.progressPercent();
-
-        if (percent < 50) return 'bg-red';
-        if (percent < 89) return 'bg-yellow';
-        return 'bg-green';
+        const total = this.countAll();
+        return total ? (this.countChecked() / total) * 100 : 0;
     }
 });

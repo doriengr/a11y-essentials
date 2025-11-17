@@ -1,0 +1,35 @@
+@layer components {
+    .switch {
+        position: relative;
+
+        &::before {
+            content: '';
+            position: absolute;
+            top: calc(var(--spacing) * 0.5);
+            left: 0;
+            width: calc(var(--spacing) * 12);
+            height: calc(var(--spacing) * 6);
+            border-radius: calc(var(--spacing) * 4);
+            background-color: var(--color-green-400);
+        }
+
+        &[aria-checked="true"]::before {
+            background-color: var(--color-green);
+        }
+
+        &::after {
+            content: '';
+            position: absolute;
+            top: calc(var(--spacing) * 1.25);
+            left: calc(var(--spacing) * 1);
+            width: calc(var(--spacing) * 4.5);
+            height: calc(var(--spacing) * 4.5);
+            border-radius: calc(var(--spacing) * 4);
+            background-color: var(--color-white);
+        }
+
+        &[aria-checked="true"]::after {
+            left: calc(var(--spacing) * 6.5);
+        }
+    }
+}
