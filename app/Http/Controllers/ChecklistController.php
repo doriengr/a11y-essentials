@@ -57,20 +57,24 @@ class ChecklistController extends Controller
             ]);
     }
 
-    public function toggle(Request $request, Checklist $checklist)
+    public function toggle(Request $request, string $checklistId)
     {
+        $checklist = Checklist::where('id', $checklistId)->firstOrFail();
+
         if ($checklist->user_id !== auth()->id()) {
             abort(403);
         }
 
         $validated = $request->validate([
-            'point_id' => 'required|string',
-            'checked' => 'required|boolean',
+            'updates' => 'required|array',
+            'updates.*' => 'boolean',
         ]);
 
         $states = $checklist->states ?? [];
 
-        $states[$validated['point_id']] = $validated['checked'];
+        foreach ($validated['updates'] as $key => $value) {
+            $states[$key] = $value;
+        }
 
         $checklist->update(['states' => $states]);
 

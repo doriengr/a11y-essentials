@@ -1,23 +1,22 @@
 export default (options = {}) => ({
+    route: options.route,
     csrfToken: options.csrfToken,
-    checklistId: options.checklistId,
     states: {},
     pendingUpdates: {},
     timeout: null,
     debounceTime: 500,
 
     init() {
-        // Collect initial checkbox states from DOM
-        document.querySelectorAll("input").forEach(el => {
-            this.states[el.name] = el.checked;
-        });
-
+        if (typeof options.states === 'string') {
+            this.states = JSON.parse(options.states);
+        } else {
+            this.states = options.states || {};
+        }
     },
 
     toggle(name, event) {
         if (!name || !event) return;
         const value = event.target.checked;
-
 
         // Update local state
         this.states[name] = value;
@@ -36,7 +35,7 @@ export default (options = {}) => ({
         const updates = this.pendingUpdates;
         this.pendingUpdates = {};
 
-        fetch(`/checklists/${this.checklistId}/toggle`, {
+        fetch(this.route, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
