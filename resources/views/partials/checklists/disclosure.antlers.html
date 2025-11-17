@@ -1,0 +1,34 @@
+<div x-data="accordion({ id: '{{ slug }}' })" class="border-green rounded-sm border bg-white">
+    {{ partial:disclosure/control control_id="{slug}" }}
+        <div class="flex flex-wrap gap-x-3">
+            <h3 class="font-headline text-green text-lg hocus:text-green-800">
+                <button
+                    @click="toggle()"
+                    id="accordion-button-{{ slug }}"
+                    :aria-expanded="isOpen"
+                    aria-controls="accordion-panel-{{ slug }}"
+                    class="before:cover text-left"
+                >
+                    {{ headline | entities }}
+                </button>
+            </h3>
+            {{ if conformance_levels }}
+                <ul class="flex flex-wrap gap-x-2">
+                    {{ conformance_levels }}
+                        <li class="pill pill-primary">
+                            {{ title }}
+                        </li>
+                    {{ /conformance_levels }}
+                </ul>
+            {{ /if }}
+        </div>
+    {{ /partial:disclosure/control }}
+    <article
+        id="accordion-panel-{{ slug }}"
+        x-cloak
+        x-show="isOpen"
+        class="autoformat px-4 pb-4 sm:px-6"
+    >
+        {{ description }}
+    </article>
+</div>
