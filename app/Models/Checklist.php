@@ -13,7 +13,15 @@ class Checklist extends Model
     protected $keyType = 'string';
     public $incrementing = false;
 
-    protected $fillable = ['user_id', 'title'];
+    protected $casts = [
+        'states' => 'array',
+    ];
+
+    protected $fillable = [
+        'user_id',
+        'title',
+        'states'
+    ];
 
     protected static function boot()
     {
