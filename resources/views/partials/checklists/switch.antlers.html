@@ -11,6 +11,20 @@
         @change="toggleGroup('{{ slug }}', $event)"
     />
 
+            <div class="mt-4">
+                <label
+                    for="{{ checklist_point_id }}"
+                    class="">Aufgabe: {{ title }}</label>
+                <input
+                    id="{{ checklist_point_id }}"
+                    class="size-6 accent-green"
+                    type="checkbox"
+                    name="{{ checklist_point_id }}"
+                    :checked="states['{{ slug }}'] && states['{{ slug }}']['{{ checklist_point_id }}']"
+                    @change="toggleGroup('{{ slug }}', event)"
+                />
+            </div>
+
     <!-- <button
         role="switch"
         :aria-checked="isChecked"

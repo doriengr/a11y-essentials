@@ -1,69 +1,87 @@
 export default (options = {}) => ({
-    route: options.route,
     csrfToken: options.csrfToken,
     states: {},
-    pendingStates: {},
-    timeout: null,
+    groups: {},
     debounceTime: 500,
+    routes: {
+        states: options.routeStates,
+        groups: options.routeGroups,
+    },
+    pending: {
+        states: {},
+        groups: {},
+    },
+    timers: {
+        states: null,
+        groups: null,
+    },
 
     init() {
-        this.states = typeof options.states === 'string'
-            ? JSON.parse(options.states)
-            : (options.states || {});
+        this.states = this.parse(options.states);
+        this.groups = this.parse(options.groups);
 
         const progressDisplay = this.$root.querySelector('#progress-display');
-        if (!progressDisplay) return;
-        progressDisplay.classList.remove('hidden');
+        progressDisplay?.classList.remove('hidden');
     },
 
-    toggleChecklistItem(group, id, event) {
+    parse: (value) => typeof value === 'string' ? JSON.parse(value || '{}') : value || {},
+
+    async sync(type) {
+        const updates = this.pending[type];
+        if (!Object.keys(updates).length) return;
+
+        // Clear pending before request
+        this.pending[type] = {};
+
+        try {
+            await fetch(this.routes[type], {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRF-TOKEN": this.csrfToken
+                },
+                body: JSON.stringify({ [type]: updates })
+            });
+        } catch {
+            // Re-queue on failure
+            this.pending[type] = { ...updates, ...this.pending[type] };
+        }
+    },
+
+    toggleState(group, id, event) {
         const value = event.target.checked;
 
-        if (!this.states[group]) {
-            this.states[group] = {};
-        }
-
+        if (!this.states[group]) this.states[group] = {};
         this.states[group][id] = value;
 
-        if (!this.pendingStates[group]) {
-            this.pendingStates[group] = {};
-        }
+        if (!this.pending.states[group]) this.pending.states[group] = {};
+        this.pending.states[group][id] = value;
 
-        this.pendingStates[group][id] = value;
-
-        clearTimeout(this.timeout);
-        this.timeout = setTimeout(() => this.sync(), this.debounceTime);
+        this.debounceSync("states");
     },
 
-    sync() {
-        if (!Object.keys(this.pendingStates).length) return;
+    toggleGroup(group, event) {
+        const value = event.target.checked;
 
-        const states = this.pendingStates;
-        this.pendingStates = {};
+        this.groups[group] = value;
+        this.pending.groups[group] = value;
 
-        fetch(this.route, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "X-CSRF-TOKEN": this.csrfToken
-            },
-            body: JSON.stringify({ states })
-        }).catch(() => {
-            this.pendingStates = {
-                ...states,
-                ...this.pendingStates
-            };
-        });
+        this.debounceSync("groups");
+    },
+
+    debounceSync(type) {
+        clearTimeout(this.timers[type]);
+        this.timers[type] = setTimeout(() => this.sync(type), this.debounceTime);
     },
 
     countAll() {
-        return this.$root.querySelectorAll('input').length;
+        return this.$root.querySelectorAll('input[type="checkbox"]').length;
     },
 
     countChecked() {
         return Object.values(this.states)
             .flatMap(group => Object.values(group))
-            .filter(v => v).length;
+            .filter(Boolean).length;
     },
 
     progressPercent() {

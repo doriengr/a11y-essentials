@@ -57,7 +57,7 @@ class ChecklistController extends Controller
             ]);
     }
 
-    public function toggle(Request $request, string $checklistId)
+    public function updateStates(Request $request, string $checklistId)
     {
         $checklist = Checklist::where('id', $checklistId)->firstOrFail();
 
@@ -85,6 +85,32 @@ class ChecklistController extends Controller
         }
 
         $checklist->update(['states' => $states]);
+
+        return response()->json(['success' => true]);
+    }
+
+    public function updateGroups(Request $request, string $checklistId)
+    {
+        $checklist = Checklist::where('id', $checklistId)->firstOrFail();
+
+        if ($checklist->user_id !== auth()->id()) {
+            abort(403);
+        }
+
+        $validated = $request->validate([
+            'groups' => 'required|array',
+            'groups.*' => 'required|boolean',
+        ]);
+
+        $groups = $checklist->groups ?? [];
+
+        foreach ($validated['groups'] as $group => $value) {
+            $groups[$group] = $value;
+        }
+
+        $checklist->update([
+            'groups' => $groups
+        ]);
 
         return response()->json(['success' => true]);
     }

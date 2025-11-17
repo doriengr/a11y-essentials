@@ -20,7 +20,7 @@
                     type="checkbox"
                     name="{{ checklist_point_id }}"
                     :checked="states['{{ slug }}'] && states['{{ slug }}']['{{ checklist_point_id }}']"
-                    @change="toggleChecklistItem('{{ slug }}', '{{ checklist_point_id }}', event)"
+                    @change="toggleState('{{ slug }}', '{{ checklist_point_id }}', event)"
                 />
             </div>
             {{ partial:checklists/disclosure }}

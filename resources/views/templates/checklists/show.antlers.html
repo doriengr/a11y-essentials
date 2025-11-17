@@ -1,10 +1,13 @@
 {{ checklist }}
     <div
         x-data="checklist({
-        csrfToken: '{{ csrf_token }}',
-        route: '{{ route:checklists.toggle checklist_id="{ checklist:id }" }}',
-        states: '{{ states | to_json | entities }}'
-    })">
+            csrfToken: '{{ csrf_token }}',
+            routeStates: '{{ route:checklists.states checklist_id="{ checklist:id }" }}',
+            routeGroups: '{{ route:checklists.groups checklist_id="{ checklist:id }" }}',
+            states: '{{ states | to_json | entities }}',
+            groups: '{{ groups | to_json | entities }}'
+        })"
+    >
         <section class="vice my-12 lg:my-20">
             <h1 class="font-headline leading-tight text-6xl font-bold lg:text-7xl">
                 Checkliste: {{ title }}

@@ -33,5 +33,6 @@ Route::middleware([EnsureUserIsAuthenticated::class])->group(function () {
     Route::get('checklist/create', [ChecklistController::class, 'create'])->name('checklists.create');
     Route::post('checklist', [ChecklistController::class, 'store'])->name('checklists.store');
     Route::get('/checklists/{checklist_id}', [ChecklistController::class, 'show'])->name('checklists.show');
-    Route::post('/checklists/{checklist_id}/toggle', [ChecklistController::class, 'toggle'])->name('checklists.toggle');
+    Route::post('/checklists/{checklist_id}/states', [ChecklistController::class, 'updateStates'])->name('checklists.states');
+    Route::post('/checklists/{checklist_id}/groups', [ChecklistController::class, 'updateGroups'])->name('checklists.groups');
 });
