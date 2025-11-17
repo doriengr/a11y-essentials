@@ -10,7 +10,7 @@
     <h2 class="font-headline mb-6 text-2xl font-bold lg:mb-10 lg:text-4xl">
         Überprüfungen
     </h2>
-    <div class="relative lg:grid lg:grid-cols-7 lg:gap-x-6">
+    <div x-data="checklist({ checklistId: '{{ checklist:id }}', csrfToken: '{{ csrf_token }}'})" class="relative lg:grid lg:grid-cols-7 lg:gap-x-6">
         <div class="lg:col-span-2">TODO: Verweise</div>
         <ul class="flex flex-col gap-y-10 lg:col-span-5 lg:gap-y-16">
             {{ collection:checklist_modules }}
@@ -27,13 +27,15 @@
                             <li class="grid grid-cols-[2rem_auto] gap-x-4 items-center">
                                 <div>
                                     <label
-                                        for="{{ checklist_id }}"
+                                        for="{{ checklist_point_id }}"
                                         class="sr-only">Aufgabe: {{ title }}</label>
                                     <input
-                                        id="{{ checklist_id }}"
+                                        id="{{ checklist_point_id }}"
                                         class="size-6 accent-green"
                                         type="checkbox"
-                                        name="{{ checklist_id }}"
+                                        name="{{ checklist_point_id }}"
+                                        :checked="false"
+                                        @change="toggle('{{ checklist_point_id }}', event)"
                                     />
                                 </div>
                                 {{ partial:checklists/disclosure }}
