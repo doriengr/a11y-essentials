@@ -25,6 +25,7 @@ tabs:
             field:
               type: replicator
               display: Checklisten-Punkte
+              collapse: true
               sets:
                 neue_setgruppe:
                   display: 'Neue Setgruppe'
