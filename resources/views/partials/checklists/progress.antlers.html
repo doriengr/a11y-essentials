@@ -1,0 +1,23 @@
+<div
+    id="progress-display"
+    class="hidden bg-green-100 p-4 rounded-sm mt-6 flex flex-col gap-4 md:flex-row md:justify-between lg:p-6"
+>
+    <div>
+        <h2 class="font-base font-bold">Aktueller Stand</h2>
+        <span class="block">Zuletzt bearbeitet am {{ updated_at | format('d.m.y') }}</span>
+    </div>
+    <div class="md:self-end">
+        <div class="w-full bg-green-400 h-3 rounded-xs overflow-hidden">
+            <div
+                class="h-3 rounded-xs transition-all ease-in-out duration-300"
+                :class="progressColor()"
+                :style="{ width: progressPercent() + '%' }"
+            ></div>
+        </div>
+        <div class="mt-2">
+            <span x-text="countCheckedStates()"></span> von
+            <span x-text="countAllCheckboxes()"></span>
+            Überprüfungen abgeschlossen
+        </div>
+    </div>
+</div>

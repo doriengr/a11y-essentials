@@ -12,6 +12,10 @@ export default (options = {}) => ({
         } else {
             this.states = options.states || {};
         }
+
+        const progressDisplay = this.$root.querySelector('#progress-display');
+        if (!progressDisplay) return;
+        progressDisplay.classList.remove('hidden');
     },
 
     toggle(name, event) {
@@ -47,5 +51,27 @@ export default (options = {}) => ({
             // On error restore pendingUpdates
             this.pendingUpdates = Object.assign(this.pendingUpdates, updates);
         });
+    },
+
+    countAllCheckboxes() {
+        return this.$root.querySelectorAll('input').length;
+    },
+
+    countCheckedStates() {
+        return Object.values(this.states).filter(v => v === true).length;
+    },
+
+    progressPercent() {
+        const total = this.countAllCheckboxes();
+        const checked = this.countCheckedStates();
+        return total > 0 ? (checked / total) * 100 : 0;
+    },
+
+    progressColor() {
+        const percent = this.progressPercent();
+
+        if (percent < 50) return 'bg-red';
+        if (percent < 89) return 'bg-yellow';
+        return 'bg-green';
     }
 });
