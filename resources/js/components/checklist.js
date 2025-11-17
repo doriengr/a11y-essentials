@@ -2,7 +2,7 @@ export default (options = {}) => ({
     route: options.route,
     csrfToken: options.csrfToken,
     states: {},
-    pendingUpdates: {},
+    pendingStates: {},
     timeout: null,
     debounceTime: 500,
 
@@ -25,21 +25,21 @@ export default (options = {}) => ({
 
         this.states[group][id] = value;
 
-        if (!this.pendingUpdates[group]) {
-            this.pendingUpdates[group] = {};
+        if (!this.pendingStates[group]) {
+            this.pendingStates[group] = {};
         }
 
-        this.pendingUpdates[group][id] = value;
+        this.pendingStates[group][id] = value;
 
         clearTimeout(this.timeout);
         this.timeout = setTimeout(() => this.sync(), this.debounceTime);
     },
 
     sync() {
-        if (!Object.keys(this.pendingUpdates).length) return;
+        if (!Object.keys(this.pendingStates).length) return;
 
-        const updates = this.pendingUpdates;
-        this.pendingUpdates = {};
+        const states = this.pendingStates;
+        this.pendingStates = {};
 
         fetch(this.route, {
             method: "POST",
@@ -47,11 +47,11 @@ export default (options = {}) => ({
                 "Content-Type": "application/json",
                 "X-CSRF-TOKEN": this.csrfToken
             },
-            body: JSON.stringify({ updates })
+            body: JSON.stringify({ states })
         }).catch(() => {
-            this.pendingUpdates = {
-                ...updates,
-                ...this.pendingUpdates
+            this.pendingStates = {
+                ...states,
+                ...this.pendingStates
             };
         });
     },

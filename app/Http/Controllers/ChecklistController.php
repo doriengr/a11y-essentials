@@ -66,15 +66,15 @@ class ChecklistController extends Controller
         }
 
         $validated = $request->validate([
-            'updates' => 'required|array',
-            'updates.*' => 'required|array',
-            'updates.*.*' => 'required|boolean',
+            'states' => 'required|array',
+            'states.*' => 'required|array',
+            'states.*.*' => 'required|boolean',
         ]);
 
         $states = $checklist->states ?? [];
-        $updates = $validated['updates'];
+        $updatedStates = $validated['states'];
 
-        foreach ($updates as $group => $pairs) {
+        foreach ($updatedStates as $group => $pairs) {
             foreach ($pairs as $id => $value) {
                 if (!isset($states[$group])) {
                     $states[$group] = [];
