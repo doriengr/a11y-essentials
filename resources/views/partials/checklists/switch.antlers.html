@@ -1,38 +1,19 @@
 {{ if can_be_hidden }}
-<div
-    id="group-label-{{ slug }}"
-    x-data="{ isChecked: {{ group_settings[slug] ? 'true' : 'false' }} }"
-    class="mt-4"
->
-        <div class="mt-4">
-            <label
-                for="{{ checklist_point_id }}"
-                class="">Aufgabe: {{ title }}</label>
-            <input
-                id="{{ checklist_point_id }}"
-                class="size-6 accent-green"
-                type="checkbox"
-                name="{{ checklist_point_id }}"
-                :checked="groups['{{ slug }}']"
-                @change="toggleGroup('{{ slug }}', event)"
-            />
-        </div>
-
-    <!-- <button
-        role="switch"
-        :aria-checked="isChecked"
-        @click="isChecked = !isChecked; $el.previousElementSibling.dispatchEvent(new Event('change'))"
-        class="group switch"
-    >
-        <span class="sr-only">Checkliste der Komponente anzeigen</span>
-
-        <span class="pl-15 group-aria-checked:hidden" aria-hidden="true">
-            Nicht inkludieren
-        </span>
-
-        <span class="pl-15 hidden group-aria-checked:block" aria-hidden="true">
-            Inkludieren
-        </span>
-    </button> -->
-</div>
+    <div>
+        <input
+            id="checklist-group-{{ slug }}"
+            class="appearance-none outline-0 size-0"
+            type="checkbox"
+            name="checklist-group-{{ slug }}"
+            :checked="groups['{{ slug }}']"
+            @change="toggleGroup('{{ slug }}', event)"
+        />
+        <span class="switch relative z-0" aria-hidden="true"></span>
+        <label
+            for="checklist-group-{{ slug }}"
+            class="relative label inline-block pl-15 z-50"
+        >
+            Komponente inkludieren
+        </label>
+    </div>
 {{ /if }}

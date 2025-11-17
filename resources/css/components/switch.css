@@ -11,10 +11,7 @@
             height: calc(var(--spacing) * 6);
             border-radius: calc(var(--spacing) * 4);
             background-color: var(--color-green-400);
-        }
-
-        &[aria-checked="true"]::before {
-            background-color: var(--color-green);
+            transition: all 300ms ease-in-out;
         }
 
         &::after {
@@ -26,10 +23,15 @@
             height: calc(var(--spacing) * 4.5);
             border-radius: calc(var(--spacing) * 4);
             background-color: var(--color-white);
+            transition: transform 300ms ease-in-out;
         }
+    }
 
-        &[aria-checked="true"]::after {
-            left: calc(var(--spacing) * 6.5);
-        }
+    input[type='checkbox']:checked + .switch::before {
+        background-color: var(--color-green);
+    }
+
+    input[type='checkbox']:checked + .switch::after {
+        transform: translateX(calc(var(--spacing) * 5.5));
     }
 }
