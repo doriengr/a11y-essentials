@@ -25,8 +25,8 @@ class AxeController extends Controller
     public function run(Request $request)
     {
         $validated = $request->validate([
-            'url' => ['required', 'url'],
-            'include_aaa' => ['nullable'],
+            'url' => 'required|url',
+            'include_aaa' => 'nullable',
         ]);
 
         $url = $validated['url'];

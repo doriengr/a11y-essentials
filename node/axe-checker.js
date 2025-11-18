@@ -3,7 +3,7 @@ import puppeteer from 'puppeteer';
 import axeSource from 'axe-core/axe.de.min.js';
 
 const url = process.argv[2];
-const checkForAaa = process.argv[3] ?? false;
+const includeAaa = process.argv[3] ?? false;
 
 if (!url) {
     console.error('Bitte eine URL angeben');
@@ -12,7 +12,7 @@ if (!url) {
 
 let values = ['wcag2a', 'wcag2aa'];
 
-if (checkForAaa) {
+if (includeAaa) {
     values = ['wcag2a', 'wcag2aa', 'wcag2aaa'];
 }
 

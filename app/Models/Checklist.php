@@ -18,6 +18,7 @@ class Checklist extends Model
         'states' => 'array',
         'groups' => 'array',
         'progress' => 'integer',
+        'include_aaa' => 'boolean'
     ];
 
     protected $fillable = [
@@ -26,6 +27,7 @@ class Checklist extends Model
         'states',
         'groups',
         'progress',
+        'include_aaa',
     ];
 
     protected static function boot()

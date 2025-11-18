@@ -44,9 +44,9 @@
                 aria-describedby="checker-aaa-error"
             {{ /if }}
         />
-        {{ get_errors:check_for_aaa }}
+        {{ get_errors:include_aaa }}
             {{ partial:forms/field-error field_id="checker-aaa-error" messages="{{ messages }}" }}
-        {{ /get_errors:check_for_aaa }}
+        {{ /get_errors:include_aaa }}
     </div>
     <button type="submit" class="button button-primary">
         Test starten
