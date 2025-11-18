@@ -1,12 +1,14 @@
-<header class="vice relative flex w-full items-center justify-between gap-x-6 py-6 lg:w-[95%] lg:gap-x-10">
+<header class="vice relative flex w-full items-center justify-between gap-x-6 py-6 lg:w-[95%] xl:gap-x-10">
     <nav
         x-data="mainNavigation()"
         @click.outside="clickOutside()"
         aria-label="Seitenavigation"
         class="w-full lg:flex lg:justify-between"
     >
-        <div class="flex items-center justify-between">
-            <a href="{{ homepage }}">Logo</a>
+        <div class="flex items-center justify-between pt-1">
+            <a href="{{ homepage }}">
+                {{ svg:design/logo class="w-32 sm:w-40 lg:w-52 xl:w-64" }}
+            </a>
             <button
                 @click="toggle()"
                 id="main-navigation-control"
