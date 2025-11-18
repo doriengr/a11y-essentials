@@ -13,10 +13,10 @@ tabs:
                 - required
               width: 75
           -
-            handle: can_be_hidden
+            handle: is_optional
             field:
               type: toggle
-              display: Ausblendbar
+              display: Optional
               width: 25
           -
             import: common_description

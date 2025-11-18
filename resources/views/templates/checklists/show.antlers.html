@@ -14,6 +14,18 @@
         </section>
 
         <section class="vice my-12 lg:my-20">
+            <h2 class="font-headline mb-6 text-2xl font-bold lg:mb-10 lg:text-4xl">Filtermöglichkeiten</h2>
+
+            <ul class="flex flex-col gap-y-10 lg:col-span-5 lg:gap-y-16">
+                {{ collection:checklist_modules }}
+                    <li>
+                        {{ partial:checklists/checklist-module }}
+                    </li>
+                {{ /collection:checklist_modules }}
+            </ul>
+        </section>
+
+        <section class="vice my-12 lg:my-20">
             <h2 class="font-headline mb-6 text-2xl font-bold lg:mb-10 lg:text-4xl">Überprüfungen</h2>
             <div class="relative lg:grid lg:grid-cols-7 lg:gap-x-6">
                 {{ partial:navigation/side-navigation navigation_items="{{ collection:checklist_modules }}" }}
