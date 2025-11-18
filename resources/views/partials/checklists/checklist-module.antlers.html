@@ -5,7 +5,7 @@
     </div>
 {{ /if }}
 {{ if is_optional }}
-    {{ partial:checklists/ switch label="Komponente inkludieren" class="mt-4" }}
+    {{ partial:checklists/show-checklist-switch label="Checkliste anzeigen" group_title="{{ title }}" }}
 {{ /if }}
 <ul
     {{ if is_optional }}
