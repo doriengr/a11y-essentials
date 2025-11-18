@@ -19,10 +19,10 @@ services:
       - ./docker/database/initialize.sql:/docker-entrypoint-initdb.d/initialize.sql
     restart: always
     environment:
-      - MYSQL_DATABASE=a11y
-      - MYSQL_USER=a11y
-      - MYSQL_PASSWORD=a11y
-      - MYSQL_ROOT_PASSWORD=a11y
+      - MYSQL_DATABASE=a11yessentials
+      - MYSQL_USER=a11yessentials
+      - MYSQL_PASSWORD=a11yessentials
+      - MYSQL_ROOT_PASSWORD=a11yessentials
     command: mysqld --character-set-server=utf8 --collation-server=utf8_general_ci --sql_mode=''
 
   application:
@@ -34,20 +34,20 @@ services:
         GROUP_ID: $GROUP_ID
     stop_grace_period: 1s
     extra_hosts:
-      - "a11y.localhost:127.0.0.1"
+      - "a11yessentials.localhost:127.0.0.1"
       - "host.docker.internal:host-gateway"
     environment:
       - PHP_OPCACHE_VALIDATE_TIMESTAMPS=1
     networks:
       web:
         aliases:
-          - a11y.localhost
+          - a11yessentials.localhost
       stack:
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.a11y.rule=Host(`a11y.localhost`)"
-      - "traefik.http.routers.a11y.entrypoints=web"
-      - "traefik.http.services.a11y.loadbalancer.server.port=80"
+      - "traefik.http.routers.a11yessentials.rule=Host(`a11yessentials.localhost`)"
+      - "traefik.http.routers.a11yessentials.entrypoints=web"
+      - "traefik.http.services.a11yessentials.loadbalancer.server.port=80"
       - "traefik.docker.network=web"
     working_dir: /var/www/html
     volumes:
@@ -79,7 +79,7 @@ services:
     volumes:
       - redis:/data
     command: >
-      --requirepass a11y
+      --requirepass a11yessentials
 
   schedule:
     build:
