@@ -1,5 +1,6 @@
 export default (options = {}) => ({
     slug: options.slug ?? '',
+    addHashToUrl: options.addHashToUrl ?? false,
 
     scrollToElement() {
         const targetElement = document.getElementById(this.slug);
@@ -9,7 +10,9 @@ export default (options = {}) => ({
                 const topPos = targetElement.getBoundingClientRect().top + window.scrollY;
                 window.scrollTo({ top: topPos, behavior: 'smooth' });
 
-                window.location.hash = this.slug;
+                if (this.addHashToUrl) {
+                    window.location.hash = this.slug;
+                }
             }, 50);
         }
     },

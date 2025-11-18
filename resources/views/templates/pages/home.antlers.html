@@ -1,16 +1,14 @@
-<section class="vice my-12 lg:my-20">
-    <div class="max-w-3xl">
-        <h1 class="font-headline text-balance leading-tight text-6xl font-bold lg:text-7xl">
-            {{ title }}
-        </h1>
-        {{ if description }}
-            <div class="autoformat mt-4">{{ description }}</div>
-        {{ /if }}
-        <a href="{{ route:axe.show }}" class="button button-primary mt-6">
-            Finde deinen Anfang
-            {{ svg:general/arrow class="size-6" }}
-        </a>
-    </div>
+<section class="vice my-12 max-w-4xl lg:my-20">
+    <h1 class="font-headline text-balance leading-tight text-6xl font-bold lg:text-7xl">
+        {{ title }}
+    </h1>
+    {{ if description }}
+        <div class="autoformat mt-4">{{ description }}</div>
+    {{ /if }}
+    <a href="{{ route:axe.show }}" class="button button-primary mt-6">
+        Finde deinen Anfang
+        {{ svg:general/arrow class="size-6" }}
+    </a>
 </section>
 <section aria-hidden="true" class="grid grid-cols-2 lg:grid-cols-4">
     <div>{{ svg:design/preceivable class="size-full" }}</div>

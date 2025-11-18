@@ -1,0 +1,75 @@
+tabs:
+  main:
+    display: Hauptteil
+    sections:
+      -
+        fields:
+          -
+            handle: title
+            field:
+              type: text
+              required: true
+              validate:
+                - required
+              width: 75
+          -
+            handle: can_be_hidden
+            field:
+              type: toggle
+              display: Ausblendbar
+              width: 25
+          -
+            import: common_description
+          -
+            handle: checklist_points
+            field:
+              type: replicator
+              display: Checklisten-Punkte
+              collapse: true
+              sets:
+                neue_setgruppe:
+                  display: 'Neue Setgruppe'
+                  sets:
+                    checklist_point:
+                      display: Checklist-Punkt
+                      fields:
+                        -
+                          handle: conformance_levels
+                          field:
+                            taxonomies:
+                              - conformance_levels
+                            type: terms
+                            display: Konformitätsstufen
+                        -
+                          handle: headline
+                          field:
+                            type: text
+                            display: Titel
+                        -
+                          handle: description
+                          field: common_description.description
+                          config:
+                            buttons:
+                              - bold
+                              - italic
+                              - unorderedlist
+                              - orderedlist
+                        -
+                          handle: checklist_point_id
+                          field:
+                            type: slug
+                            display: ID
+                            validate:
+                              - required
+  sidebar:
+    display: Sidebar
+    sections:
+      -
+        fields:
+          -
+            handle: slug
+            field:
+              type: slug
+              localizable: true
+              validate: 'max:200'
+title: Checklisten-Module
