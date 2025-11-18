@@ -10,7 +10,10 @@ class ChecklistController extends Controller
 {
     public function index()
     {
-        $checklists = Checklist::where('user_id', auth()->id())->get();
+        $checklists =
+            Checklist::where('user_id', auth()->id())
+            ->orderBy('updated_at', 'desc')
+            ->get();
 
         return (new View())
             ->template('templates/checklists/index')
@@ -38,7 +41,7 @@ class ChecklistController extends Controller
             'title' => $request->title,
         ]);
 
-        return redirect()->route('checklist.index')->with('success', 'Projekt erstellt!');
+        return redirect()->route('checklists.index');
     }
 
     public function show(string $id)
