@@ -12,8 +12,8 @@ class ChecklistController extends Controller
     {
         $checklists =
             Checklist::where('user_id', auth()->id())
-            ->orderBy('updated_at', 'desc')
-            ->get();
+                ->orderBy('updated_at', 'desc')
+                ->get();
 
         return (new View())
             ->template('templates/checklists/index')
@@ -72,7 +72,7 @@ class ChecklistController extends Controller
             'states' => 'required|array',
             'states.*' => 'required|array',
             'states.*.*' => 'required|boolean',
-            'progress' => 'required|integer|min:0|max:100'
+            'progress' => 'required|integer|min:0|max:100',
         ]);
 
         $states = $checklist->states ?? [];
@@ -80,7 +80,7 @@ class ChecklistController extends Controller
 
         foreach ($updatedStates as $group => $pairs) {
             foreach ($pairs as $id => $value) {
-                if (!isset($states[$group])) {
+                if (! isset($states[$group])) {
                     $states[$group] = [];
                 }
 
@@ -90,7 +90,7 @@ class ChecklistController extends Controller
 
         $checklist->update([
             'states' => $states,
-            'progress' => $validated['progress']
+            'progress' => $validated['progress'],
         ]);
 
         return response()->json(['success' => true]);

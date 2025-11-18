@@ -11,9 +11,7 @@ export default () => ({
     toggle() {
         this.isOpen = !this.isOpen;
 
-        this.isOpen
-            ? this.$store.navigation.toggle('profile')
-            : this.$store.navigation.toggle('none');
+        this.isOpen ? this.$store.navigation.toggle('profile') : this.$store.navigation.toggle('none');
     },
 
     clickOutside() {
@@ -21,5 +19,5 @@ export default () => ({
         if (this.$store.navigation.visibleNav === 'profile') {
             this.$store.navigation.toggle('none');
         }
-    }
+    },
 });

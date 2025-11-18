@@ -34,15 +34,15 @@ export default (options = {}) => ({
 
         try {
             await fetch(this.routes[type], {
-                method: "POST",
+                method: 'POST',
                 headers: {
-                    "Content-Type": "application/json",
-                    "X-CSRF-TOKEN": this.csrfToken
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': this.csrfToken,
                 },
                 body: JSON.stringify({
                     [type]: updates,
-                    progress: this.progressPercent() ?? 0
-                })
+                    progress: this.progressPercent() ?? 0,
+                }),
             });
         } catch {
             this.pending[type] = { ...updates, ...this.pending[type] };
@@ -56,7 +56,7 @@ export default (options = {}) => ({
         if (!this.pending.states[group]) this.pending.states[group] = {};
         this.pending.states[group][id] = event.target.checked;
 
-        this.debounceSync("states");
+        this.debounceSync('states');
         event.target.checked ? this.checkedCount++ : this.checkedCount--;
     },
 
@@ -64,7 +64,7 @@ export default (options = {}) => ({
         this.groups[name] = event.target.checked;
         this.pending.groups[name] = event.target.checked;
 
-        this.debounceSync("groups");
+        this.debounceSync('groups');
         this.setCounts();
     },
 
@@ -78,7 +78,7 @@ export default (options = {}) => ({
         this.checkedCount = 0;
         this.totalCount = 0;
 
-        this.$root.querySelectorAll('[data-group]').forEach(group => {
+        this.$root.querySelectorAll('[data-group]').forEach((group) => {
             const name = group.dataset.group;
             const canBeHidden = group.dataset.canBeHidden;
 
@@ -100,7 +100,7 @@ export default (options = {}) => ({
 
     getCheckedCount() {
         return Object.values(this.states)
-            .flatMap(group => Object.values(group))
+            .flatMap((group) => Object.values(group))
             .filter(Boolean).length;
     },
 
@@ -109,14 +109,12 @@ export default (options = {}) => ({
     },
 
     parse(value) {
-        return typeof value === 'string'
-            ? JSON.parse(value || '{}')
-            : (value || {});
+        return typeof value === 'string' ? JSON.parse(value || '{}') : value || {};
     },
 
     showProgressDisplay() {
         const progressDisplay = this.$root.querySelector('#progress-display');
         if (!progressDisplay) return;
-        progressDisplay.classList.remove("hidden");
-    }
+        progressDisplay.classList.remove('hidden');
+    },
 });

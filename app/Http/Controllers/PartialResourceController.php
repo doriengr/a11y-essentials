@@ -13,7 +13,7 @@ class PartialResourceController extends Controller
             ->where('slug', $slug)
             ->first();
 
-        if (!$resource) {
+        if (! $resource) {
             return view('partials.resources.notice');
         }
 
@@ -24,7 +24,7 @@ class PartialResourceController extends Controller
 
         return view('partials.resources.async-load', [
             'resource' => $resource,
-            'button_url'   => $component ? $component->uri() : null,
+            'button_url' => $component ? $component->uri() : null,
             'button_label' => $component ? $component->get('title') : null,
         ]);
     }

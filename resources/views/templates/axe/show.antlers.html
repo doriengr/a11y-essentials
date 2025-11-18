@@ -6,32 +6,29 @@
             </h1>
             <p class="mb-4 block">
                 {{ if results }}
-                    <a href="{{ results.url }}">{{ results.url }}</a> |
-                    {{ localized_timestamp | format('d.m.y') }} um {{ localized_timestamp | format('H:i') }} Uhr
+                    <a href="{{ results.url }}">{{ results.url }}</a>
+                    |
+                    {{ localized_timestamp | format('d.m.y') }}
+                    um {{ localized_timestamp | format('H:i') }} Uhr
                 {{ else }}
                     Finde einen Anfang
                 {{ /if }}
             </p>
         </div>
         <span id="automatic-test-config" class="sr-only">Konfigurationen des automatischen Tests</span>
-        <ul aria-labelledby="automatic-test-config" class="flex flex-wrap gap-4 mt-4">
-            <li class="pill pill-primary pill-large">
-                WCAG 2.2 konform
-            </li>
-            <li class="pill pill-primary pill-large">
-                Alle Konformitätsstufen möglich
-            </li>
+        <ul aria-labelledby="automatic-test-config" class="mt-4 flex flex-wrap gap-4">
+            <li class="pill pill-primary pill-large">WCAG 2.2 konform</li>
+            <li class="pill pill-primary pill-large">Alle Konformitätsstufen möglich</li>
         </ul>
         {{ partial:forms/axe }}
     </section>
-
     {{ unless results }}
         <aside aria-labelledby="aside-headline" class="mt-12 flex flex-col gap-y-12 lg:col-span-2">
             {{ partial:sets/content/notice notice_label="Wichtige Info" }}
                 <p>
                     Diese schnelle, automatische Überprüfung kann nur einen kleinen Teil überprüfen und
-                    <strong>ersetzt keine vollumfängliche, manuelle Überprüfung</strong>.
-                    Sie dient lediglich dazu sich einen ersten schnellen Überblick zu schaffen.
+                    <strong>ersetzt keine vollumfängliche, manuelle Überprüfung</strong>
+                    . Sie dient lediglich dazu sich einen ersten schnellen Überblick zu schaffen.
                 </p>
             {{ /partial:sets/content/notice }}
             <div>
@@ -44,7 +41,10 @@
                         </a>
                     </li>
                     <li>
-                        <a href="https://www.w3.org/TR/UNDERSTANDING-WCAG20/conformance.html" class="button button-secondary">
+                        <a
+                            href="https://www.w3.org/TR/UNDERSTANDING-WCAG20/conformance.html"
+                            class="button button-secondary"
+                        >
                             Die Konformitätsstufen
                             {{ svg:general/arrow-up-right class="size-6" }}
                         </a>
@@ -59,18 +59,16 @@
                     {{ partial:results/summary }}
                 {{ /if }}
                 <section x-data="tablist()" class="my-12 lg:my-20">
-                    <div class="w-full flex flex-wrap justify-between items-end gap-y-4 gap-x-16 mb-6 lg:mb-8">
-                        <h2 class="font-headline text-2xl font-bold lg:text-4xl">
-                            Gefundene Probleme
-                        </h2>
-                        <div class="shrink-0 md:flex md:gap-x-4 md:items-center">
-                            <strong id="tablist-label" class="font-semibold text-grey-800 block mb-2 md:mb-0">
+                    <div class="mb-6 flex w-full flex-wrap items-end justify-between gap-x-16 gap-y-4 lg:mb-8">
+                        <h2 class="font-headline text-2xl font-bold lg:text-4xl">Gefundene Probleme</h2>
+                        <div class="shrink-0 md:flex md:items-center md:gap-x-4">
+                            <strong id="tablist-label" class="text-grey-800 mb-2 block font-semibold md:mb-0">
                                 Sortiert nach:
                             </strong>
                             <div
                                 aria-labelledby="tablist-label"
                                 role="tablist"
-                                class="bg-green-100 rounded-md p-2 flex items-center w-max"
+                                class="flex w-max items-center rounded-md bg-green-100 p-2"
                             >
                                 {{ partial:tablist/tab tab_label="Nach Auswirkung" index="impact" }}
                                 {{ partial:tablist/tab tab_label="Nach Konformität" index="conformance" }}
@@ -101,8 +99,7 @@
             </div>
         {{ /results }}
     {{ /unless }}
-
-    <div x-show="isLoading" class="mx-auto my-10 lg:my-20 lg:col-span-full">
+    <div x-show="isLoading" class="mx-auto my-10 lg:col-span-full lg:my-20">
         {{ partial:loading-spinner }}
     </div>
 </div>

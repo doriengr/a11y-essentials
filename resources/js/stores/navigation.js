@@ -5,5 +5,5 @@ Alpine.store('navigation', {
 
     toggle(option) {
         this.visibleNav = option;
-    }
-})
+    },
+});

@@ -37,6 +37,9 @@ RUN apk update && apk add \
     patch \
     git
 
+# Make /tmp writable for PHP CS Fixer/Husky
+RUN chmod 1777 /tmp
+
 # Install PHP extensions
 RUN docker-php-ext-configure intl
 RUN docker-php-ext-configure ldap

@@ -1,5 +1,4 @@
 export default (options = {}) => ({
-
     loadResourceRoute: options.loadResourceRoute ?? '',
     isOpen: false,
     resourceLoaded: false,
@@ -12,7 +11,7 @@ export default (options = {}) => ({
             if (event.key === 'Escape' && this.isOpen) {
                 this.closeDialog();
             }
-        })
+        });
     },
 
     toggle() {
@@ -42,7 +41,7 @@ export default (options = {}) => ({
     async loadResource() {
         if (!this.loadResourceRoute) return;
 
-        const html = await fetch(this.loadResourceRoute).then(r => r.text());
+        const html = await fetch(this.loadResourceRoute).then((r) => r.text());
         const target = this.$root.querySelector('[id^="dialog-target"]');
         if (!target) return;
         target.innerHTML = html;
@@ -51,8 +50,8 @@ export default (options = {}) => ({
 
     closeDialog() {
         if (!this.dialog) return;
-        this.dialog.close()
+        this.dialog.close();
         this.isOpen = !this.isOpen;
         document.body.classList.remove('overflow-y-hidden');
-    }
+    },
 });

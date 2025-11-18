@@ -1,12 +1,10 @@
-<h3 class="font-semibold text-xl lg:text-2xl">{{ title }}</h3>
+<h3 class="text-xl font-semibold lg:text-2xl">{{ title }}</h3>
 {{ if description }}
     <div class="autoformat mt-2">
         {{ description }}
     </div>
 {{ /if }}
-
-{{ partial:checklists/switch }}
-
+{{ partial:checklists/ switch }}
 <ul
     {{ if can_be_hidden }}
         x-show="groups['{{ slug }}']"
@@ -19,12 +17,10 @@
     {{ checklist_items }}
         <li class="grid grid-cols-[2rem_auto] gap-x-4">
             <div class="mt-4">
-                <label
-                    for="{{ checklist_item_id }}"
-                    class="sr-only">Aufgabe: {{ title }}</label>
+                <label for="{{ checklist_item_id }}" class="sr-only">Aufgabe: {{ title }}</label>
                 <input
                     id="checklist-item-{{ checklist_item_id }}"
-                    class="size-6 accent-green"
+                    class="accent-green size-6"
                     type="checkbox"
                     name="checklist-item-{{ checklist_item_id }}"
                     :checked="states['{{ slug }}'] && states['{{ slug }}']['{{ checklist_item_id }}']"

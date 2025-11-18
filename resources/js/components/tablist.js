@@ -14,12 +14,12 @@ export default () => ({
         this.currentLabel = currentLabel;
         if (!this.panels) return;
 
-        this.panels.forEach(panel => {
+        this.panels.forEach((panel) => {
             const label = panel.id.replace('tabpanel-', '');
             if (!label || label !== this.currentLabel) {
                 panel.classList.add('hidden');
             } else {
-                panel.classList.remove('hidden')
+                panel.classList.remove('hidden');
             }
         });
     },
@@ -33,7 +33,7 @@ export default () => ({
 
     prevTab() {
         if (!this.tabs || !this.panels) return;
-        let index = Array.from(this.tabs).findIndex(tab => tab.id === `tab-${this.currentLabel}`);
+        let index = Array.from(this.tabs).findIndex((tab) => tab.id === `tab-${this.currentLabel}`);
         index = index <= 0 ? this.tabs.length - 1 : index - 1;
         const label = this.tabs[index].id.replace('tab-', '');
         this.selectTab(label);
@@ -41,7 +41,7 @@ export default () => ({
 
     nextTab() {
         if (!this.tabs || !this.panels) return;
-        let index = Array.from(this.tabs).findIndex(tab => tab.id === `tab-${this.currentLabel}`);
+        let index = Array.from(this.tabs).findIndex((tab) => tab.id === `tab-${this.currentLabel}`);
         index = index >= this.tabs.length - 1 ? 0 : index + 1; // wrap around
         const label = this.tabs[index].id.replace('tab-', '');
         this.selectTab(label);
@@ -58,5 +58,5 @@ export default () => ({
         const last = this.tabs[this.tabs.length - 1];
         const label = last.id.replace('tab-', '');
         this.selectTab(label);
-    }
+    },
 });

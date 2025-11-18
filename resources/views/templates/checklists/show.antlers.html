@@ -2,25 +2,20 @@
     <div
         x-data="checklist({
             csrfToken: '{{ csrf_token }}',
-            routeStates: '{{ route:checklists.states checklist_id="{ checklist:id }" }}',
-            routeGroups: '{{ route:checklists.groups checklist_id="{ checklist:id }" }}',
+            routeStates: '{{ route:checklists.states checklist_id="{checklist:id}" }}',
+            routeGroups: '{{ route:checklists.groups checklist_id="{checklist:id}" }}',
             states: '{{ states | to_json | entities }}',
             groups: '{{ groups | to_json | entities }}'
         })"
     >
         <section class="vice my-12 lg:my-20">
-            <h1 class="font-headline leading-tight text-6xl font-bold lg:text-7xl">
-                Checkliste: {{ title }}
-            </h1>
+            <h1 class="font-headline text-6xl leading-tight font-bold lg:text-7xl">Checkliste: {{ title }}</h1>
             {{ partial:checklists/progress }}
         </section>
 
         <section class="vice my-12 lg:my-20">
-            <h2 class="font-headline mb-6 text-2xl font-bold lg:mb-10 lg:text-4xl">
-                Überprüfungen
-            </h2>
-            <div
-                class="relative lg:grid lg:grid-cols-7 lg:gap-x-6">
+            <h2 class="font-headline mb-6 text-2xl font-bold lg:mb-10 lg:text-4xl">Überprüfungen</h2>
+            <div class="relative lg:grid lg:grid-cols-7 lg:gap-x-6">
                 {{ partial:navigation/side-navigation navigation_items="{{ collection:checklist_modules }}" }}
                 <ul class="flex flex-col gap-y-10 lg:col-span-5 lg:gap-y-16">
                     {{ collection:checklist_modules }}

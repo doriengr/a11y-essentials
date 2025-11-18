@@ -1,39 +1,30 @@
 @layer components {
-  .circle {
-    --_percentage: var(--percentage, 0);
+    .circle {
+        --_percentage: var(--percentage, 0);
 
-    width: calc(var(--spacing) * 48);
-    height: calc(var(--spacing) * 48);
-    border-radius: 50%;
-    -webkit-mask: radial-gradient(farthest-side, transparent 78%, black 79%);
-    -webkit-mask-composite: destination-out;
-    mask: radial-gradient(farthest-side, transparent 78%, black 79%);
-    mask-composite: exclude;
-  }
+        width: calc(var(--spacing) * 48);
+        height: calc(var(--spacing) * 48);
+        border-radius: 50%;
+        -webkit-mask: radial-gradient(farthest-side, transparent 78%, black 79%);
+        -webkit-mask-composite: destination-out;
+        mask: radial-gradient(farthest-side, transparent 78%, black 79%);
+        mask-composite: exclude;
+    }
 
-  .circle::before {
-    content: attr(data-percentage) "%";
-    position: absolute;
-  }
+    .circle::before {
+        content: attr(data-percentage) '%';
+        position: absolute;
+    }
 
-  .circle-red {
-    background: conic-gradient(
-      var(--color-red) calc(var(--_percentage) * 3.6deg),
-      var(--color-red-200) 0
-    );
-  }
+    .circle-red {
+        background: conic-gradient(var(--color-red) calc(var(--_percentage) * 3.6deg), var(--color-red-200) 0);
+    }
 
-   .circle-yellow {
-    background: conic-gradient(
-      var(--color-yellow) calc(var(--_percentage) * 3.6deg),
-      var(--color-yellow-200) 0
-    );
-   }
+    .circle-yellow {
+        background: conic-gradient(var(--color-yellow) calc(var(--_percentage) * 3.6deg), var(--color-yellow-200) 0);
+    }
 
     .circle-green {
-    background: conic-gradient(
-      var(--color-green) calc(var(--_percentage) * 3.6deg),
-      var(--color-green-200) 0
-    );
-  }
+        background: conic-gradient(var(--color-green) calc(var(--_percentage) * 3.6deg), var(--color-green-200) 0);
+    }
 }

@@ -3,12 +3,10 @@
                       (priority == 'moderate') => 'Moderate Priorität',
                       () => 'Niedrige Priorität') }}
 <span
-    class="priority text-grey-800 flex items-center gap-x-2 text-sm lg:gap-x-3 lg:text-base
-    {{ switch(
-        (priority == 'high') => 'before:bg-red',
-        (priority == 'moderate') => 'before:bg-yellow',
-        () => 'before:bg-green')
-    }}"
+    class="priority text-grey-800 {{ switch(
+    (priority == 'high') => 'before:bg-red',
+    (priority == 'moderate') => 'before:bg-yellow',
+    () => 'before:bg-green') }} flex items-center gap-x-2 text-sm lg:gap-x-3 lg:text-base"
 >
     {{ priority_label }}
 </span>
