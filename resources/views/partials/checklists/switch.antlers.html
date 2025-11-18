@@ -1,17 +1,15 @@
-{{ if is_optional }}
-    <div class="mt-4">
-        <input
-            id="checklist-group-{{ slug }}"
-            class="size-0 appearance-none outline-0"
-            type="checkbox"
-            role="switch"
-            name="checklist-group-{{ slug }}"
-            :checked="groups['{{ slug }}']"
-            @change="toggleGroup('{{ slug }}', event)"
-        />
-        <span class="switch relative z-0" aria-hidden="true"></span>
-        <label for="checklist-group-{{ slug }}" class="label relative z-50 inline-block pl-15">
-            Komponente inkludieren
-        </label>
-    </div>
-{{ /if }}
+<div class="{{ class }}">
+    <input
+        id="checklist-group-{{ slug }}"
+        class="size-0 appearance-none outline-0"
+        type="checkbox"
+        role="switch"
+        name="checklist-group-{{ slug }}"
+        :checked="groups['{{ slug }}']"
+        @change="toggleGroup('{{ slug }}', event)"
+    />
+    <span class="switch relative z-0" aria-hidden="true"></span>
+    <label for="checklist-group-{{ slug }}" class="label relative z-50 inline-block pl-15">
+        {{ label }}
+    </label>
+</div>

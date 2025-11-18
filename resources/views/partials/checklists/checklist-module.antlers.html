@@ -4,7 +4,9 @@
         {{ description }}
     </div>
 {{ /if }}
-{{ partial:checklists/switch }}
+{{ if is_optional }}
+    {{ partial:checklists/ switch label="Komponente inkludieren" class="mt-4" }}
+{{ /if }}
 <ul
     {{ if is_optional }}
         x-show="groups['{{ slug }}']"
