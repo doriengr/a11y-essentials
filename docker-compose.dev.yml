@@ -13,7 +13,7 @@ volumes:
 
 services:
   application:
-    image: git.visuellverstehen.de:4567/a11y/website/application:dev
+    image: git.visuellverstehen.de:4567/a11yessentials/website/application:dev
     networks:
       - web
       - stack
@@ -33,14 +33,14 @@ services:
     labels:
         - "traefik.enable=true"
 
-        - "traefik.http.middlewares.dev-a11y.headers.stsseconds=31536000"
-        - "traefik.http.middlewares.dev-a11y-auth.basicauth.users=a11y:$$2y$$05$$uJMFTJ3gc0NcbDZMreHQMuHjjffZH4sFa2UBle4xBWMmACfVgStOy"
+        - "traefik.http.middlewares.dev-a11yessentials.headers.stsseconds=31536000"
+        - "traefik.http.middlewares.dev-a11yessentials-auth.basicauth.users=a11yessentials:$$2y$$05$$uJMFTJ3gc0NcbDZMreHQMuHjjffZH4sFa2UBle4xBWMmACfVgStOy"
 
-        - "traefik.http.routers.dev-a11y.middlewares=dev-a11y,dev-a11y-auth"
-        - "traefik.http.routers.dev-a11y.rule=Host(`a11y.visuel.dev`)"
-        - "traefik.http.routers.dev-a11y.entrypoints=https,http"
-        - "traefik.http.services.dev-a11y.loadbalancer.server.port=80"
-        - "traefik.http.routers.dev-a11y.tls.certresolver=tls"
+        - "traefik.http.routers.dev-a11y.middlewares=dev-a11yessentials,dev-a11yessentials-auth"
+        - "traefik.http.routers.dev-a11yessentials.rule=Host(`a11yessentials.visuel.dev`)"
+        - "traefik.http.routers.dev-a11yessentials.entrypoints=https,http"
+        - "traefik.http.services.dev-a11yessentials.loadbalancer.server.port=80"
+        - "traefik.http.routers.dev-a11yessentials.tls.certresolver=tls"
         - "traefik.docker.network=web"
     entrypoint: ["bash", "/var/www/html/docker/application/entrypoint.sh"]
     command: ["bash", "/var/www/html/docker/application/startup.sh"]
@@ -53,10 +53,10 @@ services:
     volumes:
       - redis:/data
     command: >
-      --requirepass a11y
+      --requirepass a11yessentials
 
   schedule:
-    image: git.visuellverstehen.de:4567/a11y/website/application:dev
+    image: git.visuellverstehen.de:4567/a11yessentials/website/application:dev
     init: true
     networks:
       - stack
@@ -76,7 +76,7 @@ services:
     command: ["su", "vvuser", "-c", "php artisan schedule:work"]
 
   worker:
-    image: git.visuellverstehen.de:4567/a11y/website/application:dev
+    image: git.visuellverstehen.de:4567/a11yessentials/website/application:dev
     networks:
       - stack
     env_file:
@@ -98,7 +98,7 @@ services:
     #   start_period: 5s
 
   # warm_static_cache:
-  #   image: git.visuellverstehen.de:4567/a11y/website/application:dev
+  #   image: git.visuellverstehen.de:4567/a11yessentials/website/application:dev
   #   depends_on:
   #     application:
   #       condition: service_healthy

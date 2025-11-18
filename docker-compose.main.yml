@@ -13,7 +13,7 @@ volumes:
 
 services:
   application:
-    image: git.visuellverstehen.de:4567/a11y/website/application:main
+    image: git.visuellverstehen.de:4567/a11yessentials/website/application:main
     networks:
       - web
       - stack
@@ -32,12 +32,12 @@ services:
     restart: always
     labels:
       - "traefik.enable=true"
-      - "traefik.http.middlewares.a11y.headers.stsseconds=31536000"
-      - "traefik.http.routers.a11y.middlewares=a11y"
-      - "traefik.http.routers.a11y.rule=Host(`example.com`)"
-      - "traefik.http.routers.a11y.entrypoints=https,http"
-      - "traefik.http.services.a11y.loadbalancer.server.port=80"
-      - "traefik.http.routers.a11y.tls.certresolver=tls"
+      - "traefik.http.middlewares.a11yessentials.headers.stsseconds=31536000"
+      - "traefik.http.routers.a11yessentials.middlewares=a11yessentials"
+      - "traefik.http.routers.a11yessentials.rule=Host(`example.com`)"
+      - "traefik.http.routers.a11yessentials.entrypoints=https,http"
+      - "traefik.http.services.a11yessentials.loadbalancer.server.port=80"
+      - "traefik.http.routers.a11yessentials.tls.certresolver=tls"
       - "traefik.docker.network=web"
     entrypoint: ["bash", "/var/www/html/docker/application/entrypoint.sh"]
     command: ["bash", "/var/www/html/docker/application/startup.sh"]
@@ -50,10 +50,10 @@ services:
     volumes:
       - redis:/data
     command: >
-      --requirepass a11y
+      --requirepass a11yessentials
 
   schedule:
-    image: git.visuellverstehen.de:4567/a11y/website/application:main
+    image: git.visuellverstehen.de:4567/a11yessentials/website/application:main
     init: true
     networks:
       - stack
@@ -73,7 +73,7 @@ services:
     command: ["su", "vvuser", "-c", "php artisan schedule:work"]
 
   worker:
-    image: git.visuellverstehen.de:4567/a11y/website/application:main
+    image: git.visuellverstehen.de:4567/a11yessentials/website/application:main
     networks:
       - stack
     env_file:
@@ -95,7 +95,7 @@ services:
     #   start_period: 5s
 
   # warm_static_cache:
-  #   image: git.visuellverstehen.de:4567/a11y/website/application:dev
+  #   image: git.visuellverstehen.de:4567/a11yessentials/website/application:dev
   #   depends_on:
   #     application:
   #       condition: service_healthy
