@@ -69,6 +69,7 @@ class ChecklistController extends Controller
             'states' => 'required|array',
             'states.*' => 'required|array',
             'states.*.*' => 'required|boolean',
+            'progress' => 'required|integer|min:0|max:100'
         ]);
 
         $states = $checklist->states ?? [];
@@ -84,7 +85,10 @@ class ChecklistController extends Controller
             }
         }
 
-        $checklist->update(['states' => $states]);
+        $checklist->update([
+            'states' => $states,
+            'progress' => $validated['progress']
+        ]);
 
         return response()->json(['success' => true]);
     }
@@ -100,6 +104,7 @@ class ChecklistController extends Controller
         $validated = $request->validate([
             'groups' => 'required|array',
             'groups.*' => 'required|boolean',
+            'progress' => 'required|integer|min:0|max:100',
         ]);
 
         $groups = $checklist->groups ?? [];
@@ -109,7 +114,8 @@ class ChecklistController extends Controller
         }
 
         $checklist->update([
-            'groups' => $groups
+            'groups' => $groups,
+            'progress' => $validated['progress'],
         ]);
 
         return response()->json(['success' => true]);

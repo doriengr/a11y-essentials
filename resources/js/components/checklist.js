@@ -38,7 +38,10 @@ export default (options = {}) => ({
                     "Content-Type": "application/json",
                     "X-CSRF-TOKEN": this.csrfToken
                 },
-                body: JSON.stringify({ [type]: updates })
+                body: JSON.stringify({
+                    [type]: updates,
+                    progress: this.progressPercent() ?? 0
+                })
             });
         } catch {
             this.pending[type] = { ...updates, ...this.pending[type] };
@@ -101,7 +104,7 @@ export default (options = {}) => ({
     },
 
     progressPercent() {
-        return this.totalCount ? (this.checkedCount / this.totalCount) * 100 : 0;
+        return this.totalCount ? Math.round((this.checkedCount / this.totalCount) * 100) : 0;
     },
 
     parse(value) {
