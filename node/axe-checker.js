@@ -3,7 +3,7 @@ import puppeteer from 'puppeteer';
 import axeSource from 'axe-core/axe.de.min.js';
 
 const url = process.argv[2];
-const check_for_aaa = process.argv[3] ?? false;
+const checkForAaa = process.argv[3] ?? false;
 
 if (!url) {
   console.error('Bitte eine URL angeben');
@@ -12,7 +12,7 @@ if (!url) {
 
 let values = ['wcag2a', 'wcag2aa'];
 
-if (check_for_aaa) {
+if (checkForAaa) {
   values = ['wcag2a', 'wcag2aa', 'wcag2aaa'];
 }
 
@@ -29,6 +29,7 @@ if (check_for_aaa) {
     await page.addScriptTag({ content: axeSource.source });
 
     const results = await page.evaluate(async (wcagValues) => {
+    // eslint-disable-next-line no-undef
       return await axe.run(document, {
         runOnly: {
           type: 'tag',
