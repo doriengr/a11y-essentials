@@ -1,31 +1,39 @@
 <section aria-labelledby="results-summary" class="my-12 md:flex md:justify-center lg:my-20">
     <h2 id="results-summary" class="sr-only">Zusammenfassung</h2>
-    <div class="relative w-max mx-auto md:mr-10 md:ml-0">
-        <div aria-hidden="true" class="circle
-            {{ switch(
-            (results.summary.successPercent > 89) => 'circle-green',
-            (results.summary.successPercent >= 50) => 'circle-yellow',
-            () => 'circle-red')
-        }}" style="--percentage: {{ results.summary.successPercent }}"></div>
-        <p class="text-center flex flex-col items-center justify-center absolute inset-x-0 top-1/2 -translate-y-1/2">
+    <div class="relative mx-auto w-max md:mr-10 md:ml-0">
+        <div
+            aria-hidden="true"
+            class="circle {{ switch(
+    (results.summary.successPercent > 89) => 'circle-green',
+    (results.summary.successPercent >= 50) => 'circle-yellow',
+    () => 'circle-red') }}"
+            style="--percentage: {{ results.summary.successPercent }}"
+        ></div>
+        <p class="absolute inset-x-0 top-1/2 flex -translate-y-1/2 flex-col items-center justify-center text-center">
             <span class="flex items-center gap-x-1">
                 <strong class="block text-5xl">{{ results.summary.successPercent }}</strong>
-                <strong class="text-2xl block">%</strong>
+                <strong class="block text-2xl">%</strong>
             </span>
-            <span class="text-sm text-grey-800 block">erfolgreiche <br>Überprüfungen</span>
+            <span class="text-grey-800 block text-sm">
+                erfolgreiche
+                <br />
+                Überprüfungen
+            </span>
         </p>
     </div>
-    <div class="border-t border-grey-200 pt-10 mt-10 md:pt-0 md:border-t-0 md:border-l md:pl-10 md:my-auto">
-        <span class="mb-4 block text-grey-800">Ergebnisse insgesamt:</span>
+    <div class="border-grey-200 mt-10 border-t pt-10 md:my-auto md:border-t-0 md:border-l md:pt-0 md:pl-10">
+        <span class="text-grey-800 mb-4 block">Ergebnisse insgesamt:</span>
         <ul class="font-headline flex flex-col gap-y-6 text-xl md:text-2xl">
-            <li class="flex gap-x-4 items-center">
-                <span class="flex items-center justify-center size-10 rounded-full bg-red-200">
+            <li class="flex items-center gap-x-4">
+                <span class="flex size-10 items-center justify-center rounded-full bg-red-200">
                     {{ svg:status/error class="text-red size-6 stroke-2" }}
                 </span>
-                <strong class="font-semibold">{{ results.summary.totalChecks - results.summary.passedChecks }} durchgefallene Überprüfungen</strong>
+                <strong class="font-semibold">
+                    {{ results.summary.totalChecks - results.summary.passedChecks }} durchgefallene Überprüfungen
+                </strong>
             </li>
-            <li class="flex gap-x-4 items-center">
-                <span class="flex items-center justify-center size-10 rounded-full bg-green-200">
+            <li class="flex items-center gap-x-4">
+                <span class="flex size-10 items-center justify-center rounded-full bg-green-200">
                     {{ svg:status/pass class="text-green size-6 stroke-2" }}
                 </span>
                 <strong class="font-semibold">{{ results.summary.passedChecks }} erfolgreiche Überprüfungen</strong>

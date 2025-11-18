@@ -1,37 +1,30 @@
-<article
-    id="accordion-panel-{{ index }}"
-    x-cloak
-    x-show="isOpen"
-    class="px-4 pb-4 sm:px-6"
->
+<article id="accordion-panel-{{ index }}" x-cloak x-show="isOpen" class="px-4 pb-4 sm:px-6">
     {{ if errors }}
-        <strong class="block mb-1">Entdeckte Probleme:</strong>
+        <strong class="mb-1 block">Entdeckte Probleme:</strong>
         <ol>
             {{ errors }}
                 <li
                     x-data="dialog({ loadResourceRoute: '{{ route:axe.resource slug="{{ id }}" }}'})"
-                    class="flex flex-col gap-y-2 border-t border-grey-200 py-2 md:flex-row md:justify-between md:gap-x-6"
+                    class="border-grey-200 flex flex-col gap-y-2 border-t py-2 md:flex-row md:justify-between md:gap-x-6"
                 >
                     <span>{{ description | entities }}</span>
                     <button
                         :aria-expanded="isOpen"
                         @click="toggle()"
                         aria-controls="dialog-error-{{ id }}"
-                        class="shrink-0 text-base font-bold flex items-center gap-2"
+                        class="flex shrink-0 items-center gap-2 text-base font-bold"
                     >
                         Mehr erfahren
                         <span class="sr-only">zu {{ description | entities }}</span>
                         {{ svg:general/arrow class="size-6" }}
                     </button>
-                    {{ partial:results/dialog index={{ index }} }}
+                    {{ partial:results/dialog index="{{ index }}" }}
                 </li>
             {{ /errors }}
         </ol>
     {{ else }}
         {{ partial:sets/content/notice notice_label="Keine Fehler" }}
-            <p>
-                Sehr gut! In dieser Kategorie wurden keine Probleme gefunden.
-            </p>
+            <p>Sehr gut! In dieser Kategorie wurden keine Probleme gefunden.</p>
         {{ /partial:sets/content/notice }}
     {{ /if }}
 </article>

@@ -1,8 +1,8 @@
 {
-  "name": "axe-checker",
-  "type": "module",
-  "dependencies": {
-    "axe-core": "https://github.com/doriengr/axe-core/tarball/v1.0.5-dist",
-    "puppeteer": "^24.0.0"
-  }
+    "name": "axe-checker",
+    "type": "module",
+    "dependencies": {
+        "axe-core": "https://github.com/doriengr/axe-core/tarball/v1.0.5-dist",
+        "puppeteer": "^24.0.0"
+    }
 }

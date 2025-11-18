@@ -1,25 +1,11 @@
-<ul class="grid grid-cols-1 gap-4 {{ images | count == 1 ? '' : 'md:grid-cols-2'}}">
+<ul class="{{ images | count == 1 ? '' : 'md:grid-cols-2' }} grid grid-cols-1 gap-4">
     {{ images }}
         <li>
             <figure>
                 {{ if images | count == 1 }}
-                    {{ picture:image
-                        default="300 | 16:9 | calc(95%-4rem)"
-                        sm="650 | 16:9 | calc(95%-4rem)"
-                        md="800 | 16:9 | calc(95%-4rem)"
-                        lg="1040 | 16:9 | calc(95%-4rem)"
-                        xl="1182 | 16:9 | 1182px"
-                        class="rounded-sm size-full object-cover"
-                    }}
+                    {{ picture:image default="300 | 16:9 | calc(95%-4rem)" sm="650 | 16:9 | calc(95%-4rem)" md="800 | 16:9 | calc(95%-4rem)" lg="1040 | 16:9 | calc(95%-4rem)" xl="1182 | 16:9 | 1182px" class="rounded-sm size-full object-cover" }}
                 {{ else }}
-                    {{ picture:image
-                        default="300 | 16:9 | calc(95%-4rem)"
-                        sm="650 | 16:9 | calc(95%-4rem)"
-                        md="400 | 16:9 | calc((95%-4rem)/2)"
-                        lg="520 | 16:9 | calc((95%-4rem)/2)"
-                        xl="580 | 16:9 | 580px"
-                        class="rounded-sm size-full object-cover"
-                    }}
+                    {{ picture:image default="300 | 16:9 | calc(95%-4rem)" sm="650 | 16:9 | calc(95%-4rem)" md="400 | 16:9 | calc((95%-4rem)/2)" lg="520 | 16:9 | calc((95%-4rem)/2)" xl="580 | 16:9 | 580px" class="rounded-sm size-full object-cover" }}
                 {{ /if }}
                 <figcaption class="caption mt-2">
                     {{ image_caption }}

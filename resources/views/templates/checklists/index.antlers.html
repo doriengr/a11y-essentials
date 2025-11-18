@@ -1,13 +1,11 @@
 <section class="vice my-12 lg:my-20">
     <div class="max-w-4xl">
-        <h1 class="font-headline leading-tight text-6xl font-bold lg:text-7xl">
-            Alle Checklisten
-        </h1>
+        <h1 class="font-headline text-6xl leading-tight font-bold lg:text-7xl">Alle Checklisten</h1>
         <p class="mt-4">
-            Diese Checklisten helfen dir dabei, deine Web-Projekte
-            auf Barrierefreiheit zu prüfen. Automatisierte Tests können leider nur einen kleinen
-            Teil abdecken, für alle anderen Prüfschritte kommst du ins Spiel. Mithilfe dieser Checklisten
-            findest du weitere Informationen und testest Fälle, die von keinen automatischen Tests abgedeckt werden können.
+            Diese Checklisten helfen dir dabei, deine Web-Projekte auf Barrierefreiheit zu prüfen. Automatisierte Tests
+            können leider nur einen kleinen Teil abdecken, für alle anderen Prüfschritte kommst du ins Spiel. Mithilfe
+            dieser Checklisten findest du weitere Informationen und testest Fälle, die von keinen automatischen Tests
+            abgedeckt werden können.
         </p>
         <a href="{{ route:checklists.create }}" class="button button-primary mt-6">
             Neue Checkliste erstellen
@@ -16,37 +14,38 @@
     </div>
 </section>
 <section class="vice my-12 lg:my-20">
-    <ul class="border-grid grid grid-cols-1 gap-y-10 gap-x-10 sm:grid-cols-2 lg:grid-cols-3">
+    <ul class="border-grid grid grid-cols-1 gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
         {{ checklists }}
-            <li class="relative pb-10 border-b border-b-grey-200 last:border-b-0 sm:last:border-b">
-               <div class="h-full group flex flex-col-reverse justify-end gap-y-4 transition-transform duration-300 ease-in-out hocus:-translate-y-1">
+            <li class="border-b-grey-200 relative border-b pb-10 last:border-b-0 sm:last:border-b">
+                <div
+                    class="group hocus:-translate-y-1 flex h-full flex-col-reverse justify-end gap-y-4 transition-transform duration-300 ease-in-out"
+                >
                     <div>
-                        <h2 class="font-bold font-headline text-2xl mb-2">
+                        <h2 class="font-headline mb-2 text-2xl font-bold">
                             <a href="{{ route:checklists.show checklist_id='{{ id }}' }}" class="before:cover">
                                 {{ title }}
                             </a>
                         </h2>
                         <span>Zuletzt bearbeitet am {{ updated_at | format('d.m.y') }}</span>
                         <div class="my-4">
-                            <div class="my-2 w-full bg-green-400 h-3 rounded-xs overflow-hidden">
+                            <div class="my-2 h-3 w-full overflow-hidden rounded-xs bg-green-400">
                                 <div
-                                    class="bg-green h-3 rounded-xs transition-all ease-in-out duration-300"
-                                    style="width: {{progress}}%"
+                                    class="bg-green h-3 rounded-xs transition-all duration-300 ease-in-out"
+                                    style="width: {{ progress }}%"
                                 ></div>
                             </div>
-                            <strong class="text-green font-semibold block text-sm lg:text-base ">
-                                {{ progress }} % abgeschlossen
+                            <strong class="text-green block text-sm font-semibold lg:text-base">
+                                {{ progress }}
+                                % abgeschlossen
                             </strong>
                         </div>
-                        <span
-                            class="button mt-4 button button-secondary group-hocus:bg-green group-hocus:text-white">
+                        <span class="button button button-secondary group-hocus:bg-green group-hocus:text-white mt-4">
                             Checkliste aufrufen
                             {{ svg:general/arrow class="size-6" }}
                         </span>
                     </div>
-               </div>
+                </div>
             </li>
         {{ /checklists }}
     </ul>
 </section>
-

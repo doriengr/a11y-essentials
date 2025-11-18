@@ -3,11 +3,11 @@
     role="dialog"
     aria-labelledby="dialog-headline-{{ id }}-{{ index }}"
     aria-modal="true"
-    class="fixed inset-6 bg-white w-full overflow-y-auto z-50 rounded-sm p-4 sm:p-6 md:w-[75dvw] md:max-w-4xl md:right-0 md:left-auto md:h-full"
+    class="fixed inset-6 z-50 w-full overflow-y-auto rounded-sm bg-white p-4 sm:p-6 md:right-0 md:left-auto md:h-full md:w-[75dvw] md:max-w-4xl"
 >
     <div class="h-full">
         <header class="flex items-center justify-between gap-x-6">
-            <h3 id="dialog-headline-{{ id }}-{{ index }}" class="font-bold text-xl">
+            <h3 id="dialog-headline-{{ id }}-{{ index }}" class="text-xl font-bold">
                 {{ description | entities }}
             </h3>
             <button @click="toggle()" aria-expanded="true" aria-controls="dialog-error-{{ id }}">
@@ -17,17 +17,17 @@
         </header>
         <article class="mt-4 pb-4 sm:pb-6">
             <p>{{ help | entities }}</p>
-            <strong class="block mt-4">Betroffene HTML-Elemente ({{ nodes | count }})</strong>
-            <ul class="flex flex-col -mt-2">
+            <strong class="mt-4 block">Betroffene HTML-Elemente ({{ nodes | count }})</strong>
+            <ul class="-mt-2 flex flex-col">
                 {{ nodes }}
                     <li class="h-20">
-                        <pre aria-hidden="true" class="block text-sm h-12">
+                        <pre aria-hidden="true" class="block h-12 text-sm">
                             <code class="language-html rounded-sm">{{ html | entities }}</code>
                         </pre>
                     </li>
                 {{ /nodes }}
             </ul>
-            <strong class="block mt-12 mb-3">Lösungsvorschlag</strong>
+            <strong class="mt-12 mb-3 block">Lösungsvorschlag</strong>
             <div id="dialog-target-{{ id }}-{{ index }}">
                 <div x-show="!resourceLoaded" x-cloak>
                     {{ partial:loading-spinner }}

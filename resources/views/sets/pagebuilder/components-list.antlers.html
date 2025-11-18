@@ -1,10 +1,12 @@
 <section class="vice my-12 lg:my-20">
-    <ul class="border-grid grid grid-cols-1 gap-y-10 gap-x-10 sm:grid-cols-2 lg:grid-cols-3">
+    <ul class="border-grid grid grid-cols-1 gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
         {{ collection:components }}
-            <li class="relative pb-10 border-b border-b-grey-200 last:border-b-0 sm:last:border-b">
-               <div class="h-full group flex flex-col-reverse justify-end gap-y-4 transition-transform duration-300 ease-in-out hocus:-translate-y-1">
+            <li class="border-b-grey-200 relative border-b pb-10 last:border-b-0 sm:last:border-b">
+                <div
+                    class="group hocus:-translate-y-1 flex h-full flex-col-reverse justify-end gap-y-4 transition-transform duration-300 ease-in-out"
+                >
                     <div>
-                        <h2 class="font-bold font-headline text-2xl mb-2">
+                        <h2 class="font-headline mb-2 text-2xl font-bold">
                             <a href="{{ url }}" class="before:cover">
                                 {{ title }}
                             </a>
@@ -13,25 +15,18 @@
                             <p>{{ teaser_description }}</p>
                         {{ /if }}
                         <span
-                            class="button text-white mt-4
-                            {{ switch(
-                                (component_color == 'red') => 'bg-red group-hocus:bg-red-800',
-                                (component_color == 'blue') => 'bg-blue group-hocus:bg-blue-800',
-                                (component_color == 'purple') => 'bg-purple group-hocus:bg-purple-800',
-                                () => 'bg-green group-hocus:bg-green-800')
-                            }}">
+                            class="button {{ switch(
+    (component_color == 'red') => 'bg-red group-hocus:bg-red-800',
+    (component_color == 'blue') => 'bg-blue group-hocus:bg-blue-800',
+    (component_color == 'purple') => 'bg-purple group-hocus:bg-purple-800',
+    () => 'bg-green group-hocus:bg-green-800') }} mt-4 text-white"
+                        >
                             Mehr erfahren
                             {{ svg:general/arrow class="size-6" }}
                         </span>
                     </div>
-                    {{ picture:teaser_image
-                        default="300 | 16:9 | calc(95%-4rem)"
-                        sm="650 | 16:9 | calc((95%-4rem)/2)"
-                        lg="520 | 16:9 | calc((95%-4rem)/3)"
-                        xl="580 | 16:9 | 580px"
-                        class="rounded-sm size-full object-cover"
-                    }}
-               </div>
+                    {{ picture:teaser_image default="300 | 16:9 | calc(95%-4rem)" sm="650 | 16:9 | calc((95%-4rem)/2)" lg="520 | 16:9 | calc((95%-4rem)/3)" xl="580 | 16:9 | 580px" class="rounded-sm size-full object-cover" }}
+                </div>
             </li>
         {{ /collection:components }}
     </ul>

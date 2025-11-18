@@ -1,13 +1,13 @@
-<section class="vice my-12 lg:grid lg:grid-cols-7 lg:gap-x-6 lg:my-20">
+<section class="vice my-12 lg:my-20 lg:grid lg:grid-cols-7 lg:gap-x-6">
     <div class="lg:col-span-5">
         <div class="flex flex-col-reverse">
-            <h1 class="font-headline text-6xl font-bold lg:text-7xl
-                {{ switch(
-                    (component_color == 'red') => 'text-red',
-                    (component_color == 'blue') => 'text-blue',
-                    (component_color == 'purple') => 'text-purple',
-                    () => 'text-green')
-                }}">
+            <h1
+                class="font-headline {{ switch(
+    (component_color == 'red') => 'text-red',
+    (component_color == 'blue') => 'text-blue',
+    (component_color == 'purple') => 'text-purple',
+    () => 'text-green') }} text-6xl font-bold lg:text-7xl"
+            >
                 {{ title }}
             </h1>
             <span class="mb-4 block">
@@ -18,32 +18,27 @@
             <div class="autoformat mt-4">{{ description }}</div>
         {{ /if }}
     </div>
-    <div class="hidden lg:block lg:col-span-2">
-        {{ picture:teaser_image
-            default="300 | 16:9 | calc(95%-4rem)"
-            sm="650 | 16:9 | calc((95%-4rem)/2)"
-            lg="520 | 16:9 | calc((95%-4rem)/3)"
-            xl="580 | 16:9 | 580px"
-            class="rounded-sm size-full object-cover"
-        }}
+    <div class="hidden lg:col-span-2 lg:block">
+        {{ picture:teaser_image default="300 | 16:9 | calc(95%-4rem)" sm="650 | 16:9 | calc((95%-4rem)/2)" lg="520 | 16:9 | calc((95%-4rem)/3)" xl="580 | 16:9 | 580px" class="rounded-sm size-full object-cover" }}
     </div>
 </section>
-
 {{ if learning_modules }}
-    <section class="py-12 lg:py-20
-        {{ switch(
-            (component_color == 'red') => 'bg-red-50',
-            (component_color == 'blue') => 'bg-blue-50',
-            (component_color == 'purple') => 'bg-purple-50',
-            () => 'bg-green-50')
-        }}">
+    <section
+        class="{{ switch(
+    (component_color == 'red') => 'bg-red-50',
+    (component_color == 'blue') => 'bg-blue-50',
+    (component_color == 'purple') => 'bg-purple-50',
+    () => 'bg-green-50') }} py-12 lg:py-20"
+    >
         <div class="vice">
             <h2 class="font-headline mb-6 text-2xl font-bold lg:mb-8 lg:text-4xl">Warum ist a11y wichtig?</h2>
             <ul class="flex flex-col gap-y-4 lg:gap-y-6">
                 {{ learning_modules }}
                     <li x-data="accordion({ id: '{{ slug }}' })" class="border-green rounded-sm border bg-white">
                         {{ partial:disclosure/control control_id="{slug}" }}
-                            <h3 class="font-headline text-green flex flex-wrap gap-x-3 text-xl font-semibold hocus:text-green-800">
+                            <h3
+                                class="font-headline text-green hocus:text-green-800 flex flex-wrap gap-x-3 text-xl font-semibold"
+                            >
                                 <button
                                     @click="toggle()"
                                     id="accordion-button-{{ slug }}"
@@ -71,7 +66,6 @@
         </div>
     </section>
 {{ /if }}
-
 {{ if resources }}
     <section class="vice my-12 lg:my-20">
         <h2 class="font-headline mb-6 text-2xl font-bold lg:mb-10 lg:text-4xl">Was muss beachtet werden?</h2>

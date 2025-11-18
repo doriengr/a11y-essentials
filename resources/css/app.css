@@ -46,7 +46,7 @@
     ol {
         counter-reset: item;
         list-style: decimal;
-        list-style-type: "";
+        list-style-type: '';
     }
 
     ol > li {
@@ -56,7 +56,7 @@
     }
 
     ol > li::before {
-        content: counter(item) ".";
+        content: counter(item) '.';
         position: absolute;
         left: calc(var(--spacing) * 0.5);
     }

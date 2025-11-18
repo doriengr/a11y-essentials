@@ -4,13 +4,13 @@
         id="form-errors-summary"
         aria-labelledby="form-errors-summary-label"
         tabindex="0"
-        class="bg-red-100 rounded-sm px-6 py-4"
+        class="rounded-sm bg-red-100 px-6 py-4"
     >
-        <div class="flex items-center text-red gap-x-2">
+        <div class="text-red flex items-center gap-x-2">
             {{ svg:status/error class="mt-[0.2rem] size-6 stroke-2" }}
             <span id="form-errors-summary-label" class="font-semibold">Leider sind folgende Eingaben fehlerhaft:</span>
         </div>
-        <ol class="flex flex-col gap-y-2 list-decimal pl-6 mt-2">
+        <ol class="mt-2 flex list-decimal flex-col gap-y-2 pl-6">
             {{ messages }}
                 <li>{{ message }}</li>
             {{ /messages }}
