@@ -10,8 +10,9 @@ class Checklist extends Model
 {
     use HasFactory;
 
-    protected $keyType = 'string';
     public $incrementing = false;
+
+    protected $keyType = 'string';
 
     protected $casts = [
         'states' => 'array',
@@ -24,7 +25,7 @@ class Checklist extends Model
         'title',
         'states',
         'groups',
-        'progress'
+        'progress',
     ];
 
     protected static function boot()

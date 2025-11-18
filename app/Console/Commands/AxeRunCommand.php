@@ -20,8 +20,9 @@ class AxeRunCommand extends Command
         $process->setTimeout(60);
         $process->run();
 
-        if (!$process->isSuccessful()) {
+        if (! $process->isSuccessful()) {
             $this->error($process->getErrorOutput());
+
             return Command::FAILURE;
         }
 

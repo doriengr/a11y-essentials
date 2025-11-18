@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Http\Request;
 use Statamic\View\View;
 use Symfony\Component\Process\Process;
@@ -30,7 +31,7 @@ class AxeController extends Controller
 
         $url = $validated['url'];
 
-        if (!$url || !filter_var($url, FILTER_VALIDATE_URL)) {
+        if (! $url || ! filter_var($url, FILTER_VALIDATE_URL)) {
             return response()->json(['error' => 'Ungültige URL'], 400);
         }
 
@@ -52,8 +53,8 @@ class AxeController extends Controller
         try {
             $process->run();
 
-            if (!$process->isSuccessful()) {
-                throw new \Exception($process->getErrorOutput());
+            if (! $process->isSuccessful()) {
+                throw new Exception($process->getErrorOutput());
             }
 
             $results = json_decode($process->getOutput(), true);
@@ -69,9 +70,9 @@ class AxeController extends Controller
                     'input_include_aaa' => $includeAAA,
                 ]);
 
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return response()->json([
-                'error' => $e->getMessage()
+                'error' => $e->getMessage(),
             ], 500);
         }
     }
