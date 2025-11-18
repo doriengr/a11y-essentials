@@ -14,7 +14,7 @@
             <ul aria-labelledby="checklist-config" class="mt-4 flex flex-wrap gap-4">
                 <li class="pill pill-primary pill-large">WCAG 2.2 konform</li>
                 <li class="pill pill-primary pill-large">
-                    Konformitätsstufe: A, AA{{ if !include_aaa }}, AAA {{ /if }}
+                    Konformitätsstufe: A, AA{{ if include_aaa }}, AAA {{ /if }}
                 </li>
             </ul>
             {{ partial:checklists/progress }}
