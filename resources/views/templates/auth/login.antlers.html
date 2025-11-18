@@ -5,7 +5,6 @@
     <div class="autoformat mt-4 mb-6">
         <p>Um alle Funktionen vollumfänglich nutzen zu können, musst du dich einloggen.</p>
     </div>
-
     {{ if current_user }}
         {{ partial:sets/content/notice notice_label="Bereits angemeldet" }}
             <p>Du bist bereits angemeldet. Möchtest du dich abmelden?</p>
@@ -16,14 +15,12 @@
             method="POST"
             aria-labelledby="form-headline"
             action="{{ route:auth.login.store }}"
-            class="flex flex-col gap-y-6 my-6"
+            class="my-6 flex flex-col gap-y-6"
             x-data="form({ errorsCount: '{{ errors | count }}' })"
             novalidate
         >
-
             {{ csrf_field }}
             {{ partial:forms/error-summary }}
-
             <div>
                 <label for="email" class="label">Email (erforderlich)</label>
                 <input
@@ -33,16 +30,13 @@
                     name="email"
                     aria-required="true"
                     value="{{ old:email }}"
-                    {{ get_error:email }}
+                    {{ if get_error:email }}
                         aria-invalid="true"
                         aria-describedby="registration-email-error"
-                    {{ /get_error:email }}
+                    {{ /if }}
                 />
                 {{ get_errors:email }}
-                    {{ partial:forms/field-error
-                        field_id="registration-email-error"
-                        messages="{{ messages }}"
-                    }}
+                    {{ partial:forms/field-error field_id="registration-email-error" messages="{{ messages }}" }}
                 {{ /get_errors:email }}
             </div>
 
@@ -55,16 +49,13 @@
                     name="password"
                     aria-required="true"
                     value="{{ old:password }}"
-                    {{ get_error:password }}
+                    {{ if get_error:password }}
                         aria-invalid="true"
                         aria-describedby="registration-password-error"
-                    {{ /get_error:password }}
+                    {{ /if }}
                 />
                 {{ get_errors:password }}
-                    {{ partial:forms/field-error
-                        field_id="registration-password-error"
-                        messages="{{ messages }}"
-                    }}
+                    {{ partial:forms/field-error field_id="registration-password-error" messages="{{ messages }}" }}
                 {{ /get_errors:password }}
             </div>
 
