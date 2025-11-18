@@ -15,10 +15,13 @@ export default (options = {}) => ({
         states: null,
         groups: null,
     },
+    totalCount: 0,
 
     init() {
         this.states = this.parse(options.states);
         this.groups = this.parse(options.groups);
+
+        this.getTotalCount();
 
         const progressDisplay = this.$root.querySelector('#progress-display');
         progressDisplay?.classList.remove('hidden');
@@ -30,7 +33,6 @@ export default (options = {}) => ({
         const updates = this.pending[type];
         if (!Object.keys(updates).length) return;
 
-        // Clear pending before request
         this.pending[type] = {};
 
         try {
@@ -43,7 +45,6 @@ export default (options = {}) => ({
                 body: JSON.stringify({ [type]: updates })
             });
         } catch {
-            // Re-queue on failure
             this.pending[type] = { ...updates, ...this.pending[type] };
         }
     },
@@ -67,6 +68,8 @@ export default (options = {}) => ({
         this.pending.groups[group] = value;
 
         this.debounceSync("groups");
+
+        this.getTotalCount();
     },
 
     debounceSync(type) {
@@ -74,8 +77,26 @@ export default (options = {}) => ({
         this.timers[type] = setTimeout(() => this.sync(type), this.debounceTime);
     },
 
-    countAll() {
-        return this.$root.querySelectorAll('input[type="checkbox"]').length;
+    getTotalCount() {
+        this.totalCount = 0;
+        const groups = this.$root.querySelectorAll('[data-group]');
+        groups.forEach(group => {
+            if (group.dataset.canBeHidden) {
+                this.getHideableChecklistItems(group);
+            } else {
+                const count = group.querySelectorAll('[id^="checklist-item-"]').length;
+                this.totalCount = this.totalCount + count;
+            }
+        })
+    },
+
+    getHideableChecklistItems(group) {
+        const name = group.dataset.group;
+
+        if (name in this.groups && this.groups[name] === true) {
+            const count = group.querySelectorAll('[id^="checklist-item-"]').length;
+            this.totalCount = this.totalCount + count;
+        }
     },
 
     countChecked() {
@@ -85,7 +106,6 @@ export default (options = {}) => ({
     },
 
     progressPercent() {
-        const total = this.countAll();
-        return total ? (this.countChecked() / total) * 100 : 0;
+        return this.totalCount ? (this.countChecked() / this.totalCount) * 100 : 0;
     }
 });

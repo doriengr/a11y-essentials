@@ -4,6 +4,7 @@
             id="checklist-group-{{ slug }}"
             class="appearance-none outline-0 size-0"
             type="checkbox"
+            role="switch"
             name="checklist-group-{{ slug }}"
             :checked="groups['{{ slug }}']"
             @change="toggleGroup('{{ slug }}', event)"

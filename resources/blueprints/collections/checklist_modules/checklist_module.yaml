@@ -21,7 +21,7 @@ tabs:
           -
             import: common_description
           -
-            handle: checklist_points
+            handle: checklist_items
             field:
               type: replicator
               display: Checklisten-Punkte
@@ -55,7 +55,7 @@ tabs:
                               - unorderedlist
                               - orderedlist
                         -
-                          handle: checklist_point_id
+                          handle: checklist_item_id
                           field:
                             type: slug
                             display: ID
