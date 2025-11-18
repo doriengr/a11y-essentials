@@ -16,18 +16,14 @@ export default (options = {}) => ({
         groups: null,
     },
     totalCount: 0,
+    checkedCount: 0,
 
     init() {
         this.states = this.parse(options.states);
         this.groups = this.parse(options.groups);
 
-        this.getTotalCount();
-
-        const progressDisplay = this.$root.querySelector('#progress-display');
-        progressDisplay?.classList.remove('hidden');
+        this.setCounts();
     },
-
-    parse: (value) => typeof value === 'string' ? JSON.parse(value || '{}') : value || {},
 
     async sync(type) {
         const updates = this.pending[type];
@@ -50,62 +46,67 @@ export default (options = {}) => ({
     },
 
     toggleState(group, id, event) {
-        const value = event.target.checked;
-
         if (!this.states[group]) this.states[group] = {};
-        this.states[group][id] = value;
+        this.states[group][id] = event.target.checked;
 
         if (!this.pending.states[group]) this.pending.states[group] = {};
-        this.pending.states[group][id] = value;
+        this.pending.states[group][id] = event.target.checked;
 
         this.debounceSync("states");
+        event.target.checked ? this.checkedCount++ : this.checkedCount--;
     },
 
-    toggleGroup(group, event) {
-        const value = event.target.checked;
-
-        this.groups[group] = value;
-        this.pending.groups[group] = value;
+    toggleGroup(name, event) {
+        this.groups[name] = event.target.checked;
+        this.pending.groups[name] = event.target.checked;
 
         this.debounceSync("groups");
-
-        this.getTotalCount();
+        this.setCounts();
     },
 
+    // Prevent users from sending too many requests to the server
     debounceSync(type) {
         clearTimeout(this.timers[type]);
         this.timers[type] = setTimeout(() => this.sync(type), this.debounceTime);
     },
 
-    getTotalCount() {
+    setCounts() {
+        this.checkedCount = 0;
         this.totalCount = 0;
-        const groups = this.$root.querySelectorAll('[data-group]');
-        groups.forEach(group => {
-            if (group.dataset.canBeHidden) {
-                this.getHideableChecklistItems(group);
-            } else {
-                const count = group.querySelectorAll('[id^="checklist-item-"]').length;
-                this.totalCount = this.totalCount + count;
+
+        this.$root.querySelectorAll('[data-group]').forEach(group => {
+            const name = group.dataset.group;
+            const canBeHidden = group.dataset.canBeHidden;
+
+            // Exclude groups from counting if:
+            // They are designed to be hideable and have not been initialized
+            // They exist in this.groups but are currently set to false
+            if (canBeHidden && (!(name in this.groups) || this.groups[name] !== true)) {
+                return;
             }
-        })
-    },
 
-    getHideableChecklistItems(group) {
-        const name = group.dataset.group;
-
-        if (name in this.groups && this.groups[name] === true) {
             const count = group.querySelectorAll('[id^="checklist-item-"]').length;
-            this.totalCount = this.totalCount + count;
-        }
+            this.totalCount += count;
+
+            if (this.states[name]) {
+                this.checkedCount += Object.values(this.states[name]).filter(Boolean).length;
+            }
+        });
     },
 
-    countChecked() {
+    getCheckedCount() {
         return Object.values(this.states)
             .flatMap(group => Object.values(group))
             .filter(Boolean).length;
     },
 
     progressPercent() {
-        return this.totalCount ? (this.countChecked() / this.totalCount) * 100 : 0;
-    }
+        return this.totalCount ? (this.checkedCount / this.totalCount) * 100 : 0;
+    },
+
+    parse(value) {
+        return typeof value === 'string'
+            ? JSON.parse(value || '{}')
+            : (value || {});
+    },
 });

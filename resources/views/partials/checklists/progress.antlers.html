@@ -1,6 +1,6 @@
 <div
     id="progress-display"
-    class="hidden bg-green-100 p-4 rounded-sm mt-6 flex flex-col gap-4 md:flex-row md:justify-between lg:p-6"
+    class="bg-green-100 p-4 rounded-sm mt-6 flex flex-col gap-4 md:flex-row md:justify-between lg:p-6"
 >
     <div>
         <h2 class="font-base font-bold">Aktueller Stand</h2>
@@ -14,7 +14,7 @@
             ></div>
         </div>
         <div class="mt-2 text-sm lg:text-base">
-            <span x-text="countChecked()"></span> von
+            <span x-text="checkedCount"></span> von
             <span x-text="totalCount"></span>
             Überprüfungen abgeschlossen
         </div>
