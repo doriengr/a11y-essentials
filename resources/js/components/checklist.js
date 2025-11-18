@@ -23,6 +23,7 @@ export default (options = {}) => ({
         this.groups = this.parse(options.groups);
 
         this.setCounts();
+        this.showProgressDisplay();
     },
 
     async sync(type) {
@@ -112,4 +113,10 @@ export default (options = {}) => ({
             ? JSON.parse(value || '{}')
             : (value || {});
     },
+
+    showProgressDisplay() {
+        const progressDisplay = this.$root.querySelector('#progress-display');
+        if (!progressDisplay) return;
+        progressDisplay.classList.remove("hidden");
+    }
 });
