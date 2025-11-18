@@ -10,7 +10,10 @@ class ChecklistController extends Controller
 {
     public function index()
     {
-        $checklists = Checklist::where('user_id', auth()->id())->get();
+        $checklists =
+            Checklist::where('user_id', auth()->id())
+            ->orderBy('updated_at', 'desc')
+            ->get();
 
         return (new View())
             ->template('templates/checklists/index')
@@ -38,7 +41,7 @@ class ChecklistController extends Controller
             'title' => $request->title,
         ]);
 
-        return redirect()->route('checklist.index')->with('success', 'Projekt erstellt!');
+        return redirect()->route('checklists.index');
     }
 
     public function show(string $id)
@@ -69,6 +72,7 @@ class ChecklistController extends Controller
             'states' => 'required|array',
             'states.*' => 'required|array',
             'states.*.*' => 'required|boolean',
+            'progress' => 'required|integer|min:0|max:100'
         ]);
 
         $states = $checklist->states ?? [];
@@ -84,7 +88,10 @@ class ChecklistController extends Controller
             }
         }
 
-        $checklist->update(['states' => $states]);
+        $checklist->update([
+            'states' => $states,
+            'progress' => $validated['progress']
+        ]);
 
         return response()->json(['success' => true]);
     }
@@ -100,6 +107,7 @@ class ChecklistController extends Controller
         $validated = $request->validate([
             'groups' => 'required|array',
             'groups.*' => 'required|boolean',
+            'progress' => 'required|integer|min:0|max:100',
         ]);
 
         $groups = $checklist->groups ?? [];
@@ -109,7 +117,8 @@ class ChecklistController extends Controller
         }
 
         $checklist->update([
-            'groups' => $groups
+            'groups' => $groups,
+            'progress' => $validated['progress'],
         ]);
 
         return response()->json(['success' => true]);
