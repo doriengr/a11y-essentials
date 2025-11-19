@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AutomaticTest;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
@@ -12,13 +13,33 @@ class AxeController extends Controller
 {
     public function show(Request $request)
     {
+        $test = null;
+
+        if ($request->has('id')) {
+            $test = AutomaticTest::find($request->query('id'));
+            if (! $test) {
+                return redirect()
+                    ->route('axe.show')
+                    ->with('error', 'Test not found'); // TODO: show error
+            }
+
+            return (new View())
+                ->template('templates/axe/show')
+                ->layout('layouts.default')
+                ->with([
+                    'title' => 'Deine Testergebnisse',
+                    'localized_timestamp' => Carbon::parse($test->results['timestamp'])->timezone('Europe/Berlin'),
+                    'results' => $test->results,
+                    'input_url' => $test->url,
+                    'include_aaa' => $test->includeAAA,
+                ]);
+        }
+
         return (new View())
             ->template('templates/axe/show')
             ->layout('layouts.default')
             ->with([
                 'title' => 'Überprüfe deinen Code',
-                'success' => session('success'),
-                'old' => session()->get('_old_input', []),
             ]);
     }
 
@@ -35,12 +56,9 @@ class AxeController extends Controller
             return response()->json(['error' => 'Ungültige URL'], 400);
         }
 
-        // boolean: checkbox checked or not
         $includeAAA = $request->boolean('include_aaa');
 
         $nodePath = trim(shell_exec('which node'));
-
-        // prepare node arguments
         $args = [$nodePath, base_path('node/axe-checker.js'), $url];
 
         if ($includeAAA) {
@@ -59,16 +77,14 @@ class AxeController extends Controller
 
             $results = json_decode($process->getOutput(), true);
 
-            return (new View())
-                ->template('templates/axe/show')
-                ->layout('layouts.default')
-                ->with([
-                    'title' => 'Deine Testergebnisse',
-                    'localized_timestamp' => Carbon::parse($results['timestamp'])->timezone('Europe/Berlin'),
-                    'results' => $results,
-                    'input_url' => $url,
-                    'input_include_aaa' => $includeAAA,
-                ]);
+            $test = AutomaticTest::create([
+                'url' => $url,
+                'include_aaa' => $includeAAA,
+                'results' => $results,
+            ]);
+
+            return redirect()
+                ->route('axe.show', ['id' => $test->id]);
 
         } catch (Exception $e) {
             return response()->json([
