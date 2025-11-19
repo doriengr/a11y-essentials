@@ -34,12 +34,13 @@ tabs:
                       display: Checklist-Punkt
                       fields:
                         -
-                          handle: conformance_levels
+                          handle: conformance_level
                           field:
                             taxonomies:
                               - conformance_levels
                             type: terms
-                            display: Konformitätsstufen
+                            display: Konformitätsstufe
+                            max_items: 1
                         -
                           handle: headline
                           field:

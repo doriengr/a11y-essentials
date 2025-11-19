@@ -16,21 +16,22 @@
     data-group="{{ slug }}"
     class="mt-6 flex flex-col gap-y-4"
 >
-    <!-- TODO: Check if checklist_items should include -->
     {{ checklist_items }}
-        <li class="grid grid-cols-[2rem_auto] gap-x-4">
-            <div class="mt-4">
-                <label for="{{ checklist_item_id }}" class="sr-only">Aufgabe: {{ title }}</label>
-                <input
-                    id="checklist-item-{{ checklist_item_id }}"
-                    class="accent-green size-6"
-                    type="checkbox"
-                    name="checklist-item-{{ checklist_item_id }}"
-                    :checked="states['{{ slug }}'] && states['{{ slug }}']['{{ checklist_item_id }}']"
-                    @change="toggleState('{{ slug }}', '{{ checklist_item_id }}', event)"
-                />
-            </div>
-            {{ partial:checklists/disclosure }}
-        </li>
+        {{ if include_aaa || conformance_level:slug != 'conformance_aaa' }}
+            <li class="grid grid-cols-[2rem_auto] gap-x-4">
+                <div class="mt-4">
+                    <label for="{{ checklist_item_id }}" class="sr-only">Aufgabe: {{ title }}</label>
+                    <input
+                        id="checklist-item-{{ checklist_item_id }}"
+                        class="accent-green size-6"
+                        type="checkbox"
+                        name="checklist-item-{{ checklist_item_id }}"
+                        :checked="states['{{ slug }}'] && states['{{ slug }}']['{{ checklist_item_id }}']"
+                        @change="toggleState('{{ slug }}', '{{ checklist_item_id }}', event)"
+                    />
+                </div>
+                {{ partial:checklists/disclosure }}
+            </li>
+        {{ /if }}
     {{ /checklist_items }}
 </ul>

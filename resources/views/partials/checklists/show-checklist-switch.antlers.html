@@ -5,7 +5,7 @@
         type="checkbox"
         role="switch"
         name="checklist-group-{{ slug }}"
-        :aria-checked="groups['{{ slug }}']"
+        :checked="groups['{{ slug }}']"
         @change="toggleGroup('{{ slug }}', event)"
     />
     <span class="switch relative z-0" aria-hidden="true"></span>

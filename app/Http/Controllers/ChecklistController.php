@@ -29,7 +29,7 @@ class ChecklistController extends Controller
             ->template('templates/checklists/create')
             ->layout('layouts.default')
             ->with([
-                'title' => "Neue Checkliste erstellen",
+                'title' => 'Neue Checkliste erstellen',
             ]);
     }
 
@@ -43,7 +43,7 @@ class ChecklistController extends Controller
         Checklist::create([
             'user_id' => auth()->id(),
             'title' => $request->title,
-            'include_aaa' => $request->boolean('include_aaa')
+            'include_aaa' => $request->boolean('include_aaa'),
         ]);
 
         return redirect()->route('checklists.index');
