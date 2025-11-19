@@ -33,7 +33,7 @@ class ChecklistController extends Controller
                 'title' => 'Neue Checkliste erstellen',
                 'breadcrumbs' => [
                     ['title' => 'Alle Checklisten', 'url' => route('checklists.index')],
-                ]
+                ],
             ]);
     }
 
@@ -69,7 +69,7 @@ class ChecklistController extends Controller
                 'checklist' => $checklist,
                 'breadcrumbs' => [
                     ['title' => 'Alle Checklisten', 'url' => route('checklists.index')],
-                ]
+                ],
             ]);
     }
 

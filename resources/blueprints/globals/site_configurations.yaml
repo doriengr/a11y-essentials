@@ -1,0 +1,17 @@
+tabs:
+  main:
+    display: Hauptteil
+    sections:
+      -
+        fields:
+          -
+            handle: parent_of_components_collection
+            field:
+              max_items: 1
+              collections:
+                - pages
+              type: entries
+              display: 'Übersichtsseite aller Komponente'
+              instructions: 'Hier muss die übergeordnete Übersichtsseite aller Komponenten verknüpft werden, damit auf allen Unterseiten der Komponenten dieser Navigationspunkt in der Breadcrumb angezeigt werden kann.'
+              validate:
+                - required

@@ -7,11 +7,11 @@
             <span id="automatic-test-config" class="sr-only">Konfigurationen des automatischen Tests</span>
             <ul aria-labelledby="automatic-test-config" class="mt-4 flex flex-wrap gap-4">
                 <li class="pill pill-primary pill-large">WCAG 2.2 konform</li>
-                <li class="pill pill-primary pill-large">Alle Konformitätsstufen möglich</li>
+                <li class="pill pill-primary pill-large">Konformitätsstufen: A, AA, AAA (optional)</li>
             </ul>
         {{ else }}
             <div class="autoformat">
-                <p class="block mt-4">
+                <p class="mt-4 block">
                     <a href="{{ results.url }}">{{ results.url }}</a>
                     |
                     {{ localized_timestamp | format('d.m.y') }}
