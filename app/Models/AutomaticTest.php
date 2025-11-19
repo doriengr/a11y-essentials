@@ -17,7 +17,7 @@ class AutomaticTest extends Model
     protected $fillable = [
         'url',
         'include_aaa',
-        'results'
+        'results',
     ];
 
     protected $casts = [
