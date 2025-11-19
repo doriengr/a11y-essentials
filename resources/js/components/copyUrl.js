@@ -1,8 +1,7 @@
 export default () => ({
-
     isCopied: false,
 
-    copy(event) {
+    copy() {
         const url = window.location;
         navigator.clipboard.writeText(url);
         this.isCopied = true;

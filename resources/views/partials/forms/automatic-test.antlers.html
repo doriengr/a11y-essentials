@@ -18,6 +18,7 @@
             class="input"
             type="url"
             name="url"
+            autocomplete="url"
             pattern="https://.*"
             aria-required="true"
             value="{{ old:url || input_url }}"
@@ -54,12 +55,7 @@
             {{ svg:general/arrow class="size-6" }}
         </button>
         {{ if results }}
-            <button
-                x-data="copyUrl()"
-                @click="copy(event)"
-                type="button"
-                class="button button-secondary"
-            >
+            <button x-data="copyUrl()" @click="copy()" type="button" class="button button-secondary">
                 Link kopieren
                 <span class="sr-only">in deinen Zwischenspeicher</span>
                 <span x-show="!isCopied" x-cloak>{{ svg:general/save class="size-6" }}</span>
