@@ -19,6 +19,7 @@ class ChecklistController extends Controller
             ->template('templates/checklists/index')
             ->layout('layouts.default')
             ->with([
+                'title' => 'Alle Checklisten',
                 'checklists' => $checklists,
             ]);
     }
