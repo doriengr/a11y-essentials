@@ -3,7 +3,7 @@
     x-cloak
     method="POST"
     aria-labelledby="form-headline"
-    action="{{ route:axe.run }}"
+    action="{{ route:test.run }}"
     class="mt-12 flex flex-col gap-y-6"
     @submit="isLoading = true"
     x-data="form({ errorsCount: '{{ errors | count }}' })"
@@ -38,7 +38,7 @@
             type="checkbox"
             name="include_aaa"
             value="1"
-            {{ if input_include_aaa }} checked {{ /if }}
+            {{ if include_aaa }} checked {{ /if }}
             {{ if get_error:include_aaa }}
                 aria-invalid="true"
                 aria-describedby="checker-aaa-error"
@@ -48,8 +48,23 @@
             {{ partial:forms/field-error field_id="checker-aaa-error" messages="{{ messages }}" }}
         {{ /get_errors:include_aaa }}
     </div>
-    <button type="submit" class="button button-primary">
-        Test starten
-        {{ svg:general/arrow class="size-6" }}
-    </button>
+    <div class="flex flex-wrap gap-x-4">
+        <button type="submit" class="button button-primary">
+            Test starten
+            {{ svg:general/arrow class="size-6" }}
+        </button>
+        {{ if results }}
+            <button
+                x-data="copyUrl()"
+                @click="copy(event)"
+                type="button"
+                class="button button-secondary"
+            >
+                Link kopieren
+                <span class="sr-only">in deinen Zwischenspeicher</span>
+                <span x-show="!isCopied" x-cloak>{{ svg:general/save class="size-6" }}</span>
+                <span x-show="isCopied" x-cloak>{{ svg:status/pass class="size-6" }}</span>
+            </button>
+        {{ /if }}
+    </div>
 </form>
