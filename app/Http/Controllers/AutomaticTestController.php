@@ -24,7 +24,7 @@ class AutomaticTestController extends Controller
             }
 
             return (new View())
-                ->template('templates/axe/show')
+                ->template('templates/automatic-tests/show')
                 ->layout('layouts.default')
                 ->with([
                     'title' => 'Deine Testergebnisse',
@@ -36,7 +36,7 @@ class AutomaticTestController extends Controller
         }
 
         return (new View())
-            ->template('templates/axe/show')
+            ->template('templates/automatic-tests/show')
             ->layout('layouts.default')
             ->with([
                 'title' => 'Überprüfe deinen Code',

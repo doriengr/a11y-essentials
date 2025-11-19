@@ -4,6 +4,7 @@ import './stores/navigation';
 
 import accordion from './components/accordion';
 import checklist from './components/checklist';
+import copyUrl from './components/copyUrl';
 import dialog from './components/dialog';
 import form from './components/form';
 import mainNavigation from './components/mainNavigation';
@@ -13,6 +14,7 @@ import tablist from './components/tablist';
 
 Alpine.data('accordion', accordion);
 Alpine.data('checklist', checklist);
+Alpine.data('copyUrl', copyUrl);
 Alpine.data('dialog', dialog);
 Alpine.data('form', form);
 Alpine.data('mainNavigation', mainNavigation);
