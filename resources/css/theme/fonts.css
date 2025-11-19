@@ -5,7 +5,7 @@
 
 @font-face {
     font-family: 'Onest';
-    src: url('/public/fonts/font-onest-variable.ttf') format('ttf');
+    src: url('/public/fonts/font-onest-variable.ttf') format('truetype');
     font-weight: 100 1000;
     font-style: normal;
     font-display: block;
@@ -13,7 +13,7 @@
 
 @font-face {
     font-family: 'Open Sans';
-    src: url('/public/fonts/font-open-sans-variable.ttf') format('ttf');
+    src: url('/public/fonts/font-open-sans-variable.ttf') format('truetype');
     font-weight: 100 1000;
     font-style: normal;
     font-display: block;
