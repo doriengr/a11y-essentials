@@ -1,4 +1,4 @@
-<section class="vice my-12 lg:my-20">
+<section class="vice mt-6 mb-12 lg:mt-10 lg:mb-20">
     <div class="max-w-4xl">
         <h1 class="font-headline text-6xl leading-tight font-bold lg:text-7xl">{{ title }}</h1>
         <p class="mt-4">
@@ -13,13 +13,13 @@
         </a>
     </div>
 </section>
-
 {{ if {checklists | length} === 0 }}
     <section class="vice my-12 lg:my-20">
         {{ partial:sets/content/notice notice_label="Keine angelegten Checklisten" }}
             <p>
                 Du hast bisher noch keine Checklisten erstellt. Fange jetzt an und
-                <a href="{{ route:checklists.create }}">erstelle deine erste Checkliste</a>.
+                <a href="{{ route:checklists.create }}">erstelle deine erste Checkliste</a>
+                .
             </p>
         {{ /partial:sets/content/notice }}
     </section>
@@ -39,7 +39,8 @@
                             </h2>
                             <p class="text-base">
                                 <span class="label">
-                                    Konformitätsstufen: A, AA{{ if include_aaa }}, AAA{{ /if }}
+                                    Konformitätsstufen: A, AA
+                                    {{ if include_aaa }}, AAA{{ /if }}
                                 </span>
                                 <span>Bearbeitet am {{ updated_at | format('d.m.y') }}</span>
                             </p>
@@ -55,7 +56,9 @@
                                     % abgeschlossen
                                 </strong>
                             </div>
-                            <span class="button button button-secondary group-hocus:bg-green group-hocus:text-white mt-4">
+                            <span
+                                class="button button button-secondary group-hocus:bg-green group-hocus:text-white mt-4"
+                            >
                                 Checkliste aufrufen
                                 {{ svg:general/arrow class="size-6" }}
                             </span>

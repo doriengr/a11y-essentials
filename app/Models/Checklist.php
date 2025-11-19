@@ -15,6 +15,7 @@ class Checklist extends Model
     protected $keyType = 'string';
 
     protected $casts = [
+        'title' => 'string',
         'states' => 'array',
         'groups' => 'array',
         'progress' => 'integer',

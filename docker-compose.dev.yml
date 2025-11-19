@@ -36,7 +36,7 @@ services:
         - "traefik.http.middlewares.dev-a11yessentials.headers.stsseconds=31536000"
         - "traefik.http.middlewares.dev-a11yessentials-auth.basicauth.users=a11yessentials:$$2y$$05$$uJMFTJ3gc0NcbDZMreHQMuHjjffZH4sFa2UBle4xBWMmACfVgStOy"
 
-        - "traefik.http.routers.dev-a11y.middlewares=dev-a11yessentials,dev-a11yessentials-auth"
+        - "traefik.http.routers.dev-a11yessentials.middlewares=dev-a11yessentials,dev-a11yessentials-auth"
         - "traefik.http.routers.dev-a11yessentials.rule=Host(`a11yessentials.visuel.dev`)"
         - "traefik.http.routers.dev-a11yessentials.entrypoints=https,http"
         - "traefik.http.services.dev-a11yessentials.loadbalancer.server.port=80"

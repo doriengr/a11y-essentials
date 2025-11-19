@@ -1,29 +1,28 @@
-<div x-data="({ isLoading: false })" class="vice my-12 lg:grid lg:grid-cols-6 lg:gap-8">
+<div x-data="({ isLoading: false })" class="vice mt-6 mb-12 lg:mt-10 lg:grid lg:grid-cols-6 lg:gap-8">
     <section class="lg:col-span-4">
-        <div class="autoformat flex flex-col-reverse">
-            <h1 id="form-headline" class="font-headline text-6xl font-bold lg:text-7xl">
-                {{ title }}
-            </h1>
-            <p class="mb-4 block">
-                {{ if results }}
+        <h1 id="form-headline" class="font-headline text-6xl font-bold lg:text-7xl">
+            {{ title }}
+        </h1>
+        {{ if !results }}
+            <span id="automatic-test-config" class="sr-only">Konfigurationen des automatischen Tests</span>
+            <ul aria-labelledby="automatic-test-config" class="mt-4 flex flex-wrap gap-4">
+                <li class="pill pill-primary pill-large">WCAG 2.2 konform</li>
+                <li class="pill pill-primary pill-large">Konformitätsstufen: A, AA, AAA (optional)</li>
+            </ul>
+        {{ else }}
+            <div class="autoformat">
+                <p class="mt-4 block">
                     <a href="{{ results.url }}">{{ results.url }}</a>
                     |
                     {{ localized_timestamp | format('d.m.y') }}
                     um {{ localized_timestamp | format('H:i') }} Uhr
-                {{ else }}
-                    Finde einen Anfang
-                {{ /if }}
-            </p>
-        </div>
-        <span id="automatic-test-config" class="sr-only">Konfigurationen des automatischen Tests</span>
-        <ul aria-labelledby="automatic-test-config" class="mt-4 flex flex-wrap gap-4">
-            <li class="pill pill-primary pill-large">WCAG 2.2 konform</li>
-            <li class="pill pill-primary pill-large">Alle Konformitätsstufen möglich</li>
-        </ul>
+                </p>
+            </div>
+        {{ /if }}
         {{ partial:forms/axe }}
     </section>
     {{ unless results }}
-        <aside aria-labelledby="aside-headline" class="mt-12 flex flex-col gap-y-12 lg:col-span-2">
+        <aside x-show="!isLoading" x-cloak class="mt-12 flex flex-col gap-y-12 lg:col-span-2">
             {{ partial:sets/content/notice notice_label="Wichtige Info" }}
                 <p>
                     Diese schnelle, automatische Überprüfung kann nur einen kleinen Teil überprüfen und
