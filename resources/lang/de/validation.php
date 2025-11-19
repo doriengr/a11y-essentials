@@ -23,6 +23,11 @@ return [
             'required' => 'Bitte gib eine URL ein.',
             'url' => 'Bitte gib eine gültige URL ein, die mit http:// oder https:// beginnt.',
         ],
+        'title' => [
+            'required' => 'Bitte gib einen Projektnamen ein.',
+            'min' => 'Der Projektname muss mindestens :min Zeichen haben.',
+            'max' => 'Der Projektname darf maximal :max Zeichen lang sein.',
+        ],
     ],
 
 ];

@@ -19,6 +19,7 @@ class ChecklistController extends Controller
             ->template('templates/checklists/index')
             ->layout('layouts.default')
             ->with([
+                'title' => 'Alle Checklisten',
                 'checklists' => $checklists,
             ]);
     }
@@ -27,18 +28,23 @@ class ChecklistController extends Controller
     {
         return (new View())
             ->template('templates/checklists/create')
-            ->layout('layouts.default');
+            ->layout('layouts.default')
+            ->with([
+                'title' => 'Neue Checkliste erstellen',
+            ]);
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required|string|max:255',
+            'title' => 'required|string|min:5|max:255',
+            'include_aaa' => 'nullable',
         ]);
 
         Checklist::create([
             'user_id' => auth()->id(),
             'title' => $request->title,
+            'include_aaa' => $request->boolean('include_aaa'),
         ]);
 
         return redirect()->route('checklists.index');

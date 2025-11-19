@@ -10,6 +10,14 @@
     >
         <section class="vice my-12 lg:my-20">
             <h1 class="font-headline text-6xl leading-tight font-bold lg:text-7xl">Checkliste: {{ title }}</h1>
+            <span id="checklist-config" class="sr-only">Konfigurationen des automatischen Tests</span>
+            <ul aria-labelledby="checklist-config" class="mt-4 flex flex-wrap gap-4">
+                <li class="pill pill-primary pill-large">WCAG 2.2 konform</li>
+                <li class="pill pill-primary pill-large">
+                    Konformitätsstufe: A, AA
+                    {{ if include_aaa }}, AAA{{ /if }}
+                </li>
+            </ul>
             {{ partial:checklists/progress }}
         </section>
 
@@ -17,9 +25,9 @@
             <h2 class="font-headline mb-6 text-2xl font-bold lg:mb-10 lg:text-4xl">Überprüfungen</h2>
             <div class="relative lg:grid lg:grid-cols-7 lg:gap-x-6">
                 {{ partial:navigation/side-navigation navigation_items="{{ collection:checklist_modules }}" }}
-                <ul class="flex flex-col gap-y-10 lg:col-span-5 lg:gap-y-16">
+                <ul class="flex flex-col gap-y-10 lg:col-span-5 lg:gap-y-12">
                     {{ collection:checklist_modules }}
-                        <li>
+                        <li class="border-b-grey-200 border-b pb-10 lg:pb-12">
                             {{ partial:checklists/checklist-module }}
                         </li>
                     {{ /collection:checklist_modules }}

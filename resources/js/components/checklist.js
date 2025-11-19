@@ -80,12 +80,12 @@ export default (options = {}) => ({
 
         this.$root.querySelectorAll('[data-group]').forEach((group) => {
             const name = group.dataset.group;
-            const canBeHidden = group.dataset.canBeHidden;
+            const optional = group.dataset.isOptional;
 
             // Exclude groups from counting if:
             // They are designed to be hideable and have not been initialized
             // They exist in this.groups but are currently set to false
-            if (canBeHidden && (!(name in this.groups) || this.groups[name] !== true)) {
+            if (optional && (!(name in this.groups) || this.groups[name] !== true)) {
                 return;
             }
 

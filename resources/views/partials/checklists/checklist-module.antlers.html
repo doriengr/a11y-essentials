@@ -4,30 +4,34 @@
         {{ description }}
     </div>
 {{ /if }}
-{{ partial:checklists/ switch }}
+{{ if is_optional }}
+    {{ partial:checklists/show-checklist-switch label="Checkliste anzeigen" group_title="{{ title }}" }}
+{{ /if }}
 <ul
-    {{ if can_be_hidden }}
+    {{ if is_optional }}
         x-show="groups['{{ slug }}']"
         x-cloak
     {{ /if }}
-    data-can-be-hidden="{{ can_be_hidden }}"
+    data-is-optional="{{ is_optional }}"
     data-group="{{ slug }}"
     class="mt-6 flex flex-col gap-y-4"
 >
     {{ checklist_items }}
-        <li class="grid grid-cols-[2rem_auto] gap-x-4">
-            <div class="mt-4">
-                <label for="{{ checklist_item_id }}" class="sr-only">Aufgabe: {{ title }}</label>
-                <input
-                    id="checklist-item-{{ checklist_item_id }}"
-                    class="accent-green size-6"
-                    type="checkbox"
-                    name="checklist-item-{{ checklist_item_id }}"
-                    :checked="states['{{ slug }}'] && states['{{ slug }}']['{{ checklist_item_id }}']"
-                    @change="toggleState('{{ slug }}', '{{ checklist_item_id }}', event)"
-                />
-            </div>
-            {{ partial:checklists/disclosure }}
-        </li>
+        {{ if include_aaa || conformance_level:slug != 'conformance_aaa' }}
+            <li class="grid grid-cols-[2rem_auto] gap-x-4">
+                <div class="mt-4">
+                    <label for="{{ checklist_item_id }}" class="sr-only">Aufgabe: {{ title }}</label>
+                    <input
+                        id="checklist-item-{{ checklist_item_id }}"
+                        class="accent-green size-6"
+                        type="checkbox"
+                        name="checklist-item-{{ checklist_item_id }}"
+                        :checked="states['{{ slug }}'] && states['{{ slug }}']['{{ checklist_item_id }}']"
+                        @change="toggleState('{{ slug }}', '{{ checklist_item_id }}', event)"
+                    />
+                </div>
+                {{ partial:checklists/disclosure }}
+            </li>
+        {{ /if }}
     {{ /checklist_items }}
 </ul>

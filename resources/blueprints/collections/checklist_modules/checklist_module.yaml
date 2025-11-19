@@ -13,10 +13,10 @@ tabs:
                 - required
               width: 75
           -
-            handle: can_be_hidden
+            handle: is_optional
             field:
               type: toggle
-              display: Ausblendbar
+              display: Optional
               width: 25
           -
             import: common_description
@@ -34,12 +34,13 @@ tabs:
                       display: Checklist-Punkt
                       fields:
                         -
-                          handle: conformance_levels
+                          handle: conformance_level
                           field:
                             taxonomies:
                               - conformance_levels
                             type: terms
-                            display: Konformitätsstufen
+                            display: Konformitätsstufe
+                            max_items: 1
                         -
                           handle: headline
                           field:

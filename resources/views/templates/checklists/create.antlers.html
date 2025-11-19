@@ -1,11 +1,61 @@
-<h1>Neues Projekt erstellen</h1>
+<section class="vice my-12 max-w-4xl lg:my-20">
+    <h1 id="form-headline" class="font-headline text-6xl font-bold lg:text-7xl">
+        {{ title }}
+    </h1>
+    <p class="mt-4">
+        Über die Checkliste kannst du projektbezogen eine manuelle Überprüfung durchführen. Automatisierte Tests decken
+        nur einen kleinen Teil der Prüfschritte der Web Content Accessibility Guidelines ab. Daher sind manuelle
+        Bewertungen unerlässlich, um deine Webanwendung umfassend und zuverlässig barrierefrei zu entwickeln.
+    </p>
 
-<form action="{{ route:checklists.store }}" method="POST">
-    {{ csrf_field }}
-    <div class="mb-4">
-        <label for="title">Titel</label>
-        <input type="text" name="title" id="title" value="{{ old:title }}" required />
-    </div>
+    <form
+        method="POST"
+        aria-labelledby="form-headline"
+        action="{{ route:checklists.store }}"
+        class="my-6 flex flex-col gap-y-6"
+        x-data="form({ errorsCount: '{{ errors | count }}' })"
+        novalidate
+    >
+        {{ csrf_field }}
+        {{ partial:forms/error-summary }}
+        <div>
+            <label for="title" class="label">Projektname</label>
+            <input
+                id="title"
+                class="input"
+                type="text"
+                name="title"
+                aria-required="true"
+                value="{{ old:title }}"
+                {{ if get_error:title }}
+                    aria-invalid="true"
+                    aria-describedby="checklist-title-error"
+                {{ /if }}
+            />
+            {{ get_errors:title }}
+                {{ partial:forms/field-error field_id="checklist-title-error" messages="{{ messages }}" }}
+            {{ /get_errors:title }}
+        </div>
+        <div class="flex flex-row-reverse justify-end gap-x-4">
+            <label for="include_aaa" class="label">WCAG Konformitätsstufe AAA ebenfalls testen</label>
+            <input
+                id="include_aaa"
+                class="accent-green size-6"
+                type="checkbox"
+                name="include_aaa"
+                value="1"
+                {{ if input_include_aaa }} checked {{ /if }}
+                {{ if get_error:include_aaa }}
+                    aria-invalid="true"
+                    aria-describedby="checklist-aaa-error"
+                {{ /if }}
+            />
+            {{ get_errors:include_aaa }}
+                {{ partial:forms/field-error field_id="checklist-aaa-error" messages="{{ messages }}" }}
+            {{ /get_errors:include_aaa }}
+        </div>
+        {{ partial:buttons/submit-button button_label="Checkliste erstellen" }}
+    </form>
 
-    <button type="submit">Projekt speichern</button>
-</form>
+    {{ partial:wcag-information }}
+</section>

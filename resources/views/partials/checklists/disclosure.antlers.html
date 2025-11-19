@@ -12,14 +12,10 @@
                     {{ headline | entities }}
                 </button>
             </h3>
-            {{ if conformance_levels }}
-                <ul class="flex flex-wrap gap-x-2">
-                    {{ conformance_levels }}
-                        <li class="pill pill-primary">
-                            {{ title }}
-                        </li>
-                    {{ /conformance_levels }}
-                </ul>
+            {{ if conformance_level }}
+                <span class="pill pill-primary">
+                    {{ conformance_level:title }}
+                </span>
             {{ /if }}
         </div>
     {{ /partial:disclosure/control }}
