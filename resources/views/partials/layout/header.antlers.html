@@ -2,12 +2,13 @@
     <nav
         x-data="mainNavigation()"
         @click.outside="clickOutside()"
-        aria-label="Seitenavigation"
+        aria-label="Hauptnavigation"
         class="w-full lg:flex lg:justify-between"
     >
         <div class="flex items-center justify-between pt-1">
-            <a href="{{ homepage }}">
-                {{ svg:design/logo class="w-32 sm:w-40 lg:w-52 xl:w-64" }}
+            <a href="{{ homepage }}" class="flex gap-x-4 items-center">
+                {{ svg:design/logo class="shrink-0" }}
+                <strong class="sr-only font-headline font-bold md:not-sr-only">A11yEssentials</strong>
             </a>
             <button
                 @click="toggle()"

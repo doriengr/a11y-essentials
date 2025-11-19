@@ -1,0 +1,21 @@
+{{ if !is_homepage }}
+    <nav aria-label="Seitennavigation" class="vice w-full mt-4 lg:w-[95%] lg:mx-auto">
+        <ul class="w-max flex items-center gap-x-1.5 text-sm text-grey-800 font-semibold bg-grey-50 rounded-2xl px-4 py-2">
+            <li class="flex items-center gap-x-1.5">
+                <a href="{{ homepage }}">Startseite</a>
+                {{ svg:general/chevron class="size-3" }}
+            </li>
+            {{ if breadcrumbs }}
+                {{ breadcrumbs }}
+                    <li class="flex items-center gap-x-1.5">
+                        <a href="{{ url }}" aria-current="page">{{ title }}</a>
+                        {{ svg:general/chevron class="size-3" }}
+                    </li>
+                {{ /breadcrumbs }}
+            {{ /if }}
+            <li>
+                <a href="{{ url }}" aria-current="page" class="text-black">{{ title }}</a>
+            </li>
+        </ul>
+    </nav>
+{{ /if }}

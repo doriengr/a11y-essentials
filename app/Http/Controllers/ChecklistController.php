@@ -31,6 +31,9 @@ class ChecklistController extends Controller
             ->layout('layouts.default')
             ->with([
                 'title' => 'Neue Checkliste erstellen',
+                'breadcrumbs' => [
+                    ['title' => 'Alle Checklisten', 'url' => route('checklists.index')],
+                ]
             ]);
     }
 
@@ -62,7 +65,11 @@ class ChecklistController extends Controller
             ->template('templates/checklists/show')
             ->layout('layouts.default')
             ->with([
+                'title' => 'Checkliste: ' . $checklist->title,
                 'checklist' => $checklist,
+                'breadcrumbs' => [
+                    ['title' => 'Alle Checklisten', 'url' => route('checklists.index')],
+                ]
             ]);
     }
 
