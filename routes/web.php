@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\AxeController;
+use App\Http\Controllers\AutomaticTestController;
 use App\Http\Controllers\ChecklistController;
 use App\Http\Controllers\PartialResourceController;
 use App\Http\Middleware\EnsureUserIsAuthenticated;
@@ -22,9 +22,9 @@ Route::get('login', [AuthController::class, 'login'])->name('auth.login');
 Route::post('login', [AuthController::class, 'loginStore'])->name('auth.login.store');
 
 // Automatic test
-Route::get('run-axe', [AxeController::class, 'show'])->name('axe.show');
-Route::post('run-axe', [AxeController::class, 'run'])->name('axe.run');
-Route::get('partial/resource/{slug}', [PartialResourceController::class, 'show'])->name('axe.resource');
+Route::get('run-test', [AutomaticTestController::class, 'show'])->name('test.show');
+Route::post('run-test', [AutomaticTestController::class, 'run'])->name('test.run');
+Route::get('partial/resource/{slug}', [PartialResourceController::class, 'show'])->name('test.resource');
 
 // Checklists
 Route::middleware([EnsureUserIsAuthenticated::class])->group(function () {

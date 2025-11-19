@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Statamic\View\View;
 use Symfony\Component\Process\Process;
 
-class AxeController extends Controller
+class AutomaticTestController extends Controller
 {
     public function show(Request $request)
     {
@@ -19,7 +19,7 @@ class AxeController extends Controller
             $test = AutomaticTest::find($request->query('id'));
             if (! $test) {
                 return redirect()
-                    ->route('axe.show')
+                    ->route('test.show')
                     ->with('error', 'Test not found'); // TODO: show error
             }
 
@@ -84,7 +84,7 @@ class AxeController extends Controller
             ]);
 
             return redirect()
-                ->route('axe.show', ['id' => $test->id]);
+                ->route('test.show', ['id' => $test->id]);
 
         } catch (Exception $e) {
             return response()->json([

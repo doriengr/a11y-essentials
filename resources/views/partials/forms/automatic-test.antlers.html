@@ -3,7 +3,7 @@
     x-cloak
     method="POST"
     aria-labelledby="form-headline"
-    action="{{ route:axe.run }}"
+    action="{{ route:test.run }}"
     class="mt-12 flex flex-col gap-y-6"
     @submit="isLoading = true"
     x-data="form({ errorsCount: '{{ errors | count }}' })"
