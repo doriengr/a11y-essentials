@@ -31,7 +31,7 @@ class AutomaticTestController extends Controller
                     'localized_timestamp' => Carbon::parse($test->results['timestamp'])->timezone('Europe/Berlin'),
                     'results' => $test->results,
                     'input_url' => $test->url,
-                    'include_aaa' => $test->includeAAA,
+                    'include_aaa' => $test->include_aaa,
                 ]);
         }
 
