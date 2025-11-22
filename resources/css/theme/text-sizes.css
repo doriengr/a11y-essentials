@@ -25,21 +25,21 @@
 
     /* Font size: 32px */
     --text-4xl: 2rem;
-    --text-4xl--line-height: 1.5em;
+    --text-4xl--line-height: 1.3em;
 
     /* Font size: 36px */
     --text-5xl: 2.25rem;
-    --text-5xl--line-height: 1.5em;
+    --text-5xl--line-height: 1.4em;
 
     /* Font size: 40px */
     --text-6xl: 2.5rem;
-    --text-6xl--line-height: 1.5em;
+    --text-6xl--line-height: 1.25em;
 
     /* Font size: 56px */
     --text-7xl: 3.5rem;
-    --text-7xl--line-height: 1.5em;
+    --text-7xl--line-height: 1.25em;
 
     /* Font size: 72px */
     --text-8xl: 4.5rem;
-    --text-8xl--line-height: 1.5em;
+    --text-8xl--line-height: 1.25em;
 }
