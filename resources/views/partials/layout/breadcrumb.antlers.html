@@ -5,13 +5,13 @@
         >
             <li class="flex items-center gap-x-1.5">
                 <a href="{{ homepage }}">Startseite</a>
-                {{ svg:general/chevron class="size-3" }}
+                {{ svg:general/chevron class="size-4" }}
             </li>
             {{ if breadcrumbs }}
                 {{ breadcrumbs }}
                     <li class="flex items-center gap-x-1.5">
                         <a href="{{ url }}" aria-current="page">{{ title }}</a>
-                        {{ svg:general/chevron class="size-3" }}
+                        {{ svg:general/chevron class="size-4" }}
                     </li>
                 {{ /breadcrumbs }}
             {{ /if }}
@@ -19,7 +19,7 @@
                 {{ site_configurations:parent_of_components_collection }}
                     <li class="flex items-center gap-x-1.5">
                         <a href="{{ url }}" aria-current="page">{{ title }}</a>
-                        {{ svg:general/chevron class="size-3" }}
+                        {{ svg:general/chevron class="size-4" }}
                     </li>
                 {{ /site_configurations:parent_of_components_collection }}
             {{ /if }}
