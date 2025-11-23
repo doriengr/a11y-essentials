@@ -1,7 +1,7 @@
 {{ if !is_homepage }}
     <nav aria-label="Seitennavigation" class="vice mt-4 w-full lg:mx-auto lg:w-[95%]">
         <ul
-            class="text-grey-800 bg-grey-50 flex max-w-max flex-wrap items-center gap-x-1.5 gap-y-2 rounded-2xl px-4 py-2 text-sm font-semibold"
+            class="text-grey-800 bg-grey-50 flex max-w-max flex-wrap items-center gap-x-1.5 gap-y-2 rounded-2xl px-4 py-2 text-sm"
         >
             <li class="flex items-center gap-x-1.5">
                 <a href="{{ homepage }}">Startseite</a>
@@ -24,7 +24,7 @@
                 {{ /site_configurations:parent_of_components_collection }}
             {{ /if }}
             <li>
-                <a href="{{ url }}" aria-current="page" class="text-black">{{ title }}</a>
+                <a href="{{ url }}" aria-current="page" class="text-black font-semibold">{{ title }}</a>
             </li>
         </ul>
     </nav>
