@@ -23,7 +23,7 @@ class AutomaticTestController extends Controller
                     ->layout('layouts.default')
                     ->with([
                         'title' => 'Überprüfe deinen Code',
-                        'error_while_running' => 'Testergebnisse konnten nicht gefunden werden.'
+                        'error_while_running' => 'Testergebnisse konnten nicht gefunden werden.',
                     ]);
             }
 
@@ -88,7 +88,7 @@ class AutomaticTestController extends Controller
                     ->layout('layouts.default')
                     ->with([
                         'title' => 'Überprüfe deinen Code',
-                        'error_while_running' => 'Test konnte nicht durchgeführt werden. Überprüfe bitte die URL.'
+                        'error_while_running' => 'Test konnte nicht durchgeführt werden. Überprüfe bitte die URL.',
                     ]);
             }
 
