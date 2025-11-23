@@ -6,6 +6,7 @@
                        (index == 'wcag2a') => 'conformance/conformance_a',
                        (index == 'wcag2aa') => 'conformance/conformance_aa',
                        (index == 'wcag2aaa') => 'conformance/conformance_aaa',
+                       (index == 'passes') => 'status/pass',
                        () => 'general/arrow') }}
 {{ partial:disclosure/control control_id="{index}" }}
     <div class="flex flex-col gap-x-4 gap-y-2 sm:flex-row sm:items-center">
@@ -14,6 +15,7 @@
     (index == 'critical') => 'bg-purple-200 text-purple',
     (index == 'serious' || index == 'wcag2a') => 'bg-red-200 text-red',
     (index == 'moderate' || index == 'wcag2aa') => 'bg-yellow-200 text-yellow-900',
+    (index == 'passes') => 'bg-green text-white',
     () => 'bg-green-200 text-green') }} flex size-10 shrink-0 items-center justify-center rounded-full"
         >
             {{ svg src="{{ $disclosure_icon }}" }}
@@ -28,7 +30,7 @@
                     class="before:cover text-left"
                 >
                     {{ trans key="automatic_test.problem_labels.{{ index }}" }}
-                    : {{ errors | count }}
+                    : {{ tests | count }}
                 </button>
             </h3>
             <p class="mt-1">

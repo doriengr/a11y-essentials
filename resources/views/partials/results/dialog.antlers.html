@@ -8,7 +8,7 @@
     <div class="h-full">
         <header class="flex items-center justify-between gap-x-6">
             <h3 id="dialog-headline-{{ id }}-{{ index }}" class="text-xl font-bold">
-                {{ description | entities }}
+                {{ help | entities }}
             </h3>
             <button @click="toggle()" aria-expanded="true" aria-controls="dialog-error-{{ id }}">
                 {{ svg:general/close class="size-6" }}
@@ -16,7 +16,7 @@
             </button>
         </header>
         <article class="mt-4 pb-4 sm:pb-6">
-            <p>{{ help | entities }}</p>
+            <p>{{ description | entities }}</p>
             <strong class="mt-4 block">Betroffene HTML-Elemente ({{ nodes | count }})</strong>
             <ul class="-mt-2 flex flex-col">
                 {{ nodes }}

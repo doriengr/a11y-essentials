@@ -6,10 +6,7 @@
         tabindex="0"
         class="rounded-sm bg-red-100 px-6 py-4"
     >
-        <div class="text-red flex items-center gap-x-2">
-            {{ svg:status/error class="mt-[0.2rem] size-6 stroke-2" }}
-            <span id="form-errors-summary-label" class="font-semibold">Leider sind folgende Eingaben fehlerhaft:</span>
-        </div>
+        {{ partial:error label='Leider sind folgende Eingaben fehlerhaft:' }}
         <ol class="mt-2 flex flex-col gap-y-2 pl-1">
             {{ messages }}
                 <li>{{ message }}</li>

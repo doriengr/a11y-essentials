@@ -19,6 +19,12 @@
                 </p>
             </div>
         {{ /if }}
+        {{ if error_while_running }}
+            {{ partial:error
+                class="my-6"
+                label='Fehler: {{ error_while_running }}'
+            }}
+        {{ /if }}
         {{ partial:forms/automatic-test }}
     </section>
     {{ unless results }}
@@ -38,44 +44,66 @@
                 {{ if results.summary }}
                     {{ partial:results/summary }}
                 {{ /if }}
-                <section x-data="tablist()" class="my-12 lg:my-20">
-                    <div class="mb-6 flex w-full flex-wrap items-end justify-between gap-x-16 gap-y-4 lg:mb-8">
-                        <h2 class="font-headline text-2xl font-bold lg:text-4xl">Gefundene Probleme</h2>
-                        <div class="shrink-0 md:flex md:items-center md:gap-x-4">
-                            <strong id="tablist-label" class="text-grey-800 mb-2 block text-base font-semibold md:mb-0">
-                                Sortiert nach:
-                            </strong>
-                            <div
-                                aria-labelledby="tablist-label"
-                                role="tablist"
-                                class="flex w-max items-center rounded-md bg-green-100 p-2"
-                            >
-                                {{ partial:tablist/tab tab_label="Nach Auswirkung" index="impact" }}
-                                {{ partial:tablist/tab tab_label="Nach Konformität" index="conformance" }}
+                {{ if results.summary.totalChecks - results.summary.passedChecks !== 0 }}
+                    <section x-data="tablist()" class="my-12 lg:my-20">
+                        <div class="mb-6 flex w-full flex-wrap items-end justify-between gap-x-16 gap-y-4 lg:mb-8">
+                            <h2 class="font-headline text-2xl font-bold lg:text-4xl">Gefundene Probleme</h2>
+                            <div class="shrink-0 md:flex md:items-center md:gap-x-4">
+                                <strong id="tablist-label" class="text-grey-800 mb-2 block text-base font-semibold md:mb-0">
+                                    Sortiert nach:
+                                </strong>
+                                <div
+                                    aria-labelledby="tablist-label"
+                                    role="tablist"
+                                    class="flex w-max items-center rounded-md bg-green-100 p-2"
+                                >
+                                    {{ partial:tablist/tab tab_label="Nach Auswirkung" index="impact" }}
+                                    {{ partial:tablist/tab tab_label="Nach Konformität" index="conformance" }}
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    {{ partial:tablist/panel index="impact" }}
-                        <ul class="flex flex-col gap-y-4">
-                            {{ results.byImpact }}
-                                <li x-data="accordion({ id: '{{ impact }}' })" class="border-green rounded-sm border">
-                                    {{ partial:results/disclosure-control index='{{ impact }}' }}
-                                    {{ partial:results/disclosure-panel index='{{ impact }}' }}
-                                </li>
-                            {{ /results.byImpact }}
-                        </ul>
-                    {{ /partial:tablist/panel }}
-                    {{ partial:tablist/panel index="conformance" }}
-                        <ul class="flex flex-col gap-y-4">
-                            {{ results.byConformanceLevel }}
-                                <li x-data="accordion({ id: '{{ level }}' })" class="border-green rounded-sm border">
-                                    {{ partial:results/disclosure-control index='{{ level }}' }}
-                                    {{ partial:results/disclosure-panel index='{{ level }}' }}
-                                </li>
-                            {{ /results.byConformanceLevel }}
-                        </ul>
-                    {{ /partial:tablist/panel }}
-                </section>
+                        {{ partial:tablist/panel index="impact" }}
+                            <ul class="flex flex-col gap-y-4">
+                                {{ results.byImpact }}
+                                    <li x-data="accordion({ id: '{{ impact }}' })" class="border-green rounded-sm border">
+                                        {{ partial:results/disclosure-control index='{{ impact }}' tests='{{ errors }}'  }}
+                                        {{ partial:results/disclosure-panel index='{{ impact }}' }}
+                                    </li>
+                                {{ /results.byImpact }}
+                            </ul>
+                        {{ /partial:tablist/panel }}
+                        {{ partial:tablist/panel index="conformance" }}
+                            <ul class="flex flex-col gap-y-4">
+                                {{ results.byConformanceLevel }}
+                                    {{ if include_aaa || level !== 'wcag2aaa' }}
+                                        <li x-data="accordion({ id: '{{ level }}' })" class="border-green rounded-sm border">
+                                            {{ partial:results/disclosure-control index='{{ level }}' tests='{{ errors }}' }}
+                                            {{ partial:results/disclosure-panel index='{{ level }}' }}
+                                        </li>
+                                    {{ /if }}
+                                {{ /results.byConformanceLevel }}
+                            </ul>
+                        {{ /partial:tablist/panel }}
+                    </section>
+                {{ /if }}
+                {{ if results.passes }}
+                    <section class="my-12 lg:my-20">
+                        <h2 class="font-headline text-2xl font-bold lg:text-4xl">Erfolgreiche Überprüfungen</h2>
+                        <div x-data="accordion({ id: 'passes' })" class="border-green rounded-sm border mt-6 lg:mt-8">
+                            {{ partial:results/disclosure-control index='passes' tests='{{ passes }}' }}
+                            <article id="accordion-panel-{{ index }}" x-cloak x-show="isOpen" class="px-4 pb-4 sm:px-6">
+                                <ol>
+                                    {{ passes }}
+                                        <li class="border-grey-200 flex flex-col gap-y-1 border-t py-2">
+                                            <strong class="font-semibold">{{ help | entities }}</strong>
+                                            <span class="text-grey-800">{{ description | entities }}</span>
+                                        </li>
+                                    {{ /passes }}
+                                </ol>
+                            </article>
+                        </div>
+                    </section>
+                {{ /if }}
             </div>
         {{ /results }}
     {{ /unless }}

@@ -52,7 +52,7 @@
     ol > li {
         counter-increment: item;
         position: relative;
-        padding-left: calc(var(--spacing) * 6);
+        padding-left: 3.5ch;
     }
 
     ol > li::before {

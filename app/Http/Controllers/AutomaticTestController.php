@@ -18,9 +18,13 @@ class AutomaticTestController extends Controller
         if ($request->has('id')) {
             $test = AutomaticTest::find($request->query('id'));
             if (! $test) {
-                return redirect()
-                    ->route('test.show')
-                    ->with('error', 'Test not found'); // TODO: show error
+                return (new View())
+                    ->template('templates/automatic-tests/show')
+                    ->layout('layouts.default')
+                    ->with([
+                        'title' => 'Überprüfe deinen Code',
+                        'error_while_running' => 'Testergebnisse konnten nicht gefunden werden.'
+                    ]);
             }
 
             return (new View())
@@ -75,7 +79,18 @@ class AutomaticTestController extends Controller
                 throw new Exception($process->getErrorOutput());
             }
 
-            $results = json_decode($process->getOutput(), true);
+            $output = $process->getOutput();
+            $results = json_decode($output, true);
+
+            if (json_last_error() !== JSON_ERROR_NONE) {
+                return (new View())
+                    ->template('templates/automatic-tests/show')
+                    ->layout('layouts.default')
+                    ->with([
+                        'title' => 'Überprüfe deinen Code',
+                        'error_while_running' => 'Test konnte nicht durchgeführt werden. Überprüfe bitte die URL.'
+                    ]);
+            }
 
             $test = AutomaticTest::create([
                 'url' => $url,
