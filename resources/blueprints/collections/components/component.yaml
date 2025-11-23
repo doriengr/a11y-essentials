@@ -81,23 +81,4 @@ tabs:
               type: slug
               localizable: true
               validate: 'max:200'
-          -
-            handle: component_color
-            field:
-              options:
-                -
-                  key: green
-                  value: Grün
-                -
-                  key: blue
-                  value: Blaue
-                -
-                  key: red
-                  value: Rot
-                -
-                  key: purple
-                  value: Lila
-              default: green
-              type: select
-              display: Farbe
 title: Komponenten

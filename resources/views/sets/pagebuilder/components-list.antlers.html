@@ -6,21 +6,20 @@
                     class="group hocus:-translate-y-1 flex h-full flex-col-reverse justify-end gap-y-4 transition-transform duration-300 ease-in-out"
                 >
                     <div>
-                        <h2 class="font-headline mb-2 text-2xl font-bold">
-                            <a href="{{ url }}" class="before:cover">
-                                {{ title }}
-                            </a>
-                        </h2>
+                        <div class="flex flex-col-reverse gap-y-2">
+                            <h2 class="font-headline mb-2 text-2xl font-bold">
+                                <a href="{{ url }}" class="before:cover">
+                                    {{ title }}
+                                </a>
+                            </h2>
+                            <span class="text-grey-800 block text-sm">
+                                {{ component_type === 'specific' ? 'Spezifische Komponente' : 'Allgemeine Komponente' }}
+                            </span>
+                        </div>
                         {{ if teaser_description }}
                             <p>{{ teaser_description }}</p>
                         {{ /if }}
-                        <span
-                            class="button {{ switch(
-    (component_color == 'red') => 'bg-red group-hocus:bg-red-800',
-    (component_color == 'blue') => 'bg-blue group-hocus:bg-blue-800',
-    (component_color == 'purple') => 'bg-purple group-hocus:bg-purple-800',
-    () => 'bg-green group-hocus:bg-green-800') }} mt-4 text-white"
-                        >
+                        <span class="button button-primary mt-4 text-white">
                             Mehr erfahren
                             {{ svg:general/arrow class="size-6" }}
                         </span>
