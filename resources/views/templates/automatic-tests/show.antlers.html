@@ -19,6 +19,12 @@
                 </p>
             </div>
         {{ /if }}
+        {{ if error_while_running }}
+            {{ partial:error
+                class="my-6"
+                label='Fehler: {{ error_while_running }}'
+            }}
+        {{ /if }}
         {{ partial:forms/automatic-test }}
     </section>
     {{ unless results }}
