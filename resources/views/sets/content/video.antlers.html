@@ -1,14 +1,16 @@
-<div class="relative aspect-video">
+<div class="relative">
     <figure class="size-full">
-        <iframe
-            width="560"
-            height="315"
-            title="{{ video_caption }}"
-            src="{{ video_url }}"
-            class="size-full rounded-sm"
-            frameborder="0"
-            allowfullscreen
-        ></iframe>
+        <div class="aspect-video">
+            <iframe
+                width="560"
+                height="315"
+                title="{{ video_caption }}"
+                src="{{ video_url }}"
+                class="size-full rounded-sm"
+                frameborder="0"
+                allowfullscreen
+            ></iframe>
+        </div>
         <figcaption class="caption mt-2">
             {{ video_caption }}
         </figcaption>

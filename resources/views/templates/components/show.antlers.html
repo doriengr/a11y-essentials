@@ -23,47 +23,8 @@
     </div>
 </section>
 {{ if learning_modules }}
-    <section
-        class="{{ switch(
-    (component_color == 'red') => 'bg-red-50',
-    (component_color == 'blue') => 'bg-blue-50',
-    (component_color == 'purple') => 'bg-purple-50',
-    () => 'bg-green-50') }} py-12 lg:py-20"
-    >
-        <div class="vice">
-            <h2 class="font-headline mb-6 text-2xl font-bold lg:mb-8 lg:text-4xl">Warum ist a11y wichtig?</h2>
-            <ul class="flex flex-col gap-y-4 lg:gap-y-6">
-                {{ learning_modules }}
-                    <li x-data="accordion({ id: '{{ slug }}' })" class="border-green rounded-sm border bg-white">
-                        {{ partial:disclosure/control control_id="{slug}" }}
-                            <h3
-                                class="font-headline text-green hocus:text-green-800 flex flex-wrap gap-x-3 text-xl font-semibold"
-                            >
-                                <button
-                                    @click="toggle()"
-                                    id="accordion-button-{{ slug }}"
-                                    :aria-expanded="isOpen"
-                                    aria-controls="accordion-panel-{{ slug }}"
-                                    class="before:cover text-left"
-                                >
-                                    {{ title }}
-                                </button>
-                            </h3>
-                        {{ /partial:disclosure/control }}
-                        <article
-                            id="accordion-panel-{{ slug }}"
-                            x-cloak
-                            x-show="isOpen"
-                            class="flex flex-col gap-y-4 px-4 pb-4 sm:px-6"
-                        >
-                            {{ content }}
-                                {{ partial:if_exists src="sets/content/{type | dashify}" }}
-                            {{ /content }}
-                        </article>
-                    </li>
-                {{ /learning_modules }}
-            </ul>
-        </div>
+    <section class="vice my-12 lg:my-20">
+        {{ partial:learning-module }}
     </section>
 {{ /if }}
 {{ if resources }}
