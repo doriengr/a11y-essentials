@@ -7,7 +7,7 @@
                     x-data="dialog({ loadResourceRoute: '{{ route:test.resource slug="{{ id }}" }}'})"
                     class="border-grey-200 flex flex-col gap-y-2 border-t py-2 md:flex-row md:justify-between md:gap-x-6"
                 >
-                    <span>{{ description | entities }}</span>
+                    <span>{{ help | entities }}</span>
                     <button
                         :aria-expanded="isOpen"
                         @click="toggle()"
@@ -15,7 +15,7 @@
                         class="flex shrink-0 items-center gap-2 text-base font-bold"
                     >
                         Mehr erfahren
-                        <span class="sr-only">zu {{ description | entities }}</span>
+                        <span class="sr-only">zu {{ help | entities }}</span>
                         {{ svg:general/arrow class="size-6" }}
                     </button>
                     {{ partial:results/dialog index="{{ index }}" }}
