@@ -21,6 +21,6 @@ return [
         'wcag2a' => 'Diese Konformitätsstufe bildet die Basis vieler Regeln bezüglich a11y. Die Probleme sollten auf jeden Fall verbessert werden.',
         'wcag2aa' => 'Wie die Konformitätsstufe A, ist auch dieses Level gesetzlich einzuhalten, sodass auch diese Probleme in Augenschein genommen werden sollten.',
         'wcag2aaa' => 'Diese Konformitätsstufe ist nicht gesetzlich vorgeschrieben, aber verbessert weiterhin die User Experience.',
-        'passes' => 'Folgende Überprüfungen wurden bereits erfolgreich abgeschlossen und müssen nicht weiter angepasst werden.'
+        'passes' => 'Folgende Überprüfungen wurden bereits erfolgreich abgeschlossen und müssen nicht weiter angepasst werden.',
     ],
 ];
