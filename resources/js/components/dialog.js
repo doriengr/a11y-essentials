@@ -16,9 +16,9 @@ export default (options = {}) => ({
 
     toggle() {
         if (!this.dialog) return;
-        this.isOpen = !this.isOpen;
 
-        if (this.isOpen) {
+        if (!this.isOpen) {
+            this.isOpen = true;
             document.body.classList.add('overflow-y-hidden');
             this.dialog.showModal();
             this.setFocus();
@@ -51,7 +51,7 @@ export default (options = {}) => ({
     closeDialog() {
         if (!this.dialog) return;
         this.dialog.close();
-        this.isOpen = !this.isOpen;
+        this.isOpen = false;
         document.body.classList.remove('overflow-y-hidden');
     },
 });
