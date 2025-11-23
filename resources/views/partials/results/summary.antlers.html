@@ -5,7 +5,7 @@
             aria-hidden="true"
             class="circle {{ switch(
     (results.summary.successPercent > 89) => 'circle-green',
-    (results.summary.successPercent >= 50) => 'circle-yellow',
+    (results.summary.successPercent >= 49) => 'circle-yellow',
     () => 'circle-red') }}"
             style="--percentage: {{ results.summary.successPercent }}"
         ></div>
