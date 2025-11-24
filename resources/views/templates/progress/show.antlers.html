@@ -14,19 +14,23 @@
             <li class="bg-white rounded-sm p-4 flex flex-col items-center justify-between lg:p-6">
                 <strong class="text-7xl">{{ automatic_test_count }}</strong>
                 <span class="text-center font-semibold text-grey-800">
-                    bereits ausgeführte automatische Tests
+                    ausgeführte automatische Tests
                 </span>
             </li>
             <li class="bg-white rounded-sm p-4 flex flex-col items-center justify-between lg:p-6">
-                <strong class="text-7xl">{{ visited_count }}</strong>
+                    <strong class="text-7xl flex items-center gap-x-2">
+                        {{ visited_percentage }}
+                        <span class="text-4xl font-normal">%</span>
+                    </strong>
+                </span>
                 <span class="text-center font-semibold text-grey-800">
-                    bereits angeschaute Ressourcen
+                    der Ressourcen angeschaut
                 </span>
             </li>
             <li class="bg-white rounded-sm p-4 flex flex-col items-center justify-between lg:p-6">
                 <strong class="text-7xl">{{ checklist_count }}</strong>
                 <span class="text-center font-semibold text-grey-800">
-                    bereits begonnene Checklisten
+                    begonnene Checklisten
                 </span>
             </li>
         </ul>
