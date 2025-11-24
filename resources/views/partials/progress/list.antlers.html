@@ -1,0 +1,25 @@
+{{ $list_item_icon = switch(
+                       (type == 'visited') => 'status/pass',
+                       () => 'general/close') }}
+<h4 class="font-semibold block mb-3">
+    {{ headline }}
+</h4>
+{{ if list_items }}
+    <ul class="flex flex-col gap-y-3">
+        {{ list_items }}
+            <li class="flex items-center gap-x-2">
+                <span class="shrink-0 size-6 stroke-2 {{ switch(
+                       (type == 'visited') => 'text-green',
+                       () => 'text-red') }}">
+                    {{ svg src="{{ $list_item_icon }}" }}
+                </span>
+                <span>
+                    <strong class="font-medium">Ressource:</strong>
+                    {{ title }}
+                </span>
+            </li>
+        {{ /list_items }}
+    </ul>
+{{ else }}
+    <span class="text-grey-800">Hier ist noch Luft nach oben!</span>
+{{ /if }}

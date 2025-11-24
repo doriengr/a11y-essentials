@@ -34,16 +34,28 @@
         Es wird dargestellt, in welchen Bereichen du dich bereits gut auskennst
         und in welchen Bereichen du noch Verbesserungspotenzial hast.
     </p>
-    <ul class="grid grid-cols-1 gap-4">
-        {{ collection:components }}
-        <li class="bg-green-100 rounded-sm p-4 lg:p-6">
-            <h3 class="text-green font-semibold text-lg lg:text-xl">Komponente: {{ title }}</h3>
-            <ul>
-                {{ resources }}
-                    <li>{{ title }}</li>
-                {{ /resources }}
+    <ul class="grid grid-cols-1 gap-y-6">
+        {{ components }}
+        <li class="bg-green-50 rounded-sm p-4 lg:p-6">
+            <h3 class="text-green font-semibold text-xl mb-3 lg:text-2xl">
+                Komponente: {{ title }}
+            </h3>
+            <ul class="grid grid-cols-1 gap-y-4 gap-x-6 md:grid-cols-2">
+                <li>
+                    {{ partial:progress/list
+                        headline="Bereits angeschaut"
+                        list_items="{{ visited_resources }}"
+                        type="visited"
+                    }}
+                </li>
+                <li>
+                    {{ partial:progress/list
+                        headline="Noch ausstehend"
+                        list_items="{{ not_visited_resources }}"
+                    }}
+                </li>
             </ul>
         </li>
-        {{ /collection:components }}
+        {{ /components }}
     </ul>
 </section>

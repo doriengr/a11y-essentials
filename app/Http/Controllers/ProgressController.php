@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\EntryUser;
 use Illuminate\Http\Request;
+use Statamic\Eloquent\Entries\Entry;
+use Statamic\Entries\EntryCollection;
 use Statamic\View\View;
 
 class ProgressController extends Controller
@@ -12,6 +14,8 @@ class ProgressController extends Controller
     {
         $user = $request->user();
 
+        $visited_resources = $user->visitedEntriesByCollection('resources');
+
         return (new View())
             ->template('templates/progress/show')
             ->layout('layouts.default')
@@ -19,6 +23,7 @@ class ProgressController extends Controller
                 'title' => 'Dein Lernprozess',
                 'automatic_test_count' => $user->automaticTests()->count(),
                 'checklist_count' => $user->checklists()->count(),
+                'components' => $this->enrichComponents($visited_resources),
             ]);
     }
 
@@ -44,5 +49,24 @@ class ProgressController extends Controller
         );
 
         return response()->json(['status' => 'ok']);
+    }
+
+    private function enrichComponents(array $visitedResources): EntryCollection
+    {
+        $components = Entry::query()
+            ->whereCollection('components')
+            ->get();
+
+        $components = $components->map(function ($component) use ($visitedResources) {
+            $resources = $component->resources ?? collect();
+
+            return [
+                'title' => $component->title,
+                'visited_resources' => $resources->filter(fn($r) => in_array($r->id, $visitedResources)),
+                'not_visited_resources' => $resources->filter(fn($r) => !in_array($r->id, $visitedResources)),
+            ];
+        });
+
+        return $components->sortBy(fn($c) => strtolower($c['title']))->values();
     }
 }

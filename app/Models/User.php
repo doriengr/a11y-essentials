@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Statamic\Eloquent\Entries\Entry;
+use Statamic\Facades\Entry as FacadesEntry;
 
 class User extends Authenticatable
 {
@@ -56,8 +57,16 @@ class User extends Authenticatable
         return $this->hasMany(Checklist::class);
     }
 
-    public function viewedEntries()
+    public function visitedEntries()
     {
         return $this->hasMany(EntryUser::class);
+    }
+
+    public function visitedEntriesByCollection(string $collection)
+    {
+        return $this->visitedEntries()
+            ->where('collection', $collection)
+            ->pluck('entry_id')
+            ->toArray();
     }
 }
