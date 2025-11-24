@@ -39,6 +39,12 @@ tabs:
                       fields:
                         -
                           import: set_code
+                    code_with_tablist:
+                      display: 'Code mit Tabliste'
+                      icon: layout-table-column-insert
+                      fields:
+                        -
+                          import: set_code_tablist
                     notice:
                       display: Info
                       icon: alert-help-question

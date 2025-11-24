@@ -1,0 +1,30 @@
+title: 'Set: Code Tablist'
+fields:
+  -
+    handle: correct_code_content
+    field:
+      type: code
+      display: Code
+      validate:
+        - required
+  -
+    handle: correct_code_caption
+    field:
+      type: text
+      display: Bescheibung
+      validate:
+        - required
+  -
+    handle: incorrect_code_content
+    field:
+      type: code
+      display: Code
+      validate:
+        - required
+  -
+    handle: incorrect_code_caption
+    field:
+      type: text
+      display: Bescheibung
+      validate:
+        - required
