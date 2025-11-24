@@ -96,6 +96,7 @@ class AutomaticTestController extends Controller
                 'url' => $url,
                 'include_aaa' => $includeAAA,
                 'results' => $results,
+                'user_id' => auth()->id(),
             ]);
 
             return redirect()

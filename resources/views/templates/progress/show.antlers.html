@@ -1,0 +1,19 @@
+<section class="vice mt-6 mb-12 lg:mt-10 lg:mb-20">
+    <div class="flex flex-col-reverse">
+        <h1 class="font-headline text-6xl leading-tight font-bold lg:text-7xl">{{ title }}</h1>
+        <span class="text-grey-800 mb-4 block text-sm lg:text-base">
+            Angemeldete:r Benutzer:in: {{ current_user.name }}
+        </span>
+    </div>
+</section>
+
+<section class="bg-green-50">
+    <div class="vice my-12 py-12 lg:py-20 lg:my-20">
+        <h2 class="text-2xl font-bold mb-4 lg:mb-6 lg:text-4xl">Deine Kennzahlen</h2>
+        <ul>
+            <li class="bg-white rounded-sm p-4 lg:p-6">
+                {{ automatic_test_count }}
+            </li>
+        </ul>
+    </div>
+</section>

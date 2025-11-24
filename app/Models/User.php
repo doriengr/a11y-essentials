@@ -44,4 +44,9 @@ class User extends Authenticatable
             'preferences' => 'json',
         ];
     }
+
+    public function automaticTests()
+    {
+        return $this->hasMany(AutomaticTest::class);
+    }
 }
