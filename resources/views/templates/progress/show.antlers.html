@@ -29,33 +29,39 @@
 
 <section class="vice my-12 lg:my-20">
     <h2 class="text-2xl font-bold mb-2 lg:text-4xl">Wie kannst du dich verbessern?</h2>
-    <p class="mb-4 lg:mb-6 max-w-4xl">
+    <p class="mb-6 lg:mb-8 max-w-4xl">
         Es gibt viele Wege wie du dich verbessern kannst.
         Es wird dargestellt, in welchen Bereichen du dich bereits gut auskennst
         und in welchen Bereichen du noch Verbesserungspotenzial hast.
     </p>
-    <ul class="grid grid-cols-1 gap-y-6">
+    <ul class="grid grid-cols-1 lg:gap-y-4 gap-y-6">
         {{ components }}
-        <li class="bg-green-50 rounded-sm p-4 lg:p-6">
-            <h3 class="text-green font-semibold text-xl mb-3 lg:text-2xl">
-                Komponente: {{ title }}
-            </h3>
-            <ul class="grid grid-cols-1 gap-y-4 gap-x-6 md:grid-cols-2">
-                <li>
-                    {{ partial:progress/list
-                        headline="Bereits angeschaut"
-                        list_items="{{ visited_resources }}"
-                        type="visited"
-                    }}
-                </li>
-                <li>
-                    {{ partial:progress/list
-                        headline="Noch ausstehend"
-                        list_items="{{ not_visited_resources }}"
-                    }}
-                </li>
-            </ul>
-        </li>
+            <li class="bg-green-50 rounded-sm p-4 lg:p-6">
+                <h3 class="text-green font-semibold text-xl mb-4 lg:mb-6 lg:text-2xl">
+                    Komponente: {{ title }}
+                </h3>
+                <ul class="grid grid-cols-1 gap-y-4 gap-x-6 md:grid-cols-2">
+                    <li>
+                        {{ partial:progress/list
+                            headline="Bereits angeschaut"
+                            list_items="{{ visited_resources }}"
+                            type="visited"
+                        }}
+                    </li>
+                    <li>
+                        {{ partial:progress/list
+                            headline="Noch ausstehend"
+                            list_items="{{ not_visited_resources }}"
+                        }}
+                    </li>
+                </ul>
+                <span class="text-sm text-grey-800 block mt-4 lg:mt-6">
+                    Fortschritt:
+                    {{ visited_resources | count }} von
+                    {{ {visited_resources | count} + {not_visited_resources | count} }}
+                    Punkten erreicht
+                </span>
+            </li>
         {{ /components }}
     </ul>
 </section>
