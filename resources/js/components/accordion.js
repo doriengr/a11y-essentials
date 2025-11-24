@@ -43,12 +43,12 @@ export default (options = {}) => ({
                 credentials: 'same-origin',
                 headers: {
                     'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': this.csrfToken
+                    'X-CSRF-TOKEN': this.csrfToken,
                 },
                 body: JSON.stringify({
                     entry_id: this.entryId,
                     collection: this.collection,
-                })
+                }),
             });
 
             if (response.ok) {
@@ -57,5 +57,5 @@ export default (options = {}) => ({
         } catch (error) {
             console.error('Failed to track entry:', error);
         }
-    }
+    },
 });

@@ -10,29 +10,6 @@ use Statamic\View\View;
 
 class ProgressController extends Controller
 {
-    public function show(Request $request)
-    {
-        $user = $request->user();
-
-        $resources = $user->visitedEntriesByCollection('resources');
-        $learningModules = $user->visitedEntriesByCollection('learning_modules');
-        $components = $this->enrichComponents($resources, $learningModules);
-
-        $visitedCount = $components->sum(fn($c) => $c['visited']->count());
-        $totalCount = $components->sum(fn($c) => $c['visited']->count() + $c['not_visited']->count());
-
-        return (new View())
-            ->template('templates/progress/show')
-            ->layout('layouts.default')
-            ->with([
-                'title' => 'Dein Lernprozess',
-                'automatic_test_count' => $user->automaticTests()->count(),
-                'checklist_count' => $user->checklists()->count(),
-                'visited_percentage' => $totalCount ? round(($visitedCount / $totalCount) * 100) : 0,
-                'components' => $components,
-            ]);
-    }
-
     public function store(Request $request)
     {
         if (! $request->user()) {
@@ -46,15 +23,38 @@ class ProgressController extends Controller
 
         EntryUser::firstOrCreate(
             [
-                'user_id'  => $request->user()->id,
+                'user_id' => $request->user()->id,
                 'entry_id' => $request->input('entry_id'),
             ],
             [
-                'collection'       => $request->input('collection'),
+                'collection' => $request->input('collection'),
             ]
         );
 
         return response()->json(['status' => 'ok']);
+    }
+
+    public function show(Request $request)
+    {
+        $user = $request->user();
+
+        $resources = $user->visitedEntriesByCollection('resources');
+        $learningModules = $user->visitedEntriesByCollection('learning_modules');
+        $components = $this->enrichComponents($resources, $learningModules);
+
+        $visitedCount = $components->sum(fn ($c) => $c['visited']->count());
+        $totalCount = $components->sum(fn ($c) => $c['visited']->count() + $c['not_visited']->count());
+
+        return (new View())
+            ->template('templates/progress/show')
+            ->layout('layouts.default')
+            ->with([
+                'title' => 'Dein Lernprozess',
+                'automatic_test_count' => $user->automaticTests()->count(),
+                'checklist_count' => $user->checklists()->count(),
+                'visited_percentage' => $totalCount ? round(($visitedCount / $totalCount) * 100) : 0,
+                'components' => $components,
+            ]);
     }
 
     private function enrichComponents(array $visitedResources, array $visitedLearningModules): EntryCollection
@@ -67,10 +67,10 @@ class ProgressController extends Controller
                 $learningModules = $component->learning_modules ?? collect();
 
                 $visited = $resources->merge($learningModules)
-                    ->filter(fn($item) => in_array($item->id, array_merge($visitedResources, $visitedLearningModules)));
+                    ->filter(fn ($item) => in_array($item->id, array_merge($visitedResources, $visitedLearningModules)));
 
                 $notVisited = $resources->merge($learningModules)
-                    ->filter(fn($item) => !in_array($item->id, array_merge($visitedResources, $visitedLearningModules)));
+                    ->filter(fn ($item) => ! in_array($item->id, array_merge($visitedResources, $visitedLearningModules)));
 
                 return [
                     'title' => $component->title,
@@ -78,7 +78,7 @@ class ProgressController extends Controller
                     'not_visited' => $notVisited,
                 ];
             })
-            ->sortBy(fn($c) => strtolower($c['title']))
+            ->sortBy(fn ($c) => strtolower($c['title']))
             ->values();
     }
 }

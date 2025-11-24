@@ -18,7 +18,7 @@ class AutomaticTest extends Model
         'url',
         'include_aaa',
         'results',
-        'user_id'
+        'user_id',
     ];
 
     protected $casts = [

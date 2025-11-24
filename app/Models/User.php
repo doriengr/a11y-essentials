@@ -5,8 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Statamic\Eloquent\Entries\Entry;
-use Statamic\Facades\Entry as FacadesEntry;
 
 class User extends Authenticatable
 {
@@ -33,20 +31,6 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
-    protected function casts(): array
-    {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-            'preferences' => 'json',
-        ];
-    }
-
     public function automaticTests()
     {
         return $this->hasMany(AutomaticTest::class);
@@ -68,5 +52,19 @@ class User extends Authenticatable
             ->where('collection', $collection)
             ->pluck('entry_id')
             ->toArray();
+    }
+
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'email_verified_at' => 'datetime',
+            'password' => 'hashed',
+            'preferences' => 'json',
+        ];
     }
 }
