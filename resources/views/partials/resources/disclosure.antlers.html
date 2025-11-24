@@ -5,9 +5,9 @@
         id: '{{ slug }}',
         isTrackingEnabled: {{ current_user ? 'true' : 'false' }},
         route: '{{ route:progress.store }}',
+        entryId: '{{ id }}',
+        collection: '{{ collection }}'
     })"
-    data-entry-id="{{ id }}"
-    data-collection="{{ collection }}"
     class="border-green rounded-sm border"
 >
     {{ partial:disclosure/control control_id="{resource:slug}" }}

@@ -33,15 +33,15 @@ class ProgressController extends Controller
             'collection' => 'required|string',
         ]);
 
-        $user = $request->user();
-        $entryId = $request->input('entry_id');
-        $collection = $request->input('collection');
-
-        EntryUser::create(
-            ['user_id' => $user->id,
-            'entry_id' => $entryId,
-            'collection' => $collection
-        ]);
+        EntryUser::firstOrCreate(
+            [
+                'user_id'  => $request->user()->id,
+                'entry_id' => $request->input('entry_id'),
+            ],
+            [
+                'collection'       => $request->input('collection'),
+            ]
+        );
 
         return response()->json(['status' => 'ok']);
     }

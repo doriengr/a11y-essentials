@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('entry_user', function (Blueprint $table) {
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->string('entry_id');
+            $table->uuid('entry_id');
             $table->string('collection');
             $table->timestamps();
 

@@ -2,9 +2,11 @@ export default (options = {}) => ({
     id: options.id ?? '',
     isOpen: false,
     isTrackingEnabled: options.isTrackingEnabled ?? false,
-    route: options.route ?? '',
+    route: options.route ?? null,
     isAlreadyTracked: false,
-    csrfToken: options.csrfToken ?? '',
+    csrfToken: options.csrfToken ?? null,
+    entryId: options.entryId ?? null,
+    collection: options.collection ?? null,
 
     init() {
         // Open if hash matches
@@ -33,10 +35,7 @@ export default (options = {}) => ({
     },
 
     async trackVisitedStatus() {
-        const entryId = this.$root.dataset.entryId;
-        const collection = this.$root.dataset.collection;
-
-        if (!this.csrfToken || !entryId || !collection) return;
+        if (!this.csrfToken || !this.entryId || !this.collection) return;
 
         try {
             const response = await fetch(this.route, {
@@ -47,8 +46,8 @@ export default (options = {}) => ({
                     'X-CSRF-TOKEN': this.csrfToken
                 },
                 body: JSON.stringify({
-                    entry_id: entryId,
-                    collection: collection
+                    entry_id: this.entryId,
+                    collection: this.collection,
                 })
             });
 
