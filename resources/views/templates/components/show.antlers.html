@@ -18,7 +18,15 @@
 </section>
 {{ if learning_modules }}
     <section class="vice my-12 lg:my-20">
-        {{ partial:learning-module }}
+        <div class="text-green flex items-center gap-x-2">
+            {{ svg:general/lightbulb class="size-6 shrink-0" }}
+            <h2 class="font-semibold">Die Relevanz von Barrierefreiheit verstehen</h2>
+        </div>
+        <ul class="flex flex-col gap-y-4 mt-2">
+            {{ learning_modules }}
+                <li>{{ partial:learning-modules/disclosure }}</li>
+            {{ /learning_modules }}
+        </ul>
     </section>
 {{ /if }}
 {{ if resources }}

@@ -1,0 +1,31 @@
+<div
+    id="{{ slug }}"
+    x-data="accordion({
+        csrfToken: '{{ csrf_token }}',
+        id: '{{ slug }}',
+        isTrackingEnabled: {{ current_user ? 'true' : 'false' }},
+        route: '{{ route:progress.store }}',
+        entryId: '{{ id }}',
+        collection: '{{ collection }}'
+    })"
+    class="bg-green-50 rounded-sm"
+>
+    {{ partial:disclosure/control control_id="{slug}" }}
+        <h3 class="font-headline text-green hocus:text-green-800 flex flex-wrap gap-x-3 text-xl font-semibold">
+            <button
+                @click="toggle()"
+                id="accordion-button-{{ slug }}"
+                :aria-expanded="isOpen"
+                aria-controls="accordion-panel-{{ slug }}"
+                class="before:cover text-left"
+            >
+                {{ title }}
+            </button>
+        </h3>
+    {{ /partial:disclosure/control }}
+    <article id="accordion-panel-{{ slug }}" x-cloak x-show="isOpen" class="flex flex-col gap-y-4 px-4 pb-4 sm:px-6">
+        {{ content }}
+            {{ partial:if_exists src="sets/content/{type | dashify}" }}
+        {{ /content }}
+    </article>
+</div>
