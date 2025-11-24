@@ -11,26 +11,56 @@
     <div class="vice">
         <h2 class="text-2xl font-bold mb-4 lg:mb-6 lg:text-4xl">Deine Kennzahlen</h2>
         <ul class="grid grid-cols-1 gap-4 lg:grid-cols-3">
-            <li class="bg-white rounded-sm p-4 flex flex-col items-center justify-between lg:p-6">
-                <strong class="text-7xl">{{ automatic_test_count }}</strong>
+            <li class="bg-white rounded-sm p-4 flex flex-col items-center justify-between gap-y-3 lg:p-6">
+                <strong class="text-7xl {{ switch(
+                    (automatic_test_count > 30) => 'text-green',
+                    (automatic_test_count < 10 ) => 'text-red',
+                    () => 'text-yellow') }}"
+                >
+                    {{ automatic_test_count }}
+                </strong>
                 <span class="text-center font-semibold text-grey-800">
                     ausgeführte automatische Tests
                 </span>
+                <span class="flex flex-wrap gap-4">
+                    <span class="flex items-center gap-x-2 priority before:bg-red text-grey-800">< 10</span>
+                    <span class="flex items-center gap-x-2 priority before:bg-yellow text-grey-800">10 - 30</span>
+                    <span class="flex items-center gap-x-2 priority before:bg-green text-grey-800">> 30</span>
+                </span>
             </li>
             <li class="bg-white rounded-sm p-4 flex flex-col items-center justify-between lg:p-6">
-                    <strong class="text-7xl flex items-center gap-x-2">
-                        {{ visited_percentage }}
-                        <span class="text-4xl font-normal">%</span>
-                    </strong>
-                </span>
+                <strong class="text-7xl flex items-center gap-x-2 {{ switch(
+                    (visited_percentage > 90) => 'text-green',
+                    (visited_percentage < 30 ) => 'text-red',
+                    () => 'text-yellow') }}"
+                >
+                    {{ visited_percentage }}
+                    <span class="text-4xl font-normal">%</span>
+                </strong>
                 <span class="text-center font-semibold text-grey-800">
                     der Ressourcen angeschaut
                 </span>
+                <span class="flex flex-wrap gap-4">
+                    <span class="flex items-center gap-x-2 priority before:bg-red text-grey-800">< 30</span>
+                    <span class="flex items-center gap-x-2 priority before:bg-yellow text-grey-800">30 - 90</span>
+                    <span class="flex items-center gap-x-2 priority before:bg-green text-grey-800">> 90</span>
+                </span>
             </li>
             <li class="bg-white rounded-sm p-4 flex flex-col items-center justify-between lg:p-6">
-                <strong class="text-7xl">{{ checklist_count }}</strong>
+                <strong class="text-7xl {{ switch(
+                    (checklist_count > 10) => 'text-green',
+                    (checklist_count < 3 ) => 'text-red',
+                    () => 'text-yellow') }}"
+                >
+                    {{ checklist_count }}
+                </strong>
                 <span class="text-center font-semibold text-grey-800">
                     begonnene Checklisten
+                </span>
+                <span class="flex flex-wrap gap-4">
+                    <span class="flex items-center gap-x-2 priority before:bg-red text-grey-800">< 3</span>
+                    <span class="flex items-center gap-x-2 priority before:bg-yellow text-grey-800">4 - 10</span>
+                    <span class="flex items-center gap-x-2 priority before:bg-green text-grey-800">> 10</span>
                 </span>
             </li>
         </ul>
