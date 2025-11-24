@@ -11,13 +11,19 @@
     <div class="vice">
         <h2 class="text-2xl font-bold mb-4 lg:mb-6 lg:text-4xl">Deine Kennzahlen</h2>
         <ul class="grid grid-cols-1 gap-4 lg:grid-cols-3">
-            <li class="bg-white rounded-sm p-4 flex flex-col items-center lg:p-6">
+            <li class="bg-white rounded-sm p-4 flex flex-col items-center justify-between lg:p-6">
                 <strong class="text-7xl">{{ automatic_test_count }}</strong>
                 <span class="text-center font-semibold text-grey-800">
                     bereits ausgeführte automatische Tests
                 </span>
             </li>
-            <li class="bg-white rounded-sm p-4 flex flex-col items-center lg:p-6">
+            <li class="bg-white rounded-sm p-4 flex flex-col items-center justify-between lg:p-6">
+                <strong class="text-7xl">{{ visited_resources_count }}</strong>
+                <span class="text-center font-semibold text-grey-800">
+                    bereits angeschaute Ressourcen
+                </span>
+            </li>
+            <li class="bg-white rounded-sm p-4 flex flex-col items-center justify-between lg:p-6">
                 <strong class="text-7xl">{{ checklist_count }}</strong>
                 <span class="text-center font-semibold text-grey-800">
                     bereits begonnene Checklisten
@@ -34,7 +40,7 @@
         Es wird dargestellt, in welchen Bereichen du dich bereits gut auskennst
         und in welchen Bereichen du noch Verbesserungspotenzial hast.
     </p>
-    <ul class="grid grid-cols-1 lg:gap-y-4 gap-y-6">
+    <ul class="grid grid-cols-1 gap-y-4 lg:gap-y-6">
         {{ components }}
             <li class="bg-green-50 rounded-sm p-4 lg:p-6">
                 <h3 class="text-green font-semibold text-xl mb-4 lg:mb-6 lg:text-2xl">

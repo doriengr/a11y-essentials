@@ -15,6 +15,7 @@ class ProgressController extends Controller
         $user = $request->user();
 
         $visited_resources = $user->visitedEntriesByCollection('resources');
+        $components = $this->enrichComponents($visited_resources);
 
         return (new View())
             ->template('templates/progress/show')
@@ -23,7 +24,8 @@ class ProgressController extends Controller
                 'title' => 'Dein Lernprozess',
                 'automatic_test_count' => $user->automaticTests()->count(),
                 'checklist_count' => $user->checklists()->count(),
-                'components' => $this->enrichComponents($visited_resources),
+                'visited_resources_count' => $components->sum(fn($c) => $c['visited_resources']->count()),
+                'components' => $components,
             ]);
     }
 
