@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Statamic\Eloquent\Entries\Entry;
 
 class User extends Authenticatable
 {
@@ -53,5 +54,17 @@ class User extends Authenticatable
     public function checklists()
     {
         return $this->hasMany(Checklist::class);
+    }
+
+    public function viewedEntries()
+    {
+        return $this->belongsToMany(
+            Entry::class,
+            'entry_user',
+            'user_id',
+            'entry_id'
+        )
+        ->withPivot('collection')
+        ->withTimestamps();
     }
 }

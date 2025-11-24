@@ -7,8 +7,8 @@
     </div>
 </section>
 
-<section class="bg-green-50">
-    <div class="vice my-12 py-12 lg:py-20 lg:my-20">
+<section class="bg-green-50 my-12 py-12 lg:py-20 lg:my-20">
+    <div class="vice">
         <h2 class="text-2xl font-bold mb-4 lg:mb-6 lg:text-4xl">Deine Kennzahlen</h2>
         <ul class="grid grid-cols-1 gap-4 lg:grid-cols-3">
             <li class="bg-white rounded-sm p-4 flex flex-col items-center lg:p-6">
@@ -25,4 +25,25 @@
             </li>
         </ul>
     </div>
+</section>
+
+<section class="vice my-12 lg:my-20">
+    <h2 class="text-2xl font-bold mb-2 lg:text-4xl">Wie kannst du dich verbessern?</h2>
+    <p class="mb-4 lg:mb-6 max-w-4xl">
+        Es gibt viele Wege wie du dich verbessern kannst.
+        Es wird dargestellt, in welchen Bereichen du dich bereits gut auskennst
+        und in welchen Bereichen du noch Verbesserungspotenzial hast.
+    </p>
+    <ul class="grid grid-cols-1 gap-4">
+        {{ collection:components }}
+        <li class="bg-green-100 rounded-sm p-4 lg:p-6">
+            <h3 class="text-green font-semibold text-lg lg:text-xl">Komponente: {{ title }}</h3>
+            <ul>
+                {{ resources }}
+                    <li>{{ title }}</li>
+                {{ /resources }}
+            </ul>
+        </li>
+        {{ /collection:components }}
+    </ul>
 </section>
