@@ -14,12 +14,12 @@
                     {{ svg src="{{ $list_item_icon }}" }}
                 </span>
                 <span>
-                    <strong class="font-medium">Ressource:</strong>
+                    <strong class="font-medium">{{ collection == 'resources' ? 'Ressource' : 'Lerninhalt' }}:</strong>
                     {{ title }}
                 </span>
             </li>
         {{ /list_items }}
     </ul>
 {{ else }}
-    <span class="text-grey-800">Hier ist noch Luft nach oben!</span>
+    <span class="text-grey-800">Keine Inhalte vorhanden</span>
 {{ /if }}

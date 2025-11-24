@@ -18,7 +18,7 @@
                 </span>
             </li>
             <li class="bg-white rounded-sm p-4 flex flex-col items-center justify-between lg:p-6">
-                <strong class="text-7xl">{{ visited_resources_count }}</strong>
+                <strong class="text-7xl">{{ visited_count }}</strong>
                 <span class="text-center font-semibold text-grey-800">
                     bereits angeschaute Ressourcen
                 </span>
@@ -50,21 +50,24 @@
                     <li>
                         {{ partial:progress/list
                             headline="Bereits angeschaut"
-                            list_items="{{ visited_resources }}"
+                            list_items="{{ visited }}"
                             type="visited"
                         }}
                     </li>
                     <li>
                         {{ partial:progress/list
                             headline="Noch ausstehend"
-                            list_items="{{ not_visited_resources }}"
+                            list_items="{{ not_visited }}"
                         }}
                     </li>
                 </ul>
+                <div>
+                    <strong></strong>
+                </div>
                 <span class="text-sm text-grey-800 block mt-4 lg:mt-6">
                     Fortschritt:
-                    {{ visited_resources | count }} von
-                    {{ {visited_resources | count} + {not_visited_resources | count} }}
+                    {{ visited | count }} von
+                    {{ {visited | count} + {not_visited | count} }}
                     Punkten erreicht
                 </span>
             </li>

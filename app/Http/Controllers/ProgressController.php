@@ -14,8 +14,9 @@ class ProgressController extends Controller
     {
         $user = $request->user();
 
-        $visited_resources = $user->visitedEntriesByCollection('resources');
-        $components = $this->enrichComponents($visited_resources);
+        $resources = $user->visitedEntriesByCollection('resources');
+        $learningModules = $user->visitedEntriesByCollection('learning_modules');
+        $components = $this->enrichComponents($resources, $learningModules);
 
         return (new View())
             ->template('templates/progress/show')
@@ -24,7 +25,7 @@ class ProgressController extends Controller
                 'title' => 'Dein Lernprozess',
                 'automatic_test_count' => $user->automaticTests()->count(),
                 'checklist_count' => $user->checklists()->count(),
-                'visited_resources_count' => $components->sum(fn($c) => $c['visited_resources']->count()),
+                'visited_count' => $components->sum(fn($c) => $c['visited']->count()),
                 'components' => $components,
             ]);
     }
@@ -53,22 +54,28 @@ class ProgressController extends Controller
         return response()->json(['status' => 'ok']);
     }
 
-    private function enrichComponents(array $visitedResources): EntryCollection
+    private function enrichComponents(array $visitedResources, array $visitedLearningModules): EntryCollection
     {
-        $components = Entry::query()
+        return Entry::query()
             ->whereCollection('components')
-            ->get();
+            ->get()
+            ->map(function ($component) use ($visitedResources, $visitedLearningModules) {
+                $resources = $component->resources ?? collect();
+                $learningModules = $component->learning_modules ?? collect();
 
-        $components = $components->map(function ($component) use ($visitedResources) {
-            $resources = $component->resources ?? collect();
+                $visited = $resources->merge($learningModules)
+                    ->filter(fn($item) => in_array($item->id, array_merge($visitedResources, $visitedLearningModules)));
 
-            return [
-                'title' => $component->title,
-                'visited_resources' => $resources->filter(fn($r) => in_array($r->id, $visitedResources)),
-                'not_visited_resources' => $resources->filter(fn($r) => !in_array($r->id, $visitedResources)),
-            ];
-        });
+                $notVisited = $resources->merge($learningModules)
+                    ->filter(fn($item) => !in_array($item->id, array_merge($visitedResources, $visitedLearningModules)));
 
-        return $components->sortBy(fn($c) => strtolower($c['title']))->values();
+                return [
+                    'title' => $component->title,
+                    'visited' => $visited,
+                    'not_visited' => $notVisited,
+                ];
+            })
+            ->sortBy(fn($c) => strtolower($c['title']))
+            ->values();
     }
 }
