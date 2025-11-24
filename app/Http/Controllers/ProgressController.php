@@ -2,10 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Statamic\View\View;
 
 class ProgressController extends Controller
@@ -20,6 +17,7 @@ class ProgressController extends Controller
             ->with([
                 'title' => 'Dein Lernprozess',
                 'automatic_test_count' => $user->automaticTests()->count(),
+                'checklist_count' => $user->checklists()->count(),
             ]);
     }
 }

@@ -10,9 +10,18 @@
 <section class="bg-green-50">
     <div class="vice my-12 py-12 lg:py-20 lg:my-20">
         <h2 class="text-2xl font-bold mb-4 lg:mb-6 lg:text-4xl">Deine Kennzahlen</h2>
-        <ul>
-            <li class="bg-white rounded-sm p-4 lg:p-6">
-                {{ automatic_test_count }}
+        <ul class="grid grid-cols-1 gap-4 lg:grid-cols-3">
+            <li class="bg-white rounded-sm p-4 flex flex-col items-center lg:p-6">
+                <strong class="text-7xl">{{ automatic_test_count }}</strong>
+                <span class="text-center font-semibold text-grey-800">
+                    bereits ausgeführte automatische Tests
+                </span>
+            </li>
+            <li class="bg-white rounded-sm p-4 flex flex-col items-center lg:p-6">
+                <strong class="text-7xl">{{ checklist_count }}</strong>
+                <span class="text-center font-semibold text-grey-800">
+                    bereits begonnene Checklisten
+                </span>
             </li>
         </ul>
     </div>

@@ -49,4 +49,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(AutomaticTest::class);
     }
+
+    public function checklists()
+    {
+        return $this->hasMany(Checklist::class);
+    }
 }
