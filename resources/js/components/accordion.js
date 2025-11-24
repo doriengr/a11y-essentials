@@ -48,7 +48,7 @@ export default (options = {}) => ({
                 },
                 body: JSON.stringify({
                     entry_id: entryId,
-                    entry_type: collection
+                    collection: collection
                 })
             });
 

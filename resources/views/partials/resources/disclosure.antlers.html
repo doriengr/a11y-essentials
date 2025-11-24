@@ -1,10 +1,10 @@
 <div
     id="{{ slug }}"
     x-data="accordion({
+        csrfToken: '{{ csrf_token }}',
         id: '{{ slug }}',
         isTrackingEnabled: {{ current_user ? 'true' : 'false' }},
         route: '{{ route:progress.store }}',
-        csrfToken: '{{ csrf_token }}'
     })"
     data-entry-id="{{ id }}"
     data-collection="{{ collection }}"

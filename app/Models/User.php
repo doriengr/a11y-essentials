@@ -58,13 +58,6 @@ class User extends Authenticatable
 
     public function viewedEntries()
     {
-        return $this->belongsToMany(
-            Entry::class,
-            'entry_user',
-            'user_id',
-            'entry_id'
-        )
-        ->withPivot('collection')
-        ->withTimestamps();
+        return $this->hasMany(EntryUser::class);
     }
 }

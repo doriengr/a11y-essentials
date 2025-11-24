@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\EntryUser;
 use Illuminate\Http\Request;
 use Statamic\View\View;
 
@@ -36,8 +37,10 @@ class ProgressController extends Controller
         $entryId = $request->input('entry_id');
         $collection = $request->input('collection');
 
-        $user->viewedEntries()->syncWithoutDetaching([
-            $entryId => ['collection' => $collection]
+        EntryUser::create(
+            ['user_id' => $user->id,
+            'entry_id' => $entryId,
+            'collection' => $collection
         ]);
 
         return response()->json(['status' => 'ok']);

@@ -40,6 +40,5 @@ Route::middleware([EnsureUserIsAuthenticated::class])->group(function () {
 // Learning progress
 Route::middleware([EnsureUserIsAuthenticated::class])->group(function () {
     Route::get('learning-progress', [ProgressController::class, 'show'])->name('progress.show');
-});
-
     Route::post('learning-progress', [ProgressController::class, 'store'])->name('progress.store');
+});
