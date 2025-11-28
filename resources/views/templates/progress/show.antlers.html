@@ -7,12 +7,9 @@
     </div>
     <p class="mt-4 max-w-4xl">
         Auf dieser Seite kannst du deinen persönlichen Lernfortschritt im Bereich Barrierefreiheit verfolgen.
-        Die Darstellung soll dir zusätzliche Motivation bieten, dich kontinuierlich weiterzubilden.
         Durch verschiedene Aktivitäten sammelst du Punkte und steigst dadurch in höhere Lernstufen auf.
     </p>
-    <div class="mt-6 flex flex-col gap-4 rounded-sm bg-green-100 p-4 md:flex-row md:justify-between lg:p-6">
-        Bisher erreichte Punkte: {{ current_user.progress_points }}
-    </div>
+    {{ partial:progress/progress-display }}
 </section>
 
 <section class="my-12 bg-green-50 py-12 lg:my-20 lg:py-20">

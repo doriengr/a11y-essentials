@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\EntryUser;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Statamic\Eloquent\Entries\Entry;
 use Statamic\Entries\EntryCollection;
@@ -10,6 +11,15 @@ use Statamic\View\View;
 
 class ProgressController extends Controller
 {
+    public const LEVEL_THRESHOLDS = [20, 40, 60];
+
+    public const LEVEL_LABELS = [
+        20 => 'Stufe 1 | Anfänger:in',
+        40 => 'Stufe 2 | Fortgeschrittene',
+        60 => 'Stufe 3 | Erfahren',
+        1000 => 'Stufe 4 | Expert:in',
+    ];
+
     public function store(Request $request)
     {
         if (! $request->user()) {
@@ -50,6 +60,11 @@ class ProgressController extends Controller
             ->layout('layouts.default')
             ->with([
                 'title' => 'Dein Lernprozess',
+                'status' => [
+                    'progress_points' => $user->progressPoints(),
+                    'points_to_next_level' => $user->pointsToNextLevel(),
+                    'level_label' => $user->levelLabel(),
+                ],
                 'automatic_test_count' => $user->automaticTests()->count(),
                 'checklist_count' => $user->checklists()->count(),
                 'visited_percentage' => $totalCount ? round(($visitedCount / $totalCount) * 100) : 0,
