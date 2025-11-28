@@ -18,6 +18,7 @@ class AutomaticTest extends Model
         'url',
         'include_aaa',
         'results',
+        'user_id',
     ];
 
     protected $casts = [
@@ -34,5 +35,10 @@ class AutomaticTest extends Model
                 $model->{$model->getKeyName()} = (string) Str::uuid();
             }
         });
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

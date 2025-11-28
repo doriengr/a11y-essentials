@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AutomaticTestController;
 use App\Http\Controllers\ChecklistController;
 use App\Http\Controllers\PartialResourceController;
+use App\Http\Controllers\ProgressController;
 use App\Http\Middleware\EnsureUserIsAuthenticated;
 use Illuminate\Support\Facades\Route;
 use Statamic\View\View;
@@ -34,4 +35,10 @@ Route::middleware([EnsureUserIsAuthenticated::class])->group(function () {
     Route::get('checklists/{checklist_id}', [ChecklistController::class, 'show'])->name('checklists.show');
     Route::post('checklists/{checklist_id}/states', [ChecklistController::class, 'updateStates'])->name('checklists.states');
     Route::post('checklists/{checklist_id}/groups', [ChecklistController::class, 'updateGroups'])->name('checklists.groups');
+});
+
+// Learning progress
+Route::middleware([EnsureUserIsAuthenticated::class])->group(function () {
+    Route::get('learning-progress', [ProgressController::class, 'show'])->name('progress.show');
+    Route::post('learning-progress', [ProgressController::class, 'store'])->name('progress.store');
 });

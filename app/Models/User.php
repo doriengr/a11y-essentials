@@ -31,6 +31,29 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    public function automaticTests()
+    {
+        return $this->hasMany(AutomaticTest::class);
+    }
+
+    public function checklists()
+    {
+        return $this->hasMany(Checklist::class);
+    }
+
+    public function visitedEntries()
+    {
+        return $this->hasMany(EntryUser::class);
+    }
+
+    public function visitedEntriesByCollection(string $collection)
+    {
+        return $this->visitedEntries()
+            ->where('collection', $collection)
+            ->pluck('entry_id')
+            ->toArray();
+    }
+
     /**
      * Get the attributes that should be cast.
      *
