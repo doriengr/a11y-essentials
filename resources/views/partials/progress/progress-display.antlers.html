@@ -1,19 +1,18 @@
 {{ status }}
     <div class="mt-6 flex flex-col gap-4 rounded-sm bg-green-100 p-4 md:flex-row md:justify-between lg:p-6">
         <div class="flex items-center gap-x-4">
-            <span class="shrink-0 size-12 bg-green rounded-full flex items-center justify-center text-white">
+            <span class="bg-green flex size-12 shrink-0 items-center justify-center rounded-full text-white">
                 {{ svg:general/person class="size-6 stroke-2" }}
             </span>
             <div>
-                <h2 class="font-base font-bold">Dein aktueller Wissensstand: </h2>
+                <h2 class="font-base font-bold">Dein aktueller Wissensstand:</h2>
                 <span>{{ level_label }}</span>
             </div>
         </div>
         <p class="md:text-right">
-            <strong class="text-green block font-semibold">
-                Aktueller Punktestand: {{ progress_points }}
-            </strong>
-            {{ points_to_next_level }} Punkte bis zur nächsten Stufe
+            <strong class="text-green block font-semibold">Aktueller Punktestand: {{ progress_points }}</strong>
+            {{ points_to_next_level }}
+            Punkte bis zur nächsten Stufe
         </p>
     </div>
 {{ /status }}

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\EntryUser;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Statamic\Eloquent\Entries\Entry;
 use Statamic\Entries\EntryCollection;

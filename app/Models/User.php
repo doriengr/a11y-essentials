@@ -13,9 +13,9 @@ class User extends Authenticatable
     public const LEVEL_THRESHOLDS = [20, 40, 60];
 
     public const LEVEL_LABELS = [
-        20   => 'Stufe 1 | Anfänger:in',
-        40   => 'Stufe 2 | Fortgeschrittene',
-        60   => 'Stufe 3 | Erfahren',
+        20 => 'Stufe 1 | Anfänger:in',
+        40 => 'Stufe 2 | Fortgeschrittene',
+        60 => 'Stufe 3 | Erfahren',
         80 => 'Stufe 4 | Expert:in',
     ];
 
@@ -31,16 +31,6 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
-
-    // The attributes that should be cast.
-    protected function casts(): array
-    {
-        return [
-            'email_verified_at' => 'datetime',
-            'password'          => 'hashed',
-            'preferences'       => 'json',
-        ];
-    }
 
     public function automaticTests()
     {
@@ -96,8 +86,18 @@ class User extends Authenticatable
         $points = $this->progressPoints();
 
         $nextLevel = collect(self::LEVEL_THRESHOLDS)
-            ->first(fn($v) => $points < $v);
+            ->first(fn ($v) => $points < $v);
 
         return $nextLevel ? $nextLevel - $points : 0;
+    }
+
+    // The attributes that should be cast.
+    protected function casts(): array
+    {
+        return [
+            'email_verified_at' => 'datetime',
+            'password' => 'hashed',
+            'preferences' => 'json',
+        ];
     }
 }
