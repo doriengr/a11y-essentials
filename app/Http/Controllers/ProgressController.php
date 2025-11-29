@@ -10,15 +10,6 @@ use Statamic\View\View;
 
 class ProgressController extends Controller
 {
-    public const LEVEL_THRESHOLDS = [20, 40, 60];
-
-    public const LEVEL_LABELS = [
-        20 => 'Stufe 1 | Anfänger:in',
-        40 => 'Stufe 2 | Fortgeschrittene',
-        60 => 'Stufe 3 | Erfahren',
-        1000 => 'Stufe 4 | Expert:in',
-    ];
-
     public function store(Request $request)
     {
         if (! $request->user()) {
