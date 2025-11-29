@@ -1,15 +1,13 @@
 <section class="vice mt-6 mb-12 lg:mt-10 lg:mb-20">
     <div class="flex flex-col-reverse">
         <h1 class="font-headline text-6xl leading-tight font-bold lg:text-7xl">{{ title }}</h1>
-        <span class="text-grey-800 mb-4 block text-sm lg:text-base">
-            Angemeldet als: {{ current_user.name }}
-        </span>
+        <span class="text-grey-800 mb-4 block text-sm lg:text-base">Angemeldet als: {{ current_user.name }}</span>
     </div>
     <p class="mt-4 max-w-4xl">
-        Auf dieser Seite kannst du deinen persönlichen Lernfortschritt im Bereich Barrierefreiheit verfolgen.
-        Die Darstellung soll dir zusätzliche Motivation bieten, dich kontinuierlich weiterzubilden.
-        Durch verschiedene Aktivitäten sammelst du Punkte und steigst dadurch in höhere Lernstufen auf.
+        Auf dieser Seite kannst du deinen persönlichen Lernfortschritt im Bereich Barrierefreiheit verfolgen. Durch
+        verschiedene Aktivitäten sammelst du Punkte und steigst dadurch in höhere Lernstufen auf.
     </p>
+    {{ partial:progress/progress-display }}
 </section>
 
 <section class="my-12 bg-green-50 py-12 lg:my-20 lg:py-20">
@@ -25,7 +23,11 @@
                 >
                     {{ automatic_test_count }}
                 </strong>
-                <span class="text-grey-800 text-center font-semibold">bereits ausgeführte<br> automatische Tests</span>
+                <span class="text-grey-800 text-center font-semibold">
+                    bereits ausgeführte
+                    <br />
+                    automatische Tests
+                </span>
                 <span class="flex flex-wrap gap-4">
                     <span class="priority before:bg-red text-grey-800 flex items-center gap-x-2">< 10</span>
                     <span class="priority before:bg-yellow text-grey-800 flex items-center gap-x-2">10 - 30</span>
@@ -42,7 +44,11 @@
                     {{ visited_percentage }}
                     <span class="text-4xl">%</span>
                 </strong>
-                <span class="text-grey-800 text-center font-semibold">der Inhalte in<br> der Bibliothek angeschaut</span>
+                <span class="text-grey-800 text-center font-semibold">
+                    der Inhalte in
+                    <br />
+                    der Bibliothek angeschaut
+                </span>
                 <span class="flex flex-wrap gap-4">
                     <span class="priority before:bg-red text-grey-800 flex items-center gap-x-2">< 30</span>
                     <span class="priority before:bg-yellow text-grey-800 flex items-center gap-x-2">30 - 90</span>
@@ -58,7 +64,11 @@
                 >
                     {{ checklist_count }}
                 </strong>
-                <span class="text-grey-800 text-center font-semibold">bereits begonnene<br> Checklisten</span>
+                <span class="text-grey-800 text-center font-semibold">
+                    bereits begonnene
+                    <br />
+                    Checklisten
+                </span>
                 <span class="flex flex-wrap gap-4">
                     <span class="priority before:bg-red text-grey-800 flex items-center gap-x-2">< 3</span>
                     <span class="priority before:bg-yellow text-grey-800 flex items-center gap-x-2">4 - 10</span>

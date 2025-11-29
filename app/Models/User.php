@@ -10,22 +10,23 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
+    public const LEVEL_THRESHOLDS = [20, 40, 60];
+
+    public const LEVEL_LABELS = [
+        20 => 'Stufe 1 | Anfänger:in',
+        40 => 'Stufe 2 | Fortgeschrittene',
+        60 => 'Stufe 3 | Erfahren',
+        80 => 'Stufe 4 | Expert:in',
+    ];
+
+    // The attributes that are mass assignable.
     protected $fillable = [
         'name',
         'email',
         'password',
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
+    // The attributes that should be hidden for arrays.
     protected $hidden = [
         'password',
         'remember_token',
@@ -46,6 +47,7 @@ class User extends Authenticatable
         return $this->hasMany(EntryUser::class);
     }
 
+    // Get all entries that are already visited
     public function visitedEntriesByCollection(string $collection)
     {
         return $this->visitedEntries()
@@ -54,11 +56,42 @@ class User extends Authenticatable
             ->toArray();
     }
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
+    // Calculate total progress points for the user.
+    public function progressPoints(): int
+    {
+        return
+            $this->automaticTests()->count()
+            + $this->checklists()->count()
+            + count($this->visitedEntriesByCollection('resources'))
+            + count($this->visitedEntriesByCollection('learning_modules'));
+    }
+
+    // Return level label
+    public function levelLabel(): string
+    {
+        $points = $this->progressPoints();
+
+        foreach (self::LEVEL_LABELS as $threshold => $label) {
+            if ($points < $threshold) {
+                return $label;
+            }
+        }
+
+        return 'Stufe 4 | Expert:in';
+    }
+
+    // Calculate how many points are needed for the next level.
+    public function pointsToNextLevel(): int
+    {
+        $points = $this->progressPoints();
+
+        $nextLevel = collect(self::LEVEL_THRESHOLDS)
+            ->first(fn ($v) => $points < $v);
+
+        return $nextLevel ? $nextLevel - $points : 0;
+    }
+
+    // The attributes that should be cast.
     protected function casts(): array
     {
         return [

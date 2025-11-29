@@ -50,6 +50,11 @@ class ProgressController extends Controller
             ->layout('layouts.default')
             ->with([
                 'title' => 'Dein Lernprozess',
+                'status' => [
+                    'progress_points' => $user->progressPoints(),
+                    'points_to_next_level' => $user->pointsToNextLevel(),
+                    'level_label' => $user->levelLabel(),
+                ],
                 'automatic_test_count' => $user->automaticTests()->count(),
                 'checklist_count' => $user->checklists()->count(),
                 'visited_percentage' => $totalCount ? round(($visitedCount / $totalCount) * 100) : 0,
