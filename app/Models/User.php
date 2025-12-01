@@ -68,7 +68,7 @@ class User extends Authenticatable
         return
             $this->automaticTests()->count()
             + $this->checklists()->count()
-            + count($this->visitedEntriesByCollection('resources'))
+            + count($this->visitedEntriesByCollection('requirements'))
             + count($this->visitedEntriesByCollection('learning_modules'));
     }
 

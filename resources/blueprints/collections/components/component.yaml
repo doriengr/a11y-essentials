@@ -39,15 +39,15 @@ tabs:
               collections:
                 - learning_modules
       -
-        display: Ressourcen
+        display: Anforderungen
         fields:
           -
-            handle: resources
+            handle: requirements
             field:
               type: entries
               display: Ressoucen
               collections:
-                - resources
+                - requirements
       -
         display: 'Neuer Abschnitt'
   teaser:

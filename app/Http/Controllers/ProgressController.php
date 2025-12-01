@@ -38,9 +38,9 @@ class ProgressController extends Controller
     {
         $user = $request->user();
 
-        $resources = $user->visitedEntriesByCollection('resources');
+        $requirements = $user->visitedEntriesByCollection('requirements');
         $learningModules = $user->visitedEntriesByCollection('learning_modules');
-        $components = $this->enrichComponents($resources, $learningModules);
+        $components = $this->enrichComponents($requirements, $learningModules);
 
         $visitedCount = $components->sum(fn ($c) => $c['visited']->count());
         $totalCount = $components->sum(fn ($c) => $c['visited']->count() + $c['not_visited']->count());
@@ -62,20 +62,20 @@ class ProgressController extends Controller
             ]);
     }
 
-    private function enrichComponents(array $visitedResources, array $visitedLearningModules): EntryCollection
+    private function enrichComponents(array $visitedRequirements, array $visitedLearningModules): EntryCollection
     {
         return Entry::query()
             ->whereCollection('components')
             ->get()
-            ->map(function ($component) use ($visitedResources, $visitedLearningModules) {
-                $resources = $component->resources ?? collect();
+            ->map(function ($component) use ($visitedRequirements, $visitedLearningModules) {
+                $requirements = $component->requirements ?? collect();
                 $learningModules = $component->learning_modules ?? collect();
 
-                $visited = $resources->merge($learningModules)
-                    ->filter(fn ($item) => in_array($item->id, array_merge($visitedResources, $visitedLearningModules)));
+                $visited = $requirements->merge($learningModules)
+                    ->filter(fn ($item) => in_array($item->id, array_merge($visitedRequirements, $visitedLearningModules)));
 
-                $notVisited = $resources->merge($learningModules)
-                    ->filter(fn ($item) => ! in_array($item->id, array_merge($visitedResources, $visitedLearningModules)));
+                $notVisited = $requirements->merge($learningModules)
+                    ->filter(fn ($item) => ! in_array($item->id, array_merge($visitedRequirements, $visitedLearningModules)));
 
                 return [
                     'title' => $component->title,

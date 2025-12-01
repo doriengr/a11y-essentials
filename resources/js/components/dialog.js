@@ -1,7 +1,7 @@
 export default (options = {}) => ({
-    loadResourceRoute: options.loadResourceRoute ?? '',
+    loadRequirementRoute: options.loadRequirementRoute ?? '',
     isOpen: false,
-    resourceLoaded: false,
+    requirementLoaded: false,
     dialog: null,
 
     init() {
@@ -22,9 +22,8 @@ export default (options = {}) => ({
             document.body.classList.add('overflow-y-hidden');
             this.dialog.showModal();
             this.setFocus();
-
-            if (!this.resourceLoaded) {
-                this.loadResource();
+            if (!this.requirementLoaded) {
+                this.loadRequirement();
             }
         } else {
             this.closeDialog();
@@ -38,14 +37,12 @@ export default (options = {}) => ({
         button.focus();
     },
 
-    async loadResource() {
-        if (!this.loadResourceRoute) return;
-
-        const html = await fetch(this.loadResourceRoute).then((r) => r.text());
+    async loadRequirement() {
+        const html = await fetch(this.loadRequirementRoute).then((r) => r.text());
         const target = this.$root.querySelector('[id^="dialog-target"]');
         if (!target) return;
         target.innerHTML = html;
-        this.resourceLoaded = true;
+        this.requirementLoaded = true;
     },
 
     closeDialog() {
