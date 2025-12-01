@@ -38,7 +38,30 @@ return [
     */
 
     'widgets' => [
-        //
+        [
+            'type' => 'collection',
+            'collection' => 'components',
+            'limit' => 10,
+            'width' => 50,
+        ],
+        [
+            'type' => 'collection',
+            'collection' => 'pages',
+            'limit' => 10,
+            'width' => 50,
+        ],
+        [
+            'type' => 'collection',
+            'collection' => 'requirements',
+            'limit' => 10,
+            'width' => 50,
+        ],
+        [
+            'type' => 'collection',
+            'collection' => 'learning_modules',
+            'limit' => 10,
+            'width' => 50,
+        ],
     ],
 
     /*

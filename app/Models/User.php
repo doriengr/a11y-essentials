@@ -32,6 +32,12 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'password' => 'hashed',
+        'preferences' => 'json',
+    ];
+
     public function automaticTests()
     {
         return $this->hasMany(AutomaticTest::class);
@@ -62,7 +68,7 @@ class User extends Authenticatable
         return
             $this->automaticTests()->count()
             + $this->checklists()->count()
-            + count($this->visitedEntriesByCollection('resources'))
+            + count($this->visitedEntriesByCollection('requirements'))
             + count($this->visitedEntriesByCollection('learning_modules'));
     }
 
@@ -89,15 +95,5 @@ class User extends Authenticatable
             ->first(fn ($v) => $points < $v);
 
         return $nextLevel ? $nextLevel - $points : 0;
-    }
-
-    // The attributes that should be cast.
-    protected function casts(): array
-    {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-            'preferences' => 'json',
-        ];
     }
 }

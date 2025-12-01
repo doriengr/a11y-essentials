@@ -3,7 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AutomaticTestController;
 use App\Http\Controllers\ChecklistController;
-use App\Http\Controllers\PartialResourceController;
+use App\Http\Controllers\PartialRequirementController;
 use App\Http\Controllers\ProgressController;
 use App\Http\Middleware\EnsureUserIsAuthenticated;
 use Illuminate\Support\Facades\Route;
@@ -25,7 +25,7 @@ Route::post('login', [AuthController::class, 'loginStore'])->name('auth.login.st
 // Automatic test
 Route::get('run-test', [AutomaticTestController::class, 'show'])->name('test.show');
 Route::post('run-test', [AutomaticTestController::class, 'run'])->name('test.run');
-Route::get('partial/resource/{slug}', [PartialResourceController::class, 'show'])->name('test.resource');
+Route::get('partial/requirement/{slug}', [PartialRequirementController::class, 'show'])->name('test.requirement');
 
 // Checklists
 Route::middleware([EnsureUserIsAuthenticated::class])->group(function () {
