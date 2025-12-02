@@ -13,11 +13,11 @@ ENV GROUP_ID=${GROUP_ID:-1001}
 ENV PS1='\u@\h \W \[\033[1;33m\]\$ \[\033[0m\]'
 
 # Add group and user based on build arguments
-RUN addgroup --gid ${GROUP_ID} vvuser
-RUN adduser --disabled-password --gecos '' --uid ${USER_ID} --ingroup vvuser vvuser
+RUN addgroup --gid ${GROUP_ID} dorien
+RUN adduser --disabled-password --gecos '' --uid ${USER_ID} --ingroup dorien dorien
 
 # Set user and group of working directory
-RUN chown -R vvuser:vvuser /var/www/html
+RUN chown -R dorien:dorien /var/www/html
 
 # Update and install packages
 RUN apk update && apk add \

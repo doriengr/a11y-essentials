@@ -5,13 +5,13 @@
   remote_user: root
 
   vars:
-    - security_autoupdate_enabled: true
-    - security_autoupdate_reboot: true
-    - security_autoupdate_reboot_time: "02:00"
-    - security_autoupdate_mail_to: "dorien.groenwald@googlemail.de"
-    - security_autoupdate_mail_on_error: true
-    - security_ssh_password_authentication: "no"
-    - security_ssh_permit_root_login: "yes"
+    security_autoupdate_enabled: true
+    security_autoupdate_reboot: true
+    security_autoupdate_reboot_time: "02:00"
+    security_autoupdate_mail_to: "dorien.groenwald@googlemail.de"
+    security_autoupdate_mail_on_error: true
+    security_ssh_password_authentication: "no"
+    security_ssh_permit_root_login: "yes"
 
   roles:
     - geerlingguy.docker
@@ -27,19 +27,19 @@
         name: ufw
         state: present
 
-    - name: Add user vvuser
+    - name: Add user dorien
       user:
-        name: vvuser
+        name: dorien
         groups: docker
         shell: /bin/bash
         create_home: yes
         append: yes
         state: present
 
-    - name: Set gitlab key for vvuser
+    - name: Set gitlab key for dorien
       authorized_key:
-        user: vvuser
-        key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDl4kvkQ/thzVm860JY1Yb917IonQrXGjp7F6a2thyWKPJlLFhwxFBrNdfSfirRIuE2LfywW3goPMa8I1bjUBMIFRKs26IjyMfUyQ6i8zOpW8juqGkDK4ZXlnWR3LcL9Mc9KM8WoCTdy1m6xmhVVYNtZBOERoQ2lRKF5GODyKGF4cJbI6ht275atZrECl9tDob+ivgLUvHM1QjjctmPZFzwcSGPBRSjYKYKLqVAOW8A4gtYAe4F0qdWc7d34XOIfTFyaMM2nRr7aAJ/3GXgQ1SD+UZfB3fY2NXd5ZZWqgQSv0YSeKrUxq0bUtYBgDuI2zfLqoCuLevRamHyeLeLwaQiRAneApkZYYnQR997L6hnw7+8n5D219u8lhDbIMCuav2o0cE52lKugnzPAarCZ0cMutyX49Wq0BtSvcG0+uSJQSuTaMwDUSgI4EUDVSAcv/3A85vPzPDBN1+zH9xiaWpcK81K9dQ9wqLNaFXCrjrhHOqFUe9JO1ZNqJRrnHZ2/bC8l/5MunLlnxKDV0EYD8655RVoLQckzrlvNLyPzMMWVthOx6tZhV5nkvZa8uGsgvAXrmXRJTBz5VWDBhDSrcrpeO6WYZANxsrzFyANDWefZqUujEY3/ogmtdtns8w76FTMZFyszKnW+S6LH8+Qy+AfkiQ5ANA5EyYJIGfYCoLvNw==
+        user: dorien
+        key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDDwd6FoY2kQUyWmVeOCWj85zATr+MWwlkxKD7Y4QyCwTiT3QriL3Qk9eX0U92Ntu4yt7+TBPsRzmGYwO3qJsGoJK8ELaPlv7tZB8YEiuGPWAuWnBPsLSOCfMFojUBFJA74YQxOD8eJbME0yk/tZQr4UGQ7+u6g2eRYIcVpW0v2sDobm11X2vWkXxrcylyb+sOqoeQmNUU1gAK2DG03zDKayJBzOLcleibd4FL2kTI5OgOpHX/aWRNAToo/WaWajiilAeLwOVuHm7yfFhsbSvbkVvojnoqeXuTdHiA82dOnyckbvYryrwIxObOKZS8nmdCNphA+Jz+HEt4x185zxN5QJcPoi6LizH0TzpPPxHVgG74bTlN8Mw11YZ2G1AcOGt7wsUgGFR8iMntVv9w3ShB1Y3Dxl2ASXEgVD7ONU//dkw6IlobpfuSeCdKLE72POoyKKI1KLqR43+paLuNmsK+SKZGyc4RYyJho/Ywn2D1ByQfdEp7vFKVyTzeB2AzvQgwrcq9ZVRU28mP3UT/QZacc6gjCQ1BC1Cf85JlAUXoT/pGfxKPtPPP74E9NbZKUJ/vckvjXnTNKPD47YyBsQoURYPIWS0vgDR1HGXLz2+oLPQCgRIeJYJaIWS+wU1NvOUfjUO3cq+t8/7csQObr1PG1NFZC15uf/QcbPfP03/9LPQ==
         state: present
 
     - name: Create docker overlay network
@@ -95,30 +95,30 @@
 
     - name: Create folder for the dev application
       file:
-        path: "/home/vvuser/dev"
+        path: "/home/dorien/dev"
         state: directory
-        owner: vvuser
+        owner: dorien
 
     - name: Create folder for the live application
       file:
-        path: "/home/vvuser/main"
+        path: "/home/dorien/main"
         state: directory
-        owner: vvuser
+        owner: dorien
 
     - name: Create traefik folder
       file:
-        path: "/home/vvuser/traefik"
+        path: "/home/dorien/traefik"
         state: directory
-        owner: vvuser
+        owner: dorien
 
     - name: Copy docker-compose.traefik.yml to destination
       ansible.builtin.copy:
         src: docker-compose.traefik.yml
-        dest: /home/vvuser/traefik/docker-compose.yml
-        owner: vvuser
-        group: vvuser
+        dest: /home/dorien/traefik/docker-compose.yml
+        owner: dorien
+        group: dorien
 
     - name: Start traefik
       ansible.builtin.command: docker compose up -d
       args:
-        chdir: /home/vvuser/traefik
+        chdir: /home/dorien/traefik
