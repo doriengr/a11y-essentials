@@ -13,7 +13,7 @@
         {{ partial:layout/header }}
         {{ partial:layout/breadcrumb }}
         {{ yield:seo_body }}
-        <main id="main" class="flex-1">
+        <main id="main" class="flex-1 {{ if is_homepage }} flex flex-col {{ /if }}">
             {{ template_content }}
         </main>
         {{ partial:layout/footer }}
