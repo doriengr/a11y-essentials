@@ -11,14 +11,9 @@
         <main id="main" class="flex-grow">
             <section class="flex h-screen items-center justify-center">
                 <article class="font-base text-center">
-                    {{ error_messages:server_error }}
-                        <h1 class="text-lg font-bold">
-                            {{ title ?? '500 Fehler: Es ist ein serverseitiger Fehler aufgetreten' }}
-                        </h1>
-                        <div class="text-base">
-                            {{ content }}
-                        </div>
-                    {{ /error_messages:server_error }}
+                    <h1 class="text-lg font-bold">
+                        500 Fehler: Es ist ein serverseitiger Fehler aufgetreten
+                    </h1>
                 </article>
             </section>
         </main>

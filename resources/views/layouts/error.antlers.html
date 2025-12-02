@@ -2,14 +2,17 @@
 <html lang="{{ site:short_locale }}">
     <head>
         <title>Ein Fehler ist aufgetreten</title>
+        {{ partial:layout/meta }}
         {{ partial:layout/favicons }}
         {{ vite src="resources/js/site.js|resources/css/app.css" }}
     </head>
-    <body class="font-base flex min-h-screen flex-col bg-white text-base text-black antialiased">
+        <body class="font-base flex min-h-screen flex-col bg-white text-base text-black antialiased lg:text-lg">
+        {{ partial:tracking/gtm-iframe }}
+        {{ partial:layout/decorative-line }}
         {{ partial:buttons/skip-link }}
         {{ partial:layout/header }}
         {{ yield:seo_body }}
-        <main id="main" class="flex-1">
+        <main id="main" class="flex-1 flex flex-col">
             {{ template_content }}
         </main>
         {{ partial:layout/footer }}
