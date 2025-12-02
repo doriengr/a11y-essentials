@@ -49,41 +49,6 @@ tabs:
               type: assets
               display: 'Open Graph Bild'
               instructions: 'Das hinterlegte Bild dient als standardisiertes OG-Bild, kann aber pro Seite überschrieben werden. Die empfohlene Größe beträgt 1200px x 630px und das Bild wird zu dieser Größe beschnitten.'
-  structured_data:
-    display: 'Strukturierte Daten'
-    sections:
-      -
-        display: 'Strukturierte Daten'
-        instructions: 'Mit Hilfe von strukturieren Daten können der Suchmaschine wichtige Informationen zur Verfügung gestellt werden. Diese werden zum einen für [eine gesonderte Darstellung](https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data?hl=de) in den SERPs genutzt, beispielsweise für Rezepte, Veranstaltungen, Jobangebote u. Ä. Zum anderen werden die Informationen genutzt, um der Suchmaschine semantische Zusammenhänge leichter verständlich zu machen. Die Nutzung von strukturierten Daten ist zwar nicht als Ranking-Faktor definiert, aber viele Websites profitieren dadurch von höheren Klickraten. Um die Einbindung der strukturieren Daten zu prüfen, stellt [Google ein Testing Tool](https://developers.google.com/search/docs/appearance/structured-data?hl=de) zur Verfügung.'
-        fields:
-          -
-            handle: kg_schema_type
-            field:
-              type: text
-              display: 'Schema Typ (@type)'
-              instructions: 'z. B. Organization, LocalBusiness, OnlineBusiness, [Weitere Beispiele](https://schema.org/Organization#subtypes)'
-      -
-        display: 'Automatische Properties'
-        instructions: 'Einige Felder werden im Graph bereits automatisch ausgefüllt. Dazu zählen: `name`: Titel der Website, `url`: URL der Homepage, `description`: Globale Meta Beschreibung `image`: Globales Meta Image'
-        fields:
-          -
-            handle: kg_additional_properties
-            field:
-              mode: javascript
-              mode_selectable: false
-              indent_size: 2
-              type: code
-              display: 'Zusätzliche Properties'
-              instructions: |-
-                Weitere Properties müssen in folgendem Format hinzugefügt werden:  `"property": "value",` oder `"property":  {…}`
-                Achtung: Hinter dem letzten Property darf kein Komma stehen.
-          -
-            handle: breadcrumbs
-            field:
-              type: toggle
-              instructions: 'Sollen JSON-LD Breadcrumbs zu jeder Seite hinzugefügt werden?'
-              listable: false
-              display: Breadcrumbs
   sitemap:
     display: Sitemap
     sections:
