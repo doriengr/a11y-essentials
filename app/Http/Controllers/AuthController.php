@@ -40,7 +40,7 @@ class AuthController extends Controller
         Auth::login($user);
 
         return redirect()
-            ->route('auth.registration')
+            ->route('auth.register')
             ->with('success', 'Registrierung erfolgreich!');
     }
 
