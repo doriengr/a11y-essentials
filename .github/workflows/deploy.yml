@@ -3,8 +3,8 @@ name: Build images and deploy to server
 on:
   workflow_dispatch:
   push:
-    # branches:
-    #   - main
+    branches:
+      - main
 
 env:
   REGISTRY: ghcr.io

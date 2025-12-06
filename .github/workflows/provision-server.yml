@@ -1,0 +1,29 @@
+name: Provision server
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - 'ansible/**'
+
+jobs:
+  provision-server:
+    runs-on: ubuntu-latest
+    container:
+      image: python:3.10-alpine
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Provision
+        run: |
+          apk add openssh-client
+          eval $(ssh-agent -s)
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" | tr -d '\r' | ssh-add -
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          pip3 install --root-user-action=ignore ansible
+          ansible-galaxy install -r ansible/requirements.yml
+          export ANSIBLE_HOST_KEY_CHECKING=false
+          ansible-playbook ansible/create.yml -i ansible/inventory.yml
