@@ -58,28 +58,29 @@ jobs:
           path: |
             vendor
             public
+            node
 
-  # push-application:
-  #   needs: build-application
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v4
-  #     -
-  #       name: Login to Container Registry
-  #       uses: docker/login-action@v3
-  #       with:
-  #         registry: ${{ vars.CONTAINER_REGISTRY }}
-  #         username: ${{ vars.CONTAINER_REGISTRY_USERNAME }}
-  #         password: ${{ secrets.CONTAINER_REGISTRY_TOKEN }}
-  #     - name: Download build artifacts
-  #       uses: actions/download-artifact@v4
-  #       with:
-  #         name: build-results
-  #     -
-  #       name: Build and push image
-  #       run: |
-  #         docker build --push --progress=plain --cache-to type=inline --cache-from type=registry,ref=${{ env.REGISTRY }}/${{ github.repository }}/application:main -t ${{ env.REGISTRY }}/${{ github.repository }}/application:main -f docker/application/application.Dockerfile .
+  push-application:
+    needs: build-application
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      -
+        name: Login to Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: build-results
+      -
+        name: Build and push image
+        run: |
+          docker build --push --progress=plain --cache-to type=inline --cache-from type=registry,ref=${{ env.REGISTRY }}/${{ github.repository }}/application:main -t ${{ env.REGISTRY }}/${{ github.repository }}/application:main -f docker/application/application.Dockerfile .
 
   # deploy:
   #   needs: push-application
