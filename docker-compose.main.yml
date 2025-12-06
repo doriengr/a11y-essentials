@@ -14,12 +14,7 @@ volumes:
 
 services:
   application:
-    build:
-      context: .
-      dockerfile: docker/application/application.Dockerfile
-      args:
-        USER_ID: $USER_ID
-        GROUP_ID: $GROUP_ID
+    image: ghcr.io/doriengr/a11y-essentials/application:main
     networks:
       - web
       - stack
@@ -75,12 +70,7 @@ services:
     command: mysqld --character-set-server=utf8 --collation-server=utf8_general_ci --sql_mode=''
 
   schedule:
-    build:
-      context: .
-      dockerfile: docker/application/application.Dockerfile
-      args:
-        USER_ID: $USER_ID
-        GROUP_ID: $GROUP_ID
+    image: ghcr.io/doriengr/a11y-essentials/application:main
     init: true
     networks:
       - stack
@@ -100,12 +90,7 @@ services:
     command: ["su", "dorien", "-c", "php artisan schedule:work"]
 
   worker:
-    build:
-      context: .
-      dockerfile: docker/application/application.Dockerfile
-      args:
-        USER_ID: $USER_ID
-        GROUP_ID: $GROUP_ID
+    image: ghcr.io/doriengr/a11y-essentials/application:main
     networks:
       - stack
     env_file:
