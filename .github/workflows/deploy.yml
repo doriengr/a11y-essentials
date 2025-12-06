@@ -1,0 +1,100 @@
+name: Build images and deploy to server
+
+on:
+  workflow_dispatch:
+  push:
+    # branches:
+    #   - main
+
+jobs:
+  build-and-push-tooling:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+      attestations: write
+      id-token: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      -
+        name: Login to Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      -
+        name: Build and push image
+        run: |
+          docker build --push --progress=plain --cache-to type=inline --cache-from type=registry,ref=${{ vars.CONTAINER_REGISTRY_PROJECT_URL }}/tooling:main -t ${{ vars.CONTAINER_REGISTRY_PROJECT_URL }}/tooling:main -f docker/tooling/tooling.Dockerfile .
+
+  # build-application:
+  #   needs: build-and-push-tooling
+  #   runs-on: ubuntu-latest
+  #   container:
+  #     image: ${{ vars.CONTAINER_REGISTRY_PROJECT_URL }}/tooling:main
+  #     credentials:
+  #        username: ${{ vars.CONTAINER_REGISTRY_USERNAME }}
+  #        password: ${{ secrets.CONTAINER_REGISTRY_TOKEN }}
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v4
+  #     - name: Composer install and NPM build
+  #       run: |
+  #         composer install --ignore-platform-reqs --optimize-autoloader --no-ansi --no-suggest --no-interaction --no-dev
+  #         npm ci
+  #         npm run production
+  #     - name: Store artifacts
+  #       uses: actions/upload-artifact@v4
+  #       with:
+  #         name: build-results
+  #         retention-days: 1
+  #         path: |
+  #           vendor
+  #           public
+
+  # push-application:
+  #   needs: build-application
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v4
+  #     -
+  #       name: Login to Container Registry
+  #       uses: docker/login-action@v3
+  #       with:
+  #         registry: ${{ vars.CONTAINER_REGISTRY }}
+  #         username: ${{ vars.CONTAINER_REGISTRY_USERNAME }}
+  #         password: ${{ secrets.CONTAINER_REGISTRY_TOKEN }}
+  #     - name: Download build artifacts
+  #       uses: actions/download-artifact@v4
+  #       with:
+  #         name: build-results
+  #     -
+  #       name: Build and push image
+  #       run: |
+  #         docker build --push --progress=plain --cache-to type=inline --cache-from type=registry,ref=${{ vars.CONTAINER_REGISTRY_PROJECT_URL }}/application:main -t ${{ vars.CONTAINER_REGISTRY_PROJECT_URL }}/application:main -f docker/application/application.Dockerfile .
+
+  # deploy:
+  #   needs: push-application
+  #   runs-on: ubuntu-latest
+  #   container:
+  #     image: alpine
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v4
+  #     - name: Deploy
+  #       run: |
+  #         apk add openssh-client
+  #         eval $(ssh-agent -s)
+  #         echo "${{ secrets.SSH_PRIVATE_KEY_IAC }}" | tr -d '\r' | ssh-add -
+  #         mkdir -p ~/.ssh
+  #         chmod 700 ~/.ssh
+  #         touch .env
+  #         if [ "main" = "main" ]; then echo "${{ vars.ENV_MAIN }}" >> .env; fi
+  #         if [ "main" = "dev" ]; then echo "${{ vars.ENV_DEV }}" >> .env; fi
+  #         ssh vvuser@${{ vars.IP_ADDRESS }} -o StrictHostKeyChecking=no "docker login -u "${{ vars.CONTAINER_REGISTRY_USERNAME }}" -p "${{ secrets.CONTAINER_REGISTRY_TOKEN }}" ${{ vars.CONTAINER_REGISTRY }}"
+  #         scp -o StrictHostKeyChecking=no .env vvuser@${{ vars.IP_ADDRESS }}:/home/vvuser/main/.env
+  #         scp -o StrictHostKeyChecking=no docker-compose.main.yml vvuser@${{ vars.IP_ADDRESS }}:/home/vvuser/main/docker-compose.yml
+  #         ssh vvuser@${{ vars.IP_ADDRESS }} "cd main && docker compose pull && docker compose up -d && docker image prune -af"
