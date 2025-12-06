@@ -82,25 +82,24 @@ jobs:
         run: |
           docker build --push --progress=plain --cache-to type=inline --cache-from type=registry,ref=${{ env.REGISTRY }}/${{ github.repository }}/application:main -t ${{ env.REGISTRY }}/${{ github.repository }}/application:main -f docker/application/application.Dockerfile .
 
-  # deploy:
-  #   needs: push-application
-  #   runs-on: ubuntu-latest
-  #   container:
-  #     image: alpine
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v4
-  #     - name: Deploy
-  #       run: |
-  #         apk add openssh-client
-  #         eval $(ssh-agent -s)
-  #         echo "${{ secrets.SSH_PRIVATE_KEY_IAC }}" | tr -d '\r' | ssh-add -
-  #         mkdir -p ~/.ssh
-  #         chmod 700 ~/.ssh
-  #         touch .env
-  #         if [ "main" = "main" ]; then echo "${{ vars.ENV_MAIN }}" >> .env; fi
-  #         if [ "main" = "dev" ]; then echo "${{ vars.ENV_DEV }}" >> .env; fi
-  #         ssh vvuser@${{ vars.IP_ADDRESS }} -o StrictHostKeyChecking=no "docker login -u "${{ vars.CONTAINER_REGISTRY_USERNAME }}" -p "${{ secrets.CONTAINER_REGISTRY_TOKEN }}" ${{ vars.CONTAINER_REGISTRY }}"
-  #         scp -o StrictHostKeyChecking=no .env vvuser@${{ vars.IP_ADDRESS }}:/home/vvuser/main/.env
-  #         scp -o StrictHostKeyChecking=no docker-compose.main.yml vvuser@${{ vars.IP_ADDRESS }}:/home/vvuser/main/docker-compose.yml
-  #         ssh vvuser@${{ vars.IP_ADDRESS }} "cd main && docker compose pull && docker compose up -d && docker image prune -af"
+  deploy:
+    needs: push-application
+    runs-on: ubuntu-latest
+    container:
+      image: alpine
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Deploy
+        run: |
+          apk add openssh-client
+          eval $(ssh-agent -s)
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" | tr -d '\r' | ssh-add -
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          touch .env
+          echo "${{ vars.ENV }}" >> .env
+          ssh dorien@${{ vars.IP_ADDRESS }} -o StrictHostKeyChecking=no "docker login -u "${{ github.actor }}" -p "${{ secrets.GITHUB_TOKEN }}" ghcr.io"
+          scp -o StrictHostKeyChecking=no .env dorien@${{ vars.IP_ADDRESS }}:/home/dorien/main/.env
+          scp -o StrictHostKeyChecking=no docker-compose.main.yml dorien@${{ vars.IP_ADDRESS }}:/home/dorien/main/docker-compose.yml
+          ssh dorien@${{ vars.IP_ADDRESS }} "cd main && docker compose pull && docker compose up -d && docker image prune -af"

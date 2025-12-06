@@ -39,8 +39,11 @@
     - name: Set gitlab key for dorien
       authorized_key:
         user: dorien
-        key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDDwd6FoY2kQUyWmVeOCWj85zATr+MWwlkxKD7Y4QyCwTiT3QriL3Qk9eX0U92Ntu4yt7+TBPsRzmGYwO3qJsGoJK8ELaPlv7tZB8YEiuGPWAuWnBPsLSOCfMFojUBFJA74YQxOD8eJbME0yk/tZQr4UGQ7+u6g2eRYIcVpW0v2sDobm11X2vWkXxrcylyb+sOqoeQmNUU1gAK2DG03zDKayJBzOLcleibd4FL2kTI5OgOpHX/aWRNAToo/WaWajiilAeLwOVuHm7yfFhsbSvbkVvojnoqeXuTdHiA82dOnyckbvYryrwIxObOKZS8nmdCNphA+Jz+HEt4x185zxN5QJcPoi6LizH0TzpPPxHVgG74bTlN8Mw11YZ2G1AcOGt7wsUgGFR8iMntVv9w3ShB1Y3Dxl2ASXEgVD7ONU//dkw6IlobpfuSeCdKLE72POoyKKI1KLqR43+paLuNmsK+SKZGyc4RYyJho/Ywn2D1ByQfdEp7vFKVyTzeB2AzvQgwrcq9ZVRU28mP3UT/QZacc6gjCQ1BC1Cf85JlAUXoT/pGfxKPtPPP74E9NbZKUJ/vckvjXnTNKPD47YyBsQoURYPIWS0vgDR1HGXLz2+oLPQCgRIeJYJaIWS+wU1NvOUfjUO3cq+t8/7csQObr1PG1NFZC15uf/QcbPfP03/9LPQ==
+        key: '{{ item }}'
         state: present
+      with_file:
+        - ssh-keys/id_deploy.pub
+        - ssh-keys/id_personal.pub
 
     - name: Create docker overlay network
       community.docker.docker_network:
