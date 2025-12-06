@@ -6,6 +6,10 @@ on:
     # branches:
     #   - main
 
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
 jobs:
   build-and-push-tooling:
     runs-on: ubuntu-latest
@@ -27,13 +31,13 @@ jobs:
       -
         name: Build and push image
         run: |
-          docker build --push --progress=plain --cache-to type=inline --cache-from type=registry,ref=${{ vars.CONTAINER_REGISTRY_PROJECT_URL }}/tooling:main -t ${{ vars.CONTAINER_REGISTRY_PROJECT_URL }}/tooling:main -f docker/tooling/tooling.Dockerfile .
+          docker build --push --progress=plain --cache-to type=inline --cache-from type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/tooling:main -t ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/tooling:main -f docker/tooling/tooling.Dockerfile .
 
   # build-application:
   #   needs: build-and-push-tooling
   #   runs-on: ubuntu-latest
   #   container:
-  #     image: ${{ vars.CONTAINER_REGISTRY_PROJECT_URL }}/tooling:main
+  #     image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/tooling:main
   #     credentials:
   #        username: ${{ vars.CONTAINER_REGISTRY_USERNAME }}
   #        password: ${{ secrets.CONTAINER_REGISTRY_TOKEN }}
@@ -74,7 +78,7 @@ jobs:
   #     -
   #       name: Build and push image
   #       run: |
-  #         docker build --push --progress=plain --cache-to type=inline --cache-from type=registry,ref=${{ vars.CONTAINER_REGISTRY_PROJECT_URL }}/application:main -t ${{ vars.CONTAINER_REGISTRY_PROJECT_URL }}/application:main -f docker/application/application.Dockerfile .
+  #         docker build --push --progress=plain --cache-to type=inline --cache-from type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/application:main -t ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/application:main -f docker/application/application.Dockerfile .
 
   # deploy:
   #   needs: push-application
