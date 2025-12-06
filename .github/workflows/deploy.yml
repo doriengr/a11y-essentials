@@ -31,13 +31,13 @@ jobs:
       -
         name: Build and push image
         run: |
-          docker build --push --progress=plain --cache-to type=inline --cache-from type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/tooling:main -t ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/tooling:main -f docker/tooling/tooling.Dockerfile .
+          docker build --push --progress=plain --cache-to type=inline --cache-from type=registry,ref=${{ env.REGISTRY }}/${{ github.repository }}/tooling:main -t ${{ env.REGISTRY }}/${{ github.repository }}/tooling:main -f docker/tooling/tooling.Dockerfile .
 
   build-application:
     needs: build-and-push-tooling
     runs-on: ubuntu-latest
     container:
-      image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/tooling:main
+      image: ghcr.io/${{ github.repository }}/tooling:main
       credentials:
          username: ${{ github.actor }}
          password: ${{ secrets.GITHUB_TOKEN }}
@@ -79,7 +79,7 @@ jobs:
   #     -
   #       name: Build and push image
   #       run: |
-  #         docker build --push --progress=plain --cache-to type=inline --cache-from type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/application:main -t ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/application:main -f docker/application/application.Dockerfile .
+  #         docker build --push --progress=plain --cache-to type=inline --cache-from type=registry,ref=${{ env.REGISTRY }}/${{ github.repository }}/application:main -t ${{ env.REGISTRY }}/${{ github.repository }}/application:main -f docker/application/application.Dockerfile .
 
   # deploy:
   #   needs: push-application
