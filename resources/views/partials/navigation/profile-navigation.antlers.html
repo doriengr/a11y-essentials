@@ -1,35 +1,37 @@
-<div x-data="profileNavigation()" @click.outside="clickOutside()">
-    <button
-        @click="toggle()"
-        :aria-expanded="isOpen"
-        aria-controls="profile-navigation-list"
-        aria-labelledby="proile-navigation-label"
-        class="group/profile flex items-center gap-x-2"
-    >
-        <span
-            class="{{ current_user ? 'bg-green-100 text-green' : 'bg-grey-100 text-grey-800' }} flex size-10 shrink-0 items-center justify-center rounded-full text-sm font-bold uppercase"
+{{ nocache }}
+    <div x-data="profileNavigation()" @click.outside="clickOutside()">
+        <button
+            @click="toggle()"
+            :aria-expanded="isOpen"
+            aria-controls="profile-navigation-list"
+            aria-labelledby="proile-navigation-label"
+            class="group/profile flex items-center gap-x-2"
         >
+            <span
+                class="{{ current_user ? 'bg-green-100 text-green' : 'bg-grey-100 text-grey-800' }} flex size-10 shrink-0 items-center justify-center rounded-full text-sm font-bold uppercase"
+            >
+                {{ if current_user }}
+                    {{ current_user:name | first(2) }}
+                {{ else }}
+                    {{ svg:general/person class="size-6 stroke-2" }}
+                {{ /if }}
+            </span>
+            {{ svg:general/chevron class="size-5 rotate-90 group-aria-expanded/profile:-rotate-90" }}
+        </button>
+        <div
+            id="profile-navigation-list"
+            x-show="isOpen"
+            x-cloak
+            class="bg-green absolute top-18 right-6 z-50 w-full max-w-2xs flex-col gap-y-6 rounded-sm p-6 text-base text-white"
+        >
+            <span id="proile-navigation-label" class="sr-only">Dein Profil</span>
             {{ if current_user }}
-                {{ current_user:name | first(2) }}
+                <span class="-mt-1">Angemeldet als:</span>
+                <p class="mb-3 truncate font-bold">{{ current_user:email }}</p>
+                <a href="{{ user:logout_url }}" class="button button-tertiary">Abmelden</a>
             {{ else }}
-                {{ svg:general/person class="size-6 stroke-2" }}
+                <a href="{{ route:auth.login }}" class="button button-tertiary">Anmelden</a>
             {{ /if }}
-        </span>
-        {{ svg:general/chevron class="size-5 rotate-90 group-aria-expanded/profile:-rotate-90" }}
-    </button>
-    <div
-        id="profile-navigation-list"
-        x-show="isOpen"
-        x-cloak
-        class="bg-green absolute top-18 right-6 z-50 w-full max-w-2xs flex-col gap-y-6 rounded-sm p-6 text-base text-white"
-    >
-        <span id="proile-navigation-label" class="sr-only">Dein Profil</span>
-        {{ if current_user }}
-            <span class="-mt-1">Angemeldet als:</span>
-            <p class="mb-3 truncate font-bold">{{ current_user:email }}</p>
-            <a href="{{ user:logout_url }}" class="button button-tertiary">Abmelden</a>
-        {{ else }}
-            <a href="{{ route:auth.login }}" class="button button-tertiary">Anmelden</a>
-        {{ /if }}
+        </div>
     </div>
-</div>
+{{ /nocache }}

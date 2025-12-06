@@ -61,7 +61,11 @@ return [
         'class' => null,
 
         'urls' => [
-            //
+            '/login',
+            '/register',
+            '/checklists*',
+            '/run-test*',
+            '/learning-progress'
         ],
 
     ],
