@@ -33,30 +33,31 @@ jobs:
         run: |
           docker build --push --progress=plain --cache-to type=inline --cache-from type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/tooling:main -t ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/tooling:main -f docker/tooling/tooling.Dockerfile .
 
-  # build-application:
-  #   needs: build-and-push-tooling
-  #   runs-on: ubuntu-latest
-  #   container:
-  #     image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/tooling:main
-  #     credentials:
-  #        username: ${{ vars.CONTAINER_REGISTRY_USERNAME }}
-  #        password: ${{ secrets.CONTAINER_REGISTRY_TOKEN }}
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v4
-  #     - name: Composer install and NPM build
-  #       run: |
-  #         composer install --ignore-platform-reqs --optimize-autoloader --no-ansi --no-suggest --no-interaction --no-dev
-  #         npm ci
-  #         npm run production
-  #     - name: Store artifacts
-  #       uses: actions/upload-artifact@v4
-  #       with:
-  #         name: build-results
-  #         retention-days: 1
-  #         path: |
-  #           vendor
-  #           public
+  build-application:
+    needs: build-and-push-tooling
+    runs-on: ubuntu-latest
+    container:
+      image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/tooling:main
+      credentials:
+         username: ${{ github.actor }}
+         password: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Composer install and NPM build
+        run: |
+          composer install --ignore-platform-reqs --optimize-autoloader --no-ansi --no-suggest --no-interaction --no-dev
+          npm ci
+          npm run production
+          cd node && npm install
+      - name: Store artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-results
+          retention-days: 1
+          path: |
+            vendor
+            public
 
   # push-application:
   #   needs: build-application
