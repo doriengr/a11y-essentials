@@ -14,9 +14,9 @@ php please static:clear
 php artisan optimize
 php -r 'opcache_reset();'
 
-chown -R vvuser:vvuser /var/www/html/storage
-chown -R vvuser:vvuser /var/www/html/content
-chown -R vvuser:vvuser /var/www/html/public/assets
-chown -R vvuser:vvuser /var/www/html/users
+chown -R dorien:dorien /var/www/html/storage
+chown -R dorien:dorien /var/www/html/content
+chown -R dorien:dorien /var/www/html/public/assets
+chown -R dorien:dorien /var/www/html/users
 
 exec "$@"

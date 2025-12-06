@@ -101,7 +101,7 @@ services:
         max-size: "10m"
         max-file: "3"
     restart: always
-    command: ["su", "vvuser", "-c", "php artisan schedule:work"]
+    command: ["su", "dorien", "-c", "php artisan schedule:work"]
 
   worker:
     build:
@@ -123,4 +123,4 @@ services:
         max-size: "10m"
         max-file: "3"
     restart: always
-    command: ["su", "vvuser", "-c", "php artisan queue:listen --tries=3"]
+    command: ["su", "dorien", "-c", "php artisan queue:listen --tries=3"]

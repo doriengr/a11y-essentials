@@ -10,10 +10,11 @@ volumes:
   users:
   assets:
   redis:
+  database:
 
 services:
   application:
-    image: git.visuellverstehen.de:4567/a11yessentials/website/application:main
+    image: ghcr.io/doriengr/a11y-essentials/application:main
     networks:
       - web
       - stack
@@ -34,7 +35,7 @@ services:
       - "traefik.enable=true"
       - "traefik.http.middlewares.a11yessentials.headers.stsseconds=31536000"
       - "traefik.http.routers.a11yessentials.middlewares=a11yessentials"
-      - "traefik.http.routers.a11yessentials.rule=Host(`example.com`)"
+      - "traefik.http.routers.a11yessentials.rule=Host(`a11y-essentials.com`) || Host(`www.a11y-essentials.com`)"
       - "traefik.http.routers.a11yessentials.entrypoints=https,http"
       - "traefik.http.services.a11yessentials.loadbalancer.server.port=80"
       - "traefik.http.routers.a11yessentials.tls.certresolver=tls"
@@ -52,8 +53,24 @@ services:
     command: >
       --requirepass a11yessentials
 
+  database:
+    image: mysql:8.0
+    networks:
+      - stack
+    working_dir: /var/www/html
+    volumes:
+      - database:/var/lib/mysql:cached
+      - ./docker/database/initialize.sql:/docker-entrypoint-initdb.d/initialize.sql
+    restart: always
+    environment:
+      - MYSQL_DATABASE=a11yessentials
+      - MYSQL_USER=a11yessentials
+      - MYSQL_PASSWORD=a11yessentials
+      - MYSQL_ROOT_PASSWORD=a11yessentials
+    command: mysqld --character-set-server=utf8 --collation-server=utf8_general_ci --sql_mode=''
+
   schedule:
-    image: git.visuellverstehen.de:4567/a11yessentials/website/application:main
+    image: ghcr.io/doriengr/a11y-essentials/application:main
     init: true
     networks:
       - stack
@@ -70,10 +87,10 @@ services:
         max-size: "10m"
         max-file: "3"
     restart: always
-    command: ["su", "vvuser", "-c", "php artisan schedule:work"]
+    command: ["su", "dorien", "-c", "php artisan schedule:work"]
 
   worker:
-    image: git.visuellverstehen.de:4567/a11yessentials/website/application:main
+    image: ghcr.io/doriengr/a11y-essentials/application:main
     networks:
       - stack
     env_file:
@@ -89,21 +106,5 @@ services:
         max-size: "10m"
         max-file: "3"
     restart: always
-    command: ["su", "vvuser", "-c", "php artisan queue:work --tries=3"]
-    # healthcheck:
-    #   test: ["CMD", "bash", "/var/www/html/docker/application/healthcheck.sh"]
-    #   start_period: 5s
+    command: ["su", "dorien", "-c", "php artisan queue:work --tries=3"]
 
-  # warm_static_cache:
-  #   image: git.visuellverstehen.de:4567/a11yessentials/website/application:dev
-  #   depends_on:
-  #     application:
-  #       condition: service_healthy
-  #   networks:
-  #     - stack
-  #   tty: true
-  #   working_dir: /var/www/html
-  #   command: ["su", "vvuser", "-c", "php please static:warm --queue"]
-  #   volumes:
-  #     - ./:/var/www/html
-  #   restart: "no"

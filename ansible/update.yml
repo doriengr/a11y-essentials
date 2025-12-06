@@ -21,9 +21,9 @@
     - name: Pull new traefik image
       ansible.builtin.command: docker compose pull
       args:
-        chdir: /home/vvuser/traefik
+        chdir: /home/dorien/traefik
 
     - name: Start traefik
       ansible.builtin.command: docker compose up -d
       args:
-        chdir: /home/vvuser/traefik
+        chdir: /home/dorien/traefik

@@ -10,6 +10,6 @@ if [ -z "$(docker-compose ps -q tooling)" ]; then
 fi
 
 if [ "$PRECOMMIT_FIX" = "true" ]; then
-    docker-compose exec -u vvuser tooling npm run fix:all
-    # else docker-compose exec -u vvuser tooling npm run check:all
+    docker-compose exec -u dorien tooling npm run fix:all
+    # else docker-compose exec -u dorien tooling npm run check:all
 fi
