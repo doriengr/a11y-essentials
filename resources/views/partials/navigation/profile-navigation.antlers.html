@@ -8,7 +8,7 @@
             class="group/profile flex items-center gap-x-2"
         >
             <span
-                class="{{ current_user ? 'bg-green-100 text-green' : 'bg-grey-100 text-grey-800' }} flex size-10 shrink-0 items-center justify-center rounded-full text-sm font-bold uppercase"
+                class="{{ current_user ? 'bg-green-50 text-green' : 'bg-grey-100 text-grey-800' }} flex size-10 shrink-0 items-center justify-center rounded-full text-sm font-bold uppercase"
             >
                 {{ if current_user }}
                     {{ current_user:name | first(2) }}

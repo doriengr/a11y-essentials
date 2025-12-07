@@ -16,7 +16,7 @@
     }
 
     .pill-primary {
-        background-color: var(--color-green-100);
+        background-color: var(--color-green-50);
         color: var(--color-green);
     }
 
