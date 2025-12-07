@@ -4,7 +4,7 @@
         <ol>
             {{ errors }}
                 <li
-                    x-data="dialog({ loadRequirementRoute: '{{ route:test.requirement slug="{{ id }}" }}'})"
+                    x-data="dialog({ loadRequirementRoute: '{{ route:test.requirement rule="{{ id }}" }}'})"
                     class="border-grey-200 flex flex-col gap-y-2 border-t py-2 md:flex-row md:justify-between md:gap-x-6"
                 >
                     <span>{{ help | entities }}</span>

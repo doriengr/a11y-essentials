@@ -25,7 +25,7 @@ Route::post('login', [AuthController::class, 'loginStore'])->name('auth.login.st
 // Automatic test
 Route::get('run-test', [AutomaticTestController::class, 'show'])->name('test.show');
 Route::post('run-test', [AutomaticTestController::class, 'run'])->name('test.run');
-Route::get('partial/requirement/{slug}', [PartialRequirementController::class, 'show'])->name('test.requirement');
+Route::get('partial/requirement/{rule}', [PartialRequirementController::class, 'show'])->name('test.requirement');
 
 // Checklists
 Route::middleware([EnsureUserIsAuthenticated::class])->group(function () {

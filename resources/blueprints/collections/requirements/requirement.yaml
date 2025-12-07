@@ -97,4 +97,27 @@ tabs:
                 - conformance_levels
               type: terms
               display: Konformitätsstufen
+      -
+        display: 'Automatisierte Tests'
+        fields:
+          -
+            handle: automatic_test_rules
+            field:
+              type: replicator
+              display: 'Zutreffende Regeln'
+              instructions: 'Folgende Regeln sind dieser Anforderung zugeordnet.'
+              sets:
+                neue_setgruppe:
+                  display: 'Neue Setgruppe'
+                  sets:
+                    rule:
+                      display: Regel
+                      fields:
+                        -
+                          handle: rule
+                          field:
+                            type: slug
+                            display: Regel
+                            validate:
+                              - required
 title: Anforderung

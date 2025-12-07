@@ -6,11 +6,11 @@ use Statamic\Facades\Entry;
 
 class PartialRequirementController extends Controller
 {
-    public function show($slug)
+    public function show(string $rule)
     {
         $requirement = Entry::query()
             ->where('collection', 'requirements')
-            ->where('slug', $slug)
+            ->where('automatic_test_rules', 'like', "%{$rule}%")
             ->first();
 
         if (! $requirement) {
