@@ -9,3 +9,29 @@ fields:
       buttons:
         - bold
         - italic
+      sets:
+        neue_setgruppe:
+          display: 'Neue Setgruppe'
+          sets:
+            button:
+              display: Button
+              fields:
+                -
+                  handle: button_label
+                  field:
+                    type: text
+                    display: 'Button Label'
+                    width: 33
+                    validate:
+                      - required
+                -
+                  handle: button
+                  field:
+                    collections:
+                      - components
+                      - pages
+                    type: link
+                    display: Button
+                    width: 66
+                    validate:
+                      - required

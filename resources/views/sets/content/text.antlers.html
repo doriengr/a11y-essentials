@@ -9,5 +9,9 @@
             {{ /if }}
         </div>
     {{ /if }}
-    <div class="autoformat">{{ text_description }}</div>
+    <div class="autoformat">
+        {{ text_description }}
+            {{ partial:if_exists src="sets/editor/{type | dashify}" }}
+        {{ /text_description }}
+    </div>
 </section>

@@ -4,7 +4,11 @@
             {{ title }}
         </h1>
         {{ if description }}
-            <div class="autoformat mt-4">{{ description }}</div>
+            <div class="autoformat mt-4">
+                {{ description }}
+                    {{ partial:if_exists src="sets/editor/{type | dashify}" }}
+                {{ /description }}
+            </div>
         {{ /if }}
         <a href="{{ route:test.show }}" class="button button-primary mt-6">
             Finde deinen Anfang
