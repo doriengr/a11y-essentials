@@ -65,7 +65,7 @@ return [
             '/registrierung',
             '/checklisten*',
             '/automatischer-test*',
-            '/lernfortschritt'
+            '/lernfortschritt',
         ],
 
     ],

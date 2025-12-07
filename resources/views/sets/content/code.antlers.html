@@ -1,8 +1,7 @@
 {{ $mode = switch(
-    (code_content:mode == 'htmlmixed') => 'html',
-    (code_content:mode == 'javascript') => 'javascript',
-    (code_content:mode == 'css') => 'css') }}
-
+            (code_content:mode == 'htmlmixed') => 'html',
+            (code_content:mode == 'javascript') => 'javascript',
+            (code_content:mode == 'css') => 'css') }}
 <figure>
     <pre aria-hidden="true" class="-my-4 text-sm">
         <code class="language-{{ $mode }} rounded-sm">{{ code_content | trim | entities }}</code>
