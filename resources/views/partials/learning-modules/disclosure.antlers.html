@@ -23,7 +23,7 @@
             </button>
         </h3>
     {{ /partial:disclosure/control }}
-    <article id="accordion-panel-{{ slug }}" x-cloak x-show="isOpen" class="flex flex-col gap-y-4 px-4 pb-4 sm:px-6">
+    <article id="accordion-panel-{{ slug }}" x-cloak x-show="isOpen" class="flex flex-col gap-y-6 px-4 pb-4 sm:px-6">
         {{ content }}
             {{ partial:if_exists src="sets/content/{type | dashify}" }}
         {{ /content }}
