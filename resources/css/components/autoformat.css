@@ -31,5 +31,13 @@
             list-style-type: disc;
             padding-left: calc(var(--spacing) * 4);
         }
+
+        code {
+            background-color: var(--color-grey-100);
+            padding: calc(var(--spacing) * 0.75) calc(var(--spacing) * 1);
+            border-radius: var(--spacing);
+            color: #c5221f;
+            font-size: 0.9em;
+        }
     }
 }
