@@ -2,6 +2,8 @@
 {{ if description }}
     <div class="autoformat mt-2">
         {{ description }}
+            {{ partial:if_exists src="sets/editor/{type | dashify}" }}
+        {{ /description }}
     </div>
 {{ /if }}
 {{ if is_optional }}

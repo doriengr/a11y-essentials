@@ -3,7 +3,11 @@
         {{ title }}
     </h1>
     {{ if description }}
-        <div class="autoformat mt-4 max-w-4xl">{{ description }}</div>
+        <div class="autoformat mt-4 max-w-4xl">
+            {{ description }}
+                {{ partial:if_exists src="sets/editor/{type | dashify}" }}
+            {{ /description }}
+        </div>
     {{ /if }}
 </section>
 

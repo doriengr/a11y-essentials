@@ -4,7 +4,11 @@
             {{ title }}
         </h1>
         {{ if description }}
-            <div class="autoformat mt-4">{{ description }}</div>
+            <div class="autoformat mt-4">
+                {{ description }}
+                    {{ partial:if_exists src="sets/editor/{type | dashify}" }}
+                {{ /description }}
+            </div>
         {{ /if }}
         <a href="{{ route:test.show }}" class="button button-primary mt-6">
             Finde deinen Anfang
@@ -12,7 +16,7 @@
         </a>
     </div>
 </section>
-<section aria-hidden="true" class="grid grid-cols-2 lg:grid-cols-4 mt-auto">
+<section aria-hidden="true" class="mt-auto grid grid-cols-2 lg:grid-cols-4">
     <div>{{ svg:design/preceivable class="size-full" }}</div>
     <div>{{ svg:design/operable class="size-full" }}</div>
     <div>{{ svg:design/understandable class="size-full" }}</div>

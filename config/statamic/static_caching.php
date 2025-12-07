@@ -62,10 +62,10 @@ return [
 
         'urls' => [
             '/login',
-            '/register',
-            '/checklists*',
-            '/run-test*',
-            '/learning-progress'
+            '/registrierung',
+            '/checklisten*',
+            '/automatischer-test*',
+            '/lernfortschritt',
         ],
 
     ],

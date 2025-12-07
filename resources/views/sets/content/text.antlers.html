@@ -1,6 +1,6 @@
 <section>
     {{ if text_headline }}
-        <div class="mb-1.5 mt-6 first:mt-4">
+        <div class="mt-6 mb-1.5 first:mt-4">
             <strong class="font-body mr-2 font-bold">{{ text_headline }}</strong>
             {{ if text_label }}
                 <span class="pill pill-highlight">
@@ -9,5 +9,9 @@
             {{ /if }}
         </div>
     {{ /if }}
-    <div class="autoformat">{{ text_description }}</div>
+    <div class="autoformat">
+        {{ text_description }}
+            {{ partial:if_exists src="sets/editor/{type | dashify}" }}
+        {{ /text_description }}
+    </div>
 </section>

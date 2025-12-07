@@ -17,28 +17,28 @@ Route::get('sitemap.xml', function () {
 });
 
 // Authentication
-Route::get('register', [AuthController::class, 'register'])->name('auth.register');
+Route::get('registrierung', [AuthController::class, 'register'])->name('auth.register');
 Route::post('register', [AuthController::class, 'registerStore'])->name('auth.register.store');
 Route::get('login', [AuthController::class, 'login'])->name('auth.login');
 Route::post('login', [AuthController::class, 'loginStore'])->name('auth.login.store');
 
 // Automatic test
-Route::get('run-test', [AutomaticTestController::class, 'show'])->name('test.show');
+Route::get('automatischer-test', [AutomaticTestController::class, 'show'])->name('test.show');
 Route::post('run-test', [AutomaticTestController::class, 'run'])->name('test.run');
 Route::get('partial/requirement/{rule}', [PartialRequirementController::class, 'show'])->name('test.requirement');
 
 // Checklists
 Route::middleware([EnsureUserIsAuthenticated::class])->group(function () {
-    Route::get('checklists', [ChecklistController::class, 'index'])->name('checklists.index');
-    Route::get('checklist/create', [ChecklistController::class, 'create'])->name('checklists.create');
+    Route::get('checklisten', [ChecklistController::class, 'index'])->name('checklists.index');
+    Route::get('checklisten/checkliste-erstellen', [ChecklistController::class, 'create'])->name('checklists.create');
     Route::post('checklist', [ChecklistController::class, 'store'])->name('checklists.store');
-    Route::get('checklists/{checklist_id}', [ChecklistController::class, 'show'])->name('checklists.show');
+    Route::get('checklisten/{checklist_id}', [ChecklistController::class, 'show'])->name('checklists.show');
     Route::post('checklists/{checklist_id}/states', [ChecklistController::class, 'updateStates'])->name('checklists.states');
     Route::post('checklists/{checklist_id}/groups', [ChecklistController::class, 'updateGroups'])->name('checklists.groups');
 });
 
 // Learning progress
 Route::middleware([EnsureUserIsAuthenticated::class])->group(function () {
-    Route::get('learning-progress', [ProgressController::class, 'show'])->name('progress.show');
+    Route::get('lernfortschritt', [ProgressController::class, 'show'])->name('progress.show');
     Route::post('learning-progress', [ProgressController::class, 'store'])->name('progress.store');
 });

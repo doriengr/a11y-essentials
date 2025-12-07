@@ -3,5 +3,13 @@
         {{ svg:status/info class="size-6 shrink-0" }}
         <strong class="font-semibold">{{ notice_label }}</strong>
     </div>
-    <div class="autoformat mt-2">{{ slot ?? notice_description }}</div>
+    <div class="autoformat mt-2">
+        {{ if slot }}
+            {{ slot }}
+        {{ else }}
+            {{ notice_description }}
+                {{ partial:if_exists src="sets/editor/{type | dashify}" }}
+            {{ /notice_description }}
+        {{ /if }}
+    </div>
 </div>

@@ -9,7 +9,11 @@
             </span>
         </div>
         {{ if description }}
-            <div class="autoformat mt-4">{{ description }}</div>
+            <div class="autoformat mt-4">
+                {{ description }}
+                    {{ partial:if_exists src="sets/editor/{type | dashify}" }}
+                {{ /description }}
+            </div>
         {{ /if }}
     </div>
     <div class="hidden lg:col-span-2 lg:block">
