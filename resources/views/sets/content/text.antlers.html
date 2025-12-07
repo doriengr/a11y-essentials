@@ -1,13 +1,13 @@
-<section class="mt-6 first:mt-4">
-    <div class="mb-1.5">
-        {{ if text_headline }}
+<section>
+    {{ if text_headline }}
+        <div class="mb-1.5 mt-6 first:mt-4">
             <strong class="font-body mr-2 font-bold">{{ text_headline }}</strong>
-        {{ /if }}
-        {{ if text_label }}
-            <span class="pill pill-highlight">
-                {{ text_label }}
-            </span>
-        {{ /if }}
-    </div>
+            {{ if text_label }}
+                <span class="pill pill-highlight">
+                    {{ text_label }}
+                </span>
+            {{ /if }}
+        </div>
+    {{ /if }}
     <div class="autoformat">{{ text_description }}</div>
 </section>
