@@ -42,3 +42,10 @@ Route::middleware([EnsureUserIsAuthenticated::class])->group(function () {
     Route::get('learning-progress', [ProgressController::class, 'show'])->name('progress.show');
     Route::post('learning-progress', [ProgressController::class, 'store'])->name('progress.store');
 });
+
+
+// Utilities
+Route::prefix('async')
+    ->group(function () {
+        Route::get('logged-in-user', [AuthController::class, 'loggedInUser'])->name('async.loggedInUser');
+    });

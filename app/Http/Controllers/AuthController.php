@@ -73,4 +73,30 @@ class AuthController extends Controller
                 'email' => 'Die angegebenen Anmeldedaten stimmen nicht.',
             ]);
     }
+
+    public function loggedInUser()
+    {
+        if (! auth()->check()) {
+            return response()->json([
+                'successful' => true,
+                'data' => [
+                    'logged_in' => false,
+                ],
+            ]);
+        }
+
+        $user = auth()->user();
+
+        return response()->json([
+            'successful' => true,
+            'data' => [
+                'logged_in' => true,
+                'user' => [
+                    'id' => $user->id,
+                    'email' => $user->email,
+                    'initials' => mb_strtoupper(mb_substr($user->name, 0, 2)),
+                ],
+            ],
+        ]);
+    }
 }
