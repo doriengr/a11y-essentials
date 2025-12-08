@@ -21,6 +21,7 @@ Route::get('registrierung', [AuthController::class, 'register'])->name('auth.reg
 Route::post('register', [AuthController::class, 'registerStore'])->name('auth.register.store');
 Route::get('login', [AuthController::class, 'login'])->name('auth.login');
 Route::post('login', [AuthController::class, 'loginStore'])->name('auth.login.store');
+Route::get('auth/logged-in-user', [AuthController::class, 'loggedInUser'])->name('auth.user');
 
 // Automatic test
 Route::get('automatischer-test', [AutomaticTestController::class, 'show'])->name('test.show');

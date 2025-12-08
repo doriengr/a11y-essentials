@@ -1,5 +1,6 @@
 import Alpine from 'alpinejs';
 
+import './stores/auth';
 import './stores/navigation';
 
 import accordion from './components/accordion';
