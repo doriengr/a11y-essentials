@@ -1,4 +1,4 @@
-import checkAuth from "../utils/checkAuth";
+import checkAuth from '../utils/checkAuth';
 
 export default () => ({
     isOpen: false,
@@ -13,7 +13,7 @@ export default () => ({
         });
 
         checkAuth((user) => {
-            if (! user || user === []) {
+            if (!user || user == []) {
                 return;
             }
 

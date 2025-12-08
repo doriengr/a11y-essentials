@@ -21,6 +21,7 @@ Route::get('register', [AuthController::class, 'register'])->name('auth.register
 Route::post('register', [AuthController::class, 'registerStore'])->name('auth.register.store');
 Route::get('login', [AuthController::class, 'login'])->name('auth.login');
 Route::post('login', [AuthController::class, 'loginStore'])->name('auth.login.store');
+Route::get('auth/logged-in-user', [AuthController::class, 'loggedInUser'])->name('auth.user');
 
 // Automatic test
 Route::get('run-test', [AutomaticTestController::class, 'show'])->name('test.show');
@@ -42,10 +43,3 @@ Route::middleware([EnsureUserIsAuthenticated::class])->group(function () {
     Route::get('learning-progress', [ProgressController::class, 'show'])->name('progress.show');
     Route::post('learning-progress', [ProgressController::class, 'store'])->name('progress.store');
 });
-
-
-// Utilities
-Route::prefix('async')
-    ->group(function () {
-        Route::get('logged-in-user', [AuthController::class, 'loggedInUser'])->name('async.loggedInUser');
-    });

@@ -4,5 +4,5 @@ Alpine.store('auth', {
     callbacks: [],
     currentUser: null,
     logged_in: null,
-    requestStarted: false
+    requestStarted: false,
 });

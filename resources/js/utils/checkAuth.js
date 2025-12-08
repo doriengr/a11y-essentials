@@ -21,12 +21,12 @@ export default (callback) => {
 
     auth.requestStarted = true;
 
-    fetch('/async/logged-in-user', {
+    fetch('/auth/logged-in-user', {
         method: 'GET',
         credentials: 'same-origin',
         headers: {
-            'Accept': 'application/json'
-        }
+            Accept: 'application/json',
+        },
     })
         .then(async (res) => {
             if (!res.ok) {
