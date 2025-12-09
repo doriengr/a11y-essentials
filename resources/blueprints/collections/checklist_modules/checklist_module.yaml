@@ -63,6 +63,34 @@ tabs:
                             display: ID
                             validate:
                               - required
+                        -
+                          handle: has_linked_entry
+                          field:
+                            type: toggle
+                            display: 'Eintrag verknüpfen'
+                            width: 33
+                        -
+                          handle: component
+                          field:
+                            max_items: 1
+                            collections:
+                              - components
+                            type: entries
+                            display: Komponente
+                            width: 33
+                            if:
+                              has_linked_entry: 'equals true'
+                        -
+                          handle: requirement
+                          field:
+                            max_items: 1
+                            collections:
+                              - requirements
+                            type: entries
+                            display: Anforderung
+                            width: 33
+                            if:
+                              has_linked_entry: 'equals true'
   sidebar:
     display: Sidebar
     sections:

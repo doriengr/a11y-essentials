@@ -23,5 +23,16 @@
         {{ description }}
             {{ partial:if_exists src="sets/editor/{type | dashify}" }}
         {{ /description }}
+        {{ if has_linked_entry }}
+            {{ if component && !requirement }}
+                <a href="{{ component:url }}" class="button button-secondary">
+                    Zur Komponente
+                </a>
+            {{ /else }}
+                <a href="{{ component:url }}#{{ requirement:slug }}" class="button button-secondary">
+                    Zur Anforderung
+                </a>
+            {{ /if }}
+        {{ /if }}
     </article>
 </div>
