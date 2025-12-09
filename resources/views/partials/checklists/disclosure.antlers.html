@@ -24,15 +24,14 @@
             {{ partial:if_exists src="sets/editor/{type | dashify}" }}
         {{ /description }}
         {{ if has_linked_entry }}
-            <div class="mt-4">
-                <span class="mb-2 block">{{ button_list_label }}</span>
+            <div class="mt-4 text-sm flex justify-end">
                 {{ if component && !requirement }}
-                    <a href="{{ component:url }}" class="button button-secondary block">
-                        Zur Komponente
+                    <a href="{{ component:url }}" class="text-green underline hocus:text-green-800">
+                        Zur Komponente in der Wissensbibliothek
                     </a>
                 {{ /else }}
-                    <a href="{{ component:url }}#{{ requirement:slug }}" class="button button-secondary">
-                        Zur Anforderung
+                    <a href="{{ component:url }}#{{ requirement:slug }}" class="text-green underline hocus:text-green-800">
+                        Zur Anforderung in der Wissensbibliothek
                     </a>
                 {{ /if }}
             </div>
