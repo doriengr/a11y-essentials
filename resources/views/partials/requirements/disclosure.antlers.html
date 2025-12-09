@@ -35,7 +35,7 @@
             {{ partial:tags/priority }}
         </div>
         {{ if description }}
-            <div class="mt-1.5">
+            <div class="autoformat mt-1.5">
                 {{ description }}
                     {{ partial:if_exists src="sets/editor/{type | dashify}" }}
                 {{ /description }}
