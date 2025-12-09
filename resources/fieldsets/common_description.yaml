@@ -9,6 +9,7 @@ fields:
       buttons:
         - bold
         - italic
+        - code
       sets:
         neue_setgruppe:
           display: 'Neue Setgruppe'
