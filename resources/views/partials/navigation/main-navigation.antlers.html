@@ -2,7 +2,7 @@
     id="main-navigation-list"
     :class="isOpen ? 'flex' : 'hidden'"
     x-cloak
-    class="bg-green absolute inset-x-6 top-18 flex-col gap-y-6 rounded-sm p-6 text-lg text-white lg:static lg:flex lg:flex-row lg:items-center lg:gap-x-6 lg:bg-white lg:p-0 lg:text-black xl:gap-x-10"
+    class="bg-green absolute z-50 inset-x-6 top-18 flex-col gap-y-6 rounded-sm p-6 text-lg text-white lg:static lg:flex lg:flex-row lg:items-center lg:gap-x-6 lg:bg-white lg:p-0 lg:text-black xl:gap-x-10"
 >
     {{ nav:main_navigation }}
         <li>
@@ -34,10 +34,10 @@
                                 {{ title }}
                                 {{ svg:general/arrow class="size-6" }}
                             </a>
-                            <span id="sub-navigation-list-{{ index }}" class="mb-4 block text-base">
-                                Schnellverweise
-                            </span>
                         {{ /children }}
+                        <span id="sub-navigation-list-{{ index }}" class="mb-4 block text-base">
+                            Schnellverweise
+                        </span>
                         <ul
                             aria-labelledby="sub-navigation-list-{{ index }}"
                             class="relative flex flex-col gap-y-6 pl-4 before:absolute before:top-0 before:left-0 before:h-full before:w-px before:bg-white lg:flex-row lg:gap-x-10 lg:p-0 lg:before:h-0"
