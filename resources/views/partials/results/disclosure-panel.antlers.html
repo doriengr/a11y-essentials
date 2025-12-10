@@ -9,6 +9,7 @@
                 >
                     <span>{{ help | entities }}</span>
                     <button
+                        id="result-dialog-{{ id }}"
                         :aria-expanded="isOpen"
                         @click="toggle()"
                         aria-controls="dialog-error-{{ id }}"
