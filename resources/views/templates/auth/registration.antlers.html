@@ -24,6 +24,7 @@
         {{ /partial:sets/content/notice }}
     {{ else }}
         <form
+            id="registration-form"
             method="POST"
             aria-labelledby="form-headline"
             action="{{ route:auth.register.store }}"

@@ -12,6 +12,7 @@
         {{ /partial:sets/content/notice }}
     {{ else }}
         <form
+            id="login-form"
             method="POST"
             aria-labelledby="form-headline"
             action="{{ route:auth.login.store }}"
