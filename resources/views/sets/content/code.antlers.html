@@ -2,11 +2,15 @@
             (code_content:mode == 'htmlmixed') => 'html',
             (code_content:mode == 'javascript') => 'javascript',
             (code_content:mode == 'css') => 'css') }}
-<figure>
-    <pre aria-hidden="true" class="-my-4 text-sm">
-        <code class="language-{{ $mode }} rounded-sm">{{ code_content | trim | entities }}</code>
-    </pre>
-    <figcaption class="caption -mt-8">
-        {{ code_caption }}
-    </figcaption>
-</figure>
+<div x-data="copy()" class="relative">
+    <figure>
+        <pre aria-hidden="true" class="-my-4 text-sm">
+            <code class="language-{{ $mode }} rounded-sm">{{ code_content | trim | entities }}</code>
+        </pre>
+        <figcaption class="caption -mt-8">
+            {{ code_caption }}
+        </figcaption>
+    </figure>
+    {{ partial:buttons/copy-button class="top-3" }}
+    <div id="code-block-for-copy" aria-hidden="true" class="hidden">{{ code_content }}</div>
+</div>

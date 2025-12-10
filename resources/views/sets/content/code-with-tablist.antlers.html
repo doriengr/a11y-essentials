@@ -1,17 +1,21 @@
 <div x-data="tablist()" class="rounded-t-md bg-green-50">
-    <div aria-labelledby="tablist-label" role="tablist" class="flex w-max items-center p-2">
+    <div role="tablist" class="flex w-max items-center p-2">
         {{ partial:tablist/tab tab_label="Do's" index="correct-{{ id }}" }}
         {{ partial:tablist/tab tab_label="Don'ts" index="incorrect-{{ id }}" }}
     </div>
     {{ partial:tablist/panel index="correct-{{ id }}" }}
-        <figure>
-            <pre aria-hidden="true" class="-my-4 text-sm">
-                <code class="language-html rounded-sm">{{ correct_code_content | trim | entities }}</code>
-            </pre>
-            <figcaption class="caption -mt-10 bg-white pt-2">
-                {{ correct_code_caption }}
-            </figcaption>
-        </figure>
+        <div x-data="copy()" class="relative">
+            <figure>
+                <pre aria-hidden="true" class="-my-4 text-sm">
+                    <code class="language-html rounded-sm">{{ correct_code_content | trim | entities }}</code>
+                </pre>
+                <figcaption class="caption -mt-10 bg-white pt-2">
+                    {{ correct_code_caption }}
+                </figcaption>
+            </figure>
+            {{ partial:buttons/copy-button class="top-7" }}
+            <div id="code-block-for-copy" aria-hidden="true" class="hidden">{{ correct_code_content }}</div>
+        </div>
     {{ /partial:tablist/panel }}
     {{ partial:tablist/panel index="incorrect-{{ id }}" }}
         <figure>

@@ -44,17 +44,12 @@
                                 </span>
                                 <span>Bearbeitet am {{ updated_at | format('d.m.y') }}</span>
                             </p>
-                            <div class="my-4">
-                                <div class="my-2 h-3 w-full overflow-hidden rounded-xs bg-green-200">
-                                    <div
-                                        class="bg-green h-3 rounded-xs transition-all duration-300 ease-in-out"
-                                        style="width: {{ progress }}%"
-                                    ></div>
-                                </div>
+                            <div class="my-4 flex flex-col-reverse gap-y-1.5">
                                 <strong class="text-green block text-sm font-semibold lg:text-base">
                                     {{ progress }}
                                     % abgeschlossen
                                 </strong>
+                                <progress aria-labelledby="progress-headline" max="100" value="{{ progress }}" class="w-full h-3.5"/>
                             </div>
                             <span
                                 class="button button button-secondary group-hocus:bg-green group-hocus:text-white mt-4"

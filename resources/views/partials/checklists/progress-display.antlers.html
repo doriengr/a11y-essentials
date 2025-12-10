@@ -3,16 +3,10 @@
     class="mt-6 flex hidden flex-col gap-4 rounded-sm bg-green-50 p-4 md:flex-row md:justify-between lg:p-6"
 >
     <div>
-        <h2 class="font-base font-bold">Aktueller Stand</h2>
+        <h2 id="progress-headline" class="font-base font-bold">Aktueller Stand</h2>
         <span class="block">Zuletzt bearbeitet am {{ updated_at | format('d.m.y') }}</span>
     </div>
-    <div class="md:self-end">
-        <div class="my-2 h-3 w-full overflow-hidden rounded-xs bg-green-400">
-            <div
-                class="bg-green h-3 rounded-xs transition-all duration-300 ease-in-out"
-                :style="{ width: progressPercent() + '%' }"
-            ></div>
-        </div>
+    <div class="flex flex-col-reverse gap-y-1.5 md:self-end">
         <div class="flex flex-wrap gap-x-1 text-sm lg:text-base">
             <strong class="text-green block font-semibold">
                 <span x-text="progressPercent() ?? {{ progress }}"></span>
@@ -26,5 +20,6 @@
                 Überprüfungen
             </span>
         </div>
+        <progress aria-labelledby="progress-headline" max="100" :value="progressPercent() ?? {{ progress }}" class="w-full h-3.5"/>
     </div>
 </div>

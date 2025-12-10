@@ -59,7 +59,7 @@
                 <strong
                     class="{{ switch(
     (checklist_count > 10) => 'text-green',
-    (checklist_count < 3) => 'text-red',
+    (checklist_count <= 3) => 'text-red',
     () => 'text-yellow') }} text-7xl"
                 >
                     {{ checklist_count }}
@@ -70,7 +70,7 @@
                     Checklisten
                 </span>
                 <span class="flex flex-wrap gap-4">
-                    <span class="priority before:bg-red text-grey-800 flex items-center gap-x-2">< 3</span>
+                    <span class="priority before:bg-red text-grey-800 flex items-center gap-x-2">< 4</span>
                     <span class="priority before:bg-yellow text-grey-800 flex items-center gap-x-2">4 - 10</span>
                     <span class="priority before:bg-green text-grey-800 flex items-center gap-x-2">> 10</span>
                 </span>
