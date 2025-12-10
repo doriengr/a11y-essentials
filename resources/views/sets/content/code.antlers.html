@@ -2,11 +2,20 @@
             (code_content:mode == 'htmlmixed') => 'html',
             (code_content:mode == 'javascript') => 'javascript',
             (code_content:mode == 'css') => 'css') }}
-<figure>
-    <pre aria-hidden="true" class="-my-4 text-sm">
-        <code class="language-{{ $mode }} rounded-sm">{{ code_content | trim | entities }}</code>
-    </pre>
-    <figcaption class="caption -mt-8">
-        {{ code_caption }}
-    </figcaption>
-</figure>
+<div x-data="copy()" class="relative">
+    <figure>
+        <pre aria-hidden="true" class="-my-4 text-sm">
+            <code class="language-{{ $mode }} rounded-sm">{{ code_content | trim | entities }}</code>
+        </pre>
+        <figcaption class="caption -mt-8">
+            {{ code_caption }}
+        </figcaption>
+    </figure>
+    <button @click="copyCode()" class="absolute top-3 right-2 z-20 gap-x-1.5 text-sm lg:gap-x-2.5 lg:text-base bg-white button button-secondary hocus:bg-green">
+        <span class="sr-only">Code </span>
+        Kopieren
+        <span x-show="!isCopied" x-cloak>{{ svg:general/save class="size-4 lg:size-5" }}</span>
+        <span x-show="isCopied" x-cloak>{{ svg:status/pass class="size-4 lg:size-5" }}</span>
+    </button>
+    <div id="code-block-for-copy" aria-hidden="true" class="hidden">{{ code_content }}</div>
+</div>
