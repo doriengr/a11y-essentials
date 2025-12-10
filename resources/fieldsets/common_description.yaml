@@ -22,7 +22,7 @@ fields:
                   field:
                     type: text
                     display: 'Button Label'
-                    width: 33
+                    width: 25
                     validate:
                       - required
                 -
@@ -33,6 +33,20 @@ fields:
                       - pages
                     type: link
                     display: Button
-                    width: 66
+                    width: 50
                     validate:
                       - required
+                -
+                  handle: color
+                  field:
+                    options:
+                      -
+                        key: primary
+                        value: Primär
+                      -
+                        key: secondary
+                        value: Sekundär
+                    default: secondary
+                    type: select
+                    display: Farbe
+                    width: 25

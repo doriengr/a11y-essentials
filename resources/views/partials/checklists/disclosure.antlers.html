@@ -24,14 +24,16 @@
             {{ partial:if_exists src="sets/editor/{type | dashify}" }}
         {{ /description }}
         {{ if has_linked_entry }}
-            <div class="mt-4 text-sm flex justify-end">
+            <div class="mt-6 text-sm flex justify-end lg:text-base">
                 {{ if component && !requirement }}
-                    <a href="{{ component:url }}" class="text-green underline hocus:text-green-800">
+                    <a href="{{ component:url }}" class="flex gap-x-2 items-center text-green underline hocus:text-green-800">
                         Zur Komponente in der Wissensbibliothek
+                        {{ svg:general/arrow class="size-6" }}
                     </a>
                 {{ /else }}
-                    <a href="{{ component:url }}#{{ requirement:slug }}" class="text-green underline hocus:text-green-800">
+                    <a href="{{ component:url }}#{{ requirement:slug }}" class="flex gap-x-2 items-center text-green underline hocus:text-green-800">
                         Zur Anforderung in der Wissensbibliothek
+                        {{ svg:general/arrow class="size-6" }}
                     </a>
                 {{ /if }}
             </div>

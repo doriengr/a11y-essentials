@@ -55,6 +55,7 @@ tabs:
                               - italic
                               - unorderedlist
                               - orderedlist
+                              - anchor
                               - code
                         -
                           handle: checklist_item_id

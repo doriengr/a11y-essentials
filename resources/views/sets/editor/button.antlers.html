@@ -1,4 +1,4 @@
-<a href="{{ button }}" class="button button-primary">
+<a href="{{ button }}" class="button {{ if color === 'primary' }} button-primary {{ else }} button-secondary {{ /if }}">
     {{ button_label }}
     {{ svg:general/arrow class="size-6" }}
 </a>
