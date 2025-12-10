@@ -49,7 +49,7 @@ class ProgressController extends Controller
             ->template('templates/progress/show')
             ->layout('layouts.default')
             ->with([
-                'title' => 'Dein Lernprozess',
+                'title' => 'Dein Lernfortschritt',
                 'status' => [
                     'progress_points' => $user->progressPoints(),
                     'points_to_next_level' => $user->pointsToNextLevel(),

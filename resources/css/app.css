@@ -77,6 +77,21 @@
         background-color: rgba(52, 54, 56, 0.6);
         backdrop-filter: blur(1.5px);
     }
+
+    progress[value]::-webkit-progress-bar {
+        background-color: var(--color-green-400);
+        border-radius: calc(var(--spacing) * 0.5);
+    }
+
+    progress[value]::-webkit-progress-value {
+        background-color: var(--color-green);
+        border-radius: calc(var(--spacing) * 0.5);
+    }
+
+    progress[value]::-moz-progress-bar {
+        background-color: var(--color-green);
+        border-radius: calc(var(--spacing) * 0.5);
+    }
 }
 
 @variant hocus (&:focus, &:hover);
