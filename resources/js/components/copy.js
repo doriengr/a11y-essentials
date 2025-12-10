@@ -8,7 +8,7 @@ export default () => ({
     },
 
     copyCode() {
-        const code = this.$root.querySelector("#code-block-for-copy");
+        const code = this.$root.querySelector('#code-block-for-copy');
         if (!code) return;
         navigator.clipboard.writeText(code.innerHTML);
         this.isCopied = true;

@@ -18,11 +18,12 @@
                     {{ if include_aaa }}, AAA{{ /if }}
                 </li>
             </ul>
-            <div class="autoformat flex gap-x-2 my-4 max-w-4xl text-grey-800">
+            <div class="autoformat text-grey-800 my-4 flex max-w-4xl gap-x-2">
                 {{ svg:status/info class="size-6 shrink-0 mt-1" }}
                 <p>
                     Einen ersten Überblick über programmatisch feststellbare Probleme kann auch ein
-                    <a href="{{ route:test.show }}">automatisierter Test</a> liefern, bevor die manuelle Checkliste angewendet wird.
+                    <a href="{{ route:test.show }}">automatisierter Test</a>
+                    liefern, bevor die manuelle Checkliste angewendet wird.
                 </p>
             </div>
             {{ partial:checklists/progress-display }}

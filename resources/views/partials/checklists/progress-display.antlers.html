@@ -20,6 +20,11 @@
                 Überprüfungen
             </span>
         </div>
-        <progress aria-labelledby="progress-headline" max="100" :value="progressPercent() ?? {{ progress }}" class="w-full h-3.5"/>
+        <progress
+            aria-labelledby="progress-headline"
+            max="100"
+            :value="progressPercent() ?? {{ progress }}"
+            class="h-3.5 w-full"
+        />
     </div>
 </div>

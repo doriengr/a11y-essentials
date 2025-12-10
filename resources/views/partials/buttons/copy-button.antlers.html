@@ -1,5 +1,8 @@
-<button @click="copyCode()" class="{{ class }} absolute right-2 z-20 gap-x-1.5 text-sm lg:gap-x-2.5 lg:text-base bg-white button button-secondary hocus:bg-green">
-    <span class="sr-only">Code </span>
+<button
+    @click="copyCode()"
+    class="{{ class }} button button-secondary hocus:bg-green absolute right-2 z-20 gap-x-1.5 bg-white text-sm lg:gap-x-2.5 lg:text-base"
+>
+    <span class="sr-only">Code</span>
     Kopieren
     <span x-show="!isCopied" x-cloak>{{ svg:general/save class="size-4 lg:size-5" }}</span>
     <span x-show="isCopied" x-cloak>{{ svg:status/pass class="size-4 lg:size-5" }}</span>
