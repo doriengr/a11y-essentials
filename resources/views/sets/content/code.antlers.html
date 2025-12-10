@@ -11,11 +11,6 @@
             {{ code_caption }}
         </figcaption>
     </figure>
-    <button @click="copyCode()" class="absolute top-3 right-2 z-20 gap-x-1.5 text-sm lg:gap-x-2.5 lg:text-base bg-white button button-secondary hocus:bg-green">
-        <span class="sr-only">Code </span>
-        Kopieren
-        <span x-show="!isCopied" x-cloak>{{ svg:general/save class="size-4 lg:size-5" }}</span>
-        <span x-show="isCopied" x-cloak>{{ svg:status/pass class="size-4 lg:size-5" }}</span>
-    </button>
+    {{ partial:buttons/copy-button class="top-3" }}
     <div id="code-block-for-copy" aria-hidden="true" class="hidden">{{ code_content }}</div>
 </div>
