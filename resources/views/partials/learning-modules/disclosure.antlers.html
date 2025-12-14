@@ -8,7 +8,7 @@
         entryId: '{{ id }}',
         collection: '{{ collection }}'
     })"
-    class="gtm-disclosure-learning-module rounded-sm bg-green-50"
+    class="rounded-sm bg-green-50"
 >
     {{ partial:disclosure/control control_id="{slug}" }}
         <h3 class="font-headline text-green hocus:text-green-800 flex flex-wrap gap-x-3 text-xl font-semibold">
@@ -17,7 +17,7 @@
                 id="accordion-button-{{ slug }}"
                 :aria-expanded="isOpen"
                 aria-controls="accordion-panel-{{ slug }}"
-                class="before:cover text-left"
+                class="gtm-disclosure-learning-module before:cover text-left"
             >
                 {{ title }}
             </button>
