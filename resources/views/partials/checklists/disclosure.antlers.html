@@ -1,4 +1,4 @@
-<div x-data="accordion({ id: '{{ slug }}' })" class="border-green rounded-sm border bg-white">
+<div x-data="accordion({ id: '{{ slug }}' })" class="gtm-disclosure-checklist border-green rounded-sm border bg-white">
     {{ partial:disclosure/control control_id="{slug}" }}
         <div class="flex flex-wrap gap-x-3">
             <h3 class="font-headline text-green hocus:text-green-800 text-lg font-medium">
@@ -28,7 +28,7 @@
                 {{ if component && !requirement }}
                     <a
                         href="{{ component:url }}"
-                        class="text-green hocus:text-green-800 flex items-center gap-x-2 underline"
+                        class="gtm-component-link text-green hocus:text-green-800 flex items-center gap-x-2 underline"
                     >
                         Zur Komponente in der Wissensbibliothek
                         {{ svg:general/arrow class="size-6" }}
@@ -36,7 +36,7 @@
                 {{ /else }}
                     <a
                         href="{{ component:url }}#{{ requirement:slug }}"
-                        class="text-green hocus:text-green-800 flex items-center gap-x-2 underline"
+                        class="gtm-component-link text-green hocus:text-green-800 flex items-center gap-x-2 underline"
                     >
                         Zur Anforderung in der Wissensbibliothek
                         {{ svg:general/arrow class="size-6" }}
