@@ -5,17 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\EntryUser;
 use Illuminate\Http\Request;
 use Statamic\Eloquent\Entries\Entry;
-use Statamic\Entries\EntryCollection;
 use Statamic\View\View;
 
 class ProgressController extends Controller
 {
     public function store(Request $request)
     {
-        if (! $request->user()) {
-            return response()->json(['status' => 'guest'], 200);
-        }
-
         $request->validate([
             'entry_id' => 'required|string',
             'collection' => 'required|string',
@@ -62,20 +57,21 @@ class ProgressController extends Controller
             ]);
     }
 
-    private function enrichComponents(array $visitedRequirements, array $visitedLearningModules): EntryCollection
+    private function enrichComponents(array $visitedRequirements, array $visitedLearningModules)
     {
+        $visitedIds = array_merge($visitedRequirements, $visitedLearningModules);
+
         return Entry::query()
             ->whereCollection('components')
             ->get()
-            ->map(function ($component) use ($visitedRequirements, $visitedLearningModules) {
+            ->map(function ($component) use ($visitedIds) {
                 $requirements = $component->requirements ?? collect();
                 $learningModules = $component->learning_modules ?? collect();
 
-                $visited = $requirements->merge($learningModules)
-                    ->filter(fn ($item) => in_array($item->id, array_merge($visitedRequirements, $visitedLearningModules)));
+                $allItems = $requirements->merge($learningModules);
 
-                $notVisited = $requirements->merge($learningModules)
-                    ->filter(fn ($item) => ! in_array($item->id, array_merge($visitedRequirements, $visitedLearningModules)));
+                $visited = $allItems->filter(fn ($item) => in_array($item->id, $visitedIds));
+                $notVisited = $allItems->filter(fn ($item) => ! in_array($item->id, $visitedIds));
 
                 return [
                     'title' => $component->title,
