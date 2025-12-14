@@ -10,13 +10,13 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
-    public const LEVEL_THRESHOLDS = [20, 40, 60];
+    public const LEVEL_THRESHOLDS = [25, 50, 75, 95];
 
     public const LEVEL_LABELS = [
-        20 => 'Stufe 1 | Anfänger:in',
-        40 => 'Stufe 2 | Fortgeschrittene',
-        60 => 'Stufe 3 | Erfahren',
-        80 => 'Stufe 4 | Expert:in',
+        25 => 'Stufe 1 | Anfänger:in',
+        50 => 'Stufe 2 | Fortgeschrittene',
+        75 => 'Stufe 3 | Erfahren',
+        95 => 'Stufe 4 | Expert:in',
     ];
 
     // The attributes that are mass assignable.
@@ -83,7 +83,7 @@ class User extends Authenticatable
             }
         }
 
-        return 'Stufe 4 | Expert:in';
+        return 'Stufe 5 | Meister:in';
     }
 
     // Calculate how many points are needed for the next level.
