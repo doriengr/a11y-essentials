@@ -10,10 +10,10 @@ if (!url) {
     process.exit(1);
 }
 
-let values = ['wcag2a', 'wcag2aa'];
+let values = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'];
 
 if (includeAaa) {
-    values = ['wcag2a', 'wcag2aa', 'wcag2aaa'];
+    values.push('wcag2aaa');
 }
 
 (async () => {
@@ -37,7 +37,6 @@ if (includeAaa) {
                 },
             });
         }, values);
-
         console.log(JSON.stringify(results));
     } catch (err) {
         console.error(err);
