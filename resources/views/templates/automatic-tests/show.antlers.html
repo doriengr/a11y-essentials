@@ -78,7 +78,7 @@
                         {{ partial:tablist/panel index="conformance" }}
                             <ul class="flex flex-col gap-y-4">
                                 {{ results.byConformanceLevel }}
-                                    {{ if include_aaa || level !== 'wcag2aaa' }}
+                                    {{ if include_aaa || level !== 'AAA' }}
                                         <li
                                             x-data="accordion({ id: '{{ level }}' })"
                                             class="border-green rounded-sm border"
