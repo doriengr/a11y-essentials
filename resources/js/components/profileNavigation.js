@@ -13,7 +13,7 @@ export default () => ({
         });
 
         checkAuth((user) => {
-            if (!user || user == []) {
+            if (!user || (Array.isArray(user) && user.length === 0)) {
                 return;
             }
 
