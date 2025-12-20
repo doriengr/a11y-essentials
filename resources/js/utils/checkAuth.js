@@ -46,6 +46,12 @@ export default (callback) => {
             if (result.logged_in === true) {
                 auth.currentUser = result.user;
 
+                window.dataLayer = window.dataLayer || [];
+                window.dataLayer.push({
+                    event: 'setUserId',
+                    user_id: auth.currentUser.id,
+                });
+
                 // Execute queued callbacks
                 auth.callbacks.forEach((func) => func(result.user));
             }
