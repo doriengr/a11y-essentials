@@ -18,16 +18,17 @@
         <article class="mt-4 pb-4 sm:pb-6">
             <p>{{ description | entities }}</p>
             <strong class="mt-4 block">Betroffene HTML-Elemente ({{ nodes | count }})</strong>
-            <ul class="-mt-2 flex flex-col">
+            <ul class="mt-2 mb-6 flex flex-col gap-y-4">
                 {{ nodes }}
-                    <li class="h-20">
-                        <pre aria-hidden="true" class="block h-12 text-sm">
-                            <code class="language-html rounded-sm">{{ html | entities }}</code>
-                        </pre>
+                    <li>
+                        <pre
+                            aria-hidden="true"
+                            class="block h-max text-sm"
+                        ><code class="language-html rounded-sm">{{ html | entities }}</code></pre>
                     </li>
                 {{ /nodes }}
             </ul>
-            <strong class="mt-12 mb-3 block">Lösungsvorschlag</strong>
+            <strong class="mb-3 block">Lösungsvorschlag</strong>
             <div id="dialog-target-{{ id }}-{{ index }}">
                 <div x-show="!requirementLoaded" x-cloak>
                     {{ partial:loading-spinner }}
