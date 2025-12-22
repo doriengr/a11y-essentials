@@ -10,7 +10,7 @@ if (!url) {
     process.exit(1);
 }
 
-let values = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'];
+let values = ['best-practice', 'wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'];
 
 if (includeAaa) {
     values.push('wcag2aaa');
