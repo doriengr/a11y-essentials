@@ -35,8 +35,15 @@
 {{ /if }}
 {{ if requirements }}
     <section class="vice my-12 lg:my-20">
-        <h2 class="font-headline mb-6 text-2xl font-bold lg:mb-10 lg:text-4xl">Was muss beachtet werden?</h2>
-        <div class="relative lg:grid lg:grid-cols-7 lg:gap-x-6">
+        <h2 class="font-headline mb-4 text-2xl font-bold lg:mb-6 lg:text-4xl">Was muss beachtet werden?</h2>
+        <p class="text-grey-800 flex max-w-4xl items-start gap-x-2">
+            {{ svg:status/info class="size-6 shrink-0 mt-0.5" }}
+            <strong class="font-semibold">
+                Deutsches Gesetz: Anforderungen der Konformitätsstufe A und AA müssen umgesetzt werden.
+            </strong>
+        </p>
+
+        <div class="relative mt-6 lg:mt-10 lg:grid lg:grid-cols-7 lg:gap-x-6">
             {{ partial:navigation/side-navigation navigation_items="{{ requirements }}" add_hash_to_url="true" }}
             <ul class="flex flex-col gap-y-4 lg:col-span-5">
                 {{ requirements }}
