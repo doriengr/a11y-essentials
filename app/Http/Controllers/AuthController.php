@@ -81,6 +81,7 @@ class AuthController extends Controller
                 'successful' => true,
                 'data' => [
                     'logged_in' => false,
+                    'csrf_token' => csrf_token(),
                 ],
             ]);
         }
@@ -91,6 +92,7 @@ class AuthController extends Controller
             'successful' => true,
             'data' => [
                 'logged_in' => true,
+                'csrf_token' => csrf_token(),
                 'user' => [
                     'id' => $user->id,
                     'email' => $user->email,
