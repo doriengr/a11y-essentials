@@ -1,7 +1,9 @@
+import checkAuth from '../utils/checkAuth';
+
 export default (options = {}) => ({
     id: options.id ?? '',
     isOpen: false,
-    isTrackingEnabled: options.isTrackingEnabled ?? false,
+    isTrackingEnabled: false,
     route: options.route ?? null,
     isAlreadyTracked: false,
     csrfToken: options.csrfToken ?? null,
@@ -9,6 +11,15 @@ export default (options = {}) => ({
     collection: options.collection ?? null,
 
     init() {
+        // Check if user is currently logged in to enable tracking for learning progress
+        checkAuth((user) => {
+            if (!user || (Array.isArray(user) && user.length === 0)) {
+                return;
+            }
+
+            this.isTrackingEnabled = true;
+        });
+
         // Open if hash matches
         if (this.currentHashIsID()) this.isOpen = true;
         window.addEventListener('hashchange', () => {

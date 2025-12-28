@@ -3,7 +3,6 @@
     x-data="accordion({
         csrfToken: '{{ csrf_token }}',
         id: '{{ slug }}',
-        isTrackingEnabled: {{ current_user ? 'true' : 'false' }},
         route: '{{ route:progress.store }}',
         entryId: '{{ id }}',
         collection: '{{ collection }}'
