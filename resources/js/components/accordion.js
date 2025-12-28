@@ -6,20 +6,19 @@ export default (options = {}) => ({
     isTrackingEnabled: false,
     route: options.route ?? null,
     isAlreadyTracked: false,
-    csrfToken: options.csrfToken ?? null,
+    csrfToken: null,
     entryId: options.entryId ?? null,
     collection: options.collection ?? null,
 
     init() {
         // Check if user is currently logged in to enable tracking for learning progress
         checkAuth((user) => {
+            this.csrfToken = this.$store.auth.csrfToken;
             if (!user || (Array.isArray(user) && user.length === 0)) {
                 return;
             }
-
             this.isTrackingEnabled = true;
         });
-
         // Open if hash matches
         if (this.currentHashIsID()) this.isOpen = true;
         window.addEventListener('hashchange', () => {

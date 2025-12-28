@@ -1,11 +1,13 @@
 export default (callback) => {
     let auth = window.Alpine.store('auth');
-    let logged_in = auth.logged_in;
+    let loggedIn = auth.loggedIn;
     let user = auth.currentUser;
+    // eslint-disable-next-line no-unused-vars
+    let csrfToken = auth.csrfToken;
 
     // If status is already known
-    if (typeof logged_in !== 'undefined' && logged_in !== null) {
-        if (logged_in === true) {
+    if (typeof loggedIn !== 'undefined' && loggedIn !== null) {
+        if (loggedIn === true) {
             callback(user);
         }
         return;
@@ -41,7 +43,8 @@ export default (callback) => {
                 return;
             }
 
-            auth.logged_in = result.logged_in;
+            auth.loggedIn = result.logged_in;
+            auth.csrfToken = result.csrf_token;
 
             if (result.logged_in === true) {
                 auth.currentUser = result.user;
