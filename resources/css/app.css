@@ -92,6 +92,10 @@
         background-color: var(--color-green);
         border-radius: calc(var(--spacing) * 0.5);
     }
+
+    .hljs {
+        min-height: calc(var(--spacing) * 14);
+    }
 }
 
 @variant hocus (&:focus, &:hover);

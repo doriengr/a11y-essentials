@@ -1,3 +1,5 @@
+import hljs from 'highlight.js/lib/core';
+
 export default (options = {}) => ({
     loadRequirementRoute: options.loadRequirementRoute ?? '',
     isOpen: false,
@@ -43,6 +45,10 @@ export default (options = {}) => ({
         if (!target) return;
         target.innerHTML = html;
         this.requirementLoaded = true;
+
+        target.querySelectorAll('pre code').forEach((block) => {
+            hljs.highlightElement(block);
+        });
     },
 
     closeDialog() {
