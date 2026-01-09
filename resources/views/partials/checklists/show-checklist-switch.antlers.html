@@ -6,7 +6,7 @@
         role="switch"
         name="checklist-group-{{ slug }}"
         :checked="groups['{{ slug }}']"
-        @change="toggleGroup('{{ slug }}', event)"
+        @change="toggleGroup('{{ slug }}', event.target.checked)"
     />
     <span class="switch relative z-0" aria-hidden="true"></span>
     <label for="checklist-group-{{ slug }}" class="label relative z-50 inline-block pl-15">

@@ -9,6 +9,7 @@ export default (options = {}) => ({
     csrfToken: null,
     entryId: options.entryId ?? null,
     collection: options.collection ?? null,
+    openOnHash: options.openOnHash ?? true,
 
     init() {
         // Check if user is currently logged in to enable tracking for learning progress
@@ -19,7 +20,9 @@ export default (options = {}) => ({
             }
             this.isTrackingEnabled = true;
         });
+
         // Open if hash matches
+        if (!this.openOnHash) return;
         if (this.currentHashIsID()) this.isOpen = true;
         window.addEventListener('hashchange', () => {
             if (this.currentHashIsID()) this.isOpen = true;

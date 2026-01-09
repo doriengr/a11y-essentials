@@ -32,7 +32,7 @@
         <section class="vice my-12 lg:my-20">
             <h2 class="font-headline mb-6 text-2xl font-bold lg:mb-10 lg:text-4xl">Überprüfungen</h2>
             <div class="relative lg:grid lg:grid-cols-7 lg:gap-x-6">
-                {{ partial:navigation/side-navigation navigation_items="{{ collection:checklist_modules }}" }}
+                {{ partial:navigation/side-navigation navigation_items="{{ collection:checklist_modules }}" add_hash_to_url="true" }}
                 <ul class="flex flex-col gap-y-10 lg:col-span-5 lg:gap-y-12">
                     {{ collection:checklist_modules }}
                         <li class="border-b-grey-200 border-b pb-10 lg:pb-12">

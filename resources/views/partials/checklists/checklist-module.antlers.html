@@ -32,7 +32,7 @@
                         @change="toggleState('{{ slug }}', '{{ checklist_item_id }}', event)"
                     />
                 </div>
-                {{ partial:checklists/disclosure }}
+                {{ partial:checklists/disclosure index="{{ index }}" }}
             </li>
         {{ /if }}
     {{ /checklist_items }}

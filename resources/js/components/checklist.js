@@ -24,6 +24,12 @@ export default (options = {}) => ({
 
         this.setCounts();
         this.showProgressDisplay();
+
+        // Open if hash matches
+        window.addEventListener('hashchange', () => {
+            const hash = window.location.hash.substring(1);
+            this.toggleGroup(hash, true);
+        });
     },
 
     async sync(type) {
@@ -60,9 +66,9 @@ export default (options = {}) => ({
         event.target.checked ? this.checkedCount++ : this.checkedCount--;
     },
 
-    toggleGroup(name, event) {
-        this.groups[name] = event.target.checked;
-        this.pending.groups[name] = event.target.checked;
+    toggleGroup(name, checkedState) {
+        this.groups[name] = checkedState;
+        this.pending.groups[name] = checkedState;
 
         this.debounceSync('groups');
         this.setCounts();

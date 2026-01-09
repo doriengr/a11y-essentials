@@ -1,4 +1,4 @@
-<div x-data="accordion({ id: '{{ slug }}' })" class="border-green rounded-sm border bg-white">
+<div x-data="accordion({ id: '{{ slug }}', openOnHash: false })" class="border-green rounded-sm border bg-white">
     {{ partial:disclosure/control control_id="{slug}" }}
         <div class="flex flex-wrap gap-x-3">
             <h3 class="font-headline text-green hocus:text-green-800 text-lg font-medium">
