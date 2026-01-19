@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html lang="{{ site:short_locale }}">
     <head>
-        {{ partial:tracking/ga-tag }}
         {{ partial:layout/meta }}
         {{ partial:layout/favicons }}
-        {{ partial:tracking/gtm-script }}
         {{ vite src="resources/js/site.js|resources/css/app.css" }}
     </head>
     <body class="font-base flex min-h-screen flex-col bg-white text-base text-black antialiased lg:text-lg">
-        {{ partial:tracking/gtm-iframe }}
         {{ partial:layout/decorative-line }}
         {{ partial:buttons/skip-link }}
         {{ partial:layout/header }}
