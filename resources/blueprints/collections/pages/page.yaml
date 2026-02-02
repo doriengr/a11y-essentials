@@ -28,6 +28,27 @@ tabs:
                 neue_setgruppe:
                   display: 'Neue Setgruppe'
                   sets:
+                    content:
+                      display: Fließtext
+                      icon: text-formatting-all-caps
+                      fields:
+                        -
+                          handle: text
+                          field:
+                            buttons:
+                              - h2
+                              - h3
+                              - bold
+                              - italic
+                              - unorderedlist
+                              - orderedlist
+                              - removeformat
+                              - anchor
+                            remove_empty_nodes: false
+                            type: bard
+                            display: Inhalt
+                            validate:
+                              - required
                     components_list:
                       display: 'Liste aller Komponenten'
                       icon: file-content-list
@@ -37,6 +58,26 @@ tabs:
                           field:
                             type: section
                             display: 'Auflistung aller Komponenten'
+                    notice:
+                      display: Notiz
+                      icon: alert-warning-exclamation-mark
+                      fields:
+                        -
+                          handle: notice_label
+                          field:
+                            type: text
+                            display: Überschrift
+                        -
+                          handle: notice_text
+                          field:
+                            buttons:
+                              - bold
+                              - anchor
+                            remove_empty_nodes: false
+                            type: bard
+                            display: Text
+                            validate:
+                              - required
   sidebar:
     display: Sidebar
     sections:
