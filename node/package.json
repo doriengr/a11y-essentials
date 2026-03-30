@@ -3,6 +3,8 @@
     "type": "module",
     "dependencies": {
         "axe-core": "https://github.com/doriengr/axe-core/tarball/v1.0.9",
-        "puppeteer": "^24.0.0"
+        "puppeteer": "^24.0.0",
+        "puppeteer-extra": "^3.3.6",
+        "puppeteer-extra-plugin-stealth": "^2.11.2"
     }
 }

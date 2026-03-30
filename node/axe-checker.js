@@ -1,6 +1,14 @@
-#!/usr/bin/env node
-import puppeteer from 'puppeteer';
-import axeSource from 'axe-core/axe.de.min.js';
+import puppeteer from 'puppeteer-extra';
+import stealthPlugin from 'puppeteer-extra-plugin-stealth';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const axePath = path.join(__dirname, 'node_modules/axe-core/axe.de.js');
+const axeSource = fs.readFileSync(axePath, 'utf8');
 
 const url = process.argv[2];
 const includeAaa = process.argv[3] ?? false;
@@ -19,14 +27,30 @@ if (includeAaa) {
 (async () => {
     const browser = await puppeteer.launch({
         executablePath: '/usr/bin/chromium-browser',
-        args: ['--no-sandbox', '--disable-setuid-sandbox'],
+        args: [
+            '--no-sandbox',
+            '--disable-setuid-sandbox',
+            '--disable-dev-shm-usage',
+            '--disable-blink-features=AutomationControlled',
+        ],
     });
+    puppeteer.use(stealthPlugin());
+    const page = await browser.newPage();
+    await page.setUserAgent(
+        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122 Safari/537.36',
+    );
 
     try {
-        const page = await browser.newPage();
-        await page.goto(url, { waitUntil: 'networkidle2' });
+        await page.goto(url, { waitUntil: 'domcontentloaded' });
+        await page.waitForSelector('body');
 
-        await page.addScriptTag({ content: axeSource.source });
+        await page.evaluate((source) => {
+            const script = document.createElement('script');
+            script.textContent = source;
+            document.head.appendChild(script);
+        }, axeSource);
+
+        await page.waitForFunction(() => typeof window.axe !== 'undefined');
 
         const results = await page.evaluate(async (wcagValues) => {
             // eslint-disable-next-line no-undef
@@ -37,9 +61,16 @@ if (includeAaa) {
                 },
             });
         }, values);
+
         console.log(JSON.stringify(results));
     } catch (err) {
-        console.error(err);
+        console.error(
+            JSON.stringify({
+                error: err.message,
+                stack: err.stack,
+            }),
+        );
+        process.exit(1);
     } finally {
         await browser.close();
     }
